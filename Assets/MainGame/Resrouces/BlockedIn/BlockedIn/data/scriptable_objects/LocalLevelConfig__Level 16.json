@@ -1,0 +1,19 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -3498561813656313700,
+  "_ref": "MonoScript:LocalLevelConfig"
+ },
+ "m_Name": "Level 16",
+ "_id": 16,
+ "_levelJson": {
+  "m_FileID": 0,
+  "m_PathID": 241387102064375224,
+  "_ref": "TextAsset:Level_16_Arrow"
+ }
+}

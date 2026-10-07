@@ -1,0 +1,61 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -6127672831117376802,
+  "_ref": "MonoScript:BottomBarTabConfig"
+ },
+ "m_Name": "BottomBarTabConfig5",
+ "_tabs": [
+  {
+   "Id": 1,
+   "Prefab": {
+    "m_FileID": 0,
+    "m_PathID": 969583794418891729,
+    "_ref": "MonoBehaviour:"
+   },
+   "IsComingSoon": 0
+  },
+  {
+   "Id": 2,
+   "Prefab": {
+    "m_FileID": 0,
+    "m_PathID": 4096602340210306594,
+    "_ref": "MonoBehaviour:"
+   },
+   "IsComingSoon": 0
+  },
+  {
+   "Id": 0,
+   "Prefab": {
+    "m_FileID": 0,
+    "m_PathID": -2700661714768260344,
+    "_ref": "MonoBehaviour:"
+   },
+   "IsComingSoon": 0
+  },
+  {
+   "Id": 3,
+   "Prefab": {
+    "m_FileID": 0,
+    "m_PathID": -6276437614005163898,
+    "_ref": "MonoBehaviour:"
+   },
+   "IsComingSoon": 0
+  },
+  {
+   "Id": 3,
+   "Prefab": {
+    "m_FileID": 0,
+    "m_PathID": 4096602340210306594,
+    "_ref": "MonoBehaviour:"
+   },
+   "IsComingSoon": 1
+  }
+ ],
+ "_defaultTabIndex": 2
+}

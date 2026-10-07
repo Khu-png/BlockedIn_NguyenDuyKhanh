@@ -1,0 +1,57 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 5591707546719789111,
+  "_ref": "MonoScript:IceVisualConfig"
+ },
+ "m_Name": "IceVisualConfig",
+ "color1": {
+  "r": 0.0,
+  "g": 0.5999999046325684,
+  "b": 1.0,
+  "a": 1.0
+ },
+ "color2": {
+  "r": 1.0,
+  "g": 1.0,
+  "b": 1.0,
+  "a": 0.5960784554481506
+ },
+ "reflectionTexture": {
+  "m_FileID": 0,
+  "m_PathID": 1224665699105656546,
+  "_ref": "Texture2D:IceBlocks"
+ },
+ "reflectionColor": {
+  "r": 1.0,
+  "g": 1.0,
+  "b": 1.0,
+  "a": 0.1568627506494522
+ },
+ "reflectionTileOffset": {
+  "x": 0.25,
+  "y": 0.6100000143051147,
+  "z": 0.23999999463558197,
+  "w": 0.0
+ },
+ "reflectionNormalScale": 0.23999999463558197,
+ "distortionNormalMap": {
+  "m_FileID": 0,
+  "m_PathID": -5316976584542387826,
+  "_ref": "Texture2D:scratchesnormal"
+ },
+ "distortionTileOffset": {
+  "x": 0.25,
+  "y": 1.0,
+  "z": 0.0,
+  "w": 0.0
+ },
+ "refractionDistortionStrength": 0.04690000042319298,
+ "reflectionDistortionStrength": 0.18000000715255737,
+ "hitDelay": 0.15000000596046448
+}

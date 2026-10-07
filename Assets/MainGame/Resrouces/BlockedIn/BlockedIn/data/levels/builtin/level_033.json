@@ -1,0 +1,506 @@
+{
+ "data": {
+  "layout_text_json": {
+   "cols": 5,
+   "rows": 7,
+   "time": 135,
+   "walls": [],
+   "orders": [
+    {
+     "parts": [
+      {
+       "dc": 0,
+       "dr": 0,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0
+        ]
+       ],
+       "color": "yellow",
+       "shapeRef": "A"
+      },
+      {
+       "dc": 1,
+       "dr": 1,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ],
+        [
+         1,
+         1
+        ]
+       ],
+       "color": "yellow",
+       "shapeRef": "D"
+      },
+      {
+       "dc": 2,
+       "dr": 0,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ]
+       ],
+       "color": "yellow",
+       "shapeRef": "F"
+      },
+      {
+       "dc": 0,
+       "dr": 1,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ]
+       ],
+       "color": "yellow",
+       "shapeRef": "K"
+      }
+     ]
+    },
+    {
+     "parts": [
+      {
+       "dc": 1,
+       "dr": 0,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0
+        ]
+       ],
+       "color": "blue",
+       "shapeRef": "B"
+      },
+      {
+       "dc": 2,
+       "dr": 1,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ]
+       ],
+       "color": "blue",
+       "shapeRef": "E"
+      },
+      {
+       "dc": 0,
+       "dr": 2,
+       "cells": [
+        [
+         1,
+         0
+        ],
+        [
+         0,
+         0
+        ]
+       ],
+       "color": "blue",
+       "shapeRef": "I"
+      },
+      {
+       "dc": 0,
+       "dr": 0,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ],
+        [
+         1,
+         1
+        ]
+       ],
+       "color": "blue",
+       "shapeRef": "L"
+      }
+     ]
+    },
+    {
+     "parts": [
+      {
+       "dc": 0,
+       "dr": 2,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0
+        ]
+       ],
+       "color": "green",
+       "shapeRef": "C"
+      },
+      {
+       "dc": 0,
+       "dr": 0,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ]
+       ],
+       "color": "green",
+       "shapeRef": "G"
+      },
+      {
+       "dc": 2,
+       "dr": 1,
+       "cells": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ]
+       ],
+       "color": "green",
+       "shapeRef": "H"
+      },
+      {
+       "dc": 1,
+       "dr": 0,
+       "cells": [
+        [
+         1,
+         0
+        ],
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ]
+       ],
+       "color": "green",
+       "shapeRef": "J"
+      }
+     ]
+    }
+   ],
+   "shapes": [
+    {
+     "col": 2,
+     "key": "A",
+     "row": 0,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "yellow"
+    },
+    {
+     "col": 2,
+     "key": "B",
+     "row": 4,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "blue",
+     "iceCount": 1
+    },
+    {
+     "col": 0,
+     "key": "C",
+     "row": 0,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "green"
+    },
+    {
+     "col": 2,
+     "key": "D",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "color": "yellow"
+    },
+    {
+     "col": 1,
+     "key": "E",
+     "row": 4,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "blue",
+     "iceCount": 1
+    },
+    {
+     "col": 4,
+     "key": "F",
+     "row": 2,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "yellow"
+    },
+    {
+     "col": 4,
+     "key": "G",
+     "row": 4,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "green",
+     "iceCount": 1
+    },
+    {
+     "col": 4,
+     "key": "H",
+     "row": 0,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "green"
+    },
+    {
+     "col": 3,
+     "key": "I",
+     "row": 6,
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blue",
+     "iceCount": 2
+    },
+    {
+     "col": 2,
+     "key": "J",
+     "row": 5,
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "green",
+     "iceCount": 1
+    },
+    {
+     "col": 0,
+     "key": "K",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "yellow"
+    },
+    {
+     "col": 0,
+     "key": "L",
+     "row": 5,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "color": "blue",
+     "iceCount": 2
+    },
+    {
+     "col": 1,
+     "key": "M",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker"
+    },
+    {
+     "col": 3,
+     "key": "N",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker"
+    },
+    {
+     "col": 0,
+     "key": "O",
+     "row": 4,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker"
+    },
+    {
+     "col": 3,
+     "key": "P",
+     "row": 3,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker"
+    },
+    {
+     "col": 1,
+     "key": "Q",
+     "row": 2,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker"
+    }
+   ],
+   "timerDisabled": false
+  }
+ },
+ "content_hash": "0c1a4ae1",
+ "level_layout_id": 54488,
+ "bank_id": 127,
+ "number": 33,
+ "rewards": []
+}

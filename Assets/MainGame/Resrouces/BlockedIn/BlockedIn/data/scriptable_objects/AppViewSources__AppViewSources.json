@@ -1,0 +1,53 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 5417062755294279632,
+  "_ref": "MonoScript:AppViewSources"
+ },
+ "m_Name": "AppViewSources",
+ "_introViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/App/IntroView.prefab",
+  "_guid": "ce29ab5cb5e754a79acb017ad5bb2cb1"
+ },
+ "_comingSoonViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/LevelsComingSoonView.prefab",
+  "_guid": "deb2ed3d952bd4493886ef6e3fb82219"
+ },
+ "_settingsViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Settings/SettingsView.prefab",
+  "_guid": "be762d8ea465d413589e1448b6d6faf8"
+ },
+ "_transitionViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/App/TransitionView.prefab",
+  "_guid": "c8e2cc66b1fa240c08206736be014087"
+ },
+ "_versionUpdateViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/VersionUpdate/VersionUpdateView.prefab",
+  "_guid": "ee691adfeb07d432fa10e1d7e29774a9"
+ }
+}

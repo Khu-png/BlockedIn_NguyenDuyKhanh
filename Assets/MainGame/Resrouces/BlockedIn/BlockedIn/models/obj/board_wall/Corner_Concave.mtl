@@ -1,0 +1,5 @@
+newmtl BoardBlockMaterial
+Ka 0 0 0
+Ks 0 0 0
+illum 1
+Kd 1.0000 0.8493 0.3349

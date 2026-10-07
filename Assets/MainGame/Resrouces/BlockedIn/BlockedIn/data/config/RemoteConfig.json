@@ -1,0 +1,356 @@
+{
+ "liveops_attributes": {
+  "ab_variant_ids": []
+ },
+ "configs": {
+  "localizations": {
+   "url": "https://localisations-server-production-cdn.tripledotapi.com/api/v1/localisations?app_id=91&timestamp=1784197923&type=live"
+  },
+  "chapter_set": {
+   "url": "https://gs-prd-web-cdn.tripledotapi.com/api/v3/metagame/chapter_based/chapter_sets/manifests?id=4&namespace=Concord%3A%3AChapterSets&timestamp=1790085338.gz",
+   "manifest_url": "https://gs-prd-web-cdn.tripledotapi.com/api/v3/metagame/chapter_based/chapter_sets/manifests?id=4&namespace=Concord%3A%3AChapterSets&timestamp=1790085338.gz"
+  },
+  "level_chests_config": {
+   "url": "https://gs-prd-web-cdn.tripledotapi.com/api/v4/concord/level_chest_configs/3?application_id=172&timestamp=1784197923"
+  }
+ },
+ "ad_remote_config": {
+  "amazon": {
+   "android_banner_id": "d2721a2a-7861-4e41-8e15-468dd4dc301e",
+   "android_interstitial_id": "d3c10dca-cd02-47c7-914c-ec3d48c51e9d",
+   "android_leaderboard_id": "f1754035-96e2-49a3-9712-877acd4ee727",
+   "android_sdk_key": "4e86eaf6-88c2-4a9d-bd6d-5c84fd0f9611",
+   "ios_banner_id": "d08f26cb-e051-406a-8d40-9fb56b7a0979",
+   "ios_interstitial_id": "60961e57-bca5-42b3-9b0b-bf0cd7940084",
+   "ios_leaderboard_id": "6d08bc54-7537-4b30-91e5-c93015fdd8d8",
+   "ios_sdk_key": "099863ec-4f0b-4e1b-bce0-4fcefd85076a"
+  },
+  "interstitial_adslots": {
+   "adslots": {
+    "897.857": {
+     "adunits": [
+      {
+       "ranking_multiplier": 1.0,
+       "adunit": {
+        "mediation": "max",
+        "tag": "2",
+        "ios_adunit_id": "4007a6e678d6c11b",
+        "android_adunit_id": "31832b9d513794ba",
+        "retry_enabled": true,
+        "sequential_loading_enabled": true
+       },
+       "cpm_floor": {
+        "waterfall": {
+         "lines": [
+          {
+           "type": "fixed",
+           "value": 0.01
+          }
+         ]
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  "rewarded_video_adslots": {
+   "adslots": {
+    "898.858": {
+     "adunits": [
+      {
+       "ranking_multiplier": 1.0,
+       "adunit": {
+        "mediation": "max",
+        "tag": "2",
+        "ios_adunit_id": "f4c7b1eaef1be424",
+        "android_adunit_id": "716a551e0f213e44",
+        "retry_enabled": true,
+        "sequential_loading_enabled": true
+       },
+       "cpm_floor": {
+        "waterfall": {
+         "lines": [
+          {
+           "type": "fixed",
+           "value": 0.01
+          }
+         ]
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  "rewarded_video_placements": [],
+  "placements": {
+   "game_end_win": {
+    "interstitial_probability": 1.0,
+    "interstitial": {
+     "newcomers_restrictions": {
+      "first_session_only": false,
+      "block_first_seconds": 1000000,
+      "block_first_impressions": 0,
+      "timer_counts_in_background": true
+     },
+     "ad_frequency_restrictions": {
+      "operator": "and",
+      "rules": [
+       {
+        "operator": "and",
+        "rules": [
+         {
+          "type": "time_based",
+          "reset_timer_after_rewarded_video": true,
+          "reset_timer_after_interstitial": true,
+          "min_time_between_interstitials": 90,
+          "timer_counts_in_background": false,
+          "min_time_placements": [
+           "any_int",
+           "any_rv"
+          ],
+          "min_time_adjustment": 0,
+          "min_time_multiplier": 1.0,
+          "min_time_min_value": 0,
+          "min_time_max_value": 0
+         }
+        ]
+       }
+      ]
+     }
+    }
+   },
+   "game_end_lose": {
+    "interstitial_probability": 1.0,
+    "interstitial": {
+     "newcomers_restrictions": {
+      "first_session_only": false,
+      "block_first_seconds": 1000000,
+      "block_first_impressions": 0,
+      "timer_counts_in_background": true
+     },
+     "ad_frequency_restrictions": {
+      "operator": "and",
+      "rules": [
+       {
+        "operator": "and",
+        "rules": [
+         {
+          "type": "time_based",
+          "reset_timer_after_rewarded_video": true,
+          "reset_timer_after_interstitial": true,
+          "min_time_between_interstitials": 90,
+          "timer_counts_in_background": false,
+          "min_time_placements": [
+           "any_int",
+           "any_rv"
+          ],
+          "min_time_adjustment": 0,
+          "min_time_multiplier": 1.0,
+          "min_time_min_value": 0,
+          "min_time_max_value": 0
+         }
+        ]
+       }
+      ]
+     }
+    }
+   }
+  },
+  "enable_banners": true,
+  "banner_position": "bottom",
+  "max": {
+   "ios_banner_id": "371ae8eaf6c1082f",
+   "android_banner_id": "105173742890ee26"
+  }
+ },
+ "ios_idfa_native_popup_enabled": true,
+ "popups": {
+  "order": [
+   "IDFA",
+   "Allow_Notifications",
+   "Google_CMP",
+   "Rate_Us",
+   "PushNotifications_Retry_OptIn"
+  ],
+  "triggers": {
+   "IDFA": {
+    "conditions": [
+     {
+      "app_starts": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       18,
+       19,
+       20,
+       25,
+       30,
+       35,
+       40,
+       45,
+       50
+      ],
+      "game_starts": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ]
+   },
+   "Google_CMP": {
+    "conditions": [
+     {
+      "app_starts": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8,
+       9,
+       10,
+       11,
+       12,
+       13,
+       14,
+       15,
+       16,
+       17,
+       18,
+       19,
+       20,
+       25,
+       30,
+       35,
+       40,
+       45,
+       50
+      ],
+      "game_starts": [
+       0
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "client_ad_revenue_timeframe": 24.0,
+ "ccrtcumulative_thresholds": [
+  1.0
+ ],
+ "powerups": {
+  "block_break": {
+   "unlock_level": 15,
+   "initial_inventory": 3,
+   "enable_tutorial": true,
+   "enable_rewarded_purchase": true,
+   "price_coins": 100,
+   "amount_for_coins": 3,
+   "amount_for_rewarded": 3
+  },
+  "time_freeze": {
+   "unlock_level": 10,
+   "duration_seconds": 10,
+   "initial_inventory": 3,
+   "enable_tutorial": true,
+   "enable_rewarded_purchase": true,
+   "price_coins": 100,
+   "amount_for_coins": 3,
+   "amount_for_rewarded": 3
+  }
+ },
+ "chapter_set_id": 4,
+ "coins_for_wins": {
+  "schema": [
+   {
+    "from": 1,
+    "to": -1,
+    "reward": [
+     {
+      "id": 21714,
+      "reward_type": "coins",
+      "attributes": {},
+      "type": "coins",
+      "quantity": 25,
+      "amount": 25
+     }
+    ]
+   }
+  ]
+ },
+ "game_end_flow": {
+  "enable_try_again": true,
+  "play_on": {
+   "price_coins": 900.0,
+   "price_increment": 1.0,
+   "additional_time_seconds": 30
+  },
+  "reward_multiplier": {
+   "enabled": true,
+   "choices": [
+    {
+     "value": 5.0,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ "low_time_indication": {
+  "threshold": 20
+ },
+ "lives": {
+  "lives_max_revivable_number": 5,
+  "lives_max_allowed_number": 5,
+  "onboarding_infinite_lives_duration": 600,
+  "price_coins": 900,
+  "regeneration_time": 1800,
+  "enable_rewarded_purchase": true,
+  "amount_for_rewarded": 1
+ },
+ "telemetry": {
+  "activation_rate": 1.0,
+  "enabled": true,
+  "enabled_metrics": [
+   "FirstLoadTime",
+   "SubsequentLoadTime",
+   "FrameStability",
+   "FrameStabilityAverage",
+   "RuntimeMemory",
+   "Battery",
+   "ThermalState",
+   "ResumeTime",
+   "AppInstallSize",
+   "DataDownloadVolume"
+  ]
+ },
+ "ads_max_ios_banner_id": "371ae8eaf6c1082f",
+ "ads_max_android_banner_id": "105173742890ee26",
+ "ads_amazon_ios_sdk_key": "099863ec-4f0b-4e1b-bce0-4fcefd85076a",
+ "ads_amazon_ios_interstitial_id": "60961e57-bca5-42b3-9b0b-bf0cd7940084",
+ "ads_amazon_ios_banner_id": "d08f26cb-e051-406a-8d40-9fb56b7a0979",
+ "ads_amazon_ios_leaderboard_id": "6d08bc54-7537-4b30-91e5-c93015fdd8d8",
+ "ads_amazon_android_sdk_key": "4e86eaf6-88c2-4a9d-bd6d-5c84fd0f9611",
+ "ads_amazon_android_interstitial_id": "d3c10dca-cd02-47c7-914c-ec3d48c51e9d",
+ "ads_amazon_android_banner_id": "d2721a2a-7861-4e41-8e15-468dd4dc301e",
+ "ads_amazon_android_leaderboard_id": "f1754035-96e2-49a3-9712-877acd4ee727"
+}

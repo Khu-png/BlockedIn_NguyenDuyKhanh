@@ -1,0 +1,318 @@
+file,name,width,height,format,source,also_in
+engine_sdk/debug_tools/IconInfoHighRes.png,IconInfoHighRes,64,64,4,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/InputFieldBackground.png,InputFieldBackground,32,32,4,sharedassets1.assets,aa:35b7eacabde31f7164c3fe4ec6a1560d_unitybuiltinassets
+engine_sdk/debug_tools/sactx-0-256x128-Uncompressed-IngameDebugConsoleSpriteAtlas-0bd39f22.png,sactx-0-256x128-Uncompressed-IngameDebugConsoleSpriteAtlas-0bd39f22,256,128,4,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_arrow_right.png,tex_uds_ui_arrow_right,17,27,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_back.png,tex_uds_ui_back,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_check.png,tex_uds_ui_check,36,27,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_close.png,tex_uds_ui_close,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_floating_button_background.png,tex_uds_ui_floating_button_background,32,32,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_search_button.png,tex_uds_ui_search_button,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_slider_gauge.png,tex_uds_ui_slider_gauge,8,8,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_slider_handle.png,tex_uds_ui_slider_handle,54,54,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_toggle_off.png,tex_uds_ui_toggle_off,109,60,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_uds_ui_toggle_on.png,tex_uds_ui_toggle_on,109,60,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_ui_rounded.png,tex_ui_rounded,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_ui_semi_rounded.png,tex_ui_semi_rounded,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_ui_square.png,tex_ui_square,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/tex_ui_top_semi_rounded.png,tex_ui_top_semi_rounded,64,64,50,sharedassets1.assets,aa:app_assets_all
+engine_sdk/debug_tools/Tools_Icon.png,Tools_Icon,64,64,50,sharedassets1.assets,aa:app_assets_all;aa:gameplay_assets_all
+engine_sdk/render_pipeline/AreaTex.png,AreaTex,160,560,3,globalgamemanagers.assets,
+engine_sdk/render_pipeline/BayerMatrix.png,BayerMatrix,4,4,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/DebugFont.png,DebugFont,256,128,50,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Large01.png,Large01,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Large02.png,Large02,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_0.png,LDR_LLL1_0,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_0__2.png,LDR_LLL1_0,64,64,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_1.png,LDR_LLL1_1,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_10.png,LDR_LLL1_10,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_11.png,LDR_LLL1_11,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_12.png,LDR_LLL1_12,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_13.png,LDR_LLL1_13,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_14.png,LDR_LLL1_14,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_15.png,LDR_LLL1_15,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_16.png,LDR_LLL1_16,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_17.png,LDR_LLL1_17,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_18.png,LDR_LLL1_18,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_19.png,LDR_LLL1_19,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_2.png,LDR_LLL1_2,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_20.png,LDR_LLL1_20,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_21.png,LDR_LLL1_21,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_22.png,LDR_LLL1_22,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_23.png,LDR_LLL1_23,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_24.png,LDR_LLL1_24,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_25.png,LDR_LLL1_25,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_26.png,LDR_LLL1_26,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_27.png,LDR_LLL1_27,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_28.png,LDR_LLL1_28,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_29.png,LDR_LLL1_29,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_3.png,LDR_LLL1_3,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_30.png,LDR_LLL1_30,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_31.png,LDR_LLL1_31,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_4.png,LDR_LLL1_4,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_5.png,LDR_LLL1_5,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_6.png,LDR_LLL1_6,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_7.png,LDR_LLL1_7,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_8.png,LDR_LLL1_8,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/LDR_LLL1_9.png,LDR_LLL1_9,16,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Medium01.png,Medium01,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Medium02.png,Medium02,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Medium03.png,Medium03,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Medium04.png,Medium04,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Medium05.png,Medium05,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Medium06.png,Medium06,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/SearchTex.png,SearchTex,64,16,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Thin01.png,Thin01,512,512,1,globalgamemanagers.assets,
+engine_sdk/render_pipeline/Thin02.png,Thin02,512,512,1,globalgamemanagers.assets,
+engine_sdk/sdk_and_tools/9Sliced.png,9Sliced,256,256,50,8884154dfe85442a3a3578be807dbcdf,
+engine_sdk/sdk_and_tools/add_link.png,add_link,64,64,4,50daed6d00264a4bb3026a095dd61561,
+engine_sdk/sdk_and_tools/arrow-down.png,arrow-down,24,24,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-down@2x.png,arrow-down@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-left.png,arrow-left,24,24,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-left@2x.png,arrow-left@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-right.png,arrow-right,24,24,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-right@2x.png,arrow-right@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-up.png,arrow-up,24,24,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/arrow-up@2x.png,arrow-up@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/Background.png,Background,32,32,4,0000000000000000f000000000000000,aa:35b7eacabde31f7164c3fe4ec6a1560d_unitybuiltinassets
+engine_sdk/sdk_and_tools/check-dash.png,check-dash,24,24,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/check-dash@2x.png,check-dash@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/check.png,check,24,24,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/check@2x.png,check@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/Checkmark.png,Checkmark,64,64,4,0000000000000000f000000000000000,
+engine_sdk/sdk_and_tools/checkmark__2.png,checkmark,16,16,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/close_icon.png,close_icon,64,64,50,7fe392aec5f0a4481b99b4ac10f58505,
+engine_sdk/sdk_and_tools/console.erroricon.png,console.erroricon,32,32,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/console.erroricon@2x.png,console.erroricon@2x,64,64,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/console.infoicon.png,console.infoicon,32,32,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/console.infoicon@2x.png,console.infoicon@2x,64,64,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/console.warnicon.png,console.warnicon,32,32,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/console.warnicon@2x.png,console.warnicon@2x,64,64,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/debug_tools_icon.png,debug_tools_icon,64,64,50,e62b595d9aecb41fe93e1d217878f7c4,
+engine_sdk/sdk_and_tools/dropdown-arrow.png,dropdown-arrow,10,10,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/dropdown-arrow@2x.png,dropdown-arrow@2x,20,20,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/DropdownArrow.png,DropdownArrow,64,64,4,0000000000000000f000000000000000,
+engine_sdk/sdk_and_tools/error_icon.png,error_icon,64,64,50,572fee4574afa4f6dbf2846e0c152fe8,
+engine_sdk/sdk_and_tools/info_icon.png,info_icon,64,64,50,036a0d1eebcb7467ba676e6cb67c7872,
+engine_sdk/sdk_and_tools/LiberationSans SDF Atlas.png,LiberationSans SDF Atlas,1,1,1,2e498d1c8094910479dc3e1b768306a4,
+engine_sdk/sdk_and_tools/LiberationSans SDF Atlas__2.png,LiberationSans SDF Atlas,1024,1024,1,8f586378b4e144a9851e7b34d9b748ee,
+engine_sdk/sdk_and_tools/Remove.png,Remove,12,12,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/Remove@2x.png,Remove@2x,48,48,4,c8b27f6a5f9f74591bcac186cfedc2fe,
+engine_sdk/sdk_and_tools/settings_icon.png,settings_icon,256,256,4,4485f7f77feac4fccb75eb6a0eb14f05,
+engine_sdk/sdk_and_tools/TripledotAdsDebugButton.png,TripledotAdsDebugButton,128,128,50,8ceb9e169b51b48b986ca5ecadd682ae,
+engine_sdk/sdk_and_tools/UICheckMark.png,UICheckMark,11,11,4,b346b2a2df1d290438be3287b6419408,
+engine_sdk/sdk_and_tools/UIElement8px.png,UIElement8px,8,8,4,d49e78756811bfa4aafb8b6535417991,
+engine_sdk/sdk_and_tools/UIFoldoutClosed.png,UIFoldoutClosed,11,11,4,7a0568d5e3330b84687e307992be3030,
+engine_sdk/sdk_and_tools/UIFoldoutOpened.png,UIFoldoutOpened,11,11,4,a674720496c1ed248a5b7ea3e22a11fd,
+engine_sdk/sdk_and_tools/UIMask.png,UIMask,32,32,4,0000000000000000f000000000000000,
+engine_sdk/sdk_and_tools/UISprite.png,UISprite,32,32,4,0000000000000000f000000000000000,
+engine_sdk/sdk_and_tools/uninstall_icon.png,uninstall_icon,128,128,50,d24994f48fdd0430692e3d49279cd782,
+engine_sdk/sdk_and_tools/warning_icon.png,warning_icon,64,64,50,b504c956e7ed744b6b0e7f014e1cac5a,
+engine_sdk/sdk_and_tools/White1px.png,White1px,1,1,3,127279d577f25ac4ea17dae3782e5074,
+engine_sdk/unity_builtin/box.png,box,12,12,13,unity default resources,
+engine_sdk/unity_builtin/button active.png,button active,12,12,4,unity default resources,
+engine_sdk/unity_builtin/button hover.png,button hover,12,12,13,unity default resources,
+engine_sdk/unity_builtin/button on hover.png,button on hover,12,12,13,unity default resources,
+engine_sdk/unity_builtin/button on.png,button on,12,12,13,unity default resources,
+engine_sdk/unity_builtin/button.png,button,12,12,13,unity default resources,
+engine_sdk/unity_builtin/EscToExit_back.png,EscToExit_back,74,71,4,unity default resources,
+engine_sdk/unity_builtin/EscToExit_Text.png,EscToExit_Text,267,20,13,unity default resources,
+engine_sdk/unity_builtin/horizontal scrollbar thumb.png,horizontal scrollbar thumb,12,12,13,unity default resources,
+engine_sdk/unity_builtin/horizontal scrollbar.png,horizontal scrollbar,18,15,13,unity default resources,
+engine_sdk/unity_builtin/horizontalslider.png,horizontalslider,8,7,13,unity default resources,
+engine_sdk/unity_builtin/slider thumb active.png,slider thumb active,8,12,13,unity default resources,
+engine_sdk/unity_builtin/slider thumb.png,slider thumb,8,12,13,unity default resources,
+engine_sdk/unity_builtin/slidert humb hover.png,slidert humb hover,8,12,13,unity default resources,
+engine_sdk/unity_builtin/Soft.png,Soft,128,128,1,unity default resources,
+engine_sdk/unity_builtin/textfield hover.png,textfield hover,12,12,13,unity default resources,
+engine_sdk/unity_builtin/textfield on.png,textfield on,12,12,13,unity default resources,
+engine_sdk/unity_builtin/textfield.png,textfield,12,12,13,unity default resources,
+engine_sdk/unity_builtin/toggle active.png,toggle active,14,14,13,unity default resources,
+engine_sdk/unity_builtin/toggle hover.png,toggle hover,14,14,13,unity default resources,
+engine_sdk/unity_builtin/toggle on active.png,toggle on active,14,14,13,unity default resources,
+engine_sdk/unity_builtin/toggle on hover.png,toggle on hover,14,14,13,unity default resources,
+engine_sdk/unity_builtin/toggle on.png,toggle on,14,14,13,unity default resources,
+engine_sdk/unity_builtin/toggle.png,toggle,14,14,13,unity default resources,
+engine_sdk/unity_builtin/UnitySplash-HolographicTrackingLoss.png,UnitySplash-HolographicTrackingLoss,32,32,34,unity default resources,
+engine_sdk/unity_builtin/UnityWatermark-dev.png,UnityWatermark-dev,115,17,13,unity default resources,
+engine_sdk/unity_builtin/UnityWatermark-edu.png,UnityWatermark-edu,148,17,13,unity default resources,
+engine_sdk/unity_builtin/UnityWatermark-proto.png,UnityWatermark-proto,87,13,13,unity default resources,
+engine_sdk/unity_builtin/UnityWatermark-trial-big.png,UnityWatermark-trial-big,512,94,13,unity default resources,
+engine_sdk/unity_builtin/UnityWatermark-trial.png,UnityWatermark-trial,76,14,13,unity default resources,
+engine_sdk/unity_builtin/vertical scrollbar thumb.png,vertical scrollbar thumb,12,12,13,unity default resources,
+engine_sdk/unity_builtin/vertical scrollbar.png,vertical scrollbar,15,18,13,unity default resources,
+engine_sdk/unity_builtin/verticalslider.png,verticalslider,7,8,13,unity default resources,
+engine_sdk/unity_builtin/WarningSign.png,WarningSign,64,64,13,unity default resources,
+engine_sdk/unity_builtin/window on.png,window on,17,27,13,unity default resources,
+engine_sdk/unity_builtin/window.png,window,17,27,13,unity default resources,
+game/blocks/Block_GradientMap.png,Block_GradientMap,512,512,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Black.png,ColorRamp_Black,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Blue.png,ColorRamp_Blue,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_ForestGreen.png,ColorRamp_ForestGreen,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Green.png,ColorRamp_Green,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Obstacle.png,ColorRamp_Obstacle,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Orange.png,ColorRamp_Orange,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Pink.png,ColorRamp_Pink,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Purple.png,ColorRamp_Purple,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Red.png,ColorRamp_Red,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Turquoise.png,ColorRamp_Turquoise,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_White.png,ColorRamp_White,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/ColorRamp_Yellow.png,ColorRamp_Yellow,64,8,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Glow_Square.png,Glow_Square,64,64,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Movement_Double_Horizontal.png,Movement_Double_Horizontal,168,129,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Movement_Double_Vertical.png,Movement_Double_Vertical,129,168,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Movement_Single-Down.png,Movement_Single-Down,128,114,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Movement_Single-Horizontal.png,Movement_Single-Horizontal,114,129,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Movement_Single-Up.png,Movement_Single-Up,129,114,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Shadow.png,Shadow,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/SnapLine.png,SnapLine,512,64,4,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/StationaryBlock_Base_color.png,StationaryBlock_Base_color,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/StationaryBlock_Shadow.png,StationaryBlock_Shadow,64,64,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Black.png,Symbol_Black,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Blue.png,Symbol_Blue,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_ForestGreen.png,Symbol_ForestGreen,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Green.png,Symbol_Green,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Obstacle.png,Symbol_Obstacle,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Orange.png,Symbol_Orange,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Pink.png,Symbol_Pink,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Purple.png,Symbol_Purple,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Red.png,Symbol_Red,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Turquoise.png,Symbol_Turquoise,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_White.png,Symbol_White,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/blocks/Symbol_Yellow.png,Symbol_Yellow,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/branding/app_icon.png,app_icon,192,192,PNG,res/mipmap-xxxhdpi-v4,
+game/branding/app_icon_round.png,app_icon_round,192,192,PNG,res/mipmap-xxxhdpi-v4,
+game/branding/Blocked-In_Logo.png,Blocked-In_Logo,2048,1173,50,aa:app_assets_all,
+game/branding/ic_launcher_background.png,ic_launcher_background,432,432,PNG,res/mipmap-xxxhdpi-v4,
+game/branding/ic_launcher_foreground.png,ic_launcher_foreground,432,432,PNG,res/mipmap-xxxhdpi-v4,
+game/branding/Logo_Meta.png,Logo_Meta,791,267,50,sharedassets2.assets,
+game/branding/Splash_Background.png,Splash_Background,1080,1920,50,aa:app_assets_all,
+game/branding/Splash_Fill_ProgressBar.png,Splash_Fill_ProgressBar,76,60,50,aa:app_assets_all,
+game/branding/Splash_Socket_ProgressBar.png,Splash_Socket_ProgressBar,98,80,50,aa:app_assets_all,
+game/fonts/Baloo2_ExtraBold Atlas.png,Baloo2_ExtraBold Atlas,1024,1024,1,sharedassets1.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/fonts/Baloo2_Medium Atlas.png,Baloo2_Medium Atlas,1024,1024,1,aa:app_assets_all,aa:gameplay_assets_all
+game/ice/Frost_Gradient.png,Frost_Gradient,128,128,3,aa:gameplay_assets_all,
+game/ice/Ice_Blurry_Bottom.png,Ice_Blurry_Bottom,256,94,50,aa:gameplay_assets_all,
+game/ice/Ice_Blurry_BottomLeft.png,Ice_Blurry_BottomLeft,210,256,50,aa:gameplay_assets_all,
+game/ice/Ice_Blurry_BottomRight.png,Ice_Blurry_BottomRight,207,256,50,aa:gameplay_assets_all,
+game/ice/Ice_Blurry_Top.png,Ice_Blurry_Top,256,57,50,aa:gameplay_assets_all,
+game/ice/Ice_Blurry_TopLeft.png,Ice_Blurry_TopLeft,230,256,50,aa:gameplay_assets_all,
+game/ice/Ice_Blurry_TopRight.png,Ice_Blurry_TopRight,256,218,50,aa:gameplay_assets_all,
+game/ice/Ice_Bottom.png,Ice_Bottom,256,85,50,aa:gameplay_assets_all,
+game/ice/Ice_Bottom_Sdf.png,Ice_Bottom_Sdf,64,16,4,aa:gameplay_assets_all,
+game/ice/Ice_Corner_BottomLeft.png,Ice_Corner_BottomLeft,237,256,50,aa:gameplay_assets_all,
+game/ice/Ice_Corner_BottomLeft_Sdf.png,Ice_Corner_BottomLeft_Sdf,64,64,4,aa:gameplay_assets_all,
+game/ice/Ice_Corner_BottomRight.png,Ice_Corner_BottomRight,256,256,50,aa:gameplay_assets_all,
+game/ice/Ice_Corner_BottomRight_Sdf.png,Ice_Corner_BottomRight_Sdf,64,64,4,aa:gameplay_assets_all,
+game/ice/Ice_Corner_TopLeft.png,Ice_Corner_TopLeft,256,223,50,aa:gameplay_assets_all,
+game/ice/Ice_Corner_TopLeft_Sdf.png,Ice_Corner_TopLeft_Sdf,64,64,4,aa:gameplay_assets_all,
+game/ice/Ice_Corner_TopRight.png,Ice_Corner_TopRight,256,229,50,aa:gameplay_assets_all,
+game/ice/Ice_Corner_TopRight_Sdf.png,Ice_Corner_TopRight_Sdf,64,64,4,aa:gameplay_assets_all,
+game/ice/Ice_Shards.png,Ice_Shards,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ice/Ice_Top.png,Ice_Top,256,25,50,aa:gameplay_assets_all,
+game/ice/Ice_Top_Sdf.png,Ice_Top_Sdf,64,8,4,aa:gameplay_assets_all,
+game/ice/IceBlock_GradientMap.png,IceBlock_GradientMap,512,512,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ice/IceBlocks.png,IceBlocks,512,512,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ice/scratchesnormal.png,scratchesnormal,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ice/Snow.png,Snow,264,60,50,sharedassets3.assets,aa:gameplay_assets_all
+game/mechanic_icons/Icon_Mechanic_Blocker.png,Icon_Mechanic_Blocker,301,302,50,sharedassets3.assets,aa:gameplay_assets_all
+game/mechanic_icons/Icon_Mechanic_Cage.png,Icon_Mechanic_Cage,301,307,50,sharedassets3.assets,aa:gameplay_assets_all
+game/mechanic_icons/Icon_Mechanic_Ice.png,Icon_Mechanic_Ice,301,307,50,sharedassets3.assets,aa:gameplay_assets_all
+game/mechanic_icons/Icon_Mechanic_Rope.png,Icon_Mechanic_Rope,303,307,50,sharedassets3.assets,aa:gameplay_assets_all
+game/mechanic_icons/Icon_Mechanic_SingleAxis.png,Icon_Mechanic_SingleAxis,301,307,50,sharedassets3.assets,aa:gameplay_assets_all
+game/powerups/Hammer.png,Hammer,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/powerups/PowerUp_Amount.png,PowerUp_Amount,101,96,50,aa:gameplay_assets_all,
+game/powerups/Powerup_Base.png,Powerup_Base,226,226,50,aa:gameplay_assets_all,
+game/powerups/PowerUp_BlockBreak.png,PowerUp_BlockBreak,401,425,50,sharedassets3.assets,aa:gameplay_assets_all
+game/powerups/PowerUp_BlockBreak_Locked.png,PowerUp_BlockBreak_Locked,401,425,50,aa:gameplay_assets_all,
+game/powerups/PowerUp_Free.png,PowerUp_Free,138,49,50,aa:gameplay_assets_all,
+game/powerups/PowerUp_Icon_Arrow.png,PowerUp_Icon_Arrow,114,232,50,sharedassets3.assets,aa:gameplay_assets_all
+game/powerups/PowerUp_Plus.png,PowerUp_Plus,101,101,50,aa:gameplay_assets_all,
+game/powerups/PowerUp_TimeFreeze.png,PowerUp_TimeFreeze,344,344,50,sharedassets3.assets,aa:gameplay_assets_all
+game/powerups/PowerUp_TimeFreeze__2.png,PowerUp_TimeFreeze,254,269,50,aa:gameplay_assets_all,
+game/powerups/PowerUp_TimeFreeze_Locked.png,PowerUp_TimeFreeze_Locked,344,344,50,aa:gameplay_assets_all,
+game/rewards/Reward_Coin.png,Reward_Coin,512,512,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rewards/Reward_Coin_SDF.png,Reward_Coin_SDF,220,220,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rewards/Reward_Life.png,Reward_Life,220,220,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rewards/Reward_Life_SDF.png,Reward_Life_SDF,220,220,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rope_scissors/Rope_C.png,Rope_C,512,512,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rope_scissors/Rope_Shadow.png,Rope_Shadow,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rope_scissors/Rope_Shadow_Ends.png,Rope_Shadow_Ends,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rope_scissors/Scissors_Base_color.png,Scissors_Base_color,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/rope_scissors/Scissors_Shadow.png,Scissors_Shadow,128,64,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/2x2_Texture.png,2x2_Texture,2,2,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Background_Popup.png,Background_Popup,453,468,50,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/balloon_triangle.png,balloon_triangle,33,19,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Banner.png,Banner,203,143,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Banner_Gold.png,Banner_Gold,1042,277,50,aa:gameplay_assets_all,
+game/ui/Box_Text.png,Box_Text,221,221,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Button_Blue.png,Button_Blue,285,285,48,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Button_Circle_Green.png,Button_Circle_Green,193,193,48,aa:app_assets_all,aa:gameplay_assets_all
+game/ui/Button_Circle_Red.png,Button_Circle_Red,193,193,50,sharedassets1.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Button_Close.png,Button_Close,179,179,48,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Button_CTA.png,Button_CTA,285,285,48,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Button_CTA_Disabled.png,Button_CTA_Disabled,285,285,48,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Button_CTA_Lobby.png,Button_CTA_Lobby,249,249,48,sharedassets2.assets,
+game/ui/Button_Red.png,Button_Red,285,285,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Button_Secondary_Small.png,Button_Secondary_Small,145,145,50,aa:app_assets_all,
+game/ui/Button_Setting_Smallest.png,Button_Setting_Smallest,166,63,50,aa:app_assets_all,aa:gameplay_assets_all
+game/ui/Element_Disabled.png,Element_Disabled,33,23,50,aa:app_assets_all,aa:gameplay_assets_all
+game/ui/Fill_ProgressBar_ChestProgression.png,Fill_ProgressBar_ChestProgression,88,57,50,sharedassets2.assets,
+game/ui/Frame_Button_Lobby_NoProgressionBar.png,Frame_Button_Lobby_NoProgressionBar,623,288,50,sharedassets2.assets,
+game/ui/Frame_Button_Lobby_ProgressionBar.png,Frame_Button_Lobby_ProgressionBar,623,341,50,sharedassets2.assets,
+game/ui/Gradient_Popup_Title_Light.png,Gradient_Popup_Title_Light,16,16,50,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Gradient_Title_Light.png,Gradient_Title_Light,16,16,50,aa:gameplay_assets_all,
+game/ui/Icon_Ad.png,Icon_Ad,97,108,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Icon_BrokenLife.png,Icon_BrokenLife,403,345,50,aa:gameplay_assets_all,
+game/ui/Icon_Chest.png,Icon_Chest,85,75,50,sharedassets2.assets,
+game/ui/Icon_Coin.png,Icon_Coin,104,104,50,sharedassets2.assets,aa:gameplay_assets_all
+game/ui/Icon_Collection.png,Icon_Collection,512,532,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Icon_Eye.png,Icon_Eye,85,48,50,aa:gameplay_assets_all,
+game/ui/Icon_Haptics.png,Icon_Haptics,87,84,50,aa:app_assets_all,aa:gameplay_assets_all
+game/ui/Icon_Home.png,Icon_Home,512,467,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Icon_Home__2.png,Icon_Home,84,84,50,aa:gameplay_assets_all,
+game/ui/Icon_Infinity.png,Icon_Infinity,88,51,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Icon_Leaderboards.png,Icon_Leaderboards,512,427,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Icon_Life.png,Icon_Life,131,112,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Icon_Life_02.png,Icon_Life_02,121,104,50,aa:gameplay_assets_all,
+game/ui/Icon_Life_Big.png,Icon_Life_Big,331,285,50,aa:gameplay_assets_all,
+game/ui/Icon_Life_Disabled.png,Icon_Life_Disabled,121,104,50,aa:gameplay_assets_all,
+game/ui/Icon_LoadingSpinner.png,Icon_LoadingSpinner,79,83,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Icon_Music.png,Icon_Music,84,84,50,aa:app_assets_all,aa:gameplay_assets_all
+game/ui/Icon_NoInternet.png,Icon_NoInternet,92,74,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Icon_Padlock.png,Icon_Padlock,512,697,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Icon_Padlock_Silver.png,Icon_Padlock_Silver,103,140,50,sharedassets2.assets,aa:gameplay_assets_all
+game/ui/Icon_Replay.png,Icon_Replay,74,88,50,aa:gameplay_assets_all,
+game/ui/Icon_Settings.png,Icon_Settings,122,131,50,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Icon_Shop.png,Icon_Shop,512,501,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Icon_Sounds.png,Icon_Sounds,84,84,50,aa:app_assets_all,aa:gameplay_assets_all
+game/ui/Icon_Timer.png,Icon_Timer,54,54,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Inset_Button_CTA.png,Inset_Button_CTA,151,73,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Inset_Button_CTA_Red.png,Inset_Button_CTA_Red,256,73,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Label_Level.png,Label_Level,392,151,50,aa:gameplay_assets_all,
+game/ui/Panel_GameItem.png,Panel_GameItem,231,240,50,sharedassets2.assets,
+game/ui/Panel_NavigationBar_Active.png,Panel_NavigationBar_Active,172,320,50,sharedassets2.assets,
+game/ui/Panel_NavigationBar_Inactive.png,Panel_NavigationBar_Inactive,246,289,50,sharedassets2.assets,
+game/ui/Panel_PlayOn.png,Panel_PlayOn,349,343,50,aa:gameplay_assets_all,
+game/ui/Panel_Popup.png,Panel_Popup,365,379,48,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/ui/Panel_SpeechBubble.png,Panel_SpeechBubble,193,131,50,aa:gameplay_assets_all,
+game/ui/Pill_01.png,Pill_01,147,150,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Pill_03.png,Pill_03,98,98,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Rounded_Rect_10px.png,Rounded_Rect_10px,20,20,50,sharedassets1.assets,aa:app_assets_all
+game/ui/Socket_ProgressBar_ChestProgression.png,Socket_ProgressBar_ChestProgression,71,47,50,sharedassets2.assets,
+game/ui/TimeFreeze_TimerBar.png,TimeFreeze_TimerBar,80,80,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/Widget_Timer_Set.png,Widget_Timer_Set,100,100,50,sharedassets3.assets,aa:gameplay_assets_all
+game/ui/WidgetBase.png,WidgetBase,245,80,50,sharedassets2.assets,aa:gameplay_assets_all
+game/vfx/Circle_01.png,Circle_01,256,256,50,sharedassets2.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/vfx/Explosion_Halo.png,Explosion_Halo,330,339,50,aa:gameplay_assets_all,
+game/vfx/FX_Shadow_OrbSoft.png,FX_Shadow_OrbSoft,128,128,50,sharedassets1.assets,aa:app_assets_all;aa:gameplay_assets_all
+game/vfx/Glow.png,Glow,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/Glow_01.png,Glow_01,32,32,3,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/Glow_02.png,Glow_02,64,64,4,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/Glow_02__2.png,Glow_02,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/Glow_Ring.png,Glow_Ring,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/Glow_Trail_01.png,Glow_Trail_01,128,128,50,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/ParticleFlare.png,ParticleFlare,256,256,50,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/ParticleStar.png,ParticleStar,73,72,50,sharedassets3.assets,aa:gameplay_assets_all
+game/vfx/Smoke_01.png,Smoke_01,64,64,50,aa:gameplay_assets_all,
+game/vfx/Sparkle_01.png,Sparkle_01,128,128,50,sharedassets2.assets,aa:gameplay_assets_all

@@ -1,0 +1,15 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -10929088049432069,
+  "_ref": "MonoScript:LegalLinksConfig"
+ },
+ "m_Name": "LegalLinksConfig",
+ "_termsOfServiceUrl": "https://www.tripledotstudios.com/tos",
+ "_privacyPolicyUrl": "https://www.tripledotstudios.com/privacy"
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='initial-scale=1.0, user-scalable=no'>
+    <!-- @orientation@auto@orientation@ -->
+    <style>
+        .hidden {
+            display: none !important;
+        }
+
+        body {
+            margin: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        #skip, #timer {
+            top: 80%;
+            padding: 4pt;
+            font-size: 12pt;
+            font-family: sans-serif;
+        }
+
+        #skip {
+            width: 64pt;
+            right: 0;
+            text-align: right;
+            justify-content: flex-end;
+        }
+
+        #timer {
+            width: 96pt;
+            left: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #current_position {
+            flex: 1;
+            text-align: right;
+        }
+
+        #duration {
+            flex: 1;
+            text-align: left;
+        }
+
+        #timer div {
+            white-space: nowrap;
+        }
+
+        #skip, #timer, #close, #mute, #replay {
+            position: absolute;
+            background-color: rgba(82, 82, 82, 0.8);
+            color: #ffffff;
+            z-index: 9999;
+            user-select: none;
+            -webkit-user-select: none;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #skip:active, #close:active, #mute:active, #replay:active {
+            background-color: rgba(58, 58, 58, 0.8);
+        }
+
+        #close, #mute, #replay {
+            top: 0.15in;
+            width: 0.3in;
+            height: 0.3in;
+            border-radius: 50%;
+        }
+
+        #close {
+            right: 0.15in;
+        }
+
+        #mute {
+            left: 0.15in;
+        }
+
+        #replay {
+            left: 0.6in;
+        }
+
+        .icon-svg {
+            width: 60%;
+            height: 60%;
+            fill: #ffffff;
+        }
+
+        .sound-off {
+            display: none;
+        }
+
+        .muted .sound-on {
+            display: none;
+        }
+
+        .muted .sound-off {
+            display: block;
+        }
+
+    </style>
+    <script>
+        window.gClientInterface = {};
+
+        window.videoApi = {
+            setSkipTimer: function(time) {
+                var skipButton = document.getElementById("skip");
+
+                if (time > 0) {
+                    skipButton.textContent = "Skip in " + time;
+                } else {
+                    skipButton.textContent = "Skip now";
+                    skipButton.onclick = onSkipClicked;
+                }
+            },
+
+            setSkippable: function(skippable) {
+                var skipButton = document.getElementById("skip");
+
+                if (skippable) {
+                    skipButton.classList.remove("hidden");
+                } else {
+                    skipButton.classList.add("hidden");
+                }
+            },
+
+            setCloseable: function(closeable) {
+                var closeButton = document.getElementById("close");
+
+                if (closeable) {
+                    closeButton.classList.remove("hidden");
+                } else {
+                    closeButton.classList.add("hidden");
+                }
+            },
+
+            setClickableVideo: function(clickable) {
+                if (clickable) {
+                    document.body.onclick = onAdClicked;
+                } else {
+                    document.body.onclick = undefined;
+                }
+            },
+
+            setSound: function(mode) {
+                var muteButton = document.getElementById("mute");
+
+                switch (mode) {
+                    case "ON":
+                        muteButton.classList.remove("muted");
+                        break;
+
+                    case "OFF":
+                        muteButton.classList.add("muted");
+                        break;
+                }
+            },
+
+            setReplayEnabled: function(enabled) {
+                var replayButton = document.getElementById("replay");
+
+                if (enabled) {
+                    replayButton.classList.remove("hidden");
+                } else {
+                    replayButton.classList.add("hidden");
+                }
+            },
+
+            setMode: function(mode) {
+                var timerText = document.getElementById("timer");
+
+                if (mode === "PLAYER") {
+                    timerText.classList.remove("hidden");
+                } else {
+                    timerText.classList.add("hidden");
+                }
+            },
+
+            setVideoDuration: function(seconds) {
+                var durationText = document.getElementById("duration");
+                durationText.textContent = formatSeconds(seconds);
+            },
+
+            setVideoCurrentPosition: function(seconds) {
+                var currentPositionText = document.getElementById("current_position");
+                currentPositionText.textContent = formatSeconds(seconds);
+            }
+        };
+
+        function formatSeconds(totalSeconds) {
+            var hours = Math.floor(totalSeconds / 3600);
+            var minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+            var seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            if (seconds < 10) {
+                seconds = "0" + seconds;
+            }
+
+            if (totalSeconds < 3600) {
+                return minutes + ":" + seconds;
+            }
+
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+
+            return hours + ":" + minutes + ":" + seconds;
+        }
+
+        function invokeApi(methodName) {
+            try {
+                var api = window.magniteapi;
+
+                if (api) {
+                    if (typeof api[methodName] === 'function') {
+                        api[methodName].apply(api);
+                    } else {
+                        console.log("window.magniteapi." + methodName + "() not found");
+                    }
+                } else {
+                    window.location.href = "magnitead://" + methodName;
+                }
+            } catch (e) {
+                console.log("error invoking: " + methodName, e);
+            }
+        }
+
+        function onAdClicked(event) {
+            console.log("onAdClicked");
+            event.stopPropagation();
+
+            var clickUrl = ["%%_magnite_click_url_%%"];
+            window.location.href = clickUrl[0];
+        }
+
+        function onSkipClicked(event) {
+            console.log("onSkipClicked");
+            event.stopPropagation();
+
+            invokeApi("skipVideo");
+        }
+
+        function onCloseClicked(event) {
+            console.log("onCloseClicked");
+            event.stopPropagation();
+
+            invokeApi("closeAd");
+        }
+
+        function onMuteClicked(event) {
+            console.log("onMuteClicked");
+            event.stopPropagation();
+
+            invokeApi("toggleSound");
+        }
+
+        function onReplayClicked(event) {
+            console.log("onReplayClicked");
+            event.stopPropagation();
+
+            invokeApi("replayVideo");
+        }
+
+        function onClickIgnored(event) {
+            console.log("onClickIgnored");
+            event.stopPropagation();
+        }
+    </script>
+</head>
+<body>
+<div id="mute" onclick="onMuteClicked(event)">
+    <svg class="icon-svg" viewBox="0 0 135.8 135.8" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 43.875h48v48H0z M0 67.874 67.874 0v135.748z"/>
+        <g class="sound-on">
+            <path d="M77.255 44.453a23.997 23.997 0 0 1 .944 46.595l-3.102-11.59a11.999 11.999 0 0 0-.473-23.298z"/>
+            <path d="M81.583 20.792c21.854 4.331 37.855 23.13 38.638 45.395.783 22.265-13.857 42.142-35.353 47.998l-3.067-11.258c16.27-4.432 27.351-19.477 26.759-36.33-.593-16.852-12.704-31.081-29.245-34.36z"/>
+        </g>
+        <path class="sound-off" d="M76.001 59.282l8.088-8.088 8.592 8.592 8.591-8.592 8.088 8.088-8.592 8.591 8.592 8.592-8.088 8.088-8.591-8.592-8.592 8.592-8.088-8.088 8.592-8.592z"/>
+    </svg>
+</div>
+<div id="replay" class="hidden" onclick="onReplayClicked(event)">
+    <svg class="icon-svg" viewBox="0 0 134.399 134.399" xmlns="http://www.w3.org/2000/svg">
+        <path d="M86.417 23.763c19.035 8.43 30.364 28.272 27.947 48.949-2.416 20.677-18.014 37.372-38.48 41.186-20.466 3.814-41.03-6.141-50.733-24.56-9.702-18.42-6.281-41.01 8.44-55.73l16.795 16.795a23.752 23.752 0 1 0 26.413-4.922z"/>
+        <path d="M67.2 17.28h47.528L97.282 34.725H85.038V46.97L67.2 64.808z"/>
+    </svg>
+</div>
+<div id="close" class="hidden" onclick="onCloseClicked(event)">
+    <svg class="icon-svg" viewBox="0 0 134.399 134.399" xmlns="http://www.w3.org/2000/svg">
+        <path d="m24.07 40.473 16.384-16.384 26.727 26.726L93.908 24.09l16.384 16.384-26.727 26.726 26.727 26.727-16.384 16.384L67.18 83.584 40.454 110.31 24.07 93.926 50.797 67.2z"/>
+    </svg>
+</div>
+<div id="timer" class="hidden">
+    <div id="current_position">00:00</div>
+    <div>&nbsp;&#47;&nbsp;</div>
+    <div id="duration">00:00</div>
+</div>
+<div id="skip" class="hidden" onclick="onClickIgnored(event)">Skip in...</div>
+</body>
+</html>

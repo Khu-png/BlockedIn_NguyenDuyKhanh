@@ -1,0 +1,19 @@
+# Cover_Corner - exported from Blocked In (Unity mesh, z negated to right-handed)
+mtllib Cover_Corner.mtl
+o Cover_Corner
+v 0.500000 0.400720 0.500000
+v -0.071427 0.400720 0.500000
+v -0.071427 0.400720 -0.035729
+v 0.500000 0.400720 -0.035729
+vt 0.569090 0.339417
+vt 0.396072 0.411798
+vt 0.375412 0.424329
+vt 0.569090 0.492211
+vn 0.00000 1.00000 -0.00000
+vn 0.00000 1.00000 -0.00000
+vn 0.00000 1.00000 -0.00000
+vn 0.00000 1.00000 -0.00000
+g Cover_Corner_sub0
+usemtl PieceBlock_Blue
+f 1/1/1 3/3/3 2/2/2
+f 1/1/1 4/4/4 3/3/3

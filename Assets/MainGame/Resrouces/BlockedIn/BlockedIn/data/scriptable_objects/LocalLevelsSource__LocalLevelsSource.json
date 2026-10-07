@@ -1,0 +1,145 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 3282267569631953960,
+  "_ref": "MonoScript:LocalLevelsSource"
+ },
+ "m_Name": "LocalLevelsSource",
+ "_levels": [
+  {
+   "m_FileID": 0,
+   "m_PathID": 1220800121157582274,
+   "_ref": "MonoBehaviour:Level 1"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -6045176352482596990,
+   "_ref": "MonoBehaviour:Level 23"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 6821606490693123274,
+   "_ref": "MonoBehaviour:Level 2"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -3626887117686038624,
+   "_ref": "MonoBehaviour:Level 3"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 976849554719202574,
+   "_ref": "MonoBehaviour:Level 4"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 2129943691989104208,
+   "_ref": "MonoBehaviour:Level 5"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -8333836104519469065,
+   "_ref": "MonoBehaviour:Level 6"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -2303441483646976321,
+   "_ref": "MonoBehaviour:Level 7"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -3234939695163844827,
+   "_ref": "MonoBehaviour:Level 8"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -5336007027423993260,
+   "_ref": "MonoBehaviour:Level 9"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 7172875982314292367,
+   "_ref": "MonoBehaviour:Level 10"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -5925481708076670747,
+   "_ref": "MonoBehaviour:Level 11"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -8331212472510085057,
+   "_ref": "MonoBehaviour:Level 12"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -2696151696587381480,
+   "_ref": "MonoBehaviour:Level 13"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -8956717144209274384,
+   "_ref": "MonoBehaviour:Level 14"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -8874541585087806004,
+   "_ref": "MonoBehaviour:Level 15"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 8273516187167019604,
+   "_ref": "MonoBehaviour:Level 16"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -6971292011529654945,
+   "_ref": "MonoBehaviour:Level 17"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -8863728051035474259,
+   "_ref": "MonoBehaviour:Level 18"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 9133369585485008625,
+   "_ref": "MonoBehaviour:Level 19"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -3483120861598072161,
+   "_ref": "MonoBehaviour:Level 20"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -4634718356692842413,
+   "_ref": "MonoBehaviour:Level 21"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 4261845632357837957,
+   "_ref": "MonoBehaviour:Level 22"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 3477873098115195184,
+   "_ref": "MonoBehaviour:Level 24"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": 2121322080031649279,
+   "_ref": "MonoBehaviour:Level 25"
+  },
+  {
+   "m_FileID": 0,
+   "m_PathID": -2955027057147702569,
+   "_ref": "MonoBehaviour:Level 26"
+  }
+ ]
+}

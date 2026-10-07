@@ -1,0 +1,90 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -6705207504311086476,
+  "_ref": "MonoScript:RewardIconCollection"
+ },
+ "m_Name": "RewardIconCollection",
+ "_rewardIcons": {
+  "m_keys": [
+   "coins",
+   "lives",
+   "lives_refill"
+  ],
+  "m_values": [
+   {
+    "_sprite": {
+     "m_FileID": 0,
+     "m_PathID": 2221956045750112892,
+     "_ref": "Sprite:Reward_Coin"
+    },
+    "_sdf": {
+     "m_FileID": 0,
+     "m_PathID": -816751636261339578,
+     "_ref": "Texture2D:Reward_Coin_SDF"
+    }
+   },
+   {
+    "_sprite": {
+     "m_FileID": 0,
+     "m_PathID": 5147317561744227131,
+     "_ref": "Sprite:Reward_Life"
+    },
+    "_sdf": {
+     "m_FileID": 0,
+     "m_PathID": -8796543444378384154,
+     "_ref": "Texture2D:Reward_Life_SDF"
+    }
+   },
+   {
+    "_sprite": {
+     "m_FileID": 0,
+     "m_PathID": 5147317561744227131,
+     "_ref": "Sprite:Reward_Life"
+    },
+    "_sdf": {
+     "m_FileID": 0,
+     "m_PathID": -8796543444378384154,
+     "_ref": "Texture2D:Reward_Life_SDF"
+    }
+   }
+  ]
+ },
+ "_defaultStyles": {
+  "m_keys": [
+   "coins",
+   "lives",
+   "lives_refill"
+  ],
+  "m_values": [
+   {
+    "m_FileID": 0,
+    "m_PathID": 2836080281703538723,
+    "_ref": "Material:UI_Reward"
+   },
+   {
+    "m_FileID": 0,
+    "m_PathID": 2836080281703538723,
+    "_ref": "Material:UI_Reward"
+   },
+   {
+    "m_FileID": 0,
+    "m_PathID": 2836080281703538723,
+    "_ref": "Material:UI_Reward"
+   }
+  ]
+ },
+ "_coinBundlesStyleMaterial": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "_coinsIcons": {
+  "m_keys": [],
+  "m_values": []
+ }
+}

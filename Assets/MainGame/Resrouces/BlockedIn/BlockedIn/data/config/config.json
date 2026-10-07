@@ -1,0 +1,24 @@
+{
+ "id": 4,
+ "levels": [
+  {
+   "from": 1,
+   "to": 50,
+   "sha256": "2a5db2fa651dfb6e01b80f8da3d6ca9dcd8b93b44ca7f4a967f8e80895faad32",
+   "file": "resources://BuiltInLevels/built_in_levels/levelPack_2a5db2fa651dfb6e01b80f8da3d6ca9dcd8b93b44ca7f4a967f8e80895faad32"
+  },
+  {
+   "from": 51,
+   "to": 100,
+   "sha256": "653abdea811dedc49435a1fa35208704d00589ee0da91311caf2cc2ae803d065",
+   "file": "resources://BuiltInLevels/built_in_levels/levelPack_653abdea811dedc49435a1fa35208704d00589ee0da91311caf2cc2ae803d065"
+  }
+ ],
+ "chapters": [
+  {
+   "id": 101,
+   "name": "Chapter 1",
+   "levels_number": 100
+  }
+ ]
+}

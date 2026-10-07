@@ -1,0 +1,132 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 7414707655843075277,
+  "_ref": "MonoScript:GameplayViewSources"
+ },
+ "m_Name": "GameplayViewSources",
+ "_gameViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/GameplayView.prefab",
+  "_guid": "33a51fd1c46164ed1baf5072cbbfabf1"
+ },
+ "_gameViewDebugSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": -6596528382628613247,
+   "_ref": "GameObject:GameplayViewDebug"
+  },
+  "_key": "",
+  "_guid": "7161a287cdaa543c3b93b4ec840e6683"
+ },
+ "_topbarViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 6948031282059498376,
+   "_ref": "GameObject:TopbarGameplaylView"
+  },
+  "_key": "",
+  "_guid": "57fc3574b28ec4007955c05d512d6f87"
+ },
+ "_timerViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": -5088230297991017908,
+   "_ref": "GameObject:TimerGameplayView"
+  },
+  "_key": "",
+  "_guid": "4d45d3a7908d34609b341dbe37e4b635"
+ },
+ "_winViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/WinGameplayView.prefab",
+  "_guid": "24da20a628a04435da715f77cb9947c8"
+ },
+ "_loseViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/LoseGameplayView.prefab",
+  "_guid": "516e572c40a7c4c2ea104032e44a0f80"
+ },
+ "_pauseGameplayViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/Pause/PauseGameplayView.prefab",
+  "_guid": "27114459c976d436f98b30271ad4f2d0"
+ },
+ "_playOnPopupViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/PlayOnPopupView.prefab",
+  "_guid": "f1f52946a63e24457810f09c197aca68"
+ },
+ "_exitGameplayViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/ExitGameplayView.prefab",
+  "_guid": "55bd8ee9adc50188cbf9abe9b238e7c3"
+ },
+ "_noLivesPopupViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 0
+  },
+  "_key": "Assets/Game/Prefabs/Gameplay/NoLivesPopupView.prefab",
+  "_guid": "962c35d9528a3495483768bc85edd497"
+ },
+ "_powerUpTutorialViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 5382472800405461598,
+   "_ref": "GameObject:PowerUpFTUEView"
+  },
+  "_key": "",
+  "_guid": "c1ce5e864c2104faebee1a61804cc86c"
+ },
+ "_mechanicTutorialViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": -3481914655211807713,
+   "_ref": "GameObject:MechanicFTUE"
+  },
+  "_key": "",
+  "_guid": "144268e3501794c9f9c29beda77c50b3"
+ },
+ "_powerUpBuyViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": 8463815556321150573,
+   "_ref": "GameObject:PowerUpBuyView"
+  },
+  "_key": "",
+  "_guid": "9186360812853468799ad38c92a38777"
+ },
+ "_rewardViewSource": {
+  "_asset": {
+   "m_FileID": 0,
+   "m_PathID": -4664612489488151445,
+   "_ref": "GameObject:RewardView"
+  },
+  "_key": "",
+  "_guid": "f9be724cbbba64953847258b9396d553"
+ }
+}

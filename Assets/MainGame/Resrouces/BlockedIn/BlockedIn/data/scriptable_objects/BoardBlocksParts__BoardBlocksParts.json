@@ -1,0 +1,78 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -8766799415877872702,
+  "_ref": "MonoScript:BoardBlocksParts"
+ },
+ "m_Name": "BoardBlocksParts",
+ "_knobPart": {
+  "m_FileID": 0,
+  "m_PathID": -3368219890548758833,
+  "_ref": "Mesh:Base_Rounded"
+ },
+ "_socketPart": {
+  "m_FileID": 0,
+  "m_PathID": -3368219890548758833,
+  "_ref": "Mesh:Base_Rounded"
+ },
+ "_basePartStraight": {
+  "m_FileID": 0,
+  "m_PathID": 5146443862624413391,
+  "_ref": "Mesh:Base_Straight"
+ },
+ "_basePartRound": {
+  "m_FileID": 0,
+  "m_PathID": -3368219890548758833,
+  "_ref": "Mesh:Base_Rounded"
+ },
+ "_cornerCornerPart": {
+  "m_FileID": 0,
+  "m_PathID": 5365036860611405519,
+  "_ref": "Mesh:Corner_Corner"
+ },
+ "_cornerCornerStraightPart": {
+  "m_FileID": 0,
+  "m_PathID": 6523619489336895183,
+  "_ref": "Mesh:Corner_Corner_Straight"
+ },
+ "_cornerStraightToRoundPart": {
+  "m_FileID": 0,
+  "m_PathID": -5729959660179118385,
+  "_ref": "Mesh:Corner_Corner_StraightToRound"
+ },
+ "_cornerRoundPart": {
+  "m_FileID": 0,
+  "m_PathID": -3806695944997984561,
+  "_ref": "Mesh:Corner_Round"
+ },
+ "_cornerConcavePart": {
+  "m_FileID": 0,
+  "m_PathID": 3618564266201294543,
+  "_ref": "Mesh:Corner_Concave"
+ },
+ "_cornerCounterConcavePart": {
+  "m_FileID": 0,
+  "m_PathID": 8908052612117341903,
+  "_ref": "Mesh:Corner_CounterConcave"
+ },
+ "_cornerConcaveCenterPart": {
+  "m_FileID": 0,
+  "m_PathID": 7869322651217077967,
+  "_ref": "Mesh:Corner_Concave_Center"
+ },
+ "_paddingPart": {
+  "m_FileID": 0,
+  "m_PathID": -5015805709637343537,
+  "_ref": "Mesh:Padding"
+ },
+ "_material": {
+  "m_FileID": 0,
+  "m_PathID": 4576795752641708745,
+  "_ref": "Material:BoardBlockMaterial"
+ }
+}

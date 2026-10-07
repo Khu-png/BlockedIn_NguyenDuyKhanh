@@ -1,0 +1,31 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -4829480877758113570,
+  "_ref": "MonoScript:PowerUpIconSource"
+ },
+ "m_Name": "PowerUpIconSource",
+ "_entries": [
+  {
+   "_powerUpType": 0,
+   "_icon": {
+    "m_FileID": 0,
+    "m_PathID": -7523598514021316665,
+    "_ref": "Sprite:PowerUp_BlockBreak"
+   }
+  },
+  {
+   "_powerUpType": 1,
+   "_icon": {
+    "m_FileID": 0,
+    "m_PathID": -169662963044417035,
+    "_ref": "Sprite:PowerUp_TimeFreeze"
+   }
+  }
+ ]
+}

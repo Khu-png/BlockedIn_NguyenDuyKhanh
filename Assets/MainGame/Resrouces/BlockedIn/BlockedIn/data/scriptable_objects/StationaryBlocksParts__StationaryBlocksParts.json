@@ -1,0 +1,48 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -5946266044867911605,
+  "_ref": "MonoScript:StationaryBlocksParts"
+ },
+ "m_Name": "StationaryBlocksParts",
+ "_anchorBottomLeft": {
+  "m_FileID": 0,
+  "m_PathID": 4842786449566523940,
+  "_ref": "Mesh:StationaryBlock_BottomLeft"
+ },
+ "_anchorBottomRight": {
+  "m_FileID": 0,
+  "m_PathID": -5091311214114315740,
+  "_ref": "Mesh:StationaryBlock_BottomRight"
+ },
+ "_anchorTopLeft": {
+  "m_FileID": 0,
+  "m_PathID": 8238443305996575268,
+  "_ref": "Mesh:StationaryBlock_TopLeft"
+ },
+ "_anchorTopRight": {
+  "m_FileID": 0,
+  "m_PathID": -5587323361041587676,
+  "_ref": "Mesh:StationaryBlock_TopRight"
+ },
+ "_cornerOffset": {
+  "x": 0.4795854985713959,
+  "y": 0.4759880006313324
+ },
+ "_material": {
+  "m_FileID": 0,
+  "m_PathID": 6035174868550669228,
+  "_ref": "Material:StationaryBlock"
+ },
+ "_secondaryMaterial": {
+  "m_FileID": 0,
+  "m_PathID": 3577967726656367237,
+  "_ref": "Material:StationaryBlock_Shadow"
+ },
+ "_localYOffset": 0.4099999964237213
+}

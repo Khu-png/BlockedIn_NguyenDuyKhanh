@@ -1,0 +1,31 @@
+{
+  "project_info": {
+    "project_number": "156387696259",
+    "project_id": "block-order-14215",
+    "storage_bucket": "block-order-14215.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156387696259:ios:f548b15a6fbf1e949045b6",
+        "android_client_info": {
+          "package_name": "com.tripledot.blockorder"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxJ8bR2o9FIcB6SUckbiJ9rqIntn25J-8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

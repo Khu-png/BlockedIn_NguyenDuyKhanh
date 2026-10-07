@@ -1,0 +1,44 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -2029360838357296537,
+  "_ref": "MonoScript:TransitionSettingsAssetCrossFade"
+ },
+ "m_Name": "Button_Down",
+ "settings": {
+  "mode": 0,
+  "animationCurve": {
+   "m_Curve": [
+    {
+     "time": 0.0,
+     "value": 0.0,
+     "inSlope": 0.0,
+     "outSlope": 1.0,
+     "weightedMode": 0,
+     "inWeight": 0.0,
+     "outWeight": 0.0
+    },
+    {
+     "time": 1.0,
+     "value": 1.0,
+     "inSlope": 1.0,
+     "outSlope": 0.0,
+     "weightedMode": 0,
+     "inWeight": 0.0,
+     "outWeight": 0.0
+    }
+   ],
+   "m_PreInfinity": 2,
+   "m_PostInfinity": 2,
+   "m_RotationOrder": 4
+  },
+  "easeType": 0,
+  "duration": 0.0,
+  "restartAnimation": 0
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 7398894589984985993,
+  "_ref": "MonoScript:AudioEntry"
+ },
+ "m_Name": "AudioEntry_BlockBreakSelection",
+ "id": "block_break_selection",
+ "clips": [
+  {
+   "m_FileID": 0,
+   "m_PathID": 5621778777430965794,
+   "_ref": "AudioClip:BO_SFX_PU_Selection_01"
+  }
+ ],
+ "playOrder": 0,
+ "loop": 0,
+ "fadeInDuration": 0.0,
+ "fadeOutDuration": 0.0,
+ "volume": 1.0,
+ "pitchVariation": 0.0,
+ "mixerGroup": {
+  "m_FileID": 0,
+  "m_PathID": 6393612124495544144,
+  "_ref": "AudioMixerGroupController:Sfx"
+ },
+ "groupId": "",
+ "priorityInGroup": 0,
+ "behaviourOnPriorityCollision": 0
+}

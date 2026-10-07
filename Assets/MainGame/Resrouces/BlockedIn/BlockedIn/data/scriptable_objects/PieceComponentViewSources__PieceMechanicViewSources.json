@@ -1,0 +1,38 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 1123644650558197645,
+  "_ref": "MonoScript:PieceComponentViewSources"
+ },
+ "m_Name": "PieceMechanicViewSources",
+ "icePrefab": {
+  "m_FileID": 0,
+  "m_PathID": -8943221095319416374,
+  "_ref": "MonoBehaviour:"
+ },
+ "movementPrefab": {
+  "m_FileID": 0,
+  "m_PathID": 5750178936031051496,
+  "_ref": "MonoBehaviour:"
+ },
+ "ropeParts": {
+  "m_FileID": 0,
+  "m_PathID": -3204877909273262435,
+  "_ref": "MonoBehaviour:RopeParts"
+ },
+ "stationaryBlocksParts": {
+  "m_FileID": 0,
+  "m_PathID": -8540116936377298364,
+  "_ref": "MonoBehaviour:StationaryBlocksParts"
+ },
+ "scissorsCutConfig": {
+  "m_FileID": 0,
+  "m_PathID": 4825878163816075507,
+  "_ref": "MonoBehaviour:ScissorsCutConfig"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -3498561813656313700,
+  "_ref": "MonoScript:LocalLevelConfig"
+ },
+ "m_Name": "Level 2",
+ "_id": 2,
+ "_levelJson": {
+  "m_FileID": 0,
+  "m_PathID": -5480177038974753257,
+  "_ref": "TextAsset:Level_02_Tutorial"
+ }
+}

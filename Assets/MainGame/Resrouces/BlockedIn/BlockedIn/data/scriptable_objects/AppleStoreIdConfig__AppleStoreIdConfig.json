@@ -1,0 +1,14 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 3217382038081752105,
+  "_ref": "MonoScript:AppleStoreIdConfig"
+ },
+ "m_Name": "AppleStoreIdConfig",
+ "_appleStoreId": "6762608929"
+}

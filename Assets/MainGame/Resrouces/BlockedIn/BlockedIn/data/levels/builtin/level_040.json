@@ -1,0 +1,368 @@
+{
+ "data": {
+  "layout_text_json": {
+   "cols": 7,
+   "rows": 8,
+   "time": 180,
+   "walls": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     0
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "orders": [
+    {
+     "parts": [
+      {
+       "dc": 0,
+       "dr": 1,
+       "cells": [
+        [
+         0,
+         0
+        ]
+       ],
+       "color": "blue",
+       "shapeRef": "A"
+      },
+      {
+       "dc": 0,
+       "dr": 0,
+       "cells": [
+        [
+         0,
+         0
+        ]
+       ],
+       "color": "blue",
+       "shapeRef": "B"
+      }
+     ]
+    }
+   ],
+   "shapes": [
+    {
+     "col": 3,
+     "key": "A",
+     "row": 7,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blue",
+     "movement": "vertical"
+    },
+    {
+     "col": 3,
+     "key": "B",
+     "row": 0,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blue",
+     "movement": "vertical"
+    },
+    {
+     "col": 3,
+     "key": "C",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    },
+    {
+     "col": 4,
+     "key": "D",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "color": "blocker",
+     "movement": "vertical"
+    },
+    {
+     "col": 1,
+     "key": "E",
+     "row": 1,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ],
+     "color": "blocker",
+     "movement": "vertical"
+    },
+    {
+     "col": 3,
+     "key": "F",
+     "row": 3,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    },
+    {
+     "col": 3,
+     "key": "G",
+     "row": 4,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    },
+    {
+     "col": 3,
+     "key": "H",
+     "row": 5,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    },
+    {
+     "col": 3,
+     "key": "I",
+     "row": 6,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    },
+    {
+     "col": 1,
+     "key": "J",
+     "row": 5,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "vertical"
+    },
+    {
+     "col": 4,
+     "key": "K",
+     "row": 5,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "vertical"
+    },
+    {
+     "col": 1,
+     "key": "L",
+     "row": 6,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "vertical"
+    },
+    {
+     "col": 4,
+     "key": "M",
+     "row": 6,
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "vertical"
+    },
+    {
+     "col": 2,
+     "key": "N",
+     "row": 7,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    },
+    {
+     "col": 4,
+     "key": "O",
+     "row": 7,
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blocker",
+     "movement": "horizontal"
+    }
+   ],
+   "timerDisabled": false
+  }
+ },
+ "content_hash": "2bf78307",
+ "level_layout_id": 54495,
+ "bank_id": 127,
+ "number": 40,
+ "rewards": []
+}

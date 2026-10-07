@@ -1,0 +1,14 @@
+newmtl StationaryBlock
+Ka 0 0 0
+Ks 0 0 0
+illum 1
+Kd 1.0000 1.0000 1.0000
+map_Kd ../textures/StationaryBlock_Base_color.png
+
+newmtl StationaryBlock_Shadow
+Ka 0 0 0
+Ks 0 0 0
+illum 1
+Kd 1.0000 1.0000 1.0000
+map_Kd ../textures/StationaryBlock_Shadow.png
+map_d ../textures/StationaryBlock_Shadow.png

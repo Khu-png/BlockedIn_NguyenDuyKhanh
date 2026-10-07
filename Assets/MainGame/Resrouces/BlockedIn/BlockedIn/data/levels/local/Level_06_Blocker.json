@@ -1,0 +1,383 @@
+{
+ "cols": 5,
+ "rows": 7,
+ "walls": [],
+ "shapes": [
+  {
+   "key": "A",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "yellow",
+   "col": 0,
+   "row": 0
+  },
+  {
+   "key": "B",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "color": "yellow",
+   "col": 0,
+   "row": 5
+  },
+  {
+   "key": "C",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "yellow",
+   "col": 4,
+   "row": 1
+  },
+  {
+   "key": "D",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "color": "green",
+   "col": 1,
+   "row": 0
+  },
+  {
+   "key": "E",
+   "cells": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "green",
+   "col": 0,
+   "row": 2
+  },
+  {
+   "key": "F",
+   "cells": [
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blue",
+   "col": 3,
+   "row": 0
+  },
+  {
+   "key": "G",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "green",
+   "col": 2,
+   "row": 3
+  },
+  {
+   "key": "H",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "color": "green",
+   "col": 3,
+   "row": 4
+  },
+  {
+   "key": "I",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "color": "green",
+   "col": 3,
+   "row": 5
+  },
+  {
+   "key": "J",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blue",
+   "col": 4,
+   "row": 6
+  },
+  {
+   "key": "K",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blue",
+   "col": 1,
+   "row": 6
+  },
+  {
+   "key": "L",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blocker",
+   "col": 2,
+   "row": 2
+  },
+  {
+   "key": "M",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blocker",
+   "col": 3,
+   "row": 3
+  },
+  {
+   "key": "N",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blocker",
+   "col": 2,
+   "row": 4
+  },
+  {
+   "key": "O",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "blocker",
+   "col": 1,
+   "row": 3
+  }
+ ],
+ "orders": [
+  {
+   "parts": [
+    {
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blue",
+     "dc": 0,
+     "dr": 0,
+     "shapeRef": "F"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blue",
+     "dc": 1,
+     "dr": 1,
+     "shapeRef": "J"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "blue",
+     "dc": 0,
+     "dr": 1,
+     "shapeRef": "K"
+    }
+   ]
+  },
+  {
+   "parts": [
+    {
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ]
+     ],
+     "color": "green",
+     "dc": 0,
+     "dr": 2,
+     "shapeRef": "H"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "green",
+     "dc": 2,
+     "dr": 1,
+     "shapeRef": "I"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "green",
+     "dc": 1,
+     "dr": 1,
+     "shapeRef": "G"
+    },
+    {
+     "cells": [
+      [
+       1,
+       0
+      ],
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "green",
+     "dc": 1,
+     "dr": 0,
+     "shapeRef": "E"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "green",
+     "dc": 0,
+     "dr": 0,
+     "shapeRef": "D"
+    }
+   ]
+  },
+  {
+   "parts": [
+    {
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "yellow",
+     "dc": 1,
+     "dr": 0,
+     "shapeRef": "A"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ]
+     ],
+     "color": "yellow",
+     "dc": 0,
+     "dr": 0,
+     "shapeRef": "B"
+    },
+    {
+     "cells": [
+      [
+       0,
+       0
+      ]
+     ],
+     "color": "yellow",
+     "dc": 1,
+     "dr": 1,
+     "shapeRef": "C"
+    }
+   ]
+  }
+ ],
+ "time": 150,
+ "timerDisabled": false
+}

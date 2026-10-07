@@ -1,0 +1,32 @@
+{
+ "AppLovinQualityServiceVersion": {
+  "iOS": "7.12.3",
+  "Android": "5.12.7"
+ },
+ "DynamicLibrariesToEmbed": [
+  {
+   "PodName": "AppLovinMediationAdjoeAdsAdapter",
+   "FrameworkNames": [
+    "AdjoeWaveSDK.xcframework"
+   ]
+  },
+  {
+   "PodName": "MolocoCustomAdapter",
+   "FrameworkNames": [
+    "MolocoCustomAdapter.xcframework"
+   ]
+  },
+  {
+   "PodName": "AppLovinMediationSmaatoAdapter",
+   "FrameworkNames": [
+    "NGSDK.xcframework"
+   ]
+  },
+  {
+   "PodName": "magnite-applovin-mediation",
+   "FrameworkNames": [
+    "MagniteSDK.xcframework"
+   ]
+  }
+ ]
+}

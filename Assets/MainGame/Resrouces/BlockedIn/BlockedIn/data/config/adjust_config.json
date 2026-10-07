@@ -1,0 +1,12 @@
+{
+ "ios_token_remap": {
+  "event_test": "eu15pmn9io74",
+  "kat_tests": "Just an event",
+  "kat_tests_65": "77"
+ },
+ "android_token_remap": {
+  "event_test": "vlke2dtn42dc",
+  "kat_tests": "123 tests!",
+  "kat_tests_65": "9"
+ }
+}

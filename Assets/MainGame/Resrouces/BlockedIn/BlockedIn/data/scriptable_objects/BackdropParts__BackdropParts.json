@@ -1,0 +1,33 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 8617440985956021678,
+  "_ref": "MonoScript:BackdropParts"
+ },
+ "m_Name": "BackdropParts",
+ "_fullPart": {
+  "m_FileID": 0,
+  "m_PathID": -122784275188577830,
+  "_ref": "Mesh:BackgroundFull"
+ },
+ "_convexPart": {
+  "m_FileID": 0,
+  "m_PathID": 8841371630139050458,
+  "_ref": "Mesh:BackgroundConvex"
+ },
+ "_concavePart": {
+  "m_FileID": 0,
+  "m_PathID": 1553456950726789594,
+  "_ref": "Mesh:BackgroundConcave"
+ },
+ "_material": {
+  "m_FileID": 0,
+  "m_PathID": 9087101707913645369,
+  "_ref": "Material:BoardBackdrop"
+ }
+}

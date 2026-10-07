@@ -1,0 +1,31 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -447579420150635128,
+  "_ref": "MonoScript:AudioServiceConfig"
+ },
+ "m_Name": "AudioConfig",
+ "Catalog": {
+  "m_FileID": 0,
+  "m_PathID": -5479853024781552713,
+  "_ref": "MonoBehaviour:AudioCatalog"
+ },
+ "AudioMixer": {
+  "m_FileID": 0,
+  "m_PathID": 101987781380144976,
+  "_ref": "AudioMixerController:AudioMixer"
+ },
+ "FallbackAudioGroup": {
+  "m_FileID": 0,
+  "m_PathID": -2293090870993813680,
+  "_ref": "AudioMixerGroupController:Master"
+ },
+ "SfxGroupVolumeParam": "SfxVolume",
+ "MusicGroupVolumeParam": "MusicVolume",
+ "MuteOnInterruptDuration": 0.15000000596046448
+}

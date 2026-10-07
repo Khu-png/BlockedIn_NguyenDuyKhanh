@@ -1,0 +1,123 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 4606025485042447886,
+  "_ref": "MonoScript:PieceBlocksParts"
+ },
+ "m_Name": "PieceBlocksParts",
+ "_cornerBottomLeft": {
+  "m_FileID": 0,
+  "m_PathID": 8083573703596325767,
+  "_ref": "Mesh:Corner_BottomLeft"
+ },
+ "_cornerBottomRight": {
+  "m_FileID": 0,
+  "m_PathID": 1480787930073414535,
+  "_ref": "Mesh:Corner_BottomRight"
+ },
+ "_cornerTopLeft": {
+  "m_FileID": 0,
+  "m_PathID": 7739130822070909831,
+  "_ref": "Mesh:Corner_TopLeft"
+ },
+ "_cornerTopRight": {
+  "m_FileID": 0,
+  "m_PathID": 1956119974805126023,
+  "_ref": "Mesh:Corner_TopRight"
+ },
+ "_cornerToStraightBottomLeft": {
+  "m_FileID": 0,
+  "m_PathID": -3258367158734079097,
+  "_ref": "Mesh:CornerToStraight_BottomLeft"
+ },
+ "_cornerToStraightBottomRight": {
+  "m_FileID": 0,
+  "m_PathID": -2083993769325741177,
+  "_ref": "Mesh:CornerToStraight_BottomRight"
+ },
+ "_cornerToStraightTopLeft": {
+  "m_FileID": 0,
+  "m_PathID": 3718937886486707079,
+  "_ref": "Mesh:CornerToStraight_TopLeft"
+ },
+ "_cornerToStraightTopRight": {
+  "m_FileID": 0,
+  "m_PathID": -2857333390021739641,
+  "_ref": "Mesh:CornerToStraight_TopRight"
+ },
+ "_edgeBottom": {
+  "m_FileID": 0,
+  "m_PathID": -1636283319375742073,
+  "_ref": "Mesh:Edge_Bottom"
+ },
+ "_edgeLeft": {
+  "m_FileID": 0,
+  "m_PathID": 5870108266618305415,
+  "_ref": "Mesh:Edge_Left"
+ },
+ "_edgeRight": {
+  "m_FileID": 0,
+  "m_PathID": -3601113767855113337,
+  "_ref": "Mesh:Edge_Right"
+ },
+ "_edgeTop": {
+  "m_FileID": 0,
+  "m_PathID": -8179143081141322873,
+  "_ref": "Mesh:Edge_Top"
+ },
+ "_frontFace": {
+  "m_FileID": 0,
+  "m_PathID": 9050692280550767495,
+  "_ref": "Mesh:FrontFace"
+ },
+ "shellTab": {
+  "m_FileID": 0,
+  "m_PathID": 1493544670731385735,
+  "_ref": "Mesh:Tab_Ice"
+ },
+ "_socketBottom": {
+  "m_FileID": 0,
+  "m_PathID": 6084713719797922695,
+  "_ref": "Mesh:Socket_Bottom"
+ },
+ "_socketLeft": {
+  "m_FileID": 0,
+  "m_PathID": 8764568014598912903,
+  "_ref": "Mesh:Socket_Left"
+ },
+ "_tabRight": {
+  "m_FileID": 0,
+  "m_PathID": 9026792642037758855,
+  "_ref": "Mesh:Tab_Right"
+ },
+ "_tabTop": {
+  "m_FileID": 0,
+  "m_PathID": -8654522955499226233,
+  "_ref": "Mesh:Tab_Top"
+ },
+ "_coverHorizontal": {
+  "m_FileID": 0,
+  "m_PathID": 4237355728822549383,
+  "_ref": "Mesh:Cover_Horizontal"
+ },
+ "_coverVertical": {
+  "m_FileID": 0,
+  "m_PathID": -7679166823775913081,
+  "_ref": "Mesh:Cover_Vertical"
+ },
+ "_coverCorner": {
+  "m_FileID": 0,
+  "m_PathID": -2986611943104300153,
+  "_ref": "Mesh:Cover_Corner"
+ },
+ "_material": {
+  "m_FileID": 0,
+  "m_PathID": -7345572511695871942,
+  "_ref": "Material:PieceBlockMaterial"
+ }
+}

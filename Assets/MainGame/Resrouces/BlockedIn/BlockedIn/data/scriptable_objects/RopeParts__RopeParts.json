@@ -1,0 +1,53 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -6619003680494910108,
+  "_ref": "MonoScript:RopeParts"
+ },
+ "m_Name": "RopeParts",
+ "segmentLength": 0.21809999644756317,
+ "endInset": 0.15000000596046448,
+ "segment": {
+  "m_FileID": 0,
+  "m_PathID": -5225561732605080943,
+  "_ref": "Mesh:Rope_Segment"
+ },
+ "endA": {
+  "m_FileID": 0,
+  "m_PathID": -2249809530800502127,
+  "_ref": "Mesh:Rope_End_02"
+ },
+ "endB": {
+  "m_FileID": 0,
+  "m_PathID": 5857762228686752401,
+  "_ref": "Mesh:Rope_End_01"
+ },
+ "material": {
+  "m_FileID": 0,
+  "m_PathID": 1310962519900178269,
+  "_ref": "Material:Rope"
+ },
+ "shadowMaterial": {
+  "m_FileID": 0,
+  "m_PathID": 951518555564436989,
+  "_ref": "Material:Rope_Shadow"
+ },
+ "shadowEndsMaterial": {
+  "m_FileID": 0,
+  "m_PathID": 3803082301378253136,
+  "_ref": "Material:Rope_Shadow_Ends"
+ },
+ "shadowWidth": 0.20000000298023224,
+ "knobSlide": 0.10000000149011612,
+ "layerDisplacementStep": 0.20000000298023224,
+ "pullDisplacement": 0.5,
+ "splitDisplacement": 1.0,
+ "splitFalloffExponent": 3.0,
+ "splitOutwardLengthRatio": 0.3333333432674408,
+ "bendMultiplier": 2.0
+}

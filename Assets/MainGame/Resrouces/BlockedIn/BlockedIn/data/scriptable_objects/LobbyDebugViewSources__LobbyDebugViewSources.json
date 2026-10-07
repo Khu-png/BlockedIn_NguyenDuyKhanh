@@ -1,0 +1,23 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 2875677318545865605,
+  "_ref": "MonoScript:LobbyDebugViewSources"
+ },
+ "m_Name": "LobbyDebugViewSources",
+ "_threeTabConfig": {
+  "m_FileID": 0,
+  "m_PathID": 4069383565701358640,
+  "_ref": "MonoBehaviour:BottomBarTabConfig3"
+ },
+ "_fiveTabConfig": {
+  "m_FileID": 0,
+  "m_PathID": 8071827564508655954,
+  "_ref": "MonoBehaviour:BottomBarTabConfig5"
+ }
+}

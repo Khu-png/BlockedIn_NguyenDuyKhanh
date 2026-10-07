@@ -1,0 +1,70 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": 7391848793074320910,
+  "_ref": "MonoScript:MechanicTutorialContentSource"
+ },
+ "m_Name": "MechanicTutorialContentSource",
+ "_entries": [
+  {
+   "_mechanic": 0,
+   "_title": "Ice Blocks",
+   "_subtitle": "New mechanic unlocked!",
+   "_note": "Clear colours to break the ice!",
+   "_illustration": {
+    "m_FileID": 0,
+    "m_PathID": -6954060800804878102,
+    "_ref": "Sprite:Icon_Mechanic_Ice"
+   }
+  },
+  {
+   "_mechanic": 1,
+   "_title": "Rope Blocks",
+   "_subtitle": "New mechanic unlocked!",
+   "_note": "Cut the ropes by completing puzzles of the same colour!",
+   "_illustration": {
+    "m_FileID": 0,
+    "m_PathID": 8793179640767555196,
+    "_ref": "Sprite:Icon_Mechanic_Rope"
+   }
+  },
+  {
+   "_mechanic": 2,
+   "_title": "Dud Blocks",
+   "_subtitle": "New mechanic unlocked!",
+   "_note": "Move blockers out of the way to clear a path!",
+   "_illustration": {
+    "m_FileID": 0,
+    "m_PathID": -3112111625697388294,
+    "_ref": "Sprite:Icon_Mechanic_Blocker"
+   }
+  },
+  {
+   "_mechanic": 3,
+   "_title": "Pinned Blocks",
+   "_subtitle": "New mechanic unlocked!",
+   "_note": "Pinned blocks can't move but can still be attached with others!",
+   "_illustration": {
+    "m_FileID": 0,
+    "m_PathID": -3406700720190438562,
+    "_ref": "Sprite:Icon_Mechanic_Cage"
+   }
+  },
+  {
+   "_mechanic": 4,
+   "_title": "Arrow Blocks",
+   "_subtitle": "New mechanic unlocked!",
+   "_note": "Blocks can only move in the direction of the arrow!",
+   "_illustration": {
+    "m_FileID": 0,
+    "m_PathID": -8620783616686175744,
+    "_ref": "Sprite:Icon_Mechanic_SingleAxis"
+   }
+  }
+ ]
+}

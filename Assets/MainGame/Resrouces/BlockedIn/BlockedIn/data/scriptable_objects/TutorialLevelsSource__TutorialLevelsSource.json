@@ -1,0 +1,27 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -2691182157611831497,
+  "_ref": "MonoScript:TutorialLevelsSource"
+ },
+ "m_Name": "TutorialLevelsSource",
+ "_entries": [
+  {
+   "_levelNumber": 1,
+   "_tutorialText": "Drag puzzle pieces so they connect!"
+  },
+  {
+   "_levelNumber": 2,
+   "_tutorialText": "Connect all pieces of the same colour to clear them!"
+  },
+  {
+   "_levelNumber": 3,
+   "_tutorialText": "Complete each colour puzzle to win the level!"
+  }
+ ]
+}

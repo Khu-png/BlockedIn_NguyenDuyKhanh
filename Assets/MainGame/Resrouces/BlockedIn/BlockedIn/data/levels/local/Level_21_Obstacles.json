@@ -1,0 +1,335 @@
+{
+ "cols": 8,
+ "rows": 12,
+ "walls": [],
+ "shapes": [
+  {
+   "key": "OL",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "color": "blocker",
+   "obstacle": true,
+   "col": 0,
+   "row": 0,
+   "movement": "none",
+   "pinned": true
+  },
+  {
+   "key": "OO",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "color": "blocker",
+   "obstacle": true,
+   "col": 3,
+   "row": 0,
+   "movement": "none",
+   "pinned": true
+  },
+  {
+   "key": "OS",
+   "cells": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   "color": "blocker",
+   "obstacle": true,
+   "col": 5,
+   "row": 3,
+   "movement": "none",
+   "pinned": true
+  },
+  {
+   "key": "OZ",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "color": "blocker",
+   "obstacle": true,
+   "col": 1,
+   "row": 4,
+   "movement": "none",
+   "pinned": true
+  },
+  {
+   "key": "OW",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "color": "blocker",
+   "obstacle": true,
+   "col": 5,
+   "row": 6,
+   "movement": "none",
+   "pinned": true
+  },
+  {
+   "key": "Y1",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "color": "yellow",
+   "col": 0,
+   "row": 8
+  },
+  {
+   "key": "G1",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "green",
+   "col": 0,
+   "row": 9
+  },
+  {
+   "key": "B1",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "color": "blue",
+   "col": 2,
+   "row": 9
+  },
+  {
+   "key": "G2",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "green",
+   "col": 4,
+   "row": 9
+  },
+  {
+   "key": "R3",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "red",
+   "col": 7,
+   "row": 9
+  },
+  {
+   "key": "Y2",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "color": "yellow",
+   "col": 3,
+   "row": 10
+  },
+  {
+   "key": "B2",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ]
+   ],
+   "color": "blue",
+   "col": 6,
+   "row": 10
+  },
+  {
+   "key": "R1",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "red",
+   "col": 0,
+   "row": 11
+  },
+  {
+   "key": "R2",
+   "cells": [
+    [
+     0,
+     0
+    ]
+   ],
+   "color": "red",
+   "col": 2,
+   "row": 11
+  }
+ ],
+ "orders": [
+  {
+   "parts": [
+    {
+     "shapeRef": "G1",
+     "dc": 0,
+     "dr": 0
+    },
+    {
+     "shapeRef": "G2",
+     "dc": 1,
+     "dr": 0
+    }
+   ]
+  },
+  {
+   "parts": [
+    {
+     "shapeRef": "B1",
+     "dc": 0,
+     "dr": 0
+    },
+    {
+     "shapeRef": "B2",
+     "dc": 1,
+     "dr": 0
+    }
+   ]
+  },
+  {
+   "parts": [
+    {
+     "shapeRef": "R1",
+     "dc": 0,
+     "dr": 0
+    },
+    {
+     "shapeRef": "R2",
+     "dc": 1,
+     "dr": 0
+    },
+    {
+     "shapeRef": "R3",
+     "dc": 1,
+     "dr": 1
+    }
+   ]
+  },
+  {
+   "parts": [
+    {
+     "shapeRef": "Y1",
+     "dc": 0,
+     "dr": 0
+    },
+    {
+     "shapeRef": "Y2",
+     "dc": 1,
+     "dr": 1
+    }
+   ]
+  }
+ ],
+ "time": 180,
+ "timerDisabled": true
+}

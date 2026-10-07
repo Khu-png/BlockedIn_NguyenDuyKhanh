@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        html, body {
+            background-color: black;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #ad-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            border: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 999;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onclick="performClick()">
+
+<div id="ad-wrapper">
+    <div id="click-overlay"></div>
+</div>
+
+<script>
+    const vastDataPlaceholder = ['%%_com_magnite_vast_data_placeholder_%%'];
+    const vastData = typeof vastDataPlaceholder[0] === 'object'
+        ? vastDataPlaceholder[0]
+        : {
+            width: 360,
+            height: 480,
+            resource: "<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwAQMAAABDiUpWAAAABlBMVEX///8AAABVwtN+AAAATUlEQVQY02OgEyjg/wEm/wDJH/z/QCQfPwMD4x8+9gYGxjt8zA0MzPfAZB+IZO8Hk/9BJP//PqAaPuY+oHo55vNAvTKM5/+AyR8MtAYAfY0W6ir59HIAAAAASUVORK5CYII=' />"
+        };
+
+    let adIframe = null;
+    const wrapper = document.getElementById('ad-wrapper');
+
+    function updateLayout() {
+        if (!wrapper) return;
+
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+        const adRatio = vastData.width / vastData.height;
+        const screenRatio = screenW / screenH;
+
+        let finalW, finalH;
+
+        if (screenRatio > adRatio) {
+            finalH = screenH;
+            finalW = screenH * adRatio;
+        } else {
+            finalW = screenW;
+            finalH = screenW / adRatio;
+        }
+
+        wrapper.style.width = Math.floor(finalW) + 'px';
+        wrapper.style.height = Math.floor(finalH) + 'px';
+
+        if (adIframe) {
+            adIframe.style.width = '100%';
+            adIframe.style.height = '100%';
+        }
+    }
+
+    function initAd() {
+        adIframe = document.createElement('iframe');
+        adIframe.scrolling = 'no';
+        adIframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups');
+
+        const safeResource = vastData.resource.replace(/`/g, '\\`');
+
+        adIframe.srcdoc = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    html, body {
+                        margin: 0; padding: 0; width: 100%; height: 100%;
+                        overflow: hidden; display: flex;
+                        justify-content: center; align-items: center;
+                        background: transparent;
+                    }
+
+                    img, video, canvas, svg {
+                        width: 100% !important;
+                        height: 100% !important;
+                        object-fit: contain;
+                        display: block;
+                    }
+
+                    body > * {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                </style>
+            </head>
+            <body>${safeResource}</body>
+            </html>
+        `;
+
+        updateLayout();
+        wrapper.insertBefore(adIframe, document.getElementById('click-overlay'));
+    }
+
+    function performClick() {
+        window.location.href = 'magnitead://vastClick';
+    }
+
+    window.onload = initAd;
+    window.addEventListener('resize', updateLayout);
+</script>
+</body>
+</html>

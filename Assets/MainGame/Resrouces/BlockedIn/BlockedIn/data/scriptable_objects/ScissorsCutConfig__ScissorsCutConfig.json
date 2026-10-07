@@ -1,0 +1,194 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -3250621748438810033,
+  "_ref": "MonoScript:ScissorsCutConfig"
+ },
+ "m_Name": "ScissorsCutConfig",
+ "ScissorsPrefab": {
+  "m_FileID": 0,
+  "m_PathID": 6007667338501987659,
+  "_ref": "MonoBehaviour:"
+ },
+ "AppearRiseDistance": 1.0,
+ "AppearRiseDuration": 0.3499999940395355,
+ "AppearRiseCurve": {
+  "m_Curve": [
+   {
+    "time": 0.0,
+    "value": 0.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.03375912457704544
+   },
+   {
+    "time": 1.0,
+    "value": 1.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   }
+  ],
+  "m_PreInfinity": 2,
+  "m_PostInfinity": 2,
+  "m_RotationOrder": 4
+ },
+ "TravelDuration": 0.5,
+ "TravelCurve": {
+  "m_Curve": [
+   {
+    "time": 0.0,
+    "value": 0.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   },
+   {
+    "time": 1.0,
+    "value": 1.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   }
+  ],
+  "m_PreInfinity": 2,
+  "m_PostInfinity": 2,
+  "m_RotationOrder": 4
+ },
+ "TravelScaleCurve": {
+  "m_Curve": [
+   {
+    "time": 0.0,
+    "value": 1.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   },
+   {
+    "time": 1.0,
+    "value": 1.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   }
+  ],
+  "m_PreInfinity": 2,
+  "m_PostInfinity": 2,
+  "m_RotationOrder": 4
+ },
+ "FaceTravelDirection": 1,
+ "FacingAngleOffset": 0.0,
+ "ZOffset": -0.20000000298023224,
+ "SpawnOffset": {
+  "x": 0.30000001192092896,
+  "y": 0.20000000298023224,
+  "z": -5.0
+ },
+ "TangentLength": 4.0,
+ "DrawDebugPath": 1,
+ "CutPullDuration": 0.30000001192092896,
+ "PullCurve": {
+  "m_Curve": [
+   {
+    "time": 0.0,
+    "value": 0.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   },
+   {
+    "time": 0.3179507851600647,
+    "value": 0.6290907859802246,
+    "inSlope": 1.7218440771102905,
+    "outSlope": 1.7218440771102905,
+    "weightedMode": 0,
+    "inWeight": 0.3333333432674408,
+    "outWeight": 0.042173709720373154
+   },
+   {
+    "time": 1.0,
+    "value": 1.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   }
+  ],
+  "m_PreInfinity": 2,
+  "m_PostInfinity": 2,
+  "m_RotationOrder": 4
+ },
+ "ScissorsPullFollow": 1.0,
+ "CutSplitDuration": 0.30000001192092896,
+ "DissolveCurve": {
+  "m_Curve": [
+   {
+    "time": 0.3008348047733307,
+    "value": 0.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   },
+   {
+    "time": 1.0,
+    "value": 1.0,
+    "inSlope": 3.0929627418518066,
+    "outSlope": 3.0929627418518066,
+    "weightedMode": 0,
+    "inWeight": 0.02926826849579811,
+    "outWeight": 0.0
+   }
+  ],
+  "m_PreInfinity": 2,
+  "m_PostInfinity": 2,
+  "m_RotationOrder": 4
+ },
+ "FlyAwayDuration": 0.10000000149011612,
+ "FlyAwayCurve": {
+  "m_Curve": [
+   {
+    "time": 0.0,
+    "value": 0.0,
+    "inSlope": 4.60256290435791,
+    "outSlope": 4.60256290435791,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.03375912457704544
+   },
+   {
+    "time": 1.0,
+    "value": 3.0,
+    "inSlope": 0.0,
+    "outSlope": 0.0,
+    "weightedMode": 0,
+    "inWeight": 0.0,
+    "outWeight": 0.0
+   }
+  ],
+  "m_PreInfinity": 2,
+  "m_PostInfinity": 2,
+  "m_RotationOrder": 4
+ }
+}

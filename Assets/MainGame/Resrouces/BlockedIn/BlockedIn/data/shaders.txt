@@ -1,0 +1,191 @@
+BlockOrder/Backdrop
+BlockOrder/BlockIce
+BlockOrder/BlockSymbol
+BlockOrder/Block_Silhouette
+BlockOrder/BoardBlock
+BlockOrder/Glow
+BlockOrder/Glow_02
+BlockOrder/Glow_02_PaintAlways
+BlockOrder/PieceBlock
+BlockOrder/PieceInnerShadow
+BlockOrder/Rope
+BlockOrder/RopeShadow
+BlockOrder/ScissorsHandle
+BlockOrders/UI-Rewards
+Custom/SnapLine
+GUI/Text Shader
+Graphy/Graph Mobile
+Graphy/Graph Standard
+Hidden/BlitCopy
+Hidden/BlitCopyDepth
+Hidden/BlitCopyHDRTonemap
+Hidden/BlitCopyWithDepth
+Hidden/BlitToDepth
+Hidden/BlitToDepth_MSAA
+Hidden/ConvertTexture
+Hidden/Core/FallbackError
+Hidden/Core/VrsVisualization
+Hidden/CoreSRP/CoreCopy
+Hidden/CubeBlend
+Hidden/CubeBlur
+Hidden/CubeCopy
+Hidden/FrameDebuggerRenderTargetDisplay
+Hidden/Internal-Colored
+Hidden/Internal-CombineDepthNormals
+Hidden/Internal-CubemapToEquirect
+Hidden/Internal-DebugPattern
+Hidden/Internal-DeferredReflections
+Hidden/Internal-DeferredShading
+Hidden/Internal-DepthNormalsTexture
+Hidden/Internal-Flare
+Hidden/Internal-GUIRoundedRect
+Hidden/Internal-GUIRoundedRectWithColorPerBorder
+Hidden/Internal-GUITexture
+Hidden/Internal-GUITextureBlit
+Hidden/Internal-GUITextureClip
+Hidden/Internal-GUITextureClipText
+Hidden/Internal-Halo
+Hidden/Internal-Loading
+Hidden/Internal-MotionVectors
+Hidden/Internal-ODSWorldTexture
+Hidden/Internal-ScreenSpaceShadows
+Hidden/Internal-StencilWrite
+Hidden/Internal-UIRAtlasBlitCopy
+Hidden/Internal-UIRDefault
+Hidden/InternalClear
+Hidden/InternalErrorShader
+Hidden/Physics2D/SDF_CapsuleGeometry
+Hidden/Physics2D/SDF_CircleGeometry
+Hidden/Physics2D/SDF_Line
+Hidden/Physics2D/SDF_Point
+Hidden/Physics2D/SDF_PolygonGeometry
+Hidden/PieceInnerShadowComposite
+Hidden/PiecePlacementHighlightComposite
+Hidden/PieceShadowComposite
+Hidden/Sentis/Activation
+Hidden/Sentis/ActivationInt
+Hidden/Sentis/BatchNormalization
+Hidden/Sentis/Broadcast
+Hidden/Sentis/Cast
+Hidden/Sentis/Clip
+Hidden/Sentis/ConstantOfShape
+Hidden/Sentis/Conv
+Hidden/Sentis/ConvTranspose
+Hidden/Sentis/Copy
+Hidden/Sentis/CumSum
+Hidden/Sentis/Dense
+Hidden/Sentis/DepthToSpace
+Hidden/Sentis/DepthwiseConv
+Hidden/Sentis/Expand
+Hidden/Sentis/Gather
+Hidden/Sentis/GatherElements
+Hidden/Sentis/GatherND
+Hidden/Sentis/Gemm
+Hidden/Sentis/GlobalPool
+Hidden/Sentis/GridSample
+Hidden/Sentis/GroupedConv
+Hidden/Sentis/HardmaxEnd
+Hidden/Sentis/InstanceNormalizationTail
+Hidden/Sentis/IsInfNaN
+Hidden/Sentis/LayerNormalizationTail
+Hidden/Sentis/LayoutSwitchBlockedAxis
+Hidden/Sentis/LocalPool
+Hidden/Sentis/LocalResponseNormalization
+Hidden/Sentis/MatMul
+Hidden/Sentis/MelWeightMatrix
+Hidden/Sentis/OneHot
+Hidden/Sentis/Pad
+Hidden/Sentis/RMSNormalizationTail
+Hidden/Sentis/Random
+Hidden/Sentis/Range
+Hidden/Sentis/Reduce
+Hidden/Sentis/ReduceExpBias
+Hidden/Sentis/ReduceIndices
+Hidden/Sentis/Reshape
+Hidden/Sentis/Resize1D
+Hidden/Sentis/RoiAlign
+Hidden/Sentis/STFT
+Hidden/Sentis/ScalarMad
+Hidden/Sentis/ScaleBias
+Hidden/Sentis/ScatterElements
+Hidden/Sentis/ScatterND
+Hidden/Sentis/Slice
+Hidden/Sentis/SliceSet
+Hidden/Sentis/Softmax
+Hidden/Sentis/SpaceToDepth
+Hidden/Sentis/Split
+Hidden/Sentis/TextureConversion/ComputeBufferToTexture
+Hidden/Sentis/TextureConversion/TensorToTexture
+Hidden/Sentis/TextureConversion/TextureToTensor
+Hidden/Sentis/TextureTensorDataDownload
+Hidden/Sentis/TextureTensorDataUpload
+Hidden/Sentis/Tile
+Hidden/Sentis/TopP
+Hidden/Sentis/Transpose
+Hidden/Sentis/Trilu
+Hidden/Sentis/Upsample
+Hidden/Sentis/Where
+Hidden/Sentis/Window
+Hidden/Sentis/WindowedDFTMatrix
+Hidden/Shader Graph/FallbackError
+Hidden/TerrainEngine/Details/UniversalPipeline/BillboardWavingDoublePass
+Hidden/TerrainEngine/Details/UniversalPipeline/Vertexlit
+Hidden/TerrainEngine/Details/UniversalPipeline/WavingDoublePass
+Hidden/TextCore/Distance Field SSD
+Hidden/TextCore/Sprite
+Hidden/UIR/ColorEffect
+Hidden/UIR/GaussianBlur
+Hidden/Universal Render Pipeline/Bloom
+Hidden/Universal Render Pipeline/BokehDepthOfField
+Hidden/Universal Render Pipeline/CameraMotionBlur
+Hidden/Universal Render Pipeline/CameraMotionVectors
+Hidden/Universal Render Pipeline/ClusterDeferred
+Hidden/Universal Render Pipeline/CopyDepth
+Hidden/Universal Render Pipeline/DBufferClear
+Hidden/Universal Render Pipeline/Debug/DebugReplacement
+Hidden/Universal Render Pipeline/Edge Adaptive Spatial Upsampling
+Hidden/Universal Render Pipeline/FallbackError
+Hidden/Universal Render Pipeline/FinalPost
+Hidden/Universal Render Pipeline/GaussianDepthOfField
+Hidden/Universal Render Pipeline/LensFlareDataDriven
+Hidden/Universal Render Pipeline/LensFlareScreenSpace
+Hidden/Universal Render Pipeline/LutBuilderHdr
+Hidden/Universal Render Pipeline/LutBuilderLdr
+Hidden/Universal Render Pipeline/PaniniProjection
+Hidden/Universal Render Pipeline/Sampling
+Hidden/Universal Render Pipeline/Scaling Setup
+Hidden/Universal Render Pipeline/StencilDeferred
+Hidden/Universal Render Pipeline/StencilDitherMaskSeed
+Hidden/Universal Render Pipeline/Stop NaN
+Hidden/Universal Render Pipeline/SubpixelMorphologicalAntialiasing
+Hidden/Universal Render Pipeline/TemporalAA
+Hidden/Universal Render Pipeline/UberPost
+Hidden/Universal Render Pipeline/XR/XRMirrorView
+Hidden/Universal Render Pipeline/XR/XRMotionVector
+Hidden/Universal Render Pipeline/XR/XROcclusionMesh
+Hidden/Universal/BlitHDROverlay
+Hidden/Universal/CoreBlit
+Hidden/Universal/CoreBlitColorAndDepth
+Hidden/Universal/HDRDebugView
+Hidden/VR/BlitFromTex2DToTexArraySlice
+Hidden/VR/BlitTexArraySlice
+Hidden/VideoComposite
+Hidden/VideoDecode
+Hidden/VideoDecodeAndroid
+Legacy Shaders/Diffuse
+Legacy Shaders/VertexLit
+Skybox/Procedural
+Sprites/Default
+Sprites/Mask
+TextMeshPro/Distance Field
+TextMeshPro/Mobile/Distance Field
+TextMeshPro/SRP/TMP_SDF-URP_Canvas_Jelly
+UI/CustomBlend
+UI/Default
+UI/DefaultETC1
+UI/Frost
+UI/Ice
+UI/RotatableMask
+UI/UIWobble
+Universal Render Pipeline/Particles/Unlit
+Universal Render Pipeline/Unlit

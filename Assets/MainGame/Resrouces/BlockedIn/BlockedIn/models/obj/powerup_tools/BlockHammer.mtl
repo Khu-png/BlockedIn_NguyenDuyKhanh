@@ -1,0 +1,6 @@
+newmtl HammerMaterial
+Ka 0 0 0
+Ks 0 0 0
+illum 1
+Kd 1.0000 1.0000 1.0000
+map_Kd ../textures/Hammer.png

@@ -1,0 +1,5 @@
+newmtl TileMaterial_B
+Ka 0 0 0
+Ks 0 0 0
+illum 1
+Kd 0.0471 0.1294 0.3529

@@ -1,0 +1,80 @@
+{
+ "Tripledot.Telemetry.Proxy.Host.TelemetryConfig, Tripledot.Telemetry.Proxy.Host, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/TelemetryConfig.asset",
+  "guid": "5c3fe92bf3f5142f5b1aee5e843f7bfb",
+  "override_type": "scriptable_object"
+ },
+ "Tripledot.AppInfo.DebugConfig, Tripledot.AppInfo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/DebugConfig.asset",
+  "guid": "cca44007325a7472b8b82f3ab8c3a030",
+  "override_type": "scriptable_object"
+ },
+ "Tripledot.Analytics.Proxy.Host.HostFirebaseConfig, Tripledot.Analytics.Proxy.Host, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/HostFirebaseConfig.asset",
+  "guid": "f43bd91fd21e84b6896e44215a8539be",
+  "override_type": "scriptable_object"
+ },
+ "Tripledot.Analytics.Proxy.Host.AnalyticsRemoteConfig, Tripledot.Analytics.Proxy.Host, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/AnalyticsRemoteConfig.asset",
+  "guid": "05f26a70c72b447c9bb9ebb68771085e",
+  "override_type": "scriptable_object"
+ },
+ "Game.SettingsConfig, Game, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/SettingsConfig.asset",
+  "guid": "106c9553f3d794a3faf8ac78efbeb88d",
+  "override_type": "scriptable_object"
+ },
+ "Tripledot.Popups.PushNotifications.PushNotificationsPopupConfig, Tripledot.Popups.PushNotifications, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/PushNotificationsPopupConfig.asset",
+  "guid": "0b52d187bdbe4427e925ae0d32f62886",
+  "override_type": "scriptable_object"
+ },
+ "Tripledot.Popups.Idfa.IdfaPopupConfig, Tripledot.Popups.Idfa, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/IdfaPopupConfig.asset",
+  "guid": "f1bb7a1c673ec445dbdce0967f970073",
+  "override_type": "scriptable_object"
+ },
+ "Tripledot.Popups.PopupTriggerConfig, Tripledot.Popups, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/PopupTriggerConfig.asset",
+  "guid": "ada320c223f654a54a05319c203aca67",
+  "override_type": "scriptable_object"
+ },
+ "Game.GameEndConfig, Game, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/GameEndFlowConfig.asset",
+  "guid": "f099eee737a814b7ea807ebae0ced20a",
+  "override_type": "scriptable_object"
+ },
+ "Game.CoinsForWinsConfig, Game, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/CoinsForWinsConfig.asset",
+  "guid": "9059cb8654c14b0c8251a6e5b978101f",
+  "override_type": "scriptable_object"
+ },
+ "Game.LivesConfig, Game, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/LivesConfig.asset",
+  "guid": "0fe3664d761d744b699182d9b77cb276",
+  "override_type": "scriptable_object"
+ },
+ "Game.PowerUpsConfig, Game, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/PowerUpsConfig.asset",
+  "guid": "4e37b7cf013124d28a71bfa276580f02",
+  "override_type": "scriptable_object"
+ },
+ "Game.LowTimeIndicationConfig, Game, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": {
+  "is_enabled": false,
+  "asset_path": "Assets/Resources/Overrides/LowTimeIndicationConfig.asset",
+  "guid": "beeb72bc3b82d4d5fb6fc75803cc95dd",
+  "override_type": "scriptable_object"
+ }
+}

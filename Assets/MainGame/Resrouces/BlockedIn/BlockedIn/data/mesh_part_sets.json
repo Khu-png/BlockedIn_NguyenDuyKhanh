@@ -1,0 +1,88 @@
+{
+ "PieceBlocksParts": {
+  "set": "piece_block",
+  "meshes": {
+   "_cornerBottomLeft": "Corner_BottomLeft",
+   "_cornerBottomRight": "Corner_BottomRight",
+   "_cornerTopLeft": "Corner_TopLeft",
+   "_cornerTopRight": "Corner_TopRight",
+   "_cornerToStraightBottomLeft": "CornerToStraight_BottomLeft",
+   "_cornerToStraightBottomRight": "CornerToStraight_BottomRight",
+   "_cornerToStraightTopLeft": "CornerToStraight_TopLeft",
+   "_cornerToStraightTopRight": "CornerToStraight_TopRight",
+   "_edgeBottom": "Edge_Bottom",
+   "_edgeLeft": "Edge_Left",
+   "_edgeRight": "Edge_Right",
+   "_edgeTop": "Edge_Top",
+   "_frontFace": "FrontFace",
+   "shellTab": "Tab_Ice",
+   "_socketBottom": "Socket_Bottom",
+   "_socketLeft": "Socket_Left",
+   "_tabRight": "Tab_Right",
+   "_tabTop": "Tab_Top",
+   "_coverHorizontal": "Cover_Horizontal",
+   "_coverVertical": "Cover_Vertical",
+   "_coverCorner": "Cover_Corner"
+  },
+  "materials": {
+   "_material": "PieceBlockMaterial"
+  }
+ },
+ "BoardBlocksParts": {
+  "set": "board_wall",
+  "meshes": {
+   "_knobPart": "Base_Rounded",
+   "_socketPart": "Base_Rounded",
+   "_basePartStraight": "Base_Straight",
+   "_basePartRound": "Base_Rounded",
+   "_cornerCornerPart": "Corner_Corner",
+   "_cornerCornerStraightPart": "Corner_Corner_Straight",
+   "_cornerStraightToRoundPart": "Corner_Corner_StraightToRound",
+   "_cornerRoundPart": "Corner_Round",
+   "_cornerConcavePart": "Corner_Concave",
+   "_cornerCounterConcavePart": "Corner_CounterConcave",
+   "_cornerConcaveCenterPart": "Corner_Concave_Center",
+   "_paddingPart": "Padding"
+  },
+  "materials": {
+   "_material": "BoardBlockMaterial"
+  }
+ },
+ "BackdropParts": {
+  "set": "board_backdrop",
+  "meshes": {
+   "_fullPart": "BackgroundFull",
+   "_convexPart": "BackgroundConvex",
+   "_concavePart": "BackgroundConcave"
+  },
+  "materials": {
+   "_material": "BoardBackdrop"
+  }
+ },
+ "StationaryBlocksParts": {
+  "set": "stationary_block",
+  "meshes": {
+   "_anchorBottomLeft": "StationaryBlock_BottomLeft",
+   "_anchorBottomRight": "StationaryBlock_BottomRight",
+   "_anchorTopLeft": "StationaryBlock_TopLeft",
+   "_anchorTopRight": "StationaryBlock_TopRight"
+  },
+  "materials": {
+   "_material": "StationaryBlock",
+   "_secondaryMaterial": "StationaryBlock_Shadow"
+  }
+ },
+ "RopeParts": {
+  "set": "rope",
+  "meshes": {
+   "segment": "Rope_Segment",
+   "endA": "Rope_End_02",
+   "endB": "Rope_End_01"
+  },
+  "materials": {
+   "material": "Rope",
+   "shadowMaterial": "Rope_Shadow",
+   "shadowEndsMaterial": "Rope_Shadow_Ends"
+  }
+ }
+}

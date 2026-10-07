@@ -1,0 +1,127 @@
+kind,number,file,cols,rows,time,shapes,orders,walls,layout_id,pack,mechanics
+builtin,1,levels/builtin/level_001.json,2,6,60,2,1,0,54456,levelPack_2a5db2fa65,
+builtin,2,levels/builtin/level_002.json,8,8,60,5,1,0,54457,levelPack_2a5db2fa65,
+builtin,3,levels/builtin/level_003.json,6,5,75,6,3,0,54458,levelPack_2a5db2fa65,
+builtin,4,levels/builtin/level_004.json,6,6,70,8,4,0,54459,levelPack_2a5db2fa65,
+builtin,5,levels/builtin/level_005.json,8,10,75,8,4,20,54460,levelPack_2a5db2fa65,walls
+builtin,6,levels/builtin/level_006.json,6,8,90,18,5,0,54461,levelPack_2a5db2fa65,
+builtin,7,levels/builtin/level_007.json,5,6,110,11,5,0,54462,levelPack_2a5db2fa65,
+builtin,8,levels/builtin/level_008.json,6,8,60,6,3,12,54463,levelPack_2a5db2fa65,ice walls
+builtin,9,levels/builtin/level_009.json,5,5,90,7,3,0,54464,levelPack_2a5db2fa65,ice
+builtin,10,levels/builtin/level_010.json,5,9,120,14,5,5,54465,levelPack_2a5db2fa65,ice walls
+builtin,11,levels/builtin/level_011.json,6,6,80,16,5,0,54466,levelPack_2a5db2fa65,ice
+builtin,12,levels/builtin/level_012.json,4,8,110,11,4,0,54467,levelPack_2a5db2fa65,ice
+builtin,13,levels/builtin/level_013.json,3,7,180,8,1,8,54468,levelPack_2a5db2fa65,blocker walls
+builtin,14,levels/builtin/level_014.json,5,7,85,15,3,4,54469,levelPack_2a5db2fa65,blocker walls
+builtin,15,levels/builtin/level_015.json,4,4,200,11,4,0,54470,levelPack_2a5db2fa65,
+builtin,16,levels/builtin/level_016.json,8,10,135,22,6,18,54471,levelPack_2a5db2fa65,blocker walls
+builtin,17,levels/builtin/level_017.json,6,8,125,14,3,12,54472,levelPack_2a5db2fa65,blocker walls
+builtin,18,levels/builtin/level_018.json,7,8,160,12,5,0,54473,levelPack_2a5db2fa65,ice
+builtin,19,levels/builtin/level_019.json,7,7,150,27,10,4,54474,levelPack_2a5db2fa65,ice walls
+builtin,20,levels/builtin/level_020.json,6,8,120,20,6,12,54475,levelPack_2a5db2fa65,blocker walls
+builtin,21,levels/builtin/level_021.json,6,7,105,12,6,0,54476,levelPack_2a5db2fa65,ice
+builtin,22,levels/builtin/level_022.json,8,10,150,28,1,0,54477,levelPack_2a5db2fa65,blocker
+builtin,23,levels/builtin/level_023.json,8,8,150,23,7,0,54478,levelPack_2a5db2fa65,ice
+builtin,24,levels/builtin/level_024.json,6,8,165,21,6,0,54479,levelPack_2a5db2fa65,blocker ice
+builtin,25,levels/builtin/level_025.json,6,8,120,22,6,0,54480,levelPack_2a5db2fa65,ice
+builtin,26,levels/builtin/level_026.json,6,10,180,30,10,0,54481,levelPack_2a5db2fa65,ice
+builtin,27,levels/builtin/level_027.json,5,9,180,23,4,8,54482,levelPack_2a5db2fa65,rope walls
+builtin,28,levels/builtin/level_028.json,7,11,180,28,7,22,54483,levelPack_2a5db2fa65,blocker key rope walls
+builtin,29,levels/builtin/level_029.json,7,9,90,31,8,16,54484,levelPack_2a5db2fa65,rope walls
+builtin,30,levels/builtin/level_030.json,6,10,180,22,5,0,54485,levelPack_2a5db2fa65,ice
+builtin,31,levels/builtin/level_031.json,7,9,170,39,9,12,54486,levelPack_2a5db2fa65,ice walls
+builtin,32,levels/builtin/level_032.json,6,6,115,12,4,9,54487,levelPack_2a5db2fa65,walls
+builtin,33,levels/builtin/level_033.json,5,7,135,17,3,0,54488,levelPack_2a5db2fa65,blocker ice
+builtin,34,levels/builtin/level_034.json,5,6,150,19,5,0,54489,levelPack_2a5db2fa65,blocker ice
+builtin,35,levels/builtin/level_035.json,6,8,120,16,5,4,54490,levelPack_2a5db2fa65,ice rope walls
+builtin,36,levels/builtin/level_036.json,8,11,160,30,8,14,54491,levelPack_2a5db2fa65,blocker rope walls
+builtin,37,levels/builtin/level_037.json,7,9,150,25,6,0,54492,levelPack_2a5db2fa65,blocker
+builtin,38,levels/builtin/level_038.json,5,7,125,17,4,3,54493,levelPack_2a5db2fa65,blocker walls
+builtin,39,levels/builtin/level_039.json,10,10,185,31,6,12,54494,levelPack_2a5db2fa65,blocker ice walls
+builtin,40,levels/builtin/level_040.json,7,8,180,15,1,20,54495,levelPack_2a5db2fa65,arrow blocker walls
+builtin,41,levels/builtin/level_041.json,10,8,140,36,10,12,54496,levelPack_2a5db2fa65,arrow blocker walls
+builtin,42,levels/builtin/level_042.json,8,9,145,20,7,6,54497,levelPack_2a5db2fa65,arrow blocker walls
+builtin,43,levels/builtin/level_043.json,8,10,155,40,10,0,54498,levelPack_2a5db2fa65,ice
+builtin,44,levels/builtin/level_044.json,9,11,120,19,6,24,54499,levelPack_2a5db2fa65,arrow blocker rope walls
+builtin,45,levels/builtin/level_045.json,6,7,105,16,5,0,54500,levelPack_2a5db2fa65,ice
+builtin,46,levels/builtin/level_046.json,5,6,120,16,4,2,54501,levelPack_2a5db2fa65,blocker ice rope walls
+builtin,47,levels/builtin/level_047.json,7,8,210,14,4,7,54502,levelPack_2a5db2fa65,walls
+builtin,48,levels/builtin/level_048.json,5,6,110,17,3,0,54503,levelPack_2a5db2fa65,blocker
+builtin,49,levels/builtin/level_049.json,9,9,180,29,9,28,54504,levelPack_2a5db2fa65,rope walls
+builtin,50,levels/builtin/level_050.json,8,9,185,34,9,0,54505,levelPack_2a5db2fa65,blocker ice
+builtin,51,levels/builtin/level_051.json,6,8,190,32,4,0,54506,levelPack_653abdea81,arrow blocker
+builtin,52,levels/builtin/level_052.json,7,7,180,13,4,0,54507,levelPack_653abdea81,arrow blocker
+builtin,53,levels/builtin/level_053.json,11,9,190,14,5,22,54508,levelPack_653abdea81,arrow walls
+builtin,54,levels/builtin/level_054.json,9,11,195,18,6,31,54509,levelPack_653abdea81,arrow walls
+builtin,55,levels/builtin/level_055.json,8,8,175,24,8,0,54510,levelPack_653abdea81,arrow
+builtin,56,levels/builtin/level_056.json,6,9,115,29,4,6,54511,levelPack_653abdea81,blocker walls
+builtin,57,levels/builtin/level_057.json,7,9,135,19,7,19,54512,levelPack_653abdea81,walls
+builtin,58,levels/builtin/level_058.json,6,8,120,19,4,0,54513,levelPack_653abdea81,blocker ice
+builtin,59,levels/builtin/level_059.json,10,10,130,28,4,0,54514,levelPack_653abdea81,arrow blocker ice
+builtin,60,levels/builtin/level_060.json,5,6,125,17,6,0,54515,levelPack_653abdea81,
+builtin,61,levels/builtin/level_061.json,5,7,115,17,6,5,54516,levelPack_653abdea81,blocker ice walls
+builtin,62,levels/builtin/level_062.json,14,11,150,34,4,24,54517,levelPack_653abdea81,arrow blocker ice walls
+builtin,63,levels/builtin/level_063.json,9,10,130,18,7,18,54518,levelPack_653abdea81,walls
+builtin,64,levels/builtin/level_064.json,7,8,160,21,7,6,54519,levelPack_653abdea81,blocker walls
+builtin,65,levels/builtin/level_065.json,9,9,180,28,9,0,54520,levelPack_653abdea81,arrow ice
+builtin,66,levels/builtin/level_066.json,6,9,130,22,7,12,54521,levelPack_653abdea81,walls
+builtin,67,levels/builtin/level_067.json,6,6,150,32,2,0,54522,levelPack_653abdea81,blocker
+builtin,68,levels/builtin/level_068.json,7,9,90,21,4,0,54523,levelPack_653abdea81,blocker ice
+builtin,69,levels/builtin/level_069.json,9,9,170,20,6,0,54524,levelPack_653abdea81,arrow blocker
+builtin,70,levels/builtin/level_070.json,8,9,135,27,7,14,54525,levelPack_653abdea81,arrow ice walls
+builtin,71,levels/builtin/level_071.json,7,9,150,26,8,5,54526,levelPack_653abdea81,arrow rope walls
+builtin,72,levels/builtin/level_072.json,11,13,200,25,6,23,54527,levelPack_653abdea81,arrow blocker ice walls
+builtin,73,levels/builtin/level_073.json,9,12,190,60,9,24,54528,levelPack_653abdea81,ice walls
+builtin,74,levels/builtin/level_074.json,6,9,150,18,6,0,54529,levelPack_653abdea81,
+builtin,75,levels/builtin/level_075.json,6,7,150,18,4,2,54530,levelPack_653abdea81,blocker ice walls
+builtin,76,levels/builtin/level_076.json,6,7,140,17,6,0,54531,levelPack_653abdea81,
+builtin,77,levels/builtin/level_077.json,8,10,125,27,9,4,54532,levelPack_653abdea81,arrow blocker ice walls
+builtin,78,levels/builtin/level_078.json,8,13,190,40,10,14,54533,levelPack_653abdea81,arrow blocker ice walls
+builtin,79,levels/builtin/level_079.json,6,8,120,22,7,6,54534,levelPack_653abdea81,walls
+builtin,80,levels/builtin/level_080.json,6,8,150,18,5,8,54535,levelPack_653abdea81,blocker walls
+builtin,81,levels/builtin/level_081.json,7,11,175,21,4,0,54536,levelPack_653abdea81,blocker rope
+builtin,82,levels/builtin/level_082.json,7,9,150,31,6,14,54537,levelPack_653abdea81,blocker ice walls
+builtin,83,levels/builtin/level_083.json,12,10,170,30,6,40,54538,levelPack_653abdea81,blocker ice walls
+builtin,84,levels/builtin/level_084.json,6,9,120,36,10,6,54539,levelPack_653abdea81,blocker rope walls
+builtin,85,levels/builtin/level_085.json,7,9,145,29,10,5,54540,levelPack_653abdea81,walls
+builtin,86,levels/builtin/level_086.json,6,9,180,16,5,8,54541,levelPack_653abdea81,arrow walls
+builtin,87,levels/builtin/level_087.json,8,12,180,35,10,0,54542,levelPack_653abdea81,ice
+builtin,88,levels/builtin/level_088.json,7,7,160,14,5,8,54543,levelPack_653abdea81,walls
+builtin,89,levels/builtin/level_089.json,6,8,160,23,6,0,54544,levelPack_653abdea81,arrow blocker
+builtin,90,levels/builtin/level_090.json,10,12,145,22,9,48,54545,levelPack_653abdea81,blocker walls
+builtin,91,levels/builtin/level_091.json,5,8,150,14,5,0,54546,levelPack_653abdea81,arrow rope
+builtin,92,levels/builtin/level_092.json,5,8,180,19,5,0,54547,levelPack_653abdea81,blocker ice
+builtin,93,levels/builtin/level_093.json,7,7,135,15,5,1,54548,levelPack_653abdea81,arrow ice rope walls
+builtin,94,levels/builtin/level_094.json,11,11,170,44,4,17,54549,levelPack_653abdea81,arrow blocker ice walls
+builtin,95,levels/builtin/level_095.json,9,9,185,41,5,30,54550,levelPack_653abdea81,walls
+builtin,96,levels/builtin/level_096.json,6,9,125,22,6,4,54551,levelPack_653abdea81,arrow rope walls
+builtin,97,levels/builtin/level_097.json,10,10,120,20,6,46,54552,levelPack_653abdea81,blocker walls
+builtin,98,levels/builtin/level_098.json,6,8,125,21,7,10,54553,levelPack_653abdea81,walls
+builtin,99,levels/builtin/level_099.json,8,10,155,27,7,8,54554,levelPack_653abdea81,ice walls
+builtin,100,levels/builtin/level_100.json,12,10,150,30,8,28,54555,levelPack_653abdea81,arrow blocker ice walls
+local,1,levels/local/Level_01_Tutorial.json,2,6,60,2,1,0,,,
+local,2,levels/local/Level_02_Tutorial.json,8,8,60,5,1,0,,,
+local,3,levels/local/Level_03_Tutorial.json,6,8,75,6,3,0,,,
+local,4,levels/local/Level_04_Normal.json,6,7,120,11,4,0,,,
+local,5,levels/local/Level_05_Normal.json,6,6,150,12,4,9,,,walls
+local,6,levels/local/Level_06_Blocker.json,5,7,150,15,3,0,,,blocker
+local,7,levels/local/Level_07_Blocker.json,6,8,150,14,6,0,,,blocker
+local,8,levels/local/Level_08_Blocker.json,8,10,160,22,6,18,,,blocker walls
+local,9,levels/local/Level_09_Arrow.json,7,7,100,8,4,0,,,arrow
+local,10,levels/local/Level_10_Arrow.json,5,6,120,9,4,0,,,arrow blocker
+local,11,levels/local/Level_11_Arrow.json,8,8,140,18,5,0,,,arrow blocker
+local,12,levels/local/Level_12_Blocker.json,8,12,140,30,11,16,,,blocker walls
+local,13,levels/local/Level_13_Arrow.json,6,9,130,16,5,10,,,arrow walls
+local,14,levels/local/Level_14_Ice.json,10,10,160,31,6,12,,,blocker ice walls
+local,15,levels/local/Level_15_Lock_And_Key.json,7,11,130,28,7,22,,,blocker key rope walls
+local,16,levels/local/Level_16_Arrow.json,9,9,130,28,9,0,,,arrow
+local,17,levels/local/Level_17_Ice.json,9,9,125,35,14,0,,,ice
+local,18,levels/local/Level_18_Lock_And_Key.json,10,10,180,58,20,20,,,key rope walls
+local,19,levels/local/Level_19_Normal.json,9,10,120,16,6,18,,,walls
+local,20,levels/local/Level_20_Normal.json,10,12,110,22,11,48,,,walls
+local,21,levels/local/Level_21_Obstacles.json,8,12,180,14,4,0,,,arrow blocker no_timer stationary
+local,22,levels/local/Level_22_Chains.json,16,12,60,12,2,0,,,no_timer rope
+local,23,levels/local/Level_23_Ropes.json,6,5,60,3,3,0,,,no_timer rope
+local,24,levels/local/Level_24_KnobShowcase.json,10,10,60,7,2,0,,,no_timer rope
+local,25,levels/local/Level_25_ThreeRopes.json,12,10,60,8,4,0,,,no_timer rope
+local,26,levels/local/Level_26_AllRopeColors.json,11,8,60,11,0,0,,,ice no_timer rope

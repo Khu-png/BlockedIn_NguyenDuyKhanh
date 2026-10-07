@@ -1,0 +1,29 @@
+{
+ "m_GameObject": {
+  "m_FileID": 0,
+  "m_PathID": 0
+ },
+ "m_Enabled": 1,
+ "m_Script": {
+  "m_FileID": 1,
+  "m_PathID": -6229861555921874979,
+  "_ref": "MonoScript:PowerUpTutorialContentSource"
+ },
+ "m_Name": "PowerUpTutorialContentSource",
+ "_entries": [
+  {
+   "_powerUpType": 0,
+   "_title": "Block Break",
+   "_subtitle": "New power-up unlocked!",
+   "_note": "Breaks a block into smaller blocks",
+   "_thirdStepNote": "Tap any block to break it into smaller blocks!"
+  },
+  {
+   "_powerUpType": 1,
+   "_title": "Time Freeze",
+   "_subtitle": "New power-up unlocked!",
+   "_note": "Freezes the timer for {0} seconds",
+   "_thirdStepNote": ""
+  }
+ ]
+}
