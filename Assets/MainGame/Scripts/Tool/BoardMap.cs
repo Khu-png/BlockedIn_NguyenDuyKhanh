@@ -1,4 +1,5 @@
 using UnityEngine;
+using BlockedIn.Blocks;
 
 namespace BlockedIn.MapTools
 {
@@ -19,7 +20,14 @@ namespace BlockedIn.MapTools
             BoardCell.Floor, BoardCell.Floor, BoardCell.Floor, BoardCell.Floor
         };
 
+        public BlockColorData[] blockColors;
+        public BlockEdgeData[] blockEdges;
+        public int[] blockGroups;
+
         public bool IsValid => columns >= 1 && columns <= 32 && rows >= 1 && rows <= 32
-            && cells != null && cells.Length == columns * rows;
+            && cells != null && cells.Length == columns * rows
+            && (blockColors == null || blockColors.Length == 0 || blockColors.Length == cells.Length)
+            && (blockEdges == null || blockEdges.Length == 0 || blockEdges.Length == cells.Length)
+            && (blockGroups == null || blockGroups.Length == 0 || blockGroups.Length == cells.Length);
     }
 }

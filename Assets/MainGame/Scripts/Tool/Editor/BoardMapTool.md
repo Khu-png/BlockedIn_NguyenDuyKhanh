@@ -21,4 +21,22 @@ Generate cập nhật Generated board đang chọn; để trống trường này
 
 Mỗi ô có kích thước 1 unit trên XZ, hàng tăng theo -Z. Floor Y=-0.22, nền Y=-0.225, tâm tường Y=0.03. Block 1×1 đặt root Y=0.
 
-SO hiện lưu sân/tường, chưa lưu khối chơi, điều kiện ghép hay thời gian màn. Scene đã Generate xem được trong Play, nhưng chưa có loader runtime để tự đọc SO khi đổi level. BoardWallCell dùng cho ô tường/viền thử nghiệm, chưa có viền bo liền và glow như ảnh game.
+SO lưu sân/tường và màu SO của block theo từng ô; chưa lưu điều kiện ghép hay thời gian màn. Scene đã Generate xem được trong Play, nhưng chưa có loader runtime để tự đọc SO khi đổi level. BoardWallCell dùng cho ô tường/viền thử nghiệm, chưa có viền bo liền và glow như ảnh game.
+
+
+Chọn brush Block trong Map Generator rồi click/kéo ô để đặt block màu Blue. Click block để mở bảng màu; Remove Block giữ lại floor. Generate dựng block từ Block 1x1 Base, gán màu và input drag; Save/Load giữ vị trí và màu trong Level SO. Floor/Wall ghi đè block khi kéo qua ô; Fill Floor và Example xoá toàn bộ block trong bản nháp.
+
+Click a block to edit its color and its Top/Right/Bottom/Left edges in the same popup. Select Default, Tab or Socket; click Done, then Generate to apply the layout. Save/Load preserves edge choices in the Level asset. Older levels use Default edges.
+
+Runtime docking preview: release a 1x1 block next to a same-ColorId block with opposing Tab/Socket edges. It slides into place and both visuals pulse; occupancy and colliders remain on the grid. Dock Duration, Dock Bounce Duration, Dock Gap and Dock Squash are configured on Block. The preview does not merge groups or remove blocks. Open BlockDockingDemo, drag the upper-left blue block next to the upper-right blue socket block and release. The lower blue/red pair demonstrates a color mismatch.
+Generated board binding survives Play/Stop through a serialized editor ID and direct OnEnable registration. Generate restores the existing board before updating it; unresolved previous bindings block generation instead of creating duplicates. Clear and Undo Clear restore both the board and its tool reference. If an older tool session already lost its reference before this fix, assign the existing GeneratedBoard component once.
+Runtime color completion: after startup or a release, once movement/docking is finished, all blocks with the same ColorId must form one connected component through opposite Tab/Socket pairs, with no unmatched special edge. A completed color is immediately deactivated, removed from occupancy, and destroyed; other colors remain. Plain single blocks and touching Default edges do not count as a completed connection. Checks run only in Play Mode; editor level data is preserved.
+
+
+## Merged block shapes
+
+Paint Block cells, choose the same color ID, enable Edit Shape, select touching cells, then click Merge. G labels identify cells belonging to one merged block. Generate creates one gameplay Block with multiple cell visuals from Block 1x1 Base. Split restores 1x1 blocks. Remove Cells removes selected cells; if the remaining shape is disconnected, it becomes separate 1x1 blocks. Adding cells uses the normal Block brush followed by merging again; selecting any cell of an existing group includes that entire group when merging.
+
+Disable Edit Shape and click a shape cell to open the palette. Color applies to the entire shape. Edge settings apply to the clicked cell; internal edges display Internal (Default). Merge resets internal Tab/Socket choices to Default. Generated shapes keep internal Default edges visible, replace rounded corners with CornerToStraight at all joins, and retain rounded outer corners. No Cover meshes are added: visible grooves between cells preserve the individual tile faces and leave exterior Socket/Tab parts exposed.
+
+Level SOs store blockGroups alongside colors and edges. Older levels without groups load as 1x1 blocks. All occupied cells share one drag root, with explicit collider and appearance references per cell. Docking and color completion check exterior ports on every cell while counting each shape as one block.

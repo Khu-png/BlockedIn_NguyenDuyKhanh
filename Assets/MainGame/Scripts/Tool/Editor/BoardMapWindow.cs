@@ -1,17 +1,20 @@
 using System;
+using BlockedIn.Blocks;
 using BlockedIn.MapTools;
 using UnityEditor;
 using UnityEngine;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed class BoardMapWindow : EditorWindow
+    public sealed partial class BoardMapWindow : EditorWindow
     {
         [SerializeField] int columns = 4, rows = 4;
         [SerializeField] int levelNumber = 1;
         [SerializeField] BoardCell[] cells;
         [SerializeField] bool outerWalls = true;
-        [SerializeField] BoardCell brush = BoardCell.Floor;
+        [SerializeField] int brushIndex;
+        [SerializeField] BlockColorData[] blockColors;
+        [SerializeField] BlockEdgeData[] blockEdges;
         [SerializeField] BoardMap mapAsset;
         [SerializeField] GeneratedBoard target;
         [SerializeField] GameObject tilePrefab, backdropPrefab, wallPrefab;
@@ -27,24 +30,33 @@ namespace BlockedIn.EditorTools
         {
             minSize = new Vector2(390, 680);
             if (cells == null || cells.Length != columns * rows) Resize(columns, rows);
+            EnsureBlocks();
             NormalizeFloor();
             previewCamera = Camera.main;
             if (tilePrefab == null) tilePrefab = BoardDefaultPrefabs.Load("BoardTile");
             if (backdropPrefab == null) backdropPrefab = BoardDefaultPrefabs.Load("BoardBackdropCell");
             if (wallPrefab == null) wallPrefab = BoardDefaultPrefabs.Load("BoardWallCell");
+            Undo.undoRedoPerformed += Repaint;
+            EnableBoardBinding();
+        }
+
+        void OnDisable()
+        {
+            Undo.undoRedoPerformed -= Repaint;
+            DisableBoardBinding();
         }
 
         void OnGUI()
         {
             EditorGUILayout.LabelField("Blocked In — Map Generator", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Select a brush and drag across the grid. The top row points toward +Z. One cell equals 1 Unity unit.", MessageType.Info);
+            EditorGUILayout.HelpBox("Paint Floor, Wall or Block on the grid. Click a block to edit its color and edges. Generate applies the layout to the scene.", MessageType.Info);
             using (new EditorGUI.DisabledScope(EditorApplication.isPlayingOrWillChangePlaymode))
             {
                 DrawSettings();
                 scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.MinHeight(160), GUILayout.MaxHeight(500));
                 DrawGrid();
                 EditorGUILayout.EndScrollView();
-                EditorGUILayout.LabelField("Floor: playable area    Wall: obstacle", EditorStyles.miniLabel);
+                EditorGUILayout.LabelField("Floor: playable area    Wall: obstacle    B: single block    G: merged group", EditorStyles.miniLabel);
                 DrawStorage();
                 EditorGUILayout.Space();
                 DrawGeneration();
@@ -62,19 +74,37 @@ namespace BlockedIn.EditorTools
         void Resize(int width, int height)
         {
             var next = new BoardCell[width * height];
+            var nextBlocks = new BlockColorData[width * height];
+            var nextGroups = new int[width * height];
+            var nextEdges = new BlockEdgeData[width * height];
             for (int y = 0; y < height; y++)
                 for (int x = 0; x < width; x++)
+                {
+                    if (blockColors != null && x < columns && y < rows && y * columns + x < blockColors.Length)
+                        nextBlocks[y * width + x] = blockColors[y * columns + x];
+                    if (blockEdges != null && x < columns && y < rows && y * columns + x < blockEdges.Length)
+                        nextEdges[y * width + x] = blockEdges[y * columns + x];
+                    if (blockGroups != null && x < columns && y < rows && y * columns + x < blockGroups.Length)
+                        nextGroups[y * width + x] = blockGroups[y * columns + x];
                     next[y * width + x] = cells != null && x < columns && y < rows && y * columns + x < cells.Length
                         ? cells[y * columns + x] : BoardCell.Floor;
+                }
+            blockGroups = nextGroups;
+            selectedCells.Clear();
+            blockColors = nextBlocks;
+            blockEdges = nextEdges;
             columns = width;
             rows = height;
             cells = next;
+            RepairGroups();
         }
 
         void Fill(BoardCell value)
         {
             Undo.RecordObject(this, "Fill map");
-            for (int i = 0; i < cells.Length; i++) cells[i] = value;
+            for (int i = 0; i < cells.Length; i++)
+            { cells[i] = value; blockColors[i] = null; blockEdges[i] = default; blockGroups[i] = 0; }
+            selectedCells.Clear();
         }
 
         void Example()
@@ -82,84 +112,18 @@ namespace BlockedIn.EditorTools
             Undo.RecordObject(this, "Example map");
             Resize(6, 6);
             for (int i = 0; i < cells.Length; i++) cells[i] = BoardCell.Floor;
+            Array.Clear(blockColors, 0, blockColors.Length);
+            Array.Clear(blockEdges, 0, blockEdges.Length);
+            Array.Clear(blockGroups, 0, blockGroups.Length);
+            selectedCells.Clear();
             outerWalls = true;
-        }
-
-        void DrawGrid()
-        {
-            const float size = 30;
-            Rect grid = GUILayoutUtility.GetRect(columns * size, rows * size, GUILayout.ExpandWidth(false));
-            PaintGrid(grid, size);
-            for (int y = 0; y < rows; y++)
-                for (int x = 0; x < columns; x++)
-                {
-                    BoardCell cell = cells[y * columns + x];
-                    Rect rect = new Rect(grid.x + x * size, grid.y + y * size, size - 2, size - 2);
-                    EditorGUI.DrawRect(rect, cell == BoardCell.Floor ? new Color(.20f, .52f, .65f)
-                        : cell == BoardCell.Wall ? new Color(.85f, .68f, .28f) : new Color(.18f, .18f, .18f));
-                    GUI.Label(rect, cell == BoardCell.Wall ? "W" : cell == BoardCell.Floor ? "·" : "", EditorStyles.centeredGreyMiniLabel);
-                }
-        }
-
-        void PaintGrid(Rect grid, float size)
-        {
-            var e = Event.current;
-            if (e.type == EventType.MouseDown && e.button == 0 && grid.Contains(e.mousePosition))
-            {
-                painting = true;
-                Undo.IncrementCurrentGroup();
-                paintUndoGroup = Undo.GetCurrentGroup();
-                Undo.RecordObject(this, "Paint map");
-            }
-            if (painting && (e.type == EventType.MouseDown || e.type == EventType.MouseDrag) && grid.Contains(e.mousePosition))
-            {
-                int x = Mathf.FloorToInt((e.mousePosition.x - grid.x) / size);
-                int y = Mathf.FloorToInt((e.mousePosition.y - grid.y) / size);
-                Undo.RecordObject(this, "Paint map");
-                cells[y * columns + x] = brush;
-                e.Use(); Repaint();
-            }
-            if (painting && (e.rawType == EventType.MouseUp || e.type == EventType.Ignore))
-            {
-                painting = false;
-                Undo.CollapseUndoOperations(paintUndoGroup);
-            }
-        }
-
-        void SaveAsLevel()
-        {
-            mapAsset = BoardLevelStorage.Save(levelNumber, columns, rows, outerWalls, cells);
-            EditorGUIUtility.PingObject(mapAsset);
-        }
-
-        void SaveTo(BoardMap asset)
-        {
-            Undo.RecordObject(asset, "Save board map");
-            asset.columns = columns;
-            asset.rows = rows;
-            asset.outerWalls = outerWalls;
-            asset.cells = (BoardCell[])cells.Clone();
-            EditorUtility.SetDirty(asset);
-            AssetDatabase.SaveAssets();
-        }
-
-        void Load()
-        {
-            if (!mapAsset.IsValid) throw new InvalidOperationException("Invalid map data: dimensions must be 1 to 32 and cell count must equal rows * columns.");
-            Undo.RecordObject(this, "Load board map");
-            columns = mapAsset.columns;
-            rows = mapAsset.rows;
-            outerWalls = mapAsset.outerWalls;
-            cells = (BoardCell[])mapAsset.cells.Clone();
-            levelNumber = Mathf.Max(1, mapAsset.levelNumber);
-            NormalizeFloor();
         }
 
         void NormalizeFloor()
         {
             for (int i = 0; i < cells.Length; i++)
                 if (cells[i] == BoardCell.Empty) cells[i] = BoardCell.Floor;
-            if (brush == BoardCell.Empty) brush = BoardCell.Floor;
+
         }
 
         void DrawSettings()
@@ -171,16 +135,15 @@ namespace BlockedIn.EditorTools
             {
                 Undo.RecordObject(this, "Resize map");
                 Resize(newColumns, newRows);
-        }
-        outerWalls = EditorGUILayout.Toggle("Outer wall border", outerWalls);
-        int selectedBrush = GUILayout.Toolbar(brush == BoardCell.Wall ? 1 : 0, new[] { "Floor", "Wall" });
-        brush = selectedBrush == 1 ? BoardCell.Wall : BoardCell.Floor;
-        using (new EditorGUILayout.HorizontalScope())
-        {
-            if (GUILayout.Button("Fill Floor")) Fill(BoardCell.Floor);
+            }
+            outerWalls = EditorGUILayout.Toggle("Outer wall border", outerWalls);
+            DrawShapeTools();
+            brushIndex = GUILayout.Toolbar(brushIndex, new[] { "Floor", "Wall", "Block" });
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button("Fill Floor")) Fill(BoardCell.Floor);
                 if (GUILayout.Button("Example 6×6")) Example();
-        }
-
+            }
         }
 
         void DrawStorage()
@@ -195,7 +158,7 @@ namespace BlockedIn.EditorTools
                     if (GUILayout.Button("Save")) Run(() => SaveTo(mapAsset));
                     if (GUILayout.Button("Load")) Run(Load);
                 }
-        }
+            }
         }
 
         void DrawGeneration()
@@ -203,7 +166,7 @@ namespace BlockedIn.EditorTools
             tilePrefab = PrefabField("Tile prefab", tilePrefab);
             backdropPrefab = PrefabField("Backdrop prefab", backdropPrefab);
             wallPrefab = PrefabField("Wall prefab", wallPrefab);
-            target = (GeneratedBoard)EditorGUILayout.ObjectField("Generated board", target, typeof(GeneratedBoard), true);
+            DrawBoardBinding();
             EditorGUILayout.HelpBox("Generate updates the selected board or creates a new board if none is assigned. Clear removes only the selected board. Undo is supported.", MessageType.None);
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -220,11 +183,18 @@ namespace BlockedIn.EditorTools
 
         void Generate()
         {
+            RestoreBoardBinding();
+            RequireBoardBinding();
+            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
+            previewCamera = Camera.main;
             if (tilePrefab == null) tilePrefab = BoardDefaultPrefabs.Load("BoardTile");
             if (backdropPrefab == null) backdropPrefab = BoardDefaultPrefabs.Load("BoardBackdropCell");
             if (wallPrefab == null) wallPrefab = BoardDefaultPrefabs.Load("BoardWallCell");
-            target = BoardSceneBuilder.Generate(target, columns, rows, outerWalls, cells,
+            GeneratedBoard board = BoardSceneBuilder.Generate(target, columns, rows, outerWalls, cells,
                 tilePrefab, backdropPrefab, wallPrefab);
+            Undo.RegisterCompleteObjectUndo(this, "Bind generated board");
+            SetBoardBinding(board);
+            BoardBlockBuilder.Generate(target, blockColors, previewCamera, blockEdges, blockGroups);
         }
 
         void DrawPreview()
@@ -243,8 +213,10 @@ namespace BlockedIn.EditorTools
 
         void Clear()
         {
+            RestoreBoardBinding();
+            Undo.RegisterCompleteObjectUndo(this, "Clear generated board");
             BoardSceneBuilder.Clear(target);
-            target = null;
+            SetBoardBinding(null);
         }
     }
 }

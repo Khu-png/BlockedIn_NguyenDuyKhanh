@@ -1,4 +1,5 @@
 using System;
+using BlockedIn.Blocks;
 using BlockedIn.MapTools;
 using UnityEditor;
 using UnityEngine;
@@ -10,9 +11,11 @@ namespace BlockedIn.EditorTools
         const string ParentFolder = "Assets/MainGame/ScriptableObject";
         public const string Folder = ParentFolder + "/Levels";
 
-        public static BoardMap Save(int number, int columns, int rows, bool border, BoardCell[] cells)
+        public static BoardMap Save(int number, int columns, int rows, bool border, BoardCell[] cells,
+            BlockColorData[] blockColors = null, BlockEdgeData[] blockEdges = null, int[] blockGroups = null)
         {
             Validate(number, columns, rows, cells);
+            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
             if (!AssetDatabase.IsValidFolder(ParentFolder)) AssetDatabase.CreateFolder("Assets/MainGame", "ScriptableObject");
             if (!AssetDatabase.IsValidFolder(Folder)) AssetDatabase.CreateFolder(ParentFolder, "Levels");
             string name = "Level " + number;
@@ -26,6 +29,9 @@ namespace BlockedIn.EditorTools
             level.rows = rows;
             level.outerWalls = border;
             level.cells = (BoardCell[])cells.Clone();
+            level.blockColors = blockColors == null ? null : (BlockColorData[])blockColors.Clone();
+            level.blockEdges = blockEdges == null ? null : (BlockEdgeData[])blockEdges.Clone();
+            level.blockGroups = blockGroups == null ? null : (int[])blockGroups.Clone();
             EditorUtility.SetDirty(level);
             AssetDatabase.SaveAssets();
             return level;
