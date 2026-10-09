@@ -38,14 +38,17 @@ namespace BlockedIn.EditorTools
             Undo.RecordObject(board, "Update board blocks");
             if (board.blockGameplay != null) Undo.DestroyObjectImmediate(board.blockGameplay.gameObject);
             board.blockGameplay = null;
+            board.SetInput(null);
             if (prefab == null) return;
             var root = new GameObject("Blocks");
             root.transform.SetParent(board.transform, false);
             Undo.RegisterCreatedObjectUndo(root, "Create board blocks");
             BlockBoard gameplay = Undo.AddComponent<BlockBoard>(root);
-            gameplay.Configure(board, null);
+            gameplay.Configure(board, null, camera);
             board.blockGameplay = gameplay;
-            Undo.AddComponent<BlockInput>(root).Configure(camera, gameplay);
+            BlockInput input = Undo.AddComponent<BlockInput>(root);
+            input.Configure(camera, gameplay);
+            board.SetInput(input);
             var spawned = new System.Collections.Generic.HashSet<int>();
             for (int i = 0; i < colors.Length; i++)
             {
@@ -77,6 +80,7 @@ namespace BlockedIn.EditorTools
             data.FindProperty("colorData").objectReferenceValue = color;
             data.ApplyModifiedPropertiesWithoutUndo();
             edges.Apply(block.Appearance);
+            BlockHitboxBuilder.Bake(block);
             board.Register(block);
         }
     }

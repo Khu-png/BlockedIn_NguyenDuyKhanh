@@ -65,7 +65,7 @@ namespace BlockedIn.Blocks
             Ray ray = mainCamera.ScreenPointToRay(screen);
             if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, blockMask, QueryTriggerInteraction.Ignore)) return;
             Block block = board.Resolve(hit.collider);
-            if (block == null || !TryGetGrid(screen, out Vector2 grid) || !block.BeginDrag()) return;
+            if (block == null || !TryGetGrid(screen, out Vector2 grid) || !block.BeginDrag(mainCamera)) return;
             selected = block;
             grabOffset = board.WorldToGrid(block.transform.position) - grid;
         }

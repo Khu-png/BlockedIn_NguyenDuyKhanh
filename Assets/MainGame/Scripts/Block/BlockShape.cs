@@ -5,12 +5,32 @@ namespace BlockedIn.Blocks
 {
     public sealed partial class Block
     {
-        [SerializeField] BlockAppearance[] cellAppearances;
-        [SerializeField] Collider[] cellColliders;
+        [SerializeField, HideInInspector] BlockAppearance[] cellAppearances;
+        [SerializeField, HideInInspector] Collider[] cellColliders;
+        [SerializeField, HideInInspector] Transform[] cellVisuals;
         public Transform Visual => visual;
         public Renderer[] Renderers => renderers;
+        bool exiting;
+        public int ExitVisualCount => cellVisuals != null && cellVisuals.Length == cells.Length ? cellVisuals.Length : 1;
+        public Transform GetExitVisual(int index) => ExitVisualCount == 1 ? visual : cellVisuals[index];
 
-        public void ConfigureShape(Vector2Int[] footprint, BlockAppearance[] parts, Collider[] colliders)
+        public void BeginExit()
+        {
+            exiting = true;
+            dragging = settling = docking = false;
+            ResetTilt();
+            if (cells.Length > 1 && cellAppearances != null)
+                foreach (BlockAppearance part in cellAppearances)
+                    if (part != null)
+                        for (int corner = 0; corner < 4; corner++) part.SetCorner(corner, CornerType.Default);
+            if (hitCollider != null) hitCollider.enabled = false;
+            if (cellColliders == null) return;
+            foreach (Collider collider in cellColliders)
+                if (collider != null) collider.enabled = false;
+        }
+
+        public void ConfigureShape(Vector2Int[] footprint, BlockAppearance[] parts, Collider[] colliders,
+            Transform[] models = null)
         {
             if (footprint == null || parts == null || colliders == null || footprint.Length == 0
                 || footprint.Length != parts.Length || footprint.Length != colliders.Length)
@@ -18,8 +38,18 @@ namespace BlockedIn.Blocks
             cells = footprint;
             cellAppearances = parts;
             cellColliders = colliders;
+            cellVisuals = models;
             appearance = parts[0];
             hitCollider = colliders[0];
+        }
+
+        public void SetHitCollider(Collider collider)
+        {
+            Collider previous = hitCollider;
+            hitCollider = collider;
+            if (cellColliders == null) return;
+            for (int i = 0; i < cellColliders.Length; i++)
+                if (cellColliders[i] == previous) cellColliders[i] = collider;
         }
 
         public bool OwnsCollider(Collider candidate)

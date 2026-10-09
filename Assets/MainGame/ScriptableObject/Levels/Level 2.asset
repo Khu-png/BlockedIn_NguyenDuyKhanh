@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a677cc24c862dd4499f3d540073b7141, type: 3}
+  m_Name: Level 2
+  m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.MapTools.BoardMap
+  levelNumber: 2
+  timeLimit: 180
+  columns: 6
+  rows: 6
+  outerWalls: 1
+  cells: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  blockColors:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
+  - {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
+  - {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
+  blockEdges:
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 2
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 1
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 1
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 2
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 1
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 2
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 2
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 1
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 1
+  - top: 1
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 2
+    bottom: 0
+    left: 0
+  - top: 0
+    right: 0
+    bottom: 2
+    left: 0
+  blockGroups: 000000000300000000000000000000000000000000000000000000000300000000000000000000000200000002000000000000000000000000000000040000000200000002000000010000000100000000000000040000000000000000000000010000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  runtimeBoard: {fileID: 4403151155056353583, guid: 8ceb3dafa4654a04086994191108f558, type: 3}

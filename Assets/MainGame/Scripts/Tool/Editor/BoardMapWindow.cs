@@ -10,6 +10,7 @@ namespace BlockedIn.EditorTools
     {
         [SerializeField] int columns = 4, rows = 4;
         [SerializeField] int levelNumber = 1;
+        [SerializeField, Min(1)] float timeLimit = 150;
         [SerializeField] BoardCell[] cells;
         [SerializeField] bool outerWalls = true;
         [SerializeField] int brushIndex;
@@ -53,9 +54,11 @@ namespace BlockedIn.EditorTools
             using (new EditorGUI.DisabledScope(EditorApplication.isPlayingOrWillChangePlaymode))
             {
                 DrawSettings();
-                scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.MinHeight(160), GUILayout.MaxHeight(500));
-                DrawGrid();
-                EditorGUILayout.EndScrollView();
+                using (var view = new EditorGUILayout.ScrollViewScope(scroll, GUILayout.MinHeight(160), GUILayout.MaxHeight(500)))
+                {
+                    scroll = view.scrollPosition;
+                    DrawGrid();
+                }
                 EditorGUILayout.LabelField("Floor: playable area    Wall: obstacle    B: single block    G: merged group", EditorStyles.miniLabel);
                 DrawStorage();
                 EditorGUILayout.Space();
@@ -67,7 +70,14 @@ namespace BlockedIn.EditorTools
 
         void Run(Action action)
         {
-            try { action(); }
+            EditorApplication.delayCall += () => Execute(action);
+        }
+
+        void Execute(Action action)
+        {
+            if (this == null || EditorApplication.isPlayingOrWillChangePlaymode) return;
+            try { action(); Repaint(); }
+            catch (ExitGUIException) { throw; }
             catch (Exception exception) { Debug.LogException(exception); EditorUtility.DisplayDialog("Map Generator", exception.Message, "OK"); }
         }
 
@@ -150,6 +160,7 @@ namespace BlockedIn.EditorTools
         {
             mapAsset = (BoardMap)EditorGUILayout.ObjectField("Map data", mapAsset, typeof(BoardMap), false);
             levelNumber = Mathf.Max(1, EditorGUILayout.IntField("Level number", levelNumber));
+            timeLimit = Mathf.Max(1, EditorGUILayout.FloatField("Time limit (seconds)", timeLimit));
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Save as Level")) Run(SaveAsLevel);

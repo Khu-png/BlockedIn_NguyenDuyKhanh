@@ -23,6 +23,12 @@ namespace BlockedIn.CameraTools
         Matrix4x4 lastBoardMatrix;
 
         public Camera MainCamera => mainCamera;
+        public void Configure(Camera camera, RectTransform area = null)
+        {
+            mainCamera = camera;
+            gamePlayRect = area;
+            uiCamera = null;
+        }
 
         void LateUpdate()
         {

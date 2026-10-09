@@ -10,7 +10,8 @@ namespace BlockedIn.EditorTools
     {
         void SaveAsLevel()
         {
-            mapAsset = BoardLevelStorage.Save(levelNumber, columns, rows, outerWalls, cells, blockColors, blockEdges, blockGroups);
+            mapAsset = BoardLevelStorage.Save(levelNumber, columns, rows, outerWalls, cells,
+                blockColors, blockEdges, blockGroups, tilePrefab, backdropPrefab, wallPrefab, timeLimit);
             EditorGUIUtility.PingObject(mapAsset);
         }
 
@@ -21,12 +22,15 @@ namespace BlockedIn.EditorTools
             asset.columns = columns;
             asset.rows = rows;
             asset.outerWalls = outerWalls;
+            asset.timeLimit = timeLimit;
             asset.cells = (BoardCell[])cells.Clone();
             asset.blockColors = (BlockColorData[])blockColors.Clone();
             asset.blockEdges = (BlockEdgeData[])blockEdges.Clone();
             asset.blockGroups = (int[])blockGroups.Clone();
+            BoardLevelStorage.BakeRuntimeBoard(asset, tilePrefab, backdropPrefab, wallPrefab);
             EditorUtility.SetDirty(asset);
             AssetDatabase.SaveAssets();
+            LevelManager.RefreshRegisteredLevels();
         }
 
         void Load()
@@ -43,6 +47,7 @@ namespace BlockedIn.EditorTools
             selectedCells.Clear();
             EnsureBlocks();
             levelNumber = Mathf.Max(1, mapAsset.levelNumber);
+            timeLimit = Mathf.Max(1, mapAsset.timeLimit);
             NormalizeFloor();
         }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Lose
+public sealed class Lose : UICanvas
 {
-    
+    public void OnReplay() => LevelManager.Ins.OnReplay();
 }

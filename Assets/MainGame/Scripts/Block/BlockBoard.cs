@@ -11,14 +11,17 @@ namespace BlockedIn.Blocks
         public const float PositionEpsilon = .0001f;
         [SerializeField] GeneratedBoard layout;
         [SerializeField] CameraManager cameraManager;
+        [SerializeField] Camera viewCamera;
         [SerializeField] List<Block> blocks = new List<Block>();
         public IReadOnlyList<Block> Blocks => blocks;
         public GeneratedBoard Layout => layout;
+        public Camera ViewCamera => cameraManager != null ? cameraManager.MainCamera : viewCamera;
 
-        public void Configure(GeneratedBoard board, CameraManager cameraController)
+        public void Configure(GeneratedBoard board, CameraManager cameraController, Camera camera = null)
         {
             layout = board;
             cameraManager = cameraController;
+            if (camera != null) viewCamera = camera;
         }
 
         void Start()
@@ -81,17 +84,7 @@ namespace BlockedIn.Blocks
         public Vector2 Constrain(Block block, Vector2 current, Vector2 target)
         {
             Vector2 delta = target - current;
-            if (Mathf.Abs(delta.x) >= Mathf.Abs(delta.y))
-            {
-                current.x = LimitAxis(block, current, target.x, true);
-                current.y = LimitAxis(block, current, target.y, false);
-            }
-            else
-            {
-                current.y = LimitAxis(block, current, target.y, false);
-                current.x = LimitAxis(block, current, target.x, true);
-            }
-            return current;
+            return Slide(block, current, target, Mathf.Abs(delta.x) >= Mathf.Abs(delta.y));
         }
 
         float LimitAxis(Block block, Vector2 current, float target, bool horizontal)

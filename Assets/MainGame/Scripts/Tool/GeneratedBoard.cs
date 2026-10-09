@@ -16,6 +16,9 @@ namespace BlockedIn.MapTools
         [SerializeField] Transform walls;
 
         public BlockBoard blockGameplay;
+        [SerializeField] BlockInput input;
+        public BlockInput Input => input;
+        public void SetInput(BlockInput controller) => input = controller;
 
         public Transform Tiles => tiles;
         public Transform Backdrop => backdrop;
@@ -31,9 +34,15 @@ namespace BlockedIn.MapTools
 #if UNITY_EDITOR
         [SerializeField, HideInInspector] string editorId;
         static readonly System.Collections.Generic.Dictionary<string, GeneratedBoard> editorBoards = new();
-        public string EditorId => editorId;
+        public string EditorId
+        {
+            get { RegisterEditorBoard(); return editorId; }
+        }
 
-        void OnEnable()
+        void OnEnable() => RegisterEditorBoard();
+        void OnValidate() => RegisterEditorBoard();
+
+        void RegisterEditorBoard()
         {
             if (!gameObject.scene.IsValid() || Application.IsPlaying(gameObject)) return;
             bool duplicate = !string.IsNullOrEmpty(editorId) && editorBoards.TryGetValue(editorId, out GeneratedBoard previous)
@@ -42,11 +51,25 @@ namespace BlockedIn.MapTools
             editorBoards[editorId] = this;
         }
 
-        void OnDisable()
+        void OnDestroy()
         {
             if (string.IsNullOrEmpty(editorId)) return;
             if (editorBoards.TryGetValue(editorId, out GeneratedBoard current) && current == this)
                 editorBoards.Remove(editorId);
+        }
+
+        public static int RegisteredSceneBoards(UnityEngine.SceneManagement.Scene scene, out GeneratedBoard onlyBoard)
+        {
+            onlyBoard = null;
+            int count = 0;
+            foreach (GeneratedBoard board in editorBoards.Values)
+            {
+                if (board == null || board.gameObject.scene != scene || Application.IsPlaying(board.gameObject)) continue;
+                count++;
+                onlyBoard = board;
+            }
+            if (count != 1) onlyBoard = null;
+            return count;
         }
 
         public static bool TryResolveEditorId(string id, out GeneratedBoard board)

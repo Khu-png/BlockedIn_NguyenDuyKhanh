@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,8 @@ namespace BlockedIn.Blocks
             foreach (int colorId in colorIds)
             {
                 List<Block> group = ColorGroup(colorId);
-                if (IsColorComplete(group)) RemoveColor(group);
+                if (!IsColorComplete(group)) continue;
+                RemoveColor(group);
             }
         }
 
@@ -105,14 +107,36 @@ namespace BlockedIn.Blocks
             return visited.Count == group.Count;
         }
 
-        void RemoveColor(List<Block> group)
+    }
+}
+
+
+
+namespace BlockedIn.Blocks
+{
+    public sealed partial class BlockBoard
+    {
+        public event Action ColorsRemoved;
+        public bool HasRemainingGoals
         {
-            foreach (Block block in group)
+            get
             {
-                blocks.Remove(block);
-                block.gameObject.SetActive(false);
-                Destroy(block.gameObject);
+                foreach (Block block in blocks)
+                    if (HasPorts(block)) return true;
+                return false;
             }
+        }
+
+        static bool HasPorts(Block block)
+        {
+            if (block == null) return false;
+            foreach (var cell in block.Cells)
+                for (int side = 0; side < 4; side++)
+                {
+                    EdgeType edge = block.EdgeAt(cell, (BlockSide)side);
+                    if (edge == EdgeType.Tab || edge == EdgeType.Socket) return true;
+                }
+            return false;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace BlockedIn.EditorTools
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Remove Block")) Select(null);
-                if (GUILayout.Button("Done")) editorWindow.Close();
+                if (GUILayout.Button("Done")) CloseLater();
             }
         }
 
@@ -94,7 +94,13 @@ namespace BlockedIn.EditorTools
         {
             choose(color);
             selected = color;
-            if (color == null) editorWindow.Close();
+            if (color == null) CloseLater();
+        }
+
+        void CloseLater()
+        {
+            EditorWindow window = editorWindow;
+            EditorApplication.delayCall += () => { if (window != null) window.Close(); };
         }
 
         public static Color Tint(BlockColorData color)

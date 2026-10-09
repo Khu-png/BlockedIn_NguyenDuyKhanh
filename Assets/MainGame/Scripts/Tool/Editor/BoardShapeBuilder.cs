@@ -18,11 +18,13 @@ namespace BlockedIn.EditorTools
             root.transform.SetParent(board.transform, false);
             Undo.RegisterCreatedObjectUndo(root, "Place merged block");
             Block block = Undo.AddComponent<Block>(root);
+            block.CopyDragSettings(prefab);
             var visual = new GameObject("Visual").transform;
             visual.SetParent(root.transform, false);
             var footprint = new Vector2Int[members.Count];
             var appearances = new BlockAppearance[members.Count];
             var colliders = new Collider[members.Count];
+            var models = new Transform[members.Count];
             var renderers = new List<Renderer>();
             var occupied = new HashSet<int>(members);
             for (int i = 0; i < members.Count; i++)
@@ -35,16 +37,18 @@ namespace BlockedIn.EditorTools
                 cell.transform.localPosition = offset;
                 cell.Visual.SetParent(visual, false);
                 cell.Visual.localPosition += offset;
+                models[i] = cell.Visual;
                 appearances[i] = cell.Appearance;
                 colliders[i] = cell.HitCollider;
                 renderers.AddRange(cell.Renderers);
                 BlockEdgeData ports = edges != null && edges.Length > 0 ? edges[index] : default;
                 ApplyParts(cell.Appearance, index, occupied, columns, colors.Length, ports);
+                BlockHitboxBuilder.Bake(cell);
                 // Keep the user's prefab parts; only the shape root owns gameplay.
                 UnityEngine.Object.DestroyImmediate(cell);
             }
             block.Configure(colors[first], origin, visual, renderers.ToArray(), colliders[0]);
-            block.ConfigureShape(footprint, appearances, colliders);
+            block.ConfigureShape(footprint, appearances, colliders, models);
             board.Register(block);
             return block;
         }
