@@ -15,12 +15,19 @@ namespace BlockedIn.CameraTools
         [SerializeField] RectTransform gamePlayRect;
         [Tooltip("Leave empty for an Overlay Canvas. Otherwise assign the Canvas camera.")]
         [SerializeField] Camera uiCamera;
-        [SerializeField, Min(1f)] float padding = 1.12f;
+        [SerializeField, Min(1f)] float padding = 1.04f;
+        [SerializeField] SpriteRenderer backgroundPrefab;
+        [SerializeField] SpriteRenderer boardFramePrefab;
+        SpriteRenderer background, boardFrame;
         GeneratedBoard board;
         Rect lastPixelRect;
+        Rect lastViewport;
         float lastAspect;
         Vector2Int lastGridSize;
         Matrix4x4 lastBoardMatrix;
+        float fittedSize, introProgress = 1;
+        Vector3 fittedPosition;
+        bool introActive;
 
         public Camera MainCamera => mainCamera;
         public void Configure(Camera camera, RectTransform area = null)
@@ -32,16 +39,45 @@ namespace BlockedIn.CameraTools
 
         void LateUpdate()
         {
+            FitBackground();
             if (board == null || mainCamera == null) return;
             if (mainCamera.pixelRect != lastPixelRect || mainCamera.aspect != lastAspect
+                || GetViewport(mainCamera, gamePlayRect, uiCamera) != lastViewport
                 || GridSize() != lastGridSize || board.transform.localToWorldMatrix != lastBoardMatrix)
                 Fit();
         }
 
         public void FocusLevel(GeneratedBoard level)
         {
+            if (board != level) { introActive = false; introProgress = 1; }
             board = level;
             Fit();
+        }
+
+        public void PrepareLevelIntro()
+        {
+            introActive = true;
+            introProgress = 0;
+            Fit();
+        }
+
+        public void SetLevelIntroProgress(float value)
+        {
+            introProgress = Mathf.Clamp01(value);
+            if (introActive) ApplyLevelIntro();
+            if (introProgress >= 1) introActive = false;
+            FitBackground();
+        }
+
+        void ApplyLevelIntro()
+        {
+            if (mainCamera == null || board == null) return;
+            float extraSize = fittedSize * .12f * (1 - introProgress);
+            Vector2 offset = lastViewport.center - new Vector2(.5f, .5f);
+            mainCamera.orthographicSize = fittedSize + extraSize;
+            mainCamera.transform.position = fittedPosition
+                - mainCamera.transform.right * (offset.x * extraSize * 2 * mainCamera.aspect)
+                - mainCamera.transform.up * (offset.y * extraSize * 2);
         }
 
         public void Fit()
@@ -50,10 +86,40 @@ namespace BlockedIn.CameraTools
             if (gamePlayRect != null) Canvas.ForceUpdateCanvases();
             Rect viewport = GetViewport(mainCamera, gamePlayRect, uiCamera);
             Fit(mainCamera, board, viewport, padding);
+            fittedSize = mainCamera.orthographicSize;
+            fittedPosition = mainCamera.transform.position;
             lastPixelRect = mainCamera.pixelRect;
+            lastViewport = viewport;
             lastAspect = mainCamera.aspect;
             lastGridSize = GridSize();
             lastBoardMatrix = board.transform.localToWorldMatrix;
+            if (introActive) ApplyLevelIntro();
+            FitBackground();
+            FitBoardFrame();
+        }
+
+        void FitBackground()
+        {
+            if (mainCamera == null || backgroundPrefab == null) return;
+            if (background == null) background = Instantiate(backgroundPrefab, mainCamera.transform);
+            if (background.sprite == null) return;
+            background.transform.localPosition = new Vector3(0, 0, mainCamera.farClipPlane - 1);
+            background.transform.localRotation = Quaternion.identity;
+            Vector2 size = background.sprite.bounds.size;
+            float height = mainCamera.orthographicSize * 2;
+            background.transform.localScale = new Vector3(height * mainCamera.aspect / size.x, height / size.y, 1);
+        }
+
+        void FitBoardFrame()
+        {
+            if (board == null || boardFramePrefab == null) return;
+            if (boardFrame == null) boardFrame = Instantiate(boardFramePrefab);
+            boardFrame.transform.SetParent(board.transform, false);
+            boardFrame.transform.localPosition = new Vector3(0, -.3f, 0);
+            boardFrame.transform.localRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
+            float border = board.outerWalls ? 2 : 0;
+            boardFrame.drawMode = SpriteDrawMode.Sliced;
+            boardFrame.size = new Vector2(board.columns + border + .4f, board.rows + border + .4f);
         }
 
         Vector2Int GridSize()
@@ -86,13 +152,13 @@ namespace BlockedIn.CameraTools
             return Rect.MinMaxRect(left, bottom, right, top);
         }
 
-        public static void Fit(Camera camera, GeneratedBoard board, Rect viewport, float padding = 1.12f)
+        public static void Fit(Camera camera, GeneratedBoard board, Rect viewport, float padding = 1.04f)
         {
             Validate(camera, board, viewport);
             Transform root = board.transform;
             float border = board.outerWalls ? 2 : 0;
-            Vector3 horizontal = root.TransformVector(Vector3.right * (board.columns + border));
-            Vector3 vertical = root.TransformVector(Vector3.forward * (board.rows + border));
+            Vector3 horizontal = root.TransformVector(Vector3.right * (board.columns + border + .4f));
+            Vector3 vertical = root.TransformVector(Vector3.forward * (board.rows + border + .4f));
             Quaternion rotation = Quaternion.LookRotation(-root.up, root.forward);
             Vector3 right = rotation * Vector3.right;
             Vector3 up = rotation * Vector3.up;

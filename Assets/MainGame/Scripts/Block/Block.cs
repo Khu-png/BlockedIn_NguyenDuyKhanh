@@ -119,6 +119,7 @@ namespace BlockedIn.Blocks
             lastDragTarget = board.WorldToGrid(transform.position);
             lastTiltPosition = transform.position;
             visual.localPosition = visualRest + Vector3.up * liftHeight;
+            board.ShowPlacementPreview(this, snapTolerance);
             return true;
         }
 
@@ -129,6 +130,7 @@ namespace BlockedIn.Blocks
             Vector2 destination = board.ConstrainDrag(this, current, target, target - lastDragTarget);
             lastDragTarget = target;
             transform.position = board.GridToWorld(destination);
+            board.ShowPlacementPreview(this, snapTolerance);
         }
 
         public void EndDrag()
@@ -136,8 +138,9 @@ namespace BlockedIn.Blocks
             if (!dragging) return;
             Vector2 current = board.WorldToGrid(transform.position);
             if (!board.TrySnap(this, current, snapTolerance, out Vector2Int destination))
-                throw new InvalidOperationException("No reachable grid position for the dragged block.");
+                destination = gridPosition;
             dragging = false;
+            board.HidePlacementPreview(this);
             gridPosition = destination;
             PrepareDock();
             settleStart = transform.localPosition;
@@ -212,6 +215,7 @@ namespace BlockedIn.Blocks
         void OnDisable()
         {
             if (board == null) return;
+            board.HidePlacementPreview(this);
             dragging = settling = false;
             docking = false;
             dockPartner = null;

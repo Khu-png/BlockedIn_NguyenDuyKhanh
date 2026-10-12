@@ -92,13 +92,16 @@ namespace BlockedIn.EditorTools
 
         static void FillCells(GeneratedBoard board, GameObject tile, GameObject backdrop, GameObject wall)
         {
+            GameObject alternate = tile;
+            if (AssetDatabase.GetAssetPath(tile) == "Assets/MainGame/Prefabs/Board/BoardTile.prefab")
+                alternate = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/MainGame/Prefabs/Board/BoardTileAlternate.prefab") ?? tile;
             for (int y = 0; y < board.rows; y++)
                 for (int x = 0; x < board.columns; x++)
                 {
                     BoardCell cell = board.cells[y * board.columns + x];
                     if (cell == BoardCell.Empty) continue;
                     Place(board, backdrop, board.Backdrop, x, y, -.225f);
-                    if (cell == BoardCell.Floor) Place(board, tile, board.Tiles, x, y, -.22f);
+                    if (cell == BoardCell.Floor) Place(board, (x + y) % 2 == 0 ? tile : alternate, board.Tiles, x, y, -.22f);
                     else Place(board, wall, board.Walls, x, y, .03f);
                 }
         }

@@ -1,6 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace BlockedIn.Blocks
 {
@@ -12,62 +16,109 @@ namespace BlockedIn.Blocks
         [SerializeField] LayerMask blockMask = ~0;
         Block selected;
         Vector2 grabOffset;
-        UnityEngine.InputSystem.Controls.ButtonControl button;
-        UnityEngine.InputSystem.Controls.Vector2Control position;
+        TouchControl activeTouch;
+        Mouse activeMouse;
         int pointerId = -1;
-        bool previousPressed;
+        PointerEventData uiPointer;
+        readonly List<RaycastResult> uiHits = new List<RaycastResult>();
 
         public void Configure(Camera camera, BlockBoard owner, EventSystem events = null)
         {
+            Release();
             mainCamera = camera;
             board = owner;
             uiEvents = events;
+            uiPointer = null;
+            uiHits.Clear();
         }
 
         void Update()
         {
-            if (mainCamera == null || board == null) return;
-            if (selected == null && !ReadPointer()) return;
-            if (button == null || position == null) { Release(); return; }
-            Vector2 screen = position.ReadValue();
-            bool pressed = button.isPressed;
-            if (pressed && !previousPressed && selected == null) Press(screen);
-            previousPressed = pressed;
-            if (selected == null) return;
-            if (!pressed) { Release(); return; }
-            if (TryGetGrid(screen, out Vector2 grid)) selected.DragTo(grid + grabOffset);
+            if (mainCamera == null || board == null) { Release(); return; }
+            if (activeTouch != null) { UpdateTouch(); return; }
+            if (activeMouse != null) { UpdateMouse(); return; }
+            if (BeginTouch()) return;
+            Mouse mouse = Mouse.current;
+            if (mouse == null || !mouse.leftButton.wasPressedThisFrame || !mouse.leftButton.isPressed) return;
+            activeMouse = mouse;
+            pointerId = -1;
+            Press(mouse.position.ReadValue());
+            Drag(mouse.position.ReadValue());
         }
 
-        bool ReadPointer()
+        bool BeginTouch()
         {
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+            Touchscreen screen = Touchscreen.current;
+            if (screen == null) return false;
+            foreach (TouchControl touch in screen.touches)
             {
-                var touch = Touchscreen.current.primaryTouch;
-                button = touch.press;
-                position = touch.position;
+                if (!touch.press.isPressed) continue;
+                if (touch.phase.ReadValue() != TouchPhase.Began && !touch.press.wasPressedThisFrame) continue;
+                activeTouch = touch;
                 pointerId = touch.touchId.ReadValue();
+                Press(touch.position.ReadValue());
+                Drag(touch.position.ReadValue());
+                return true;
             }
-            else if (Mouse.current != null)
+            return false;
+        }
+
+        void UpdateTouch()
+        {
+            if (!activeTouch.device.added) { Release(); return; }
+            TouchPhase phase = activeTouch.phase.ReadValue();
+            if (!activeTouch.press.isPressed
+                || phase == TouchPhase.Ended || phase == TouchPhase.Canceled)
             {
-                button = Mouse.current.leftButton;
-                position = Mouse.current.position;
-                pointerId = -1;
+                Release();
+                BeginTouch();
+                return;
             }
-            else return false;
-            return true;
+            if (activeTouch.touchId.ReadValue() != pointerId
+                || (phase == TouchPhase.Began && activeTouch.press.wasReleasedThisFrame))
+            {
+                Release();
+                BeginTouch();
+                return;
+            }
+            Drag(activeTouch.position.ReadValue());
+        }
+
+        void UpdateMouse()
+        {
+            if (!activeMouse.added || !activeMouse.leftButton.isPressed) { Release(); return; }
+            Drag(activeMouse.position.ReadValue());
+        }
+
+        void Drag(Vector2 screen)
+        {
+            if (selected != null && TryGetGrid(screen, out Vector2 grid)) selected.DragTo(grid + grabOffset);
         }
 
         void Press(Vector2 screen)
         {
             foreach (Block item in board.Blocks)
                 if (item != null && item.IsSettling) return;
-            if (uiEvents != null && uiEvents.IsPointerOverGameObject(pointerId)) return;
+            if (IsOverUI(screen)) return;
             Ray ray = mainCamera.ScreenPointToRay(screen);
             if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, blockMask, QueryTriggerInteraction.Ignore)) return;
             Block block = board.Resolve(hit.collider);
             if (block == null || !TryGetGrid(screen, out Vector2 grid) || !block.BeginDrag(mainCamera)) return;
             selected = block;
             grabOffset = board.WorldToGrid(block.transform.position) - grid;
+        }
+
+        bool IsOverUI(Vector2 screen)
+        {
+            if (uiEvents == null) return false;
+            if (uiPointer == null) uiPointer = new PointerEventData(uiEvents);
+            uiPointer.position = screen;
+            uiPointer.pointerId = pointerId;
+            uiHits.Clear();
+            uiEvents.RaycastAll(uiPointer, uiHits);
+            foreach (RaycastResult hit in uiHits)
+                if (hit.module is GraphicRaycaster) return true;
+            return false;
         }
 
         public bool TryGetGrid(Vector2 screen, out Vector2 grid)
@@ -82,11 +133,16 @@ namespace BlockedIn.Blocks
 
         void Release()
         {
-            if (selected != null) selected.EndDrag();
+            Block block = selected;
             selected = null;
+            activeTouch = null;
+            activeMouse = null;
+            pointerId = -1;
+            if (block != null) block.EndDrag();
         }
 
         void OnDisable() => Release();
         void OnApplicationFocus(bool focused) { if (!focused) Release(); }
+        void OnApplicationPause(bool paused) { if (paused) Release(); }
     }
 }

@@ -35,8 +35,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnPlay()
     {
         int index = Array.FindIndex(levels, level => level != null && level.levelNumber == SavedLevelNumber);
-        OnLoadLevel(index >= 0 ? index : 0);
-        OnInit();
+        StartLevel(index >= 0 ? index : 0);
     }
     public void OnInit()
     {
@@ -72,6 +71,7 @@ public class LevelManager : Singleton<LevelManager>
     void Update()
     {
         if (!Application.isPlaying || currentLevel == null || !GameManager.IsState(GameState.Gameplay)) return;
+        if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
         if (currentLevel.blockGameplay != null && currentLevel.blockGameplay.IsRemovingColors
             && !currentLevel.blockGameplay.HasRemainingGoals) return;
         remainingTime = Mathf.Max(0, remainingTime - Time.deltaTime);
@@ -79,6 +79,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     void CheckWin()
     {
+        if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
         if (hasGoals && currentLevel != null && !currentLevel.blockGameplay.IsRemovingColors
             && !currentLevel.blockGameplay.HasRemainingGoals) OnWin();
     }
@@ -92,14 +93,37 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnReplay()
     {
-        OnLoadLevel(currentLevelIndex);
-        OnInit();
+        StartLevel(currentLevelIndex);
     }
     public void OnNextLevel()
     {
         if (!GameManager.IsState(GameState.Win) || !HasNextLevel) return;
-        OnLoadLevel(currentLevelIndex + 1);
+        StartLevel(currentLevelIndex + 1);
+    }
+    void StartLevel(int index)
+    {
+        if (LoadingManager.Ins != null) LoadingManager.Ins.LoadGameplay(index);
+        else LoadAndPlay(index);
+    }
+    void LoadAndPlay(int index)
+    {
+        OnLoadLevel(index);
         OnInit();
+    }
+    public void OnLoadingComplete()
+    {
+        SetInputEnabled(GameManager.IsState(GameState.Gameplay));
+        CheckWin();
+    }
+    public void PrepareBoardIntro() => cameraManager.PrepareLevelIntro();
+    public void SetBoardIntroProgress(float value) => cameraManager.SetLevelIntroProgress(value);
+
+    public void ResetSavedLevel()
+    {
+        if (Application.isPlaying && LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
+        PlayerPrefs.SetInt(CurrentLevelKey, 1);
+        PlayerPrefs.Save();
+        if (Application.isPlaying) OnPlay();
     }
     public void OnRestart() => OnReplay();
     public void SetInputEnabled(bool value)

@@ -37,17 +37,22 @@ namespace BlockedIn.Blocks
 
         public void BeginExit()
         {
+            if (board != null) board.HidePlacementPreview(this);
             exiting = true;
             dragging = settling = docking = false;
             ResetTilt();
-            if (cells.Length > 1 && cellAppearances != null)
-                foreach (BlockAppearance part in cellAppearances)
-                    if (part != null)
-                        for (int corner = 0; corner < 4; corner++) part.SetCorner(corner, CornerType.Default);
             if (hitCollider != null) hitCollider.enabled = false;
             if (cellColliders == null) return;
             foreach (Collider collider in cellColliders)
                 if (collider != null) collider.enabled = false;
+        }
+
+        public void RestoreExitCorners()
+        {
+            if (cells.Length <= 1 || cellAppearances == null) return;
+            foreach (BlockAppearance part in cellAppearances)
+                if (part != null)
+                    for (int corner = 0; corner < 4; corner++) part.SetCorner(corner, CornerType.Default);
         }
 
         public void ConfigureShape(Vector2Int[] footprint, BlockAppearance[] parts, Collider[] colliders,
