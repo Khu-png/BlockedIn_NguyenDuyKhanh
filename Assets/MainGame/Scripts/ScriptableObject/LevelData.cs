@@ -20,6 +20,7 @@ namespace BlockedIn.MapTools
         public BlockColorData[] blockColors;
         public BlockEdgeData[] blockEdges;
         public int[] blockGroups;
+        public BlockIceData[] frozenColors = System.Array.Empty<BlockIceData>();
         [SerializeField, HideInInspector] GeneratedBoard runtimeBoard;
         public GeneratedBoard RuntimeBoard => runtimeBoard;
         public void SetRuntimeBoard(GeneratedBoard board) => runtimeBoard = board;

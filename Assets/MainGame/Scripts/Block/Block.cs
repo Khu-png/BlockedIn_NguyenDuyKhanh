@@ -41,7 +41,7 @@ namespace BlockedIn.Blocks
         public Vector2Int[] Cells => cells;
         public Collider HitCollider => hitCollider;
         public BlockAppearance Appearance => appearance;
-        public bool CanDrag => movable && !exiting && !settling && !docking && !dragging && isActiveAndEnabled;
+        public bool CanDrag => movable && !IsFrozen && !exiting && !settling && !docking && !dragging && isActiveAndEnabled;
         public bool IsDragging => dragging;
         public bool IsSettling => settling || docking;
 
@@ -68,6 +68,7 @@ namespace BlockedIn.Blocks
             visualRestRotation = visual.localRotation;
             ResetTilt();
             transform.position = owner.GridToWorld(gridPosition);
+            SetFreezeCount(freezeCount);
             ApplyColor();
             if (appearance != null) appearance.Apply();
         }

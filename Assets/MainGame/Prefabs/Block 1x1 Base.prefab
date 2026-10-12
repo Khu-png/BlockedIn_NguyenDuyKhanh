@@ -1615,6 +1615,8 @@ MonoBehaviour:
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!114 &9000000000001005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3471,7 +3473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1066748108912898604, guid: 3a61cc4b3cffe1149947e1eacf0a28c8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4392707245708891370, guid: 3a61cc4b3cffe1149947e1eacf0a28c8, type: 3}
       propertyPath: m_LocalPosition.x

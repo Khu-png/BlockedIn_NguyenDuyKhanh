@@ -11,6 +11,27 @@ namespace BlockedIn.Blocks
         public Transform Visual => visual;
         public Renderer[] Renderers => renderers;
         bool exiting;
+        [SerializeField] BlockIceVisual icePresentation;
+        [SerializeField, Min(0)] int freezeCount;
+        public int FreezeCount => freezeCount;
+        public bool IsFrozen => freezeCount > 0;
+
+        public void ConfigureIce(BlockIceVisual presentation, int count)
+        {
+            icePresentation = presentation;
+            if (presentation != null)
+            {
+                iceVisual = presentation.gameObject;
+                iceCountText = presentation.CountText;
+            }
+            SetFreezeCount(count);
+        }
+
+        public void SetFreezeCount(int count)
+        {
+            freezeCount = Mathf.Max(0, count);
+            if (icePresentation != null) icePresentation.ShowCount(freezeCount);
+        }
         public int ExitVisualCount => cellVisuals != null && cellVisuals.Length == cells.Length ? cellVisuals.Length : 1;
         public Transform GetExitVisual(int index) => ExitVisualCount == 1 ? visual : cellVisuals[index];
 

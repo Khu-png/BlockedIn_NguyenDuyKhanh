@@ -39,7 +39,16 @@ namespace BlockedIn.Blocks
                 }
             }
             removingColors++;
+            ThawOtherColors(group[0].ColorData.ColorId);
             StartCoroutine(PlayColorExit(group, visuals, camera));
+        }
+
+        void ThawOtherColors(int completedColor)
+        {
+            foreach (Block block in blocks)
+                if (block != null && block.IsFrozen && block.ColorData.ColorId != completedColor)
+                    block.SetFreezeCount(block.FreezeCount - 1);
+            RequestCompletionCheck();
         }
 
         IEnumerator PlayColorExit(List<Block> group, List<ExitVisual> visuals, Camera camera)

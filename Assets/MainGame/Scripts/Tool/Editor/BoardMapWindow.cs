@@ -114,6 +114,7 @@ namespace BlockedIn.EditorTools
             Undo.RecordObject(this, "Fill map");
             for (int i = 0; i < cells.Length; i++)
             { cells[i] = value; blockColors[i] = null; blockEdges[i] = default; blockGroups[i] = 0; }
+            frozenColors = Array.Empty<BlockIceData>();
             selectedCells.Clear();
         }
 
@@ -126,6 +127,7 @@ namespace BlockedIn.EditorTools
             Array.Clear(blockEdges, 0, blockEdges.Length);
             Array.Clear(blockGroups, 0, blockGroups.Length);
             selectedCells.Clear();
+            frozenColors = Array.Empty<BlockIceData>();
             outerWalls = true;
         }
 
@@ -206,6 +208,7 @@ namespace BlockedIn.EditorTools
             Undo.RegisterCompleteObjectUndo(this, "Bind generated board");
             SetBoardBinding(board);
             BoardBlockBuilder.Generate(target, blockColors, previewCamera, blockEdges, blockGroups);
+            BoardIceBuilder.Apply(target.blockGameplay, frozenColors);
         }
 
         void DrawPreview()

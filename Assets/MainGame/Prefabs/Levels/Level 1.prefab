@@ -10410,6 +10410,8 @@ MonoBehaviour:
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!114 &6673197528329628554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16591,6 +16593,8 @@ MonoBehaviour:
   cellVisuals:
   - {fileID: 5391661046333703171}
   - {fileID: 863736864478391780}
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!1 &2954179351043562941
 GameObject:
   m_ObjectHideFlags: 0
@@ -21179,6 +21183,8 @@ MonoBehaviour:
   - {fileID: 3576763102804179577}
   - {fileID: 3985370344243432017}
   - {fileID: 5258429424926628684}
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!1 &3728982194990419591
 GameObject:
   m_ObjectHideFlags: 0
@@ -22523,6 +22529,8 @@ MonoBehaviour:
   - {fileID: 2601203512883437769}
   - {fileID: 2150275442526476046}
   - {fileID: 7798933496454520110}
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!1 &3936899907872337132
 GameObject:
   m_ObjectHideFlags: 0
@@ -37072,6 +37080,8 @@ MonoBehaviour:
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!114 &7915919319500851584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38482,6 +38492,8 @@ MonoBehaviour:
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!114 &2609995640046580248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39495,6 +39507,8 @@ MonoBehaviour:
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!114 &6926744121112442197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40260,6 +40274,8 @@ MonoBehaviour:
   cellVisuals:
   - {fileID: 9029556233340301156}
   - {fileID: 6110524718544383037}
+  icePresentation: {fileID: 0}
+  freezeCount: 0
 --- !u!1 &6820520590385888471
 GameObject:
   m_ObjectHideFlags: 0

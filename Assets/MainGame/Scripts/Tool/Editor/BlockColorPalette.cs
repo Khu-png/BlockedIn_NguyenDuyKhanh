@@ -10,6 +10,9 @@ namespace BlockedIn.EditorTools
     {
         BlockColorData selected;
         BlockEdgeData edges;
+        int iceCount;
+        readonly Action<int> changeIce;
+        readonly Func<int> readIce;
         readonly bool[] internalEdges;
         readonly Action<BlockColorData> choose;
         readonly Action<BlockEdgeData> changeEdges;
@@ -18,16 +21,19 @@ namespace BlockedIn.EditorTools
             "Pink", "Purple", "Red", "Turquoise", "White", "Yellow" };
 
         public BlockColorPalette(BlockColorData current, BlockEdgeData currentEdges,
-            Action<BlockColorData> onChoose, Action<BlockEdgeData> onChangeEdges, bool[] internalSides = null)
+            Action<BlockColorData> onChoose, Action<BlockEdgeData> onChangeEdges, bool[] internalSides = null, int currentIce = 0, Action<int> onChangeIce = null, Func<int> onReadIce = null)
         {
             internalEdges = internalSides;
+            iceCount = currentIce;
+            changeIce = onChangeIce;
+            readIce = onReadIce;
             selected = current;
             choose = onChoose;
             edges = currentEdges;
             changeEdges = onChangeEdges;
         }
 
-        public override Vector2 GetWindowSize() => new Vector2(510, 235);
+        public override Vector2 GetWindowSize() => new Vector2(510, 300);
 
         public override void OnGUI(Rect rect)
         {
@@ -71,6 +77,11 @@ namespace BlockedIn.EditorTools
                     if (EditorGUI.EndChangeCheck()) SetEdge(side, type);
                 }
             }
+            EditorGUI.BeginChangeCheck();
+            bool iced = EditorGUILayout.Toggle("Iced", iceCount > 0);
+            int nextCount = iced ? Math.Max(1, EditorGUILayout.IntField("Freeze Count", Math.Max(1, iceCount))) : 0;
+            if (EditorGUI.EndChangeCheck()) { iceCount = nextCount; changeIce?.Invoke(iceCount); }
+            EditorGUILayout.HelpBox("Iced applies to all blocks with the same Color ID, including groups.", MessageType.None);
             EditorGUILayout.HelpBox("Top points toward +Z. Color applies to the entire shape; edges apply to the clicked cell. Internal edges stay visible as Default. Generate applies changes.", MessageType.None);
         }
 
@@ -94,6 +105,7 @@ namespace BlockedIn.EditorTools
         {
             choose(color);
             selected = color;
+            if (readIce != null) iceCount = readIce();
             if (color == null) CloseLater();
         }
 

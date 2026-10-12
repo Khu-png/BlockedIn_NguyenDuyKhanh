@@ -42,6 +42,7 @@ namespace BlockedIn.EditorTools
                         EditorGUI.DrawRect(new Rect(rect.xMax - 2, rect.y, 2, rect.height), Color.white);
                     }
                     string label = blockColors[index] != null ? (blockGroups[index] > 0 ? "G" + groupLabels[blockGroups[index]] : "B") : cells[index] == MapTools.BoardCell.Wall ? "W" : "·";
+                    if (IceCount(index) > 0) label += " I";
                     Color oldColor = GUI.contentColor;
                     GUI.contentColor = tint.grayscale > .5f ? Color.black : Color.white;
                     GUI.Label(rect, label, new GUIStyle(EditorStyles.centeredGreyMiniLabel) { normal = { textColor = GUI.contentColor } });
@@ -107,7 +108,7 @@ namespace BlockedIn.EditorTools
         void OpenPalette(Rect rect, int index)
         {
             PopupWindow.Show(rect, new BlockColorPalette(blockColors[index], blockEdges[index],
-                color => SetBlockColor(index, color), edges => SetBlockEdges(index, edges), InternalEdges(index)));
+                color => SetBlockColor(index, color), edges => SetBlockEdges(index, edges), InternalEdges(index), IceCount(index), count => SetIceCount(index, count), () => IceCount(index)));
         }
 
         void SetBlockColor(int index, BlockColorData color)
