@@ -21,6 +21,16 @@ public class GameManager : Singleton<GameManager>
         ChangeState(GameState.Gameplay);
         UIManager.Ins.CloseAll();
         UIManager.Ins.OpenUI<Gameplay>();
+        if (LoadingManager.Ins == null || !LoadingManager.Ins.IsLoading) StartGameplayMusic();
+    }
+    public void StartGameplayMusic()
+    {
+        if (!IsState(GameState.Gameplay)) return;
+        if (SoundManager.Ins != null)
+        {
+            SoundManager.Ins.SetMusicSuspended(false);
+            SoundManager.Ins.PlayMusic(SoundManager.GameplayMusic);
+        }
     }
     public void OnFinish()
     {
@@ -28,6 +38,8 @@ public class GameManager : Singleton<GameManager>
         ChangeState(GameState.Win);
         LevelManager.Ins.SetInputEnabled(false);
         UIManager.Ins.OpenUI<Win>();
+        if (SoundManager.Ins != null) SoundManager.Ins.SetMusicSuspended(true);
+        SoundManager.Play(SoundManager.WinSound);
     }
     public void OnLose()
     {
@@ -35,6 +47,8 @@ public class GameManager : Singleton<GameManager>
         ChangeState(GameState.Lose);
         LevelManager.Ins.SetInputEnabled(false);
         UIManager.Ins.OpenUI<Lose>();
+        if (SoundManager.Ins != null) SoundManager.Ins.SetMusicSuspended(true);
+        SoundManager.Play(SoundManager.LoseSound);
     }
     public void OnReplay() => LevelManager.Ins.OnReplay();
     public void OnNextLevel()

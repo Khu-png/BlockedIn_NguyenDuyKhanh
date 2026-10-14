@@ -49,9 +49,11 @@ namespace BlockedIn.EditorTools
 
         public static BoardMap Save(int number, int columns, int rows, bool border, BoardCell[] cells,
             BlockColorData[] blockColors = null, BlockEdgeData[] blockEdges = null, int[] blockGroups = null,
-            GameObject tile = null, GameObject backdrop = null, GameObject wall = null, float? timeLimit = null, BlockIceData[] frozenColors = null)
+            GameObject tile = null, GameObject backdrop = null, GameObject wall = null, float? timeLimit = null, BlockIceData[] frozenColors = null,
+            BlockColorData[] ropeColors = null)
         {
             Validate(number, columns, rows, cells);
+            BoardRopeBuilder.Validate(blockColors, ropeColors, blockGroups);
             BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
             if (!AssetDatabase.IsValidFolder(ParentFolder)) AssetDatabase.CreateFolder("Assets/MainGame", "ScriptableObject");
             if (!AssetDatabase.IsValidFolder(Folder)) AssetDatabase.CreateFolder(ParentFolder, "Levels");
@@ -71,6 +73,7 @@ namespace BlockedIn.EditorTools
             level.blockEdges = blockEdges == null ? null : (BlockEdgeData[])blockEdges.Clone();
             level.blockGroups = blockGroups == null ? null : (int[])blockGroups.Clone();
             if (frozenColors != null) level.frozenColors = (BlockIceData[])frozenColors.Clone();
+            if (ropeColors != null) level.ropeColors = (BlockColorData[])ropeColors.Clone();
             BakeRuntimeBoard(level, tile, backdrop, wall);
             EditorUtility.SetDirty(level);
             AssetDatabase.SaveAssets();
@@ -81,6 +84,7 @@ namespace BlockedIn.EditorTools
         public static void BakeRuntimeBoard(BoardMap level, GameObject tile = null,
             GameObject backdrop = null, GameObject wall = null)
         {
+            BoardRopeBuilder.Validate(level.blockColors, level.ropeColors, level.blockGroups);
             const string prefabFolder = "Assets/MainGame/Prefabs/Levels";
             if (!AssetDatabase.IsValidFolder(prefabFolder)) AssetDatabase.CreateFolder("Assets/MainGame/Prefabs", "Levels");
             GeneratedBoard board = null;
@@ -93,6 +97,7 @@ namespace BlockedIn.EditorTools
                     wall != null ? wall : BoardDefaultPrefabs.Load("BoardWallCell"));
                 BoardBlockBuilder.Generate(board, level.blockColors, null, level.blockEdges, level.blockGroups);
                 BoardIceBuilder.Apply(board.blockGameplay, level.frozenColors);
+                BoardRopeBuilder.Apply(board.blockGameplay, level.ropeColors);
                 string path = prefabFolder + "/Level " + level.levelNumber + ".prefab";
                 PrefabUtility.SaveAsPrefabAsset(board.gameObject, path, out bool success);
                 if (!success) throw new InvalidOperationException("Could not save the runtime level prefab.");

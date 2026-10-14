@@ -13,6 +13,10 @@ namespace BlockedIn.EditorTools
         int iceCount;
         readonly Action<int> changeIce;
         readonly Func<int> readIce;
+        BlockColorData ropeColor;
+        readonly Action<BlockColorData> changeRope;
+        readonly Func<BlockColorData> readRope;
+        readonly BlockColorData suggestedRope;
         readonly bool[] internalEdges;
         readonly Action<BlockColorData> choose;
         readonly Action<BlockEdgeData> changeEdges;
@@ -21,19 +25,23 @@ namespace BlockedIn.EditorTools
             "Pink", "Purple", "Red", "Turquoise", "White", "Yellow" };
 
         public BlockColorPalette(BlockColorData current, BlockEdgeData currentEdges,
-            Action<BlockColorData> onChoose, Action<BlockEdgeData> onChangeEdges, bool[] internalSides = null, int currentIce = 0, Action<int> onChangeIce = null, Func<int> onReadIce = null)
+            Action<BlockColorData> onChoose, Action<BlockEdgeData> onChangeEdges, bool[] internalSides = null, int currentIce = 0, Action<int> onChangeIce = null, Func<int> onReadIce = null,
+            BlockColorData currentRope = null, Action<BlockColorData> onChangeRope = null, Func<BlockColorData> onReadRope = null,
+            BlockColorData suggestedRopeColor = null)
         {
             internalEdges = internalSides;
             iceCount = currentIce;
             changeIce = onChangeIce;
             readIce = onReadIce;
+            ropeColor = currentRope; changeRope = onChangeRope; readRope = onReadRope;
+            suggestedRope = suggestedRopeColor;
             selected = current;
             choose = onChoose;
             edges = currentEdges;
             changeEdges = onChangeEdges;
         }
 
-        public override Vector2 GetWindowSize() => new Vector2(510, 300);
+        public override Vector2 GetWindowSize() => new Vector2(510, 390);
 
         public override void OnGUI(Rect rect)
         {
@@ -82,7 +90,34 @@ namespace BlockedIn.EditorTools
             int nextCount = iced ? Math.Max(1, EditorGUILayout.IntField("Freeze Count", Math.Max(1, iceCount))) : 0;
             if (EditorGUI.EndChangeCheck()) { iceCount = nextCount; changeIce?.Invoke(iceCount); }
             EditorGUILayout.HelpBox("Iced applies to all blocks with the same Color ID, including groups.", MessageType.None);
+            DrawRope();
             EditorGUILayout.HelpBox("Top points toward +Z. Color applies to the entire shape; edges apply to the clicked cell. Internal edges stay visible as Default. Generate applies changes.", MessageType.None);
+        }
+
+        void DrawRope()
+        {
+            if (readRope != null) ropeColor = readRope();
+            bool roped = EditorGUILayout.Toggle("Roped", ropeColor != null);
+            if (!roped && ropeColor != null) { ropeColor = null; changeRope?.Invoke(null); }
+            if (roped && ropeColor == null && suggestedRope != null)
+            { ropeColor = suggestedRope; changeRope?.Invoke(ropeColor); }
+            if (roped && ropeColor == null)
+                foreach (string name in names)
+                {
+                    BlockColorData candidate = BlockAssetBuilder.LoadColor(name);
+                    if (candidate == null || selected == null || candidate.ColorId == selected.ColorId) continue;
+                    ropeColor = candidate; changeRope?.Invoke(ropeColor); break;
+                }
+            if (ropeColor == null) return;
+            int current = Array.IndexOf(names, ropeColor.name.Replace("BlockColor_", ""));
+            int next = EditorGUILayout.Popup("Rope Color", Math.Max(0, current), names);
+            if (next != current)
+            {
+                BlockColorData candidate = BlockAssetBuilder.LoadColor(names[next]);
+                if (candidate != null && selected != null && candidate.ColorId != selected.ColorId)
+                { ropeColor = candidate; changeRope?.Invoke(ropeColor); }
+            }
+            EditorGUILayout.HelpBox("Applies to this block/group. Complete the rope color to cut it. Choose a different color from the block.", MessageType.None);
         }
 
         void SetEdge(BlockSide side, EdgeType type)

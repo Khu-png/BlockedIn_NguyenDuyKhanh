@@ -16,6 +16,6 @@ public sealed class Win : UICanvas
         if (messageText != null) messageText.text = hasNext
             ? "Ready for the next puzzle?" : "You've completed every level!";
     }
-    public void OnReplay() => LevelManager.Ins.OnReplay();
-    public void OnNextLevel() => GameManager.Ins.OnNextLevel();
+    public void OnReplay() { SoundManager.Play(SoundManager.ButtonSound); LevelManager.Ins.OnReplay(); }
+    public void OnNextLevel() { SoundManager.Play(SoundManager.ButtonSound); GameManager.Ins.OnNextLevel(); }
 }

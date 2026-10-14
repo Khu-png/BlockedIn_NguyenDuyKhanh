@@ -69,6 +69,7 @@ namespace BlockedIn.EditorTools
             if (members.TrueForAll(index => blockGroups[index] == id))
             { selectedCells = members; Repaint(); return; }
             Undo.RecordObject(this, "Merge block shape");
+            MergeRopes(members);
             foreach (int index in members)
             {
                 blockGroups[index] = id;
@@ -121,7 +122,7 @@ namespace BlockedIn.EditorTools
         {
             Undo.RecordObject(this, "Remove shape cells");
             foreach (int index in selectedCells)
-            { blockColors[index] = null; blockEdges[index] = default; blockGroups[index] = 0; }
+            { blockColors[index] = null; blockEdges[index] = default; blockGroups[index] = 0; ropeColors[index] = null; }
             selectedCells.Clear();
             RepairGroups();
             Repaint();

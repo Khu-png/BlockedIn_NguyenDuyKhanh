@@ -11,12 +11,13 @@ namespace BlockedIn.EditorTools
         void SaveAsLevel()
         {
             mapAsset = BoardLevelStorage.Save(levelNumber, columns, rows, outerWalls, cells,
-                blockColors, blockEdges, blockGroups, tilePrefab, backdropPrefab, wallPrefab, timeLimit, frozenColors);
+                blockColors, blockEdges, blockGroups, tilePrefab, backdropPrefab, wallPrefab, timeLimit, frozenColors, ropeColors);
             EditorGUIUtility.PingObject(mapAsset);
         }
 
         void SaveTo(BoardMap asset)
         {
+            BoardRopeBuilder.Validate(blockColors, ropeColors, blockGroups);
             BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
             Undo.RecordObject(asset, "Save board map");
             asset.columns = columns;
@@ -27,6 +28,7 @@ namespace BlockedIn.EditorTools
             asset.blockColors = (BlockColorData[])blockColors.Clone();
             asset.blockEdges = (BlockEdgeData[])blockEdges.Clone();
             asset.frozenColors = (BlockIceData[])frozenColors.Clone();
+            asset.ropeColors = (BlockColorData[])ropeColors.Clone();
             asset.blockGroups = (int[])blockGroups.Clone();
             BoardLevelStorage.BakeRuntimeBoard(asset, tilePrefab, backdropPrefab, wallPrefab);
             EditorUtility.SetDirty(asset);
@@ -46,6 +48,7 @@ namespace BlockedIn.EditorTools
             blockEdges = mapAsset.blockEdges == null ? null : (BlockEdgeData[])mapAsset.blockEdges.Clone();
             blockGroups = mapAsset.blockGroups == null ? null : (int[])mapAsset.blockGroups.Clone();
             frozenColors = mapAsset.frozenColors == null ? Array.Empty<BlockIceData>() : (BlockIceData[])mapAsset.frozenColors.Clone();
+            ropeColors = mapAsset.ropeColors == null ? Array.Empty<BlockColorData>() : (BlockColorData[])mapAsset.ropeColors.Clone();
             selectedCells.Clear();
             EnsureBlocks();
             levelNumber = Mathf.Max(1, mapAsset.levelNumber);

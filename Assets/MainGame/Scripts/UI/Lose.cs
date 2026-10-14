@@ -10,5 +10,5 @@ public sealed class Lose : UICanvas
         if (levelText != null && LevelManager.Ins != null)
             levelText.text = "Level " + LevelManager.Ins.CurrentLevelNumber;
     }
-    public void OnReplay() => LevelManager.Ins.OnReplay();
+    public void OnReplay() { SoundManager.Play(SoundManager.ButtonSound); LevelManager.Ins.OnReplay(); }
 }

@@ -113,6 +113,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnLoadingComplete()
     {
         SetInputEnabled(GameManager.IsState(GameState.Gameplay));
+        GameManager.Ins.StartGameplayMusic();
         CheckWin();
     }
     public void PrepareBoardIntro() => cameraManager.PrepareLevelIntro();

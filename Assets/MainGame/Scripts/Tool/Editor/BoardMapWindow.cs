@@ -87,6 +87,7 @@ namespace BlockedIn.EditorTools
             var nextBlocks = new BlockColorData[width * height];
             var nextGroups = new int[width * height];
             var nextEdges = new BlockEdgeData[width * height];
+            var nextRopes = new BlockColorData[width * height];
             for (int y = 0; y < height; y++)
                 for (int x = 0; x < width; x++)
                 {
@@ -96,10 +97,13 @@ namespace BlockedIn.EditorTools
                         nextEdges[y * width + x] = blockEdges[y * columns + x];
                     if (blockGroups != null && x < columns && y < rows && y * columns + x < blockGroups.Length)
                         nextGroups[y * width + x] = blockGroups[y * columns + x];
+                    if (ropeColors != null && x < columns && y < rows && y * columns + x < ropeColors.Length)
+                        nextRopes[y * width + x] = ropeColors[y * columns + x];
                     next[y * width + x] = cells != null && x < columns && y < rows && y * columns + x < cells.Length
                         ? cells[y * columns + x] : BoardCell.Floor;
                 }
             blockGroups = nextGroups;
+            ropeColors = nextRopes;
             selectedCells.Clear();
             blockColors = nextBlocks;
             blockEdges = nextEdges;
@@ -113,7 +117,7 @@ namespace BlockedIn.EditorTools
         {
             Undo.RecordObject(this, "Fill map");
             for (int i = 0; i < cells.Length; i++)
-            { cells[i] = value; blockColors[i] = null; blockEdges[i] = default; blockGroups[i] = 0; }
+            { cells[i] = value; blockColors[i] = null; blockEdges[i] = default; blockGroups[i] = 0; ropeColors[i] = null; }
             frozenColors = Array.Empty<BlockIceData>();
             selectedCells.Clear();
         }
@@ -126,6 +130,7 @@ namespace BlockedIn.EditorTools
             Array.Clear(blockColors, 0, blockColors.Length);
             Array.Clear(blockEdges, 0, blockEdges.Length);
             Array.Clear(blockGroups, 0, blockGroups.Length);
+            Array.Clear(ropeColors, 0, ropeColors.Length);
             selectedCells.Clear();
             frozenColors = Array.Empty<BlockIceData>();
             outerWalls = true;
@@ -196,6 +201,7 @@ namespace BlockedIn.EditorTools
 
         void Generate()
         {
+            BoardRopeBuilder.Validate(blockColors, ropeColors, blockGroups);
             RestoreBoardBinding();
             RequireBoardBinding();
             BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
@@ -209,6 +215,7 @@ namespace BlockedIn.EditorTools
             SetBoardBinding(board);
             BoardBlockBuilder.Generate(target, blockColors, previewCamera, blockEdges, blockGroups);
             BoardIceBuilder.Apply(target.blockGameplay, frozenColors);
+            BoardRopeBuilder.Apply(target.blockGameplay, ropeColors);
         }
 
         void DrawPreview()

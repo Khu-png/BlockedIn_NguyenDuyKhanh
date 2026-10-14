@@ -13,7 +13,7 @@ namespace BlockedIn.Blocks
         const float PickupDistance = .22f;
         const float PickupScale = 1.22f;
         int removingColors;
-        public bool IsRemovingColors => removingColors > 0;
+        public bool IsRemovingColors => removingColors > 0 || HasRopesCutting;
 
         struct ExitVisual
         {
@@ -32,7 +32,9 @@ namespace BlockedIn.Blocks
                 block.BeginExit();
             }
             removingColors++;
+            SoundManager.Play(SoundManager.BreakSound);
             ThawOtherColors(group[0].ColorData.ColorId);
+            CutMatchingRopes(group[0].ColorData.ColorId);
             StartCoroutine(PlayColorExit(group, camera));
         }
 

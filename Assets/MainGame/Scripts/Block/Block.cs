@@ -41,7 +41,7 @@ namespace BlockedIn.Blocks
         public Vector2Int[] Cells => cells;
         public Collider HitCollider => hitCollider;
         public BlockAppearance Appearance => appearance;
-        public bool CanDrag => movable && !IsFrozen && !exiting && !settling && !docking && !dragging && isActiveAndEnabled;
+        public bool CanDrag => movable && !IsFrozen && !IsRoped && !exiting && !settling && !docking && !dragging && isActiveAndEnabled;
         public bool IsDragging => dragging;
         public bool IsSettling => settling || docking;
 
@@ -115,6 +115,7 @@ namespace BlockedIn.Blocks
         {
             if (board == null || !CanDrag) return false;
             dragging = true;
+            board.ResetDragGuidance(this);
             dragCamera = camera;
             lastDragTarget = board.WorldToGrid(transform.position);
             lastTiltPosition = transform.position;
@@ -127,7 +128,7 @@ namespace BlockedIn.Blocks
         {
             if (!dragging) return;
             Vector2 current = board.WorldToGrid(transform.position);
-            Vector2 destination = board.ConstrainDrag(this, current, target, target - lastDragTarget);
+            Vector2 destination = board.ConstrainDrag(this, current, target, target - lastDragTarget, Time.deltaTime);
             lastDragTarget = target;
             transform.position = board.GridToWorld(destination);
             board.ShowPlacementPreview(this, snapTolerance);
@@ -136,10 +137,12 @@ namespace BlockedIn.Blocks
         public void EndDrag()
         {
             if (!dragging) return;
+            board.ResetDragGuidance(this);
             Vector2 current = board.WorldToGrid(transform.position);
             if (!board.TrySnap(this, current, snapTolerance, out Vector2Int destination))
                 destination = gridPosition;
             dragging = false;
+            SoundManager.Play(SoundManager.DropSound);
             board.HidePlacementPreview(this);
             gridPosition = destination;
             PrepareDock();
@@ -215,6 +218,7 @@ namespace BlockedIn.Blocks
         void OnDisable()
         {
             if (board == null) return;
+            board.ResetDragGuidance(this);
             board.HidePlacementPreview(this);
             dragging = settling = false;
             docking = false;

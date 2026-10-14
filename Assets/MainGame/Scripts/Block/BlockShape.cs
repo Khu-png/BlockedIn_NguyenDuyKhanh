@@ -29,7 +29,10 @@ namespace BlockedIn.Blocks
 
         public void SetFreezeCount(int count)
         {
+            int previous = freezeCount;
             freezeCount = Mathf.Max(0, count);
+            if (Application.isPlaying && freezeCount < previous)
+                SoundManager.Play(freezeCount == 0 ? SoundManager.IceBreakSound : SoundManager.IceCrackSound);
             if (icePresentation != null) icePresentation.ShowCount(freezeCount);
         }
         public int ExitVisualCount => cellVisuals != null && cellVisuals.Length == cells.Length ? cellVisuals.Length : 1;

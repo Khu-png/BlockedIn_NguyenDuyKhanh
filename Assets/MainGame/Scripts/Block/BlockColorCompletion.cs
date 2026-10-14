@@ -62,7 +62,7 @@ namespace BlockedIn.Blocks
 
         bool StableCell(Block block)
         {
-            return block.isActiveAndEnabled && !block.IsFrozen && !block.IsDragging && !block.IsSettling && block.Appearance != null
+            return block.isActiveAndEnabled && !block.IsFrozen && !block.IsRoped && !block.IsDragging && !block.IsSettling && block.Appearance != null
                 && block.Cells != null && block.Cells.Length > 0
                 && Vector2.Distance(WorldToGrid(block.transform.position), block.GridPosition) <= PositionEpsilon;
         }

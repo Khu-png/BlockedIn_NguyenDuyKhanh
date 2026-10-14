@@ -52,7 +52,13 @@ Dragging checks both axis orders and selects the reachable position closest to t
 
 ## Gameplay, Win and Lose
 
-Use the existing GameManager, LevelManager and UIManager scene components. Assign CameraManager, UI Events and the optional Editor Preview on LevelManager. Assign Gameplay, Win and Lose scene components or prefab components to UIManager's UI Resources array. Scene UI is reused directly; prefab UI is instantiated once and cached. MainMenu, Pause, SoundManager, GridMap and CameraController are not part of this flow.
+Use the existing GameManager, LevelManager and UIManager scene components. Assign CameraManager, UI Events and the optional Editor Preview on LevelManager. Assign Gameplay, Win and Lose scene components or prefab components to UIManager's UI Resources array. Scene UI is reused directly; prefab UI is instantiated once and cached. SoundManager uses its two serialized AudioSources and clip tables. MainMenu, Pause, GridMap and CameraController are not part of this flow.
+
+## Roped blocks
+
+Click a block in the map palette, tick Roped and choose Rope Color. The setting applies to the clicked block or its entire group, rather than every block with the same body color. The grid adds an R marker. Rope Color must differ from the locked block color: completing that color cuts the matching ropes and unlocks their blocks after the scissors animation. Any remaining ice continues to prevent movement.
+
+Generate shows the rope preview; Save or Save as Level bakes the setting into the runtime prefab used by LevelManager. Group edits, resizing, save/load and replay preserve rope colors. Existing levels default to no ropes. The editor uses the original rope mesh/textures and converts the two scissors rotation curves from Cut.json into ScissorsCut.anim. Default materials, shape meshes and the clip live in Assets/MainGame/Prefabs/Rope; existing assets are reused.
 
 LevelManager keeps a serialized LevelData array. Existing BoardMap assets inherit LevelData so previously saved levels remain compatible. Each Level SO stores its own Time Limit. In Map Generator, set Time limit (seconds) before Save or Save as Level; Load restores the selected level duration. You can also edit timeLimit directly in the SO Inspector. Save automatically adds the SO to registered scene LevelManagers, retaining custom assignments. Runtime board prefabs are prepared by Map Generator and linked inside the SO.
 

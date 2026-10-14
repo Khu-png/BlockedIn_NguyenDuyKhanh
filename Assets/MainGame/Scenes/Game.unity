@@ -909,6 +909,40 @@ MonoBehaviour:
   padding: 1.04
   backgroundPrefab: {fileID: 9066015772493468440, guid: 554689aedf22be449a20b78d549e7cb6, type: 3}
   boardFramePrefab: {fileID: 140220026976544434, guid: 5e674b34edf835247b6fb97de819b476, type: 3}
+--- !u!1 &1842512555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1842512556}
+  - component: {fileID: 1842512557}
+  - component: {fileID: 1842512558}
+  - component: {fileID: 1842512559}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1842512556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842512555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1855329521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1855329520
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +976,7 @@ Transform:
   - {fileID: 1103149313}
   - {fileID: 1378624041}
   - {fileID: 2115963107}
+  - {fileID: 1842512556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115963106
@@ -1002,3 +1037,101 @@ SceneRoots:
   - {fileID: 459734757}
   - {fileID: 1855329521}
   - {fileID: 28360612}
+--- !u!82 &1842512558
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842512555}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+--- !u!82 &1842512559
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842512555}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.7
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 0
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+--- !u!114 &1842512557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842512555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22096e35ed53c0546b831310a78aa78c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  musicSource: {fileID: 1842512558}
+  soundSource: {fileID: 1842512559}
+  musicEntries:
+  - id: Gameplay
+    clip: {fileID: 8300000, guid: fd66e5178c78f6642bcbf1ceda276498, type: 3}
+  soundEntries:
+  - id: Button
+    clip: {fileID: 8300000, guid: e76a9e1567bba0d44bac39bd4da6aa57, type: 3}
+  - id: BlockDrop
+    clip: {fileID: 8300000, guid: 944a3786ba8c6e9488c06ab0a1b95e5d, type: 3}
+  - id: BlockMatch
+    clip: {fileID: 8300000, guid: 9045d01c2fdaec741817886e433533c8, type: 3}
+  - id: BlockBreak
+    clip: {fileID: 8300000, guid: de902eeef2fe0ef4e91316ff00d743ff, type: 3}
+  - id: IceCrack
+    clip: {fileID: 8300000, guid: d7382130a60a9cb40aad76a7b731670d, type: 3}
+  - id: IceBreak
+    clip: {fileID: 8300000, guid: 34946b476fd63974285ab9b8d55cbf6d, type: 3}
+  - id: FrozenBlock
+    clip: {fileID: 8300000, guid: 081a70e74ecd2dd4bb3be6cd21451d6c, type: 3}
+  - id: LockedBlock
+    clip: {fileID: 8300000, guid: dcb646d60051d3540a48a0f83213ac2d, type: 3}
+  - id: Win
+    clip: {fileID: 8300000, guid: c1f338749dac4a14ba1c52fd3d341b38, type: 3}
+  - id: Lose
+    clip: {fileID: 8300000, guid: 415b19850bef15e47a0aed5dd76968d9, type: 3}
+  - id: RopeShow
+    clip: {fileID: 8300000, guid: c2c735fce701a154c8cd785337f3954d, type: 3}
+  - id: RopeCut
+    clip: {fileID: 8300000, guid: aeea4a2d3f2b2ba41a46983555de6c12, type: 3}
+  - id: RopeLocked
+    clip: {fileID: 8300000, guid: 46057bcbedea815418c53f69802f47f1, type: 3}

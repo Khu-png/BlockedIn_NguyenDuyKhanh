@@ -15,6 +15,7 @@ namespace BlockedIn.EditorTools
             if (blockEdges == null || blockEdges.Length != columns * rows)
                 blockEdges = new BlockEdgeData[columns * rows];
             EnsureGroups();
+            EnsureRopes();
             for (int i = 0; i < blockEdges.Length; i++) blockEdges[i].Normalize();
         }
 
@@ -43,6 +44,7 @@ namespace BlockedIn.EditorTools
                     }
                     string label = blockColors[index] != null ? (blockGroups[index] > 0 ? "G" + groupLabels[blockGroups[index]] : "B") : cells[index] == MapTools.BoardCell.Wall ? "W" : "·";
                     if (IceCount(index) > 0) label += " I";
+                    if (RopeColor(index) != null) label += " R";
                     Color oldColor = GUI.contentColor;
                     GUI.contentColor = tint.grayscale > .5f ? Color.black : Color.white;
                     GUI.Label(rect, label, new GUIStyle(EditorStyles.centeredGreyMiniLabel) { normal = { textColor = GUI.contentColor } });
@@ -108,7 +110,8 @@ namespace BlockedIn.EditorTools
         void OpenPalette(Rect rect, int index)
         {
             PopupWindow.Show(rect, new BlockColorPalette(blockColors[index], blockEdges[index],
-                color => SetBlockColor(index, color), edges => SetBlockEdges(index, edges), InternalEdges(index), IceCount(index), count => SetIceCount(index, count), () => IceCount(index)));
+                color => SetBlockColor(index, color), edges => SetBlockEdges(index, edges), InternalEdges(index), IceCount(index), count => SetIceCount(index, count), () => IceCount(index),
+                RopeColor(index), color => SetRopeColor(index, color), () => RopeColor(index), DefaultRopeColor(index)));
         }
 
         void SetBlockColor(int index, BlockColorData color)
@@ -118,7 +121,7 @@ namespace BlockedIn.EditorTools
             foreach (int cell in BlockShapeLayout.Members(index, blockGroups, blockColors))
             {
                 blockColors[cell] = color;
-                if (color == null) { blockEdges[cell] = default; blockGroups[cell] = 0; }
+                if (color == null) { blockEdges[cell] = default; blockGroups[cell] = 0; ropeColors[cell] = null; }
             }
             Repaint();
         }

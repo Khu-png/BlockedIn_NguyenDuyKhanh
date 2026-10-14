@@ -49,7 +49,7 @@ namespace BlockedIn.Blocks
         bool CanDock(Block other)
         {
             return other != null && other != this && other.isActiveAndEnabled && HasSameColor(other)
-                && !other.IsDragging && !other.IsSettling;
+                && !other.IsRoped && !other.IsDragging && !other.IsSettling;
         }
 
         static bool IsPair(EdgeType first, EdgeType second)
@@ -68,6 +68,7 @@ namespace BlockedIn.Blocks
             }
             StartDock();
             dockPartner.StartDock();
+            SoundManager.Play(SoundManager.MatchSound);
             dockPartner = null;
         }
 

@@ -21,6 +21,7 @@ public class LoadingManager : Singleton<LoadingManager>
             throw new InvalidOperationException("Assign the loading prefab and its canvas parent.");
         if (screen == null) screen = Instantiate(loadingPrefab, canvasParent);
         IsLoading = true;
+        if (SoundManager.Ins != null) SoundManager.Ins.SetMusicSuspended(true);
         LevelManager.Ins.SetInputEnabled(false);
         screen.Show();
         SetProgress(0);

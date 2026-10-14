@@ -21,6 +21,7 @@ namespace BlockedIn.MapTools
         public BlockEdgeData[] blockEdges;
         public int[] blockGroups;
         public BlockIceData[] frozenColors = System.Array.Empty<BlockIceData>();
+        public BlockColorData[] ropeColors = System.Array.Empty<BlockColorData>();
         [SerializeField, HideInInspector] GeneratedBoard runtimeBoard;
         public GeneratedBoard RuntimeBoard => runtimeBoard;
         public void SetRuntimeBoard(GeneratedBoard board) => runtimeBoard = board;
@@ -28,6 +29,7 @@ namespace BlockedIn.MapTools
             && cells != null && cells.Length == columns * rows
             && (blockColors == null || blockColors.Length == 0 || blockColors.Length == cells.Length)
             && (blockEdges == null || blockEdges.Length == 0 || blockEdges.Length == cells.Length)
-            && (blockGroups == null || blockGroups.Length == 0 || blockGroups.Length == cells.Length);
+            && (blockGroups == null || blockGroups.Length == 0 || blockGroups.Length == cells.Length)
+            && (ropeColors == null || ropeColors.Length == 0 || ropeColors.Length == cells.Length);
     }
 }
