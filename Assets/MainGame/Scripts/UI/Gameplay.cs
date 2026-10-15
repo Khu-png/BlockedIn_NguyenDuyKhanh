@@ -7,6 +7,7 @@ public sealed class Gameplay : UICanvas
     [SerializeField] Text levelText;
     [SerializeField] Text timerText;
     [SerializeField] Text coinText;
+    [SerializeField] TimeFreezeView timeFreezeView;
     [SerializeField] UnityEvent blockBreakClicked = new UnityEvent();
     [SerializeField] UnityEvent timeFreezeClicked = new UnityEvent();
     [SerializeField] UnityEvent settingsClicked = new UnityEvent();
@@ -53,9 +54,20 @@ public sealed class Gameplay : UICanvas
         lastLevel = number;
         lastSeconds = seconds;
     }
-    public void OnReplay() { SoundManager.Play(SoundManager.ButtonSound); LevelManager.Ins.OnReplay(); }
+    public void OnReplay()
+    {
+        if (LevelManager.Ins == null) return;
+        if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
+        SoundManager.Play(SoundManager.ButtonSound);
+        FinishCloseSettings();
+        LevelManager.Ins.OnReplay();
+    }
     public void OnBlockBreak() { SoundManager.Play(SoundManager.ButtonSound); blockBreakClicked.Invoke(); }
-    public void OnTimeFreeze() { SoundManager.Play(SoundManager.ButtonSound); timeFreezeClicked.Invoke(); }
+    public void OnTimeFreeze()
+    {
+        if (timeFreezeView == null || !timeFreezeView.TryPlayIntro()) return;
+        timeFreezeClicked.Invoke();
+    }
     public void OnSettings()
     {
         if (settingsOpen) { OnCloseSettings(); return; }

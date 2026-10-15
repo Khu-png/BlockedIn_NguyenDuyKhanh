@@ -71,12 +71,14 @@ namespace BlockedIn.Blocks
             SetFreezeCount(freezeCount);
             ApplyColor();
             if (appearance != null) appearance.Apply();
+            ApplyIcons();
         }
 
         public void SetColor(BlockColorData color)
         {
             colorData = color;
             ApplyColor();
+            ApplyIcons();
             if (board != null) board.RequestCompletionCheck();
         }
 
@@ -98,6 +100,7 @@ namespace BlockedIn.Blocks
 
         public void ApplyColor()
         {
+            RefreshIcons();
             if (colorData == null || colorData.Material == null || renderers == null) return;
             foreach (Renderer item in renderers)
             {
@@ -115,6 +118,7 @@ namespace BlockedIn.Blocks
         {
             if (board == null || !CanDrag) return false;
             dragging = true;
+            foreach (Block item in board.Blocks) if (item != null) item.RefreshDockPorts();
             board.ResetDragGuidance(this);
             dragCamera = camera;
             lastDragTarget = board.WorldToGrid(transform.position);
@@ -170,6 +174,12 @@ namespace BlockedIn.Blocks
         void TickTilt(float deltaTime)
         {
             if (board == null || visual == null || deltaTime <= 0) return;
+            if (!dragging && tilt.sqrMagnitude < .000001f && tiltVelocity.sqrMagnitude < .000001f)
+            {
+                if (tilt.sqrMagnitude > 0f || tiltVelocity.sqrMagnitude > 0f) ResetTilt();
+                else lastTiltPosition = transform.position;
+                return;
+            }
             Vector3 movement = transform.position - lastTiltPosition;
             lastTiltPosition = transform.position;
             Vector3 speed = movement / deltaTime;
@@ -223,6 +233,7 @@ namespace BlockedIn.Blocks
             dragging = settling = false;
             docking = false;
             dockPartner = null;
+            RefreshDockPorts();
             ResetTilt();
             transform.position = board.GridToWorld(gridPosition);
             if (visual != null) visual.localPosition = visualRest;

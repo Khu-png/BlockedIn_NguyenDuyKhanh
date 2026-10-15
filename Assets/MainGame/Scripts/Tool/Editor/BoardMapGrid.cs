@@ -111,16 +111,18 @@ namespace BlockedIn.EditorTools
         {
             PopupWindow.Show(rect, new BlockColorPalette(blockColors[index], blockEdges[index],
                 color => SetBlockColor(index, color), edges => SetBlockEdges(index, edges), InternalEdges(index), IceCount(index), count => SetIceCount(index, count), () => IceCount(index),
-                RopeColor(index), color => SetRopeColor(index, color), () => RopeColor(index), DefaultRopeColor(index)));
+                RopeColor(index), color => SetRopeColor(index, color), () => RopeColor(index), () => AvailableRopeColors(index)));
         }
 
         void SetBlockColor(int index, BlockColorData color)
         {
             if (index >= blockColors.Length) return;
             Undo.RecordObject(this, "Change block color");
+            BlockColorData inheritedRope = InheritedRope(index, color);
             foreach (int cell in BlockShapeLayout.Members(index, blockGroups, blockColors))
             {
                 blockColors[cell] = color;
+                ropeColors[cell] = inheritedRope;
                 if (color == null) { blockEdges[cell] = default; blockGroups[cell] = 0; ropeColors[cell] = null; }
             }
             Repaint();

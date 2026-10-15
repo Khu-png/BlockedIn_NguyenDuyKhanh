@@ -74,11 +74,27 @@ namespace BlockedIn.EditorTools
             {
                 var arm = new GameObject("Pivot_0" + i); arm.transform.SetParent(pivot.transform, false);
                 arm.transform.localScale = Vector3.one * .6f;
-                MeshFilter filter = arm.AddComponent<MeshFilter>(); filter.sharedMesh = Mesh("powerup_tools/Scissor_0" + i);
-                MeshRenderer renderer = arm.AddComponent<MeshRenderer>(); renderer.sharedMaterials = materials;
-                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                AddScissorParts(arm.transform, i, materials);
             }
             return root.transform;
+        }
+        static void AddScissorParts(Transform arm, int index, Material[] materials)
+        {
+            string path = Resources + "models/obj/powerup_tools/Scissor_0" + index + ".obj";
+            int count = 0;
+            foreach (UnityEngine.Object asset in AssetDatabase.LoadAllAssetsAtPath(path))
+            {
+                if (asset is not Mesh mesh) continue;
+                int materialIndex = mesh.name.EndsWith("_sub0") ? 0 : mesh.name.EndsWith("_sub1") ? 1 : -1;
+                if (materialIndex < 0) throw new InvalidOperationException("Unknown scissors mesh part: " + mesh.name);
+                var part = new GameObject(materialIndex == 0 ? "Handle" : "Blade");
+                part.transform.SetParent(arm, false);
+                MeshFilter filter = part.AddComponent<MeshFilter>(); filter.sharedMesh = mesh;
+                MeshRenderer renderer = part.AddComponent<MeshRenderer>(); renderer.sharedMaterial = materials[materialIndex];
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                count++;
+            }
+            if (count != 2) throw new InvalidOperationException("Scissors need both a handle mesh and a blade mesh.");
         }
     }
 }

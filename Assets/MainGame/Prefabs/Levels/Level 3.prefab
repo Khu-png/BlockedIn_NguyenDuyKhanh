@@ -24735,10 +24735,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
@@ -31539,10 +31539,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
@@ -36064,10 +36064,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 9023782442922329287}
   - {fileID: 8255335466770927333}
@@ -40750,10 +40750,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 4810425617633911402}
   - {fileID: 5939882856184378249}
@@ -49475,10 +49475,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
@@ -64333,10 +64333,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
@@ -67984,10 +67984,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 1896843654258458100}
   - {fileID: 996183245426366664}
@@ -69689,10 +69689,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 7682444273636285977}
   - {fileID: 2453124041081837034}
@@ -69771,7 +69771,7 @@ MonoBehaviour:
   - {fileID: 7661541549895835329}
   - {fileID: 5962795699941822502}
   - {fileID: 8530010888777086462}
-  colorExitDuration: 1.05
+  colorExitDuration: 1.2
   colorExitHeight: 1.5
   colorExitSpin: 60
   placementPreviewMaterial: {fileID: 2100000, guid: 13b742b925624d3e8d41167ddaf6afef, type: 2}
@@ -70769,10 +70769,10 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockDuration: 0.12
+  dockPortTravel: 0.065
+  iconRenderers: []
+  ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 766525036830039442}
   - {fileID: 5712111711694723163}

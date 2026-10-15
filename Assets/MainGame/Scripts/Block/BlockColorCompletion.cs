@@ -8,21 +8,33 @@ namespace BlockedIn.Blocks
     {
         static readonly Vector2Int[] connectionOffsets = { Vector2Int.down, Vector2Int.right, Vector2Int.up, Vector2Int.left };
         bool completionPending;
+        float completionNotBefore;
 
         public void RequestCompletionCheck() => completionPending = true;
 
+        public void OnDockFinished()
+        {
+            completionNotBefore = Time.time + .05f;
+            RequestCompletionCheck();
+        }
+
+        bool CanCheckCompletion()
+        {
+            if (PowerupBusy || Time.time < completionNotBefore) return false;
+            foreach (Block block in blocks)
+                if (block != null && (block.IsDragging || block.IsSettling)) return false;
+            return true;
+        }
+
         void LateUpdate()
         {
-            if (!completionPending) return;
-            foreach (Block block in blocks)
-                if (block != null && (block.IsDragging || block.IsSettling)) return;
-            completionPending = false;
-            CheckCompletedColors();
+            if (completionPending) CheckCompletedColors();
         }
 
         public void CheckCompletedColors()
         {
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying || !CanCheckCompletion()) return;
+            completionPending = false;
             var colorIds = new HashSet<int>();
             foreach (Block block in blocks)
                 if (block != null && block.ColorData != null) colorIds.Add(block.ColorData.ColorId);

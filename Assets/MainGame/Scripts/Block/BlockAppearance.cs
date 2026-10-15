@@ -11,10 +11,40 @@ namespace BlockedIn.Blocks
     [Serializable]
     public sealed class BlockEdgeParts
     {
+        const float TabInnerEdge = .363f;
+        const float TabDepth = .2533f;
         public EdgeType type;
         public GameObject defaultEdge;
         public GameObject tab;
         public GameObject socket;
+        Transform tabTransform;
+        Vector3 tabPosition, tabScale;
+
+        public void SetTabRetraction(Vector3 direction, float distance)
+        {
+            if (tab == null) return;
+            if (tabTransform == null)
+            {
+                tabTransform = tab.transform;
+                tabPosition = tabTransform.localPosition;
+                tabScale = tabTransform.localScale;
+            }
+            Vector3 axis = tabTransform.InverseTransformDirection(direction);
+            Vector3 outward = tabTransform.parent.InverseTransformDirection(direction).normalized;
+            float reach = 1f - Mathf.Clamp(distance, 0f, .075f) / TabDepth;
+            Vector3 scale = Vector3.one;
+            if (Mathf.Abs(axis.x) > Mathf.Abs(axis.z)) scale.x = reach;
+            else scale.z = reach;
+            tabTransform.localScale = Vector3.Scale(tabScale, scale);
+            tabTransform.localPosition = tabPosition + outward * (TabInnerEdge * (1f - reach));
+        }
+
+        public void ResetTabExtension()
+        {
+            if (tabTransform == null) return;
+            tabTransform.localPosition = tabPosition;
+            tabTransform.localScale = tabScale;
+        }
 
         public void Apply()
         {
@@ -47,6 +77,14 @@ namespace BlockedIn.Blocks
 
         public EdgeType GetEdge(BlockSide side) => edges[(int)side].type;
         public CornerType GetCorner(int index) => corners[index].type;
+
+        public void SetTabRetraction(BlockSide side, Vector3 direction, float distance)
+            => edges[(int)side].SetTabRetraction(direction, distance);
+
+        public void ResetTabExtensions()
+        {
+            foreach (BlockEdgeParts edge in edges) edge?.ResetTabExtension();
+        }
 
         public void SetEdge(BlockSide side, EdgeType type)
         {

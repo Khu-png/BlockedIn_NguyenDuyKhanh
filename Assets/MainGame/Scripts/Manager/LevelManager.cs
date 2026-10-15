@@ -18,13 +18,20 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] CameraManager cameraManager;
     [SerializeField] EventSystem uiEvents;
     [SerializeField] GeneratedBoard editorPreview;
+    [SerializeField, Min(1f)] float timeFreezeDuration = 30f;
     GeneratedBoard currentLevel;
     int currentLevelIndex;
     float remainingTime;
+    float remainingTimeFreeze;
     bool hasGoals;
     public LevelData[] Levels => levels;
     public int CurrentLevelNumber => levels[currentLevelIndex].levelNumber;
     public float RemainingTime => remainingTime;
+    public float RemainingTimeFreeze => remainingTimeFreeze;
+    public float TimeFreezeProgress => Mathf.Clamp01(remainingTimeFreeze / Mathf.Max(1f, timeFreezeDuration));
+    public bool CanFreezeTime => currentLevel != null && remainingTime > 0f && remainingTimeFreeze <= 0f
+        && GameManager.IsState(GameState.Gameplay) && Time.timeScale > 0f
+        && (LoadingManager.Ins == null || !LoadingManager.Ins.IsLoading);
     public GeneratedBoard CurrentLevel => currentLevel;
     public bool HasNextLevel => HasLevelData(currentLevelIndex + 1);
 
@@ -74,8 +81,17 @@ public class LevelManager : Singleton<LevelManager>
         if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
         if (currentLevel.blockGameplay != null && currentLevel.blockGameplay.IsRemovingColors
             && !currentLevel.blockGameplay.HasRemainingGoals) return;
-        remainingTime = Mathf.Max(0, remainingTime - Time.deltaTime);
+        float delta = Time.deltaTime;
+        float frozenDelta = Mathf.Min(remainingTimeFreeze, delta);
+        remainingTimeFreeze -= frozenDelta;
+        remainingTime = Mathf.Max(0, remainingTime - (delta - frozenDelta));
         if (remainingTime <= 0) GameManager.Ins.OnLose();
+    }
+    public bool TryFreezeTime()
+    {
+        if (!CanFreezeTime) return false;
+        remainingTimeFreeze = Mathf.Max(1f, timeFreezeDuration);
+        return true;
     }
     void CheckWin()
     {
@@ -133,6 +149,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnDespawn()
     {
+        remainingTimeFreeze = 0f;
         if (currentLevel == null) return;
         if (currentLevel.blockGameplay != null) currentLevel.blockGameplay.ColorsRemoved -= CheckWin;
         currentLevel.gameObject.SetActive(false);

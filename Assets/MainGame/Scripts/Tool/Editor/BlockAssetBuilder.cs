@@ -21,7 +21,9 @@ namespace BlockedIn.Blocks.Editor
                 Material material = AssetDatabase.LoadAssetAtPath<Material>("Assets/MainGame/Material/Block_" + colors[i] + ".mat");
                 if (material == null) throw new InvalidOperationException("Missing material for " + colors[i]);
                 var color = ScriptableObject.CreateInstance<BlockColorData>();
-                color.Configure(i, material);
+                Sprite icon = AssetDatabase.LoadAssetAtPath<Sprite>(
+                    "Assets/MainGame/Resrouces/BlockedIn/BlockedIn/images/game/blocks/Symbol_" + colors[i] + ".png");
+                color.Configure(i, material, icon);
                 AssetDatabase.CreateAsset(color, path);
             }
             AssetDatabase.SaveAssets();

@@ -16,7 +16,7 @@ namespace BlockedIn.EditorTools
         BlockColorData ropeColor;
         readonly Action<BlockColorData> changeRope;
         readonly Func<BlockColorData> readRope;
-        readonly BlockColorData suggestedRope;
+        readonly Func<BlockColorData[]> availableRopeColors;
         readonly bool[] internalEdges;
         readonly Action<BlockColorData> choose;
         readonly Action<BlockEdgeData> changeEdges;
@@ -27,14 +27,14 @@ namespace BlockedIn.EditorTools
         public BlockColorPalette(BlockColorData current, BlockEdgeData currentEdges,
             Action<BlockColorData> onChoose, Action<BlockEdgeData> onChangeEdges, bool[] internalSides = null, int currentIce = 0, Action<int> onChangeIce = null, Func<int> onReadIce = null,
             BlockColorData currentRope = null, Action<BlockColorData> onChangeRope = null, Func<BlockColorData> onReadRope = null,
-            BlockColorData suggestedRopeColor = null)
+            Func<BlockColorData[]> onAvailableRopeColors = null)
         {
             internalEdges = internalSides;
             iceCount = currentIce;
             changeIce = onChangeIce;
             readIce = onReadIce;
             ropeColor = currentRope; changeRope = onChangeRope; readRope = onReadRope;
-            suggestedRope = suggestedRopeColor;
+            availableRopeColors = onAvailableRopeColors;
             selected = current;
             choose = onChoose;
             edges = currentEdges;
@@ -97,27 +97,25 @@ namespace BlockedIn.EditorTools
         void DrawRope()
         {
             if (readRope != null) ropeColor = readRope();
-            bool roped = EditorGUILayout.Toggle("Roped", ropeColor != null);
+            BlockColorData[] choices = availableRopeColors?.Invoke() ?? Array.Empty<BlockColorData>();
+            bool roped;
+            using (new EditorGUI.DisabledScope(choices.Length == 0))
+                roped = EditorGUILayout.Toggle("Roped", ropeColor != null);
             if (!roped && ropeColor != null) { ropeColor = null; changeRope?.Invoke(null); }
-            if (roped && ropeColor == null && suggestedRope != null)
-            { ropeColor = suggestedRope; changeRope?.Invoke(ropeColor); }
-            if (roped && ropeColor == null)
-                foreach (string name in names)
-                {
-                    BlockColorData candidate = BlockAssetBuilder.LoadColor(name);
-                    if (candidate == null || selected == null || candidate.ColorId == selected.ColorId) continue;
-                    ropeColor = candidate; changeRope?.Invoke(ropeColor); break;
-                }
+            if (choices.Length == 0)
+            { EditorGUILayout.HelpBox("Place another playable color on the board to use ropes.", MessageType.None); return; }
+            if (roped && ropeColor == null) { ropeColor = choices[0]; changeRope?.Invoke(ropeColor); }
             if (ropeColor == null) return;
-            int current = Array.IndexOf(names, ropeColor.name.Replace("BlockColor_", ""));
-            int next = EditorGUILayout.Popup("Rope Color", Math.Max(0, current), names);
+            int current = Array.FindIndex(choices, color => color.ColorId == ropeColor.ColorId);
+            string[] labels = Array.ConvertAll(choices, color => color.name.Replace("BlockColor_", ""));
+            int next = EditorGUILayout.Popup("Rope Color", Math.Max(0, current), labels);
             if (next != current)
             {
-                BlockColorData candidate = BlockAssetBuilder.LoadColor(names[next]);
+                BlockColorData candidate = choices[next];
                 if (candidate != null && selected != null && candidate.ColorId != selected.ColorId)
                 { ropeColor = candidate; changeRope?.Invoke(ropeColor); }
             }
-            EditorGUILayout.HelpBox("Applies to this block/group. Complete the rope color to cut it. Choose a different color from the block.", MessageType.None);
+            EditorGUILayout.HelpBox("Applies to every block with the same Color ID. Complete the Rope Color to cut these ropes.", MessageType.None);
         }
 
         void SetEdge(BlockSide side, EdgeType type)

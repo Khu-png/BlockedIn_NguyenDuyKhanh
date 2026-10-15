@@ -1608,7 +1608,7 @@ MonoBehaviour:
   tiltAngle: 12
   verticalTiltAngle: 12
   screenRollAngle: 8
-  dockDuration: 0.18
+  dockDuration: 0.12
   dockBounceDuration: 0.16
   dockGap: 0.06
   dockSquash: 0.025

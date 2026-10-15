@@ -103,6 +103,7 @@ namespace BlockedIn.Blocks
             Ray ray = mainCamera.ScreenPointToRay(screen);
             if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, blockMask, QueryTriggerInteraction.Ignore)) return;
             Block block = board.Resolve(hit.collider);
+            if (board.PowerupPress != null && board.PowerupPress(block)) return;
             if (block != null && !block.CanDrag)
             {
                 SoundManager.Play(block.IsRoped ? SoundManager.RopeLockedSound

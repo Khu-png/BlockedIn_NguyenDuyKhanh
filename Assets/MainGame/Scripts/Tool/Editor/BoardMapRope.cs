@@ -14,20 +14,44 @@ namespace BlockedIn.EditorTools
         void EnsureRopes()
         {
             if (ropeColors == null || ropeColors.Length != columns * rows) ropeColors = new BlockColorData[columns * rows];
-            for (int i = 0; i < ropeColors.Length; i++) if (blockColors[i] == null) ropeColors[i] = null;
+            var settings = new Dictionary<int, BlockColorData>();
+            for (int i = 0; i < ropeColors.Length; i++)
+            {
+                BlockColorData body = blockColors[i], rope = ropeColors[i];
+                if (body == null || rope == null || body.ColorId == rope.ColorId || BoardRopeBuilder.IsObstacle(rope)) continue;
+                bool present = Array.Exists(blockColors, color => color != null && color.ColorId == rope.ColorId);
+                if (present && !settings.ContainsKey(body.ColorId)) settings[body.ColorId] = rope;
+            }
+            for (int i = 0; i < ropeColors.Length; i++)
+                ropeColors[i] = blockColors[i] != null && settings.TryGetValue(blockColors[i].ColorId, out BlockColorData rope) ? rope : null;
         }
         BlockColorData RopeColor(int index) => ropeColors != null && index < ropeColors.Length ? ropeColors[index] : null;
-        BlockColorData DefaultRopeColor(int index)
+        BlockColorData[] AvailableRopeColors(int index)
         {
+            if (index < 0 || index >= blockColors.Length || blockColors[index] == null) return Array.Empty<BlockColorData>();
+            var result = new List<BlockColorData>(); var ids = new HashSet<int>();
             foreach (BlockColorData color in blockColors)
-                if (color != null && color.ColorId != blockColors[index].ColorId) return color;
-            return null;
+                if (color != null && color.Material != null && color.ColorId != blockColors[index].ColorId
+                    && !BoardRopeBuilder.IsObstacle(color) && ids.Add(color.ColorId)) result.Add(color);
+            return result.ToArray();
         }
         void SetRopeColor(int index, BlockColorData color)
         {
             Undo.RecordObject(this, "Change block rope");
-            foreach (int cell in BlockShapeLayout.Members(index, blockGroups, blockColors)) ropeColors[cell] = color;
+            int id = blockColors[index].ColorId;
+            for (int i = 0; i < blockColors.Length; i++)
+                if (blockColors[i] != null && blockColors[i].ColorId == id) ropeColors[i] = color;
             Repaint();
+        }
+        BlockColorData InheritedRope(int index, BlockColorData color)
+        {
+            if (color == null) return null;
+            List<int> members = BlockShapeLayout.Members(index, blockGroups, blockColors);
+            for (int i = 0; i < blockColors.Length; i++)
+                if (!members.Contains(i) && blockColors[i] != null && blockColors[i].ColorId == color.ColorId)
+                    return ropeColors[i];
+            BlockColorData previous = RopeColor(index);
+            return previous != null && previous.ColorId != color.ColorId ? previous : null;
         }
         void MergeRopes(List<int> members)
         {

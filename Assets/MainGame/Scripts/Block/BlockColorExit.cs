@@ -6,10 +6,10 @@ namespace BlockedIn.Blocks
 {
     public sealed partial class BlockBoard
     {
-        [SerializeField, Min(.1f)] float colorExitDuration = 1.05f;
+        [SerializeField, Min(.1f)] float colorExitDuration = 1.2f;
         [SerializeField, Min(0)] float colorExitHeight = 1.5f;
         [SerializeField, Min(0)] float colorExitSpin = 60f;
-        const float PickupDuration = .1f;
+        const float PickupDuration = .14f;
         const float PickupDistance = .22f;
         const float PickupScale = 1.22f;
         int removingColors;
@@ -34,7 +34,7 @@ namespace BlockedIn.Blocks
             removingColors++;
             SoundManager.Play(SoundManager.BreakSound);
             ThawOtherColors(group[0].ColorData.ColorId);
-            CutMatchingRopes(group[0].ColorData.ColorId);
+            CutMatchingRopes(group[0].ColorData.ColorId, group[0].Visual.position);
             StartCoroutine(PlayColorExit(group, camera));
         }
 

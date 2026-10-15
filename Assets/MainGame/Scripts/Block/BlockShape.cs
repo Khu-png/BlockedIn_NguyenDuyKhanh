@@ -42,6 +42,7 @@ namespace BlockedIn.Blocks
         {
             if (board != null) board.HidePlacementPreview(this);
             exiting = true;
+            RefreshDockPorts();
             dragging = settling = docking = false;
             ResetTilt();
             if (hitCollider != null) hitCollider.enabled = false;

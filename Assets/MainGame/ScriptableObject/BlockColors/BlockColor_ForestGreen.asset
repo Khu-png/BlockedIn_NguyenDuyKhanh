@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.BlockColorData
   colorId: 2
   material: {fileID: 2100000, guid: f0339a76e0c573446ac4c14b64025695, type: 2}
+  icon: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}

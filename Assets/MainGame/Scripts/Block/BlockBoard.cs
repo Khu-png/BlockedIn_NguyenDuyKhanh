@@ -33,6 +33,7 @@ namespace BlockedIn.Blocks
                 block.Initialize(this);
             }
             if (cameraManager != null) cameraManager.FocusLevel(layout);
+            foreach (Block block in blocks) block.RefreshDockPorts();
             RequestCompletionCheck();
         }
 
