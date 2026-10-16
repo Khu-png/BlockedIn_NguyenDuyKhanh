@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a25dd310ca97b478b3ae35c433ea3a, type: 3}
   m_Name: BlockColor_Obstacle
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.BlockColorData
+  isObstacle: 1
   colorId: 4
   material: {fileID: 2100000, guid: 8fcd2c3c22b27e94fb2d5a295f20211a, type: 2}
   icon: {fileID: 21300000, guid: b8363c29b221c8d47963a193e4a96795, type: 3}

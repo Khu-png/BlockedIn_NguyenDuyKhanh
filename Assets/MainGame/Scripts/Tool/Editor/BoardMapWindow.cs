@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed partial class BoardMapWindow : EditorWindow
+    public partial class BoardMapWindow : EditorWindow
     {
         [SerializeField] int columns = 4, rows = 4;
         [SerializeField] int levelNumber = 1;
@@ -27,7 +27,10 @@ namespace BlockedIn.EditorTools
         [MenuItem("Tools/Blocked In/Map Generator")]
         public static void Open() => GetWindow<BoardMapWindow>("Map Generator");
 
-        void OnEnable()
+        protected virtual bool UsesAssemblyWorkflow => false;
+        protected virtual string WindowTitle => "Map Generator";
+
+        protected virtual void OnEnable()
         {
             minSize = new Vector2(390, 680);
             if (cells == null || cells.Length != columns * rows) Resize(columns, rows);
@@ -41,16 +44,19 @@ namespace BlockedIn.EditorTools
             EnableBoardBinding();
         }
 
-        void OnDisable()
+        protected virtual void OnDisable()
         {
+            CancelAssemblyDrag();
             Undo.undoRedoPerformed -= Repaint;
             DisableBoardBinding();
         }
 
-        void OnGUI()
+        protected virtual void OnGUI()
         {
-            EditorGUILayout.LabelField("Blocked In — Map Generator", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Paint Floor, Wall or Block on the grid. Click a block to edit its color and edges. Generate applies the layout to the scene.", MessageType.Info);
+            EditorGUILayout.LabelField("Blocked In — " + WindowTitle, EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(UsesAssemblyWorkflow
+                ? "Build a complete shape, cut it into pieces, then arrange the puzzle. Save builds the playable level automatically."
+                : "Paint blocks and edit their colors and ports. Use Edit Shape to merge or split selected cells. Save builds the playable level automatically.", MessageType.Info);
             using (new EditorGUI.DisabledScope(EditorApplication.isPlayingOrWillChangePlaymode))
             {
                 DrawSettings();
@@ -62,8 +68,7 @@ namespace BlockedIn.EditorTools
                 EditorGUILayout.LabelField("Floor: playable area    Wall: obstacle    B: single block    G: merged group", EditorStyles.miniLabel);
                 DrawStorage();
                 EditorGUILayout.Space();
-                DrawGeneration();
-                DrawPreview();
+                DrawPrefabSettings();
 
             }
         }
@@ -78,7 +83,7 @@ namespace BlockedIn.EditorTools
             if (this == null || EditorApplication.isPlayingOrWillChangePlaymode) return;
             try { action(); Repaint(); }
             catch (ExitGUIException) { throw; }
-            catch (Exception exception) { Debug.LogException(exception); EditorUtility.DisplayDialog("Map Generator", exception.Message, "OK"); }
+            catch (Exception exception) { Debug.LogException(exception); EditorUtility.DisplayDialog(WindowTitle, exception.Message, "OK"); }
         }
 
         void Resize(int width, int height)
@@ -155,12 +160,8 @@ namespace BlockedIn.EditorTools
             }
             outerWalls = EditorGUILayout.Toggle("Outer wall border", outerWalls);
             DrawShapeTools();
-            brushIndex = GUILayout.Toolbar(brushIndex, new[] { "Floor", "Wall", "Block" });
-            using (new EditorGUILayout.HorizontalScope())
-            {
-                if (GUILayout.Button("Fill Floor")) Fill(BoardCell.Floor);
-                if (GUILayout.Button("Example 6×6")) Example();
-            }
+            if (UsesAssemblyWorkflow) DrawAssemblyBrushes();
+            else DrawClassicBrushes();
         }
 
         void DrawStorage()

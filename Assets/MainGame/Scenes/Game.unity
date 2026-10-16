@@ -813,6 +813,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76717b33c11af9d4298f74a515f49f42, type: 2}
   - {fileID: 11400000, guid: 30e4b895a85a5a34bbbacc864f1f62eb, type: 2}
   - {fileID: 11400000, guid: fc779ee34ebb0f74198727186d92d452, type: 2}
+  - {fileID: 11400000, guid: f0e4e56112d1f6148b44af8fcf3125ad, type: 2}
+  - {fileID: 11400000, guid: 96a73f3c47b700e43b18d438485f6e21, type: 2}
   cameraManager: {fileID: 1378624042}
   uiEvents: {fileID: 0}
   editorPreview: {fileID: 0}

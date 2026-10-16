@@ -9,11 +9,19 @@ namespace BlockedIn.EditorTools
         {
             var occupied = new HashSet<Vector2Int>(cells);
             var vertices = new List<Vector3>(); var uv = new List<Vector2>(); var triangles = new List<int>();
+            var localUv = new List<Vector2>();var borders = new List<Vector4>();
+            Vector2Int activeCell = default;
+            Vector4 activeBorders = default;
             Vector2 min = cells[0], max = cells[0];
             foreach (Vector2Int cell in cells) { min=Vector2.Min(min,cell); max=Vector2.Max(max,cell); }
             Vector2 size=max-min+Vector2.one;
             foreach (Vector2Int cell in cells)
             {
+                activeCell = cell;
+                activeBorders = new Vector4(occupied.Contains(cell+Vector2Int.left)?0:1,
+                    occupied.Contains(cell+Vector2Int.right)?0:1,
+                    occupied.Contains(cell+Vector2Int.down)?0:1,
+                    occupied.Contains(cell+Vector2Int.up)?0:1);
                 var outline=new List<Vector2>();
                 Vector2Int[] corners={Vector2Int.one,new Vector2Int(-1,1),-Vector2Int.one,new Vector2Int(1,-1)};
                 for(int corner=0;corner<4;corner++)
@@ -49,9 +57,11 @@ namespace BlockedIn.EditorTools
                 }
             }
             var mesh=new Mesh { name="BlockIceShell" };
-            mesh.SetVertices(vertices); mesh.SetUVs(0,uv); mesh.SetTriangles(triangles,0); mesh.RecalculateNormals(); return mesh;
+            mesh.SetVertices(vertices); mesh.SetUVs(0,uv); mesh.SetUVs(1,localUv); mesh.SetUVs(2,borders); mesh.SetTriangles(triangles,0); mesh.RecalculateNormals(); return mesh;
             void Add(Vector3 point)
             {
+                localUv.Add(new Vector2(point.x-activeCell.x+.5f,-point.z-activeCell.y+.5f));
+                borders.Add(activeBorders);
                 vertices.Add(point); uv.Add(new Vector2((point.x-min.x+.5f)/size.x,(-point.z-min.y+.5f)/size.y));
             }
         }

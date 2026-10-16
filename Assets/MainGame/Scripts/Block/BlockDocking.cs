@@ -83,6 +83,7 @@ namespace BlockedIn.Blocks
 
         void FinishSettle()
         {
+            board.RequestCompletionCheck();
             if (dockPartner == null || FindDockPartner() == null)
             {
                 dockPartner = null;
@@ -141,6 +142,7 @@ namespace BlockedIn.Blocks
 
         public void RefreshDockPorts()
         {
+            if (IsSettling) return;
             dockPorts.Clear();
             if (cellAppearances != null && cellAppearances.Length > 0)
             {

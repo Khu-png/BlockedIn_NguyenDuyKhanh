@@ -27,6 +27,8 @@ public class LevelManager : Singleton<LevelManager>
     public LevelData[] Levels => levels;
     public int CurrentLevelNumber => levels[currentLevelIndex].levelNumber;
     public float RemainingTime => remainingTime;
+    public bool HasTimerStarted => currentLevel != null && currentLevel.blockGameplay != null
+        && currentLevel.blockGameplay.HasPlayerInteracted;
     public float RemainingTimeFreeze => remainingTimeFreeze;
     public float TimeFreezeProgress => Mathf.Clamp01(remainingTimeFreeze / Mathf.Max(1f, timeFreezeDuration));
     public bool CanFreezeTime => currentLevel != null && remainingTime > 0f && remainingTimeFreeze <= 0f
@@ -84,6 +86,7 @@ public class LevelManager : Singleton<LevelManager>
         float delta = Time.deltaTime;
         float frozenDelta = Mathf.Min(remainingTimeFreeze, delta);
         remainingTimeFreeze -= frozenDelta;
+        if (!HasTimerStarted) return;
         remainingTime = Mathf.Max(0, remainingTime - (delta - frozenDelta));
         if (remainingTime <= 0) GameManager.Ins.OnLose();
     }

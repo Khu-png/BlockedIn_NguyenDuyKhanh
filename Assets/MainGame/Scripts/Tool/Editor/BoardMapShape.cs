@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed partial class BoardMapWindow
+    public partial class BoardMapWindow
     {
         [SerializeField] int[] blockGroups;
         [SerializeField] bool editShape;
@@ -21,10 +21,11 @@ namespace BlockedIn.EditorTools
 
         void DrawShapeTools()
         {
+            if (UsesAssemblyWorkflow) { DrawAssemblyTools(); return; }
             EnsureGroups();
             editShape = GUILayout.Toggle(editShape, "Edit Shape", "Button");
             if (!editShape) return;
-            EditorGUILayout.HelpBox("Click block cells to select them. Merge joins touching cells with the same color ID. Add cells by painting blocks, then merge again. Split restores separate 1x1 blocks. Removing a cell that breaks the shape also splits the remaining cells.", MessageType.Info);
+            EditorGUILayout.HelpBox("Select touching cells of the same color to merge. Split restores separate 1x1 blocks. Remove Cells deletes only selected cells.", MessageType.Info);
             using (new EditorGUILayout.HorizontalScope())
             {
                 using (new EditorGUI.DisabledScope(selectedCells.Count == 0))
@@ -137,7 +138,7 @@ namespace BlockedIn.EditorTools
                 int id = blockGroups[i];
                 if (id == 0 || !visited.Add(id)) continue;
                 List<int> members = BlockShapeLayout.Members(i, blockGroups, blockColors);
-                if (members.Count > 1 && BlockShapeLayout.Connected(members, columns, cells.Length)) continue;
+                if ((members.Count > 1 || UsesAssemblyWorkflow) && BlockShapeLayout.Connected(members, columns, cells.Length)) continue;
                 foreach (int cell in members) blockGroups[cell] = 0;
             }
         }

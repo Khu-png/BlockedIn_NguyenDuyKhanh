@@ -34,7 +34,8 @@ public sealed class TimeFreezeView : MonoBehaviour
             && GameManager.IsState(GameState.Gameplay) && !loading;
         float seconds = playing ? manager.RemainingTimeFreeze : 0f;
         bool frozen = seconds > 0f;
-        if (freezeButton != null) freezeButton.interactable = playing && !frozen && !IsIntroducing && Time.timeScale > 0f;
+        bool hammerBusy = playing && manager.CurrentLevel.blockGameplay != null && manager.CurrentLevel.blockGameplay.PowerupBusy;
+        if (freezeButton != null) freezeButton.interactable = playing && !hammerBusy && !frozen && !IsIntroducing && Time.timeScale > 0f;
         if (frostGroup != null)
             frostGroup.alpha = Mathf.MoveTowards(frostGroup.alpha, frozen ? 1f : 0f, Time.unscaledDeltaTime * 4f);
         if (timerFrostGroup != null)
@@ -48,6 +49,7 @@ public sealed class TimeFreezeView : MonoBehaviour
     {
         LevelManager manager = LevelManager.Ins;
         if (IsIntroducing || manager == null || !manager.CanFreezeTime || introIcon == null || introGroup == null) return false;
+        if (manager.CurrentLevel.blockGameplay != null && manager.CurrentLevel.blockGameplay.PowerupBusy) return false;
         IsIntroducing = true;
         if (freezeButton != null) freezeButton.interactable = false;
         if (feedback != null) feedback.BeginFlight();

@@ -5,7 +5,7 @@ namespace BlockedIn.Blocks
 {
     public sealed partial class Block
     {
-        public bool CanSplit => CanDrag && !IsRopeCutting && cells.Length > 1
+        public bool CanSplit => colorData != null && !colorData.IsObstacle && CanDrag && !IsRopeCutting && cells.Length > 1
             && cellVisuals != null && cellVisuals.Length == cells.Length
             && cellAppearances != null && cellAppearances.Length == cells.Length
             && cellColliders != null && cellColliders.Length == cells.Length;
@@ -76,23 +76,20 @@ namespace BlockedIn.Blocks
         public Block[] SplitBlock(Block source)
         {
             if (source == null || !source.CanSplit || !blocks.Contains(source)) return null;
-            if (!BlockSplitLayout.TryDivide(source.Cells, out List<int> first, out List<int> second)) return null;
-            var firstSet = new HashSet<int>(first);
             for (int i = 0; i < source.Cells.Length; i++)
                 for (int side = 0; side < 4; side++)
                 {
                     int next = System.Array.IndexOf(source.Cells, source.Cells[i] + connectionOffsets[side]);
-                    if (next < 0 || firstSet.Contains(i) == firstSet.Contains(next)) continue;
-                    source.SetSplitEdge(i, side, firstSet.Contains(i) ? EdgeType.Tab : EdgeType.Socket);
+                    if (next < 0) continue;
+                    source.SetSplitEdge(i, side, side < 2 ? EdgeType.Tab : EdgeType.Socket);
                 }
             blocks.Remove(source);
-            Block a = source.CreateSplitPart(first);
-            Block b = source.CreateSplitPart(second);
+            var parts = new Block[source.Cells.Length];
+            for (int i = 0; i < parts.Length; i++) parts[i] = source.CreateSplitPart(new[] { i });
             source.enabled = false;
-            Register(a);
-            Register(b);
+            foreach (Block part in parts) Register(part);
             Destroy(source.gameObject);
-            return new[] { a, b };
+            return parts;
         }
     }
 }

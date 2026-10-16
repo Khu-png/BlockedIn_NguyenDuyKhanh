@@ -15,3 +15,4 @@ MonoBehaviour:
   colorId: 5
   material: {fileID: 2100000, guid: 79164fd23ffa4b9cbd6bdee90f6e31d4, type: 2}
   icon: {fileID: 21300000, guid: a1c49c8287848d14d9b3db03a387bda3, type: 3}
+  iconTint: {r: 1, g: 0.8, b: 0.5, a: 1}

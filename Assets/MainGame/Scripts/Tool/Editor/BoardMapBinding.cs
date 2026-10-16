@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed partial class BoardMapWindow
+    public partial class BoardMapWindow
     {
         [SerializeField] string targetEditorId;
 

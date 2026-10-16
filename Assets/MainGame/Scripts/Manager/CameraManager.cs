@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 
 namespace BlockedIn.CameraTools
 {
-    public sealed class CameraManager : MonoBehaviour
+    public sealed partial class CameraManager : MonoBehaviour
     {
         [SerializeField] Camera mainCamera;
         [Tooltip("Optional screen-aligned UI rectangle reserved for the board.")]
@@ -96,30 +96,6 @@ namespace BlockedIn.CameraTools
             if (introActive) ApplyLevelIntro();
             FitBackground();
             FitBoardFrame();
-        }
-
-        void FitBackground()
-        {
-            if (mainCamera == null || backgroundPrefab == null) return;
-            if (background == null) background = Instantiate(backgroundPrefab, mainCamera.transform);
-            if (background.sprite == null) return;
-            background.transform.localPosition = new Vector3(0, 0, mainCamera.farClipPlane - 1);
-            background.transform.localRotation = Quaternion.identity;
-            Vector2 size = background.sprite.bounds.size;
-            float height = mainCamera.orthographicSize * 2;
-            background.transform.localScale = new Vector3(height * mainCamera.aspect / size.x, height / size.y, 1);
-        }
-
-        void FitBoardFrame()
-        {
-            if (board == null || boardFramePrefab == null) return;
-            if (boardFrame == null) boardFrame = Instantiate(boardFramePrefab);
-            boardFrame.transform.SetParent(board.transform, false);
-            boardFrame.transform.localPosition = new Vector3(0, -.3f, 0);
-            boardFrame.transform.localRotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
-            float border = board.outerWalls ? 2 : 0;
-            boardFrame.drawMode = SpriteDrawMode.Sliced;
-            boardFrame.size = new Vector2(board.columns + border + .4f, board.rows + border + .4f);
         }
 
         Vector2Int GridSize()

@@ -8,6 +8,7 @@ public sealed class Gameplay : UICanvas
     [SerializeField] Text timerText;
     [SerializeField] Text coinText;
     [SerializeField] TimeFreezeView timeFreezeView;
+    [SerializeField] HammerPowerup hammerPowerup;
     [SerializeField] UnityEvent blockBreakClicked = new UnityEvent();
     [SerializeField] UnityEvent timeFreezeClicked = new UnityEvent();
     [SerializeField] UnityEvent settingsClicked = new UnityEvent();
@@ -62,7 +63,7 @@ public sealed class Gameplay : UICanvas
         FinishCloseSettings();
         LevelManager.Ins.OnReplay();
     }
-    public void OnBlockBreak() { SoundManager.Play(SoundManager.ButtonSound); blockBreakClicked.Invoke(); }
+    public void OnBlockBreak() { SoundManager.Play(SoundManager.ButtonSound); if (hammerPowerup != null) hammerPowerup.Toggle(); blockBreakClicked.Invoke(); }
     public void OnTimeFreeze()
     {
         if (timeFreezeView == null || !timeFreezeView.TryPlayIntro()) return;
@@ -70,6 +71,8 @@ public sealed class Gameplay : UICanvas
     }
     public void OnSettings()
     {
+        if (hammerPowerup != null && hammerPowerup.IsStriking) return;
+        if (hammerPowerup != null && hammerPowerup.IsActive) hammerPowerup.Cancel();
         if (settingsOpen) { OnCloseSettings(); return; }
         if (settingsPanel == null || !GameManager.IsState(GameState.Gameplay)) return;
         if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
@@ -123,7 +126,11 @@ public sealed class Gameplay : UICanvas
         lastCoins = -1;
         LevelManager.Ins.OnPlay();
     }
-    public override void BackKey() => OnCloseSettings();
+    public override void BackKey()
+    {
+        if (hammerPowerup != null && hammerPowerup.IsActive) hammerPowerup.Cancel();
+        else OnCloseSettings();
+    }
     public void OnToggleMusic()
     {
         if (!settingsOpen || SoundManager.Ins == null) return;

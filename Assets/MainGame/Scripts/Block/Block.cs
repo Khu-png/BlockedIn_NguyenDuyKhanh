@@ -116,7 +116,7 @@ namespace BlockedIn.Blocks
 
         public bool BeginDrag(Camera camera = null)
         {
-            if (board == null || !CanDrag) return false;
+            if (board == null || board.PowerupBusy || !CanDrag) return false;
             dragging = true;
             foreach (Block item in board.Blocks) if (item != null) item.RefreshDockPorts();
             board.ResetDragGuidance(this);

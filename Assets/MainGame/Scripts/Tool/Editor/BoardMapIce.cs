@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed partial class BoardMapWindow
+    public partial class BoardMapWindow
     {
         [UnityEngine.SerializeField] BlockIceData[] frozenColors = Array.Empty<BlockIceData>();
 

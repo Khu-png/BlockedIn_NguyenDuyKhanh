@@ -24,6 +24,7 @@ namespace BlockedIn.Blocks.Editor
                 Sprite icon = AssetDatabase.LoadAssetAtPath<Sprite>(
                     "Assets/MainGame/Resrouces/BlockedIn/BlockedIn/images/game/blocks/Symbol_" + colors[i] + ".png");
                 color.Configure(i, material, icon);
+                color.SetObstacle(colors[i] == "Obstacle");
                 AssetDatabase.CreateAsset(color, path);
             }
             AssetDatabase.SaveAssets();

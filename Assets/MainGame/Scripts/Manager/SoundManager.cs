@@ -115,6 +115,12 @@ public class SoundManager : Singleton<SoundManager>
         soundSource.PlayOneShot(clip);
     }
 
+    public void PlayEffect(AudioClip clip, float volume = 1f)
+    {
+        if (!isLoaded || !isSoundEnabled || clip == null || soundSource == null) return;
+        soundSource.PlayOneShot(clip, Mathf.Clamp01(volume));
+    }
+
     public void PlayButtonSound(string id = ButtonSound)
     {
         if (!isLoaded || !isSoundEnabled) return;

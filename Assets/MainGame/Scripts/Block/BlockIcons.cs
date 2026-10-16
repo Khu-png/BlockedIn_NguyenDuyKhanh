@@ -47,6 +47,7 @@ namespace BlockedIn.Blocks
             {
                 if (renderer == null) continue;
                 renderer.sprite = sprite;
+                renderer.color = colorData != null ? colorData.IconTint : Color.white;
                 renderer.enabled = sprite != null;
                 if (sprite == null) continue;
                 float size = Mathf.Max(sprite.bounds.size.x, sprite.bounds.size.y);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed partial class BoardMapWindow
+    public partial class BoardMapWindow
     {
         void SaveAsLevel()
         {
@@ -38,6 +38,7 @@ namespace BlockedIn.EditorTools
 
         void Load()
         {
+            CancelAssemblyDrag();
             if (!mapAsset.IsValid) throw new InvalidOperationException("Invalid map data: dimensions must be 1 to 32 and cell count must equal rows * columns.");
             Undo.RecordObject(this, "Load board map");
             columns = mapAsset.columns;
@@ -54,6 +55,12 @@ namespace BlockedIn.EditorTools
             levelNumber = Mathf.Max(1, mapAsset.levelNumber);
             timeLimit = Mathf.Max(1, mapAsset.timeLimit);
             NormalizeFloor();
+            if (UsesAssemblyWorkflow)
+            {
+                assemblyStage = 2;
+                editShape = true;
+                assemblyStatus = "Loaded layout. Arrange pieces directly, or start a new complete shape in Build Shape.";
+            }
         }
 
     }

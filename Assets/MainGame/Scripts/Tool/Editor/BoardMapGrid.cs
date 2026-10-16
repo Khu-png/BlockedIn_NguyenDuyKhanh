@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BlockedIn.EditorTools
 {
-    public sealed partial class BoardMapWindow
+    public partial class BoardMapWindow
     {
         void EnsureBlocks()
         {
@@ -35,6 +35,7 @@ namespace BlockedIn.EditorTools
                         : cells[index] == MapTools.BoardCell.Wall ? new Color(.85f, .68f, .28f)
                         : new Color(.20f, .52f, .65f);
                     EditorGUI.DrawRect(rect, tint);
+                    DrawAssemblyBridge(rect, index, tint);
                     if (editShape && selectedCells.Contains(index))
                     {
                         EditorGUI.DrawRect(new Rect(rect.x, rect.y, rect.width, 2), Color.white);
@@ -50,6 +51,8 @@ namespace BlockedIn.EditorTools
                     GUI.Label(rect, label, new GUIStyle(EditorStyles.centeredGreyMiniLabel) { normal = { textColor = GUI.contentColor } });
                     GUI.contentColor = oldColor;
                 }
+            DrawAssemblyPorts(grid, size);
+            DrawAssemblyDragPreview(grid, size);
         }
 
         static Rect CellRect(Rect grid, float size, int x, int y)
@@ -60,6 +63,8 @@ namespace BlockedIn.EditorTools
         void PaintGrid(Rect grid, float size)
         {
             Event e = Event.current;
+            if (HandleAssemblyDrag(e, grid, size)) return;
+            if (HandleAssemblyClick(e, grid, size)) return;
             if (e.type == EventType.MouseDown && e.button == 0 && grid.Contains(e.mousePosition))
             {
                 int x = Mathf.FloorToInt((e.mousePosition.x - grid.x) / size);
@@ -73,6 +78,7 @@ namespace BlockedIn.EditorTools
                     return;
                 }
                 painting = true;
+                BeginPaintStroke();
                 Undo.IncrementCurrentGroup();
                 paintUndoGroup = Undo.GetCurrentGroup();
             }
@@ -80,7 +86,8 @@ namespace BlockedIn.EditorTools
             {
                 int x = Mathf.FloorToInt((e.mousePosition.x - grid.x) / size);
                 int y = Mathf.FloorToInt((e.mousePosition.y - grid.y) / size);
-                Run(() => PaintCell(y * columns + x));
+                int strokeGroup = paintStrokeGroup;
+                Run(() => PaintStrokeCell(y * columns + x, strokeGroup));
                 e.Use();
                 Repaint();
             }
@@ -93,7 +100,7 @@ namespace BlockedIn.EditorTools
 
         void PaintCell(int index)
         {
-            BlockColorData color = brushIndex == 2 ? BlockAssetBuilder.LoadColor("Blue") : null;
+            BlockColorData color = brushIndex == 2 ? (UsesAssemblyWorkflow && assemblyColor != null ? assemblyColor : BlockAssetBuilder.LoadColor("Blue")) : null;
             if (brushIndex == 2 && color == null)
             {
                 BlockAssetBuilder.CreateColors();
@@ -105,6 +112,7 @@ namespace BlockedIn.EditorTools
             blockColors[index] = color;
             blockGroups[index] = 0;
             RepairGroups();
+
         }
 
         void OpenPalette(Rect rect, int index)
@@ -125,6 +133,7 @@ namespace BlockedIn.EditorTools
                 ropeColors[cell] = inheritedRope;
                 if (color == null) { blockEdges[cell] = default; blockGroups[cell] = 0; ropeColors[cell] = null; }
             }
+
             Repaint();
         }
 

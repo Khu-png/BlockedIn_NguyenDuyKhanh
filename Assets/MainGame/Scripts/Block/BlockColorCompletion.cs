@@ -20,10 +20,7 @@ namespace BlockedIn.Blocks
 
         bool CanCheckCompletion()
         {
-            if (PowerupBusy || Time.time < completionNotBefore) return false;
-            foreach (Block block in blocks)
-                if (block != null && (block.IsDragging || block.IsSettling)) return false;
-            return true;
+            return !PowerupBusy && Time.time >= completionNotBefore;
         }
 
         void LateUpdate()

@@ -3667,6 +3667,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9100000000009001}
   - component: {fileID: 6855908443658275093}
   - component: {fileID: 5433661820332681788}
   - component: {fileID: 4195521421348175603}
@@ -3737,6 +3738,7 @@ MonoBehaviour:
   levelText: {fileID: 350769874948034496}
   timerText: {fileID: 3044923283905832169}
   coinText: {fileID: 2233817683065995847}
+  hammerPowerup: {fileID: 9100000000009001}
   timeFreezeView: {fileID: 9100000000005081}
   blockBreakClicked:
     m_PersistentCalls:
@@ -5089,3 +5091,25 @@ MonoBehaviour:
   iconGlow: {fileID: 9100000000006363}
   barGlow: {fileID: 9100000000006373}
   barCore: {fileID: 9100000000006383}
+--- !u!114 &9100000000009001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822176183319765058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f318bdd0f7426299115f878406c72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HammerPowerup
+  button: {fileID: 8391502899015386825}
+  launchOrigin: {fileID: 1925714151872822280}
+  feedbackPrefab: {fileID: 6337939006017620970, guid: f0da6954260958c43af70fa52fd4a7d7, type: 3}
+  timeFreeze: {fileID: 9100000000005081}
+  dimmedHud:
+  - {fileID: 350769874948034496}
+  - {fileID: 3044923283905832169}
+  - {fileID: 2233817683065995847}
+  - {fileID: 1970103822055424205}
+  - {fileID: 8458109256483253266}

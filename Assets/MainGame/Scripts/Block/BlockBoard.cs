@@ -15,6 +15,11 @@ namespace BlockedIn.Blocks
         [SerializeField] List<Block> blocks = new List<Block>();
         public IReadOnlyList<Block> Blocks => blocks;
         public GeneratedBoard Layout => layout;
+        public bool HasPlayerInteracted { get; private set; }
+        public void NotifyBlockPressed(Block block)
+        {
+            if (block != null && blocks.Contains(block)) HasPlayerInteracted = true;
+        }
         public Camera ViewCamera => cameraManager != null ? cameraManager.MainCamera : viewCamera;
 
         public void Configure(GeneratedBoard board, CameraManager cameraController, Camera camera = null)
