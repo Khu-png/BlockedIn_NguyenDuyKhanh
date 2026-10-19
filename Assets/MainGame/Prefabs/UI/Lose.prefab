@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000001005}
   - component: {fileID: 3185913081751767314}
   - component: {fileID: 1025617781165790822}
   - component: {fileID: 4035532486871303265}
@@ -141,6 +142,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000001002}
   - component: {fileID: 464124864989611111}
   - component: {fileID: 6758214903663533189}
   - component: {fileID: 8742881824026723587}
@@ -312,6 +314,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000001000}
   - component: {fileID: 6781077740298778369}
   - component: {fileID: 465146877102953185}
   - component: {fileID: 6503372448640491340}
@@ -366,6 +369,7 @@ MonoBehaviour:
   - {fileID: 2952762369401750491}
   popups: []
   levelText: {fileID: 4730858570935830977}
+  reveal: {fileID: 9200000000001000}
 --- !u!225 &6503372448640491340
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -408,6 +412,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000001003}
   - component: {fileID: 1258666523979228600}
   - component: {fileID: 3269737223904679159}
   - component: {fileID: 5159494489890849097}
@@ -484,6 +489,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000001001}
   - component: {fileID: 4366397434498158097}
   - component: {fileID: 2975196240261028931}
   - component: {fileID: 7335460595696123941}
@@ -750,6 +756,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000001004}
   - component: {fileID: 1203914562557116578}
   - component: {fileID: 3986753543811377597}
   - component: {fileID: 588770966387334052}
@@ -1167,3 +1174,96 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!225 &9200000000001001
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696942480485743721}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &9200000000001002
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012695502213453164}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &9200000000001003
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4661292155430574679}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &9200000000001004
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7974482554712514999}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &9200000000001005
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124579640356955229}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &9200000000001000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586286892274994817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7d6e779f3e4c278aecbb64e960b1b4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  parts:
+  - rect: {fileID: 4366397434498158097}
+    group: {fileID: 9200000000001001}
+    delay: 0.02
+    action: 0
+  - rect: {fileID: 464124864989611111}
+    group: {fileID: 9200000000001002}
+    delay: 0.18
+    action: 0
+  - rect: {fileID: 1258666523979228600}
+    group: {fileID: 9200000000001003}
+    delay: 0.24
+    action: 0
+  - rect: {fileID: 1203914562557116578}
+    group: {fileID: 9200000000001004}
+    delay: 0.3
+    action: 0
+  - rect: {fileID: 3185913081751767314}
+    group: {fileID: 9200000000001005}
+    delay: 0.38
+    action: 1

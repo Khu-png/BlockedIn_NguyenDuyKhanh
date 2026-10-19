@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public sealed class TimeFreezeView : MonoBehaviour
 {
+    [SerializeField] FreezeCornerSnow cornerSnow;
     [SerializeField] CanvasGroup frostGroup;
     [SerializeField] CanvasGroup timerFrostGroup;
     [SerializeField] CanvasGroup freezeBarGroup;
@@ -34,6 +35,7 @@ public sealed class TimeFreezeView : MonoBehaviour
             && GameManager.IsState(GameState.Gameplay) && !loading;
         float seconds = playing ? manager.RemainingTimeFreeze : 0f;
         bool frozen = seconds > 0f;
+        if (cornerSnow != null) cornerSnow.SetFrozen(frozen);
         bool hammerBusy = playing && manager.CurrentLevel.blockGameplay != null && manager.CurrentLevel.blockGameplay.PowerupBusy;
         if (freezeButton != null) freezeButton.interactable = playing && !hammerBusy && !frozen && !IsIntroducing && Time.timeScale > 0f;
         if (frostGroup != null)
@@ -97,6 +99,7 @@ public sealed class TimeFreezeView : MonoBehaviour
     }
     void ClearVisuals()
     {
+        if (cornerSnow != null) cornerSnow.Clear();
         if (frostGroup != null) frostGroup.alpha = 0f;
         if (timerFrostGroup != null) timerFrostGroup.alpha = 0f;
         if (freezeBarGroup != null) freezeBarGroup.alpha = 0f;

@@ -19,11 +19,12 @@ namespace BlockedIn.EditorTools
             for (int i = 0; i < blockEdges.Length; i++) blockEdges[i].Normalize();
         }
 
-        void DrawGrid()
+        void DrawGrid(Rect grid)
         {
             EnsureBlocks();
-            const float size = 30;
-            Rect grid = GUILayoutUtility.GetRect(columns * size, rows * size, GUILayout.ExpandWidth(false));
+            float size = cellSize;
+            if (gridLabel == null) gridLabel = new GUIStyle(EditorStyles.centeredGreyMiniLabel);
+            gridLabel.fontSize = size >= 36 ? 12 : 10;
             PaintGrid(grid, size);
             var groupLabels = GroupLabels();
             for (int y = 0; y < rows; y++)
@@ -43,12 +44,13 @@ namespace BlockedIn.EditorTools
                         EditorGUI.DrawRect(new Rect(rect.x, rect.y, 2, rect.height), Color.white);
                         EditorGUI.DrawRect(new Rect(rect.xMax - 2, rect.y, 2, rect.height), Color.white);
                     }
-                    string label = blockColors[index] != null ? (blockGroups[index] > 0 ? "G" + groupLabels[blockGroups[index]] : "B") : cells[index] == MapTools.BoardCell.Wall ? "W" : "·";
+                    string label = blockColors[index] != null ? (blockGroups[index] > 0 ? "G" + groupLabels[blockGroups[index]] : "B") : cells[index] == MapTools.BoardCell.Wall ? "W" : ".";
                     if (IceCount(index) > 0) label += " I";
                     if (RopeColor(index) != null) label += " R";
                     Color oldColor = GUI.contentColor;
                     GUI.contentColor = tint.grayscale > .5f ? Color.black : Color.white;
-                    GUI.Label(rect, label, new GUIStyle(EditorStyles.centeredGreyMiniLabel) { normal = { textColor = GUI.contentColor } });
+                    gridLabel.normal.textColor = GUI.contentColor;
+                    GUI.Label(rect, label, gridLabel);
                     GUI.contentColor = oldColor;
                 }
             DrawAssemblyPorts(grid, size);

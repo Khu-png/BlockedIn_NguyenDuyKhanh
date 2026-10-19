@@ -1054,6 +1054,7 @@ RectTransform:
   - {fileID: 9100000000005042}
   - {fileID: 9100000000005052}
   - {fileID: 9100000000005062}
+  - {fileID: 9300000000000001}
   m_Father: {fileID: 6855908443658275093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3667,6 +3668,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 9200000000002000}
   - component: {fileID: 9100000000009001}
   - component: {fileID: 6855908443658275093}
   - component: {fileID: 5433661820332681788}
@@ -3769,6 +3771,7 @@ MonoBehaviour:
   settingsDimmer: {fileID: 9000000000002003}
   settingsSlideDuration: 0.24
   settingsStagger: 0.035
+  resultFeedback: {fileID: 9200000000002000}
 --- !u!225 &4195521421348175603
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3805,6 +3808,7 @@ MonoBehaviour:
   introGroup: {fileID: 9100000000005604}
   introDuration: 1.25
   frozenTimerColor: {r: 0.1, g: 0.45, b: 0.75, a: 1}
+  cornerSnow: {fileID: 9300000000000003}
 --- !u!1 &8890520614855870904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5113,3 +5117,82 @@ MonoBehaviour:
   - {fileID: 2233817683065995847}
   - {fileID: 1970103822055424205}
   - {fileID: 8458109256483253266}
+--- !u!114 &9200000000002000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822176183319765058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddb731c77694d6eb8f3c29b6a96a1c6, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  timerRoot: {fileID: 1609203776956843722}
+  timerDigits: {fileID: 3044923283905832169}
+--- !u!1 &9300000000000000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9300000000000001}
+  - component: {fileID: 9300000000000002}
+  - component: {fileID: 9300000000000003}
+  m_Layer: 5
+  m_Name: FreezeCornerSnow
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!224 &9300000000000001
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9300000000000000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9100000000005001}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9300000000000002
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9300000000000000}
+  m_CullTransparentMesh: 1
+--- !u!114 &9300000000000003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9300000000000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e343b67eabbb4d51b892306407ce148c, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  corners:
+  - {fileID: 9100000000005012}
+  - {fileID: 9100000000005022}
+  - {fileID: 9100000000005032}
+  - {fileID: 9100000000005042}
+  emissionRate: 6

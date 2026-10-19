@@ -4,6 +4,8 @@ using UnityEngine.Events;
 
 public sealed class Gameplay : UICanvas
 {
+    [SerializeField] GameplayResultFeedback resultFeedback;
+    public GameplayResultFeedback ResultFeedback => resultFeedback;
     [SerializeField] Text levelText;
     [SerializeField] Text timerText;
     [SerializeField] Text coinText;

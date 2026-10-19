@@ -32,7 +32,7 @@ namespace BlockedIn.EditorTools
 
         protected virtual void OnEnable()
         {
-            minSize = new Vector2(390, 680);
+            minSize = new Vector2(480, 540);
             if (cells == null || cells.Length != columns * rows) Resize(columns, rows);
             EnsureBlocks();
             NormalizeFloor();
@@ -51,27 +51,7 @@ namespace BlockedIn.EditorTools
             DisableBoardBinding();
         }
 
-        protected virtual void OnGUI()
-        {
-            EditorGUILayout.LabelField("Blocked In — " + WindowTitle, EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox(UsesAssemblyWorkflow
-                ? "Build a complete shape, cut it into pieces, then arrange the puzzle. Save builds the playable level automatically."
-                : "Paint blocks and edit their colors and ports. Use Edit Shape to merge or split selected cells. Save builds the playable level automatically.", MessageType.Info);
-            using (new EditorGUI.DisabledScope(EditorApplication.isPlayingOrWillChangePlaymode))
-            {
-                DrawSettings();
-                using (var view = new EditorGUILayout.ScrollViewScope(scroll, GUILayout.MinHeight(160), GUILayout.MaxHeight(500)))
-                {
-                    scroll = view.scrollPosition;
-                    DrawGrid();
-                }
-                EditorGUILayout.LabelField("Floor: playable area    Wall: obstacle    B: single block    G: merged group", EditorStyles.miniLabel);
-                DrawStorage();
-                EditorGUILayout.Space();
-                DrawPrefabSettings();
-
-            }
-        }
+        protected virtual void OnGUI() => DrawWorkspace();
 
         void Run(Action action)
         {
@@ -159,9 +139,6 @@ namespace BlockedIn.EditorTools
                 Resize(newColumns, newRows);
             }
             outerWalls = EditorGUILayout.Toggle("Outer wall border", outerWalls);
-            DrawShapeTools();
-            if (UsesAssemblyWorkflow) DrawAssemblyBrushes();
-            else DrawClassicBrushes();
         }
 
         void DrawStorage()
@@ -169,15 +146,8 @@ namespace BlockedIn.EditorTools
             mapAsset = (BoardMap)EditorGUILayout.ObjectField("Map data", mapAsset, typeof(BoardMap), false);
             levelNumber = Mathf.Max(1, EditorGUILayout.IntField("Level number", levelNumber));
             timeLimit = Mathf.Max(1, EditorGUILayout.FloatField("Time limit (seconds)", timeLimit));
-            using (new EditorGUILayout.HorizontalScope())
-            {
-                if (GUILayout.Button("Save as Level")) Run(SaveAsLevel);
-                using (new EditorGUI.DisabledScope(mapAsset == null))
-                {
-                    if (GUILayout.Button("Save")) Run(() => SaveTo(mapAsset));
-                    if (GUILayout.Button("Load")) Run(Load);
-                }
-            }
+            using (new EditorGUI.DisabledScope(mapAsset == null))
+                if (GUILayout.Button("Load Selected Map", GUILayout.Height(24))) Run(Load);
         }
 
         void DrawGeneration()

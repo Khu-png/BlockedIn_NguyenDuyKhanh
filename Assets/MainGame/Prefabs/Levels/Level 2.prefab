@@ -4988,6 +4988,14 @@ MonoBehaviour:
   shakeDuration: 0.2
   shakeDistance: 0.055
   shakeAngle: 4
+  shardMaterial: {fileID: 2100000, guid: e11daf8c51a0cee4fa0f3997dfe60686, type: 2}
+  shardMeshes:
+  - {fileID: 4300000, guid: d807d27b37a5710459c6b1628dea4a75, type: 2}
+  - {fileID: 4300000, guid: c9fc8313ded72fb4faf35cae60639034, type: 2}
+  - {fileID: 4300000, guid: d9ac3cbcc20f0e94f904150ea32ece6f, type: 2}
+  - {fileID: 4300000, guid: ec54e3a760a4fcf4a9782bd76f84b960, type: 2}
+  - {fileID: 4300000, guid: 345f339f2c3acf74299a6cef91209838, type: 2}
+  - {fileID: 4300000, guid: 64985d8e7396d9c49a598bcca6d6ba7b, type: 2}
 --- !u!1 &682265492227581121
 GameObject:
   m_ObjectHideFlags: 0
@@ -56719,6 +56727,14 @@ MonoBehaviour:
   shakeDuration: 0.2
   shakeDistance: 0.055
   shakeAngle: 4
+  shardMaterial: {fileID: 2100000, guid: e11daf8c51a0cee4fa0f3997dfe60686, type: 2}
+  shardMeshes:
+  - {fileID: 4300000, guid: d807d27b37a5710459c6b1628dea4a75, type: 2}
+  - {fileID: 4300000, guid: c9fc8313ded72fb4faf35cae60639034, type: 2}
+  - {fileID: 4300000, guid: d9ac3cbcc20f0e94f904150ea32ece6f, type: 2}
+  - {fileID: 4300000, guid: ec54e3a760a4fcf4a9782bd76f84b960, type: 2}
+  - {fileID: 4300000, guid: 345f339f2c3acf74299a6cef91209838, type: 2}
+  - {fileID: 4300000, guid: 64985d8e7396d9c49a598bcca6d6ba7b, type: 2}
 --- !u!1 &8757188984254973890
 GameObject:
   m_ObjectHideFlags: 0

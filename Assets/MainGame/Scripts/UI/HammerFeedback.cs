@@ -9,8 +9,9 @@ public sealed class HammerFeedback : MonoBehaviour
     [SerializeField] AudioClip breakSound;
     [SerializeField, Range(0, 1)] float breakVolume = .45f;
     [SerializeField, Min(.1f)] float flightDuration = .52f;
-    [SerializeField, Min(.1f)] float swingDuration = .26f;
+    [SerializeField, Min(.1f)] float swingDuration = .2f;
     [SerializeField, Min(.1f)] float returnDuration = .5f;
+    [SerializeField, Range(0,.15f)] float anticipationDuration=.065f;
     Vector3 launchPoint;
     float fullSize;
     static readonly Vector3 Grip = new Vector3(0, -1.15f, 0);
@@ -42,13 +43,22 @@ public sealed class HammerFeedback : MonoBehaviour
     public IEnumerator Swing(Vector3 target, Quaternion rotation)
     {
         Vector3 grip = target - Contact(rotation) * ((head.localPosition - Grip) * fullSize);
+        float anticipation=0;
+        while(anticipation<anticipationDuration)
+        {
+            anticipation+=Time.deltaTime;
+            float t=anticipationDuration>0?Mathf.Clamp01(anticipation/anticipationDuration):1;
+            Quaternion pose=Raised(rotation)*Quaternion.Euler(0,0,-9*Mathf.Sin(t*Mathf.PI*.5f));
+            transform.rotation=pose;transform.position=grip-pose*(Grip*fullSize);
+            yield return null;
+        }
         float elapsed = 0;
         while (elapsed < swingDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / swingDuration);
-            float strike = Mathf.Clamp01((t-.25f)/.75f);
-            Quaternion pose = Quaternion.Slerp(Raised(rotation), Contact(rotation), strike*strike);
+            Quaternion ready=Raised(rotation)*Quaternion.Euler(0,0,-9);
+            Quaternion pose = Quaternion.Slerp(ready, Contact(rotation), t*t*t);
             transform.rotation = pose;
             transform.position = grip - pose * (Grip * fullSize);
             if (t < 1) yield return null;
@@ -78,7 +88,7 @@ public sealed class HammerFeedback : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / returnDuration);
-            float travel = t*t;
+            float travel = Mathf.SmoothStep(0,1,t);
             Vector3 point = (1-travel)*(1-travel)*start + 2*(1-travel)*travel*bend + travel*travel*launchPoint;
             point += rotation * Vector3.up * (Mathf.Sin(Mathf.Clamp01(t/.3f)*Mathf.PI)*.18f);
             transform.localScale = Vector3.one * fullSize * Mathf.Lerp(1, .24f, travel);
@@ -86,6 +96,15 @@ public sealed class HammerFeedback : MonoBehaviour
             PoseHead(point, Contact(rotation) * roll);
             yield return null;
         }
+    }
+    public void ResetForReuse()
+    {
+        if (impact != null) impact.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (audioSource != null) audioSource.Stop();
+        transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        transform.localScale = Vector3.one;
+        launchPoint = Vector3.zero;
+        fullSize = 1f;
     }
     void PoseHead(Vector3 position, Quaternion rotation)
     {

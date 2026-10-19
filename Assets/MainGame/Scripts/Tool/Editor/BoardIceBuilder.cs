@@ -42,6 +42,7 @@ namespace BlockedIn.EditorTools
             text.fontSize=96; text.characterSize=.045f; text.anchor=TextAnchor.MiddleCenter; text.color=Color.white;
             textRenderer.sharedMaterial=text.font.material; textRenderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;
             BlockIceVisual presentation=root.AddComponent<BlockIceVisual>(); presentation.Configure(filter,renderer,text);
+            BlockIceShardAssets.Configure(presentation);
             block.ConfigureIce(presentation,count);
         }
         static Mesh LoadMesh(Vector2Int[] cells)
@@ -50,6 +51,12 @@ namespace BlockedIn.EditorTools
             string path=Folder+"/IceShape_"+Hash128.Compute(key.ToString())+".asset";
             Mesh mesh=AssetDatabase.LoadAssetAtPath<Mesh>(path);
             if(mesh==null) { mesh=BlockIceMeshBuilder.Build(cells); AssetDatabase.CreateAsset(mesh,path); }
+            if (!mesh.HasVertexAttribute(UnityEngine.Rendering.VertexAttribute.TexCoord3) || mesh.name != "BlockIceShell_Crystal_V2")
+            {
+                Mesh updated=BlockIceMeshBuilder.Build(cells);
+                EditorUtility.CopySerialized(updated,mesh);EditorUtility.SetDirty(mesh);
+                UnityEngine.Object.DestroyImmediate(updated);
+            }
             return mesh;
         }
         static Vector3 CountPosition(Vector2Int[] cells)

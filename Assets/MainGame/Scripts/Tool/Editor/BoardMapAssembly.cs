@@ -16,8 +16,6 @@ namespace BlockedIn.EditorTools
         void DrawAssemblyTools()
         {
             EnsureGroups();
-            int next = GUILayout.Toolbar(assemblyStage, new[] { "1. Build Shape", "2. Cut Pieces", "3. Arrange" });
-            if (next != assemblyStage) Run(() => SetAssemblyStage(next));
             editShape = assemblyStage != 0 || selectAssemblyGroups;
             string[] tips = {
                 "Hold and drag to draw one complete group. Release to finish it. The next stroke creates a separate group, even beside the same color.",
@@ -51,7 +49,7 @@ namespace BlockedIn.EditorTools
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Fill Floor")) Fill(MapTools.BoardCell.Floor);
-                if (GUILayout.Button("Example 6×6")) Example();
+                if (GUILayout.Button("Example 6x6")) Example();
             }
         }
         void SetAssemblyStage(int next)

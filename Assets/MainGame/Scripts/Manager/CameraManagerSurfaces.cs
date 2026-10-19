@@ -14,11 +14,21 @@ namespace BlockedIn.CameraTools
         GeneratedBoard surfaceBoard;
         BoardCell[] surfaceCells;
         Texture2D floorMask, outlineMask;
+        Sprite fittedBackgroundSprite;
+        Vector3 fittedBackgroundSize;
         void FitBackground()
         {
             if (mainCamera == null || backgroundPrefab == null) return;
-            if (background == null) background = Instantiate(backgroundPrefab, mainCamera.transform);
+            if (background == null)
+            {
+                background = Instantiate(backgroundPrefab, mainCamera.transform);
+                fittedBackgroundSprite = null;
+            }
             if (background.sprite == null) return;
+            Vector3 cameraSize = new Vector3(mainCamera.orthographicSize, mainCamera.aspect, mainCamera.farClipPlane);
+            if (fittedBackgroundSprite == background.sprite && fittedBackgroundSize == cameraSize) return;
+            fittedBackgroundSprite = background.sprite;
+            fittedBackgroundSize = cameraSize;
             background.transform.localPosition = new Vector3(0, 0, mainCamera.farClipPlane - 1);
             background.transform.localRotation = Quaternion.identity;
             Vector2 size = background.sprite.bounds.size;

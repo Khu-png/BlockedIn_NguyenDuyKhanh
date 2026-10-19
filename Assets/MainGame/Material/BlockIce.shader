@@ -2,20 +2,18 @@ Shader "BlockedIn/BlockIce"
 {
     Properties
     {
-        _BaseColor ("Ice Tint / Fade", Color) = (.55,.87,1,.42)
-        _ReflectionMap ("Reflection Streaks", 2D) = "black" {}
-        _ClearAlpha ("Clear Center", Range(0,1)) = .12
-        _RimAlpha ("Frozen Edge", Range(0,1)) = .72
-        _RimWidth ("Frozen Edge Width", Range(.01,.3)) = .085
-        _CrackStrength ("Fine Cracks", Range(0,1)) = .34
-        _ReflectionStrength ("Glass Reflection", Range(0,1)) = .2
+        _BaseColor("Blue Ice Tint / Fade", Color)=(.12,.65,1,1)
+        _FrostMap("Patchy Frost", 2D)="gray" {}
+        _FrostOpacity("Transparent Face",Range(0,1))=.2
+        _RimOpacity("Beveled Edge",Range(0,1))=.88
+        _CrackStrength("Face Cracks",Range(0,1))=.8
     }
     SubShader
     {
         Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent" }
         Pass
         {
-            Name "IceGlass"
+            Name "BlueBeveledIce"
             Tags { "LightMode"="UniversalForward" }
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
@@ -24,68 +22,91 @@ Shader "BlockedIn/BlockIce"
             #pragma vertex Vert
             #pragma fragment Frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            TEXTURE2D(_ReflectionMap); SAMPLER(sampler_ReflectionMap);
+            TEXTURE2D(_FrostMap);SAMPLER(sampler_FrostMap);
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseColor;
-                float4 _ReflectionMap_ST;
-                float _ClearAlpha, _RimAlpha, _RimWidth, _CrackStrength, _ReflectionStrength;
+                float4 _FrostMap_ST;
+                float _FrostOpacity,_RimOpacity,_CrackStrength;
             CBUFFER_END
             struct Attributes
             {
-                float4 positionOS : POSITION;
-                float3 normalOS : NORMAL;
-                float2 uv : TEXCOORD0;
-                float2 cell : TEXCOORD1;
-                float4 borders : TEXCOORD2;
+                float4 vertex:POSITION;float3 normal:NORMAL;
+                float2 uv:TEXCOORD0;float2 cell:TEXCOORD1;
+                float4 borders:TEXCOORD2;float2 layer:TEXCOORD3;
             };
             struct Varyings
             {
-                float4 positionCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
-                float2 cell : TEXCOORD1;
-                float4 borders : TEXCOORD2;
-                float3 normalWS : TEXCOORD3;
+                float4 position:SV_POSITION;float2 surface:TEXCOORD0;
+                float2 cell:TEXCOORD1;float4 borders:TEXCOORD2;
+                float2 layer:TEXCOORD3;float3 normal:TEXCOORD4;float2 groupUV:TEXCOORD5;
             };
             Varyings Vert(Attributes input)
             {
-                Varyings output;
-                output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
-                output.normalWS = TransformObjectToWorldNormal(input.normalOS);
-                output.uv = input.uv;output.cell = input.cell;output.borders = input.borders;
-                return output;
+                Varyings output;output.position=TransformObjectToHClip(input.vertex.xyz);
+                output.surface=input.vertex.xz;output.cell=input.cell;
+                output.borders=input.borders;output.layer=input.layer;output.groupUV=input.uv;
+                output.normal=TransformObjectToWorldNormal(input.normal);return output;
             }
-            float Segment(float2 p, float2 a, float2 b)
+            float SegmentDistance(float2 p,float2 a,float2 b)
             {
-                float2 edge=b-a;
-                float t=saturate(dot(p-a,edge)/dot(edge,edge));
-                float distance=length(p-a-edge*t);
-                return 1-smoothstep(.0015,.0065,distance);
+                float2 direction=b-a;
+                float along=saturate(dot(p-a,direction)/dot(direction,direction));
+                return length(p-a-direction*along);
             }
-            half4 Frag(Varyings input) : SV_Target
+            float CrackDistance(float2 p)
             {
-                float2 uv=input.cell;
-                float4 flags=input.borders;
-                // Older standalone shells use their normalized UVs as one outer contour.
-                if (dot(flags,flags)<.01 && dot(uv,uv)<.00001) { uv=input.uv;flags=1; }
-                float4 distances=float4(uv.x,1-uv.x,uv.y,1-uv.y);
-                distances=lerp(10,distances,flags);
+                float d=SegmentDistance(p,float2(.12,.25),float2(.3,.34));
+                d=min(d,SegmentDistance(p,float2(.3,.34),float2(.4,.53)));
+                d=min(d,SegmentDistance(p,float2(.4,.53),float2(.61,.6)));
+                d=min(d,SegmentDistance(p,float2(.61,.6),float2(.72,.85)));
+                d=min(d,SegmentDistance(p,float2(.4,.53),float2(.22,.62)));
+                d=min(d,SegmentDistance(p,float2(.22,.62),float2(.15,.79)));
+                d=min(d,SegmentDistance(p,float2(.61,.6),float2(.77,.54)));
+                d=min(d,SegmentDistance(p,float2(.77,.54),float2(.91,.59)));
+                return min(d,SegmentDistance(p,float2(.3,.34),float2(.39,.18)));
+            }
+            half4 Frag(Varyings input):SV_Target
+            {
+                float density=SAMPLE_TEXTURE2D(_FrostMap,sampler_FrostMap,input.surface*.52+.17).r;
+                float frost=smoothstep(.57,.86,density);
+                float4 distances=lerp(10,float4(input.cell.x,1-input.cell.x,input.cell.y,1-input.cell.y),input.borders);
                 float edge=min(min(distances.x,distances.y),min(distances.z,distances.w));
-                float rim=1-smoothstep(.005,_RimWidth,edge);
-                float frost=1-smoothstep(0,_RimWidth*2.5,edge);
-                float crack=Segment(input.uv,float2(.02,.72),float2(.29,.57));
-                crack=max(crack,Segment(input.uv,float2(.29,.57),float2(.43,.61)));
-                crack=max(crack,Segment(input.uv,float2(.29,.57),float2(.35,.38)));
-                crack=max(crack,Segment(input.uv,float2(.98,.2),float2(.76,.33)));
-                crack=max(crack,Segment(input.uv,float2(.76,.33),float2(.68,.29)));
-                float reflection=SAMPLE_TEXTURE2D(_ReflectionMap,sampler_ReflectionMap,input.uv*float2(.65,1)+float2(.19,.07)).r;
-                float sweep=input.uv.x+input.uv.y*.65;
-                float band=exp2(-240*pow(sweep-.68,2))*.45;
-                float gleam=saturate(reflection*.65+band)*_ReflectionStrength;
-                float side=1-abs(normalize(input.normalWS).y);
-                float alpha=saturate(lerp(_ClearAlpha,_RimAlpha,rim)+frost*.07+crack*_CrackStrength+gleam+side*.15);
-                float3 color=lerp(_BaseColor.rgb,float3(.9,.98,1),saturate(rim*.85+crack*.75+gleam*2));
-                color=lerp(color,float3(.28,.7,.98),side*.25);
-                return half4(color,alpha*saturate(_BaseColor.a/.42));
+                float nearEdge=1-smoothstep(.04,.27,edge);
+                float3 color=lerp(_BaseColor.rgb,float3(.88,.97,1),frost*(.12+nearEdge*.64));
+                float opacity=_FrostOpacity*.8+frost*(.05+nearEdge*.31);
+                if(input.layer.x>.5)
+                {
+                    float depth=saturate(input.layer.y);
+                    float facing=saturate(dot(normalize(input.normal),normalize(float3(-.4,.8,.3)))*.5+.5);
+                    color=lerp(float3(.025,.18,.5),float3(.08,.48,.86),facing);
+                    color=lerp(color,float3(.24,.73,1),(1-depth)*.3);
+                    float glint=(1-smoothstep(.02,.12,depth))*facing*(.2+.8*smoothstep(.58,.85,density));
+                    color=lerp(color,float3(.91,.99,1),glint*.8);
+                    color=lerp(color,float3(.78,.94,1),frost*.16);
+                    float patch=smoothstep(.43,.8,density);
+                    opacity=_RimOpacity*(.16+patch*.4);
+                    color=lerp(_BaseColor.rgb,float3(.42,.83,1),patch*.45);
+                    if(input.layer.x>1.5) { color*=.75;opacity*=.7; }
+                }
+                if(input.layer.x>2.5)
+                {
+                    float lighting=saturate(dot(normalize(input.normal),normalize(float3(-.5,.9,.4)))*.5+.5);
+                    color=lerp(float3(.035,.3,.63),float3(.28,.79,1),lighting);
+                    float highlight=pow(lighting,8)*.65;
+                    color=lerp(color,float3(.82,.97,1),highlight);
+                    opacity=.9;
+                }
+                if(input.layer.x<.5)
+                {
+                    float distance=CrackDistance(input.groupUV);
+                    float aa=max(fwidth(distance)*.65,.001);
+                    float core=(1-smoothstep(.003-aa,.003+aa,distance))*_CrackStrength;
+                    float outline=(1-smoothstep(.009-aa,.009+aa,distance))*_CrackStrength;
+                    color=lerp(color,float3(.025,.28,.59),outline*.65);
+                    color=lerp(color,float3(.71,.94,1),core);
+                    opacity=max(opacity,outline*.28+core*.57);
+                }
+                return half4(color,saturate(opacity)*_BaseColor.a);
             }
             ENDHLSL
         }

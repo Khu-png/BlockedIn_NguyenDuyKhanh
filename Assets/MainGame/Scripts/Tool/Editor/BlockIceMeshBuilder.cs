@@ -8,62 +8,113 @@ namespace BlockedIn.EditorTools
         public static Mesh Build(Vector2Int[] cells)
         {
             var occupied = new HashSet<Vector2Int>(cells);
-            var vertices = new List<Vector3>(); var uv = new List<Vector2>(); var triangles = new List<int>();
-            var localUv = new List<Vector2>();var borders = new List<Vector4>();
-            Vector2Int activeCell = default;
-            Vector4 activeBorders = default;
+            var vertices = new List<Vector3>();var triangles = new List<int>();
+            var uv = new List<Vector2>();var local = new List<Vector2>();
+            var borders = new List<Vector4>();var surfaces = new List<Vector2>();
             Vector2 min = cells[0], max = cells[0];
-            foreach (Vector2Int cell in cells) { min=Vector2.Min(min,cell); max=Vector2.Max(max,cell); }
-            Vector2 size=max-min+Vector2.one;
-            foreach (Vector2Int cell in cells)
+            foreach (var cell in cells) { min = Vector2.Min(min,cell);max = Vector2.Max(max,cell); }
+            Vector2 size = max-min+Vector2.one;
+            foreach (var cell in cells)
             {
-                activeCell = cell;
-                activeBorders = new Vector4(occupied.Contains(cell+Vector2Int.left)?0:1,
-                    occupied.Contains(cell+Vector2Int.right)?0:1,
-                    occupied.Contains(cell+Vector2Int.down)?0:1,
-                    occupied.Contains(cell+Vector2Int.up)?0:1);
-                var outline=new List<Vector2>();
-                Vector2Int[] corners={Vector2Int.one,new Vector2Int(-1,1),-Vector2Int.one,new Vector2Int(1,-1)};
-                for(int corner=0;corner<4;corner++)
+                bool left=!occupied.Contains(cell+Vector2Int.left),right=!occupied.Contains(cell+Vector2Int.right);
+                bool top=!occupied.Contains(cell+Vector2Int.down),bottom=!occupied.Contains(cell+Vector2Int.up);
+                Vector4 flags=new Vector4(left?1:0,right?1:0,top?1:0,bottom?1:0);
+                Vector2 center=new Vector2(cell.x,-cell.y);
+                Vector2[] inner=Outline(center,left?.41f:.5f,right?.41f:.5f,top?.41f:.5f,bottom?.41f:.5f,.055f,left,right,top,bottom);
+                Vector2[] outer=Outline(center,left?.54f:.5f,right?.54f:.5f,top?.54f:.5f,bottom?.54f:.5f,.11f,left,right,top,bottom);
+                int middle=Add(center,.58f,0,0);
+                int first=vertices.Count;
+                foreach(var point in inner)Add(point,.58f,0,0);
+                for(int i=0;i<8;i++)
                 {
-                    Vector2Int sign=corners[corner];
-                    bool rounded=!occupied.Contains(cell+new Vector2Int(sign.x,0)) && !occupied.Contains(cell+new Vector2Int(0,sign.y));
-                    float radius=rounded ? .12f : 0;
-                    Vector2 center=new Vector2(cell.x+sign.x*(.5f-radius),-cell.y-sign.y*(.5f-radius));
-                    for(int step=0;step<=4;step++)
+                    int next=(i+1)%8;
+                    if ((inner[i]-inner[next]).sqrMagnitude>.000001f)
+                        triangles.AddRange(new[]{middle,first+i,first+next});
+                    Vector2 mid=(outer[i]+outer[next])*.5f-center;
+                    bool exposed=Mathf.Abs(mid.x)>Mathf.Abs(mid.y)?(mid.x<0?left:right):(mid.y>0?top:bottom);
+                    if(!exposed || (outer[i]-outer[next]).sqrMagnitude<.000001f)continue;
+                    Vector2 a=Chipped(outer[i]),b=Chipped(outer[next]);
+                    Quad(inner[i],.58f,inner[next],.58f,a,.47f,b,.47f,1);
+                    Quad(a,.47f,b,.47f,a,.29f,b,.29f,2);
+                }
+                if(left&&top)Cluster(-1,1);
+                if(right&&top)Cluster(1,1);
+                if(left&&bottom)Cluster(-1,-1);
+                if(right&&bottom)Cluster(1,-1);
+                void Cluster(float x,float z)
+                {
+                    float seed=cell.x*7.13f+cell.y*17.37f+x*3.71f+z*11.91f+cells.Length*.73f;
+                    int corner=(x>0?1:0)+(z<0?2:0);
+                    int count=1+(corner+cells.Length)%3;
+                    for(int i=0;i<count;i++)
                     {
-                        // Traverse each convex corner clockwise in the XZ plane.
-                        float start=corner==0 ? 0 : corner==1 ? 90 : corner==2 ? 180 : 270;
-                        float angle=(start+step*22.5f)*Mathf.Deg2Rad;
-                        Vector2 point=center+new Vector2(Mathf.Cos(angle),-Mathf.Sin(angle))*radius;
-                        outline.Add(point);
+                        float variation=Variation(seed+i*3.17f);
+                        float radius=Mathf.Lerp(.075f,.16f,variation)*(i==0?1:.8f);
+                        float along=(i-(count-1)*.5f)*.11f;
+                        Vector2 point=center+new Vector2(x*(.34f+along),z*(.34f-along));
+                        float height=Mathf.Lerp(.6f,.74f,Variation(seed+i*5.43f+2));
+                        float angle=Variation(seed+i*7.19f+4)*Mathf.PI;
+                        Crystal(point,radius,height,angle,Mathf.Lerp(.65f,1.3f,variation),x,z);
                     }
                 }
-                int middle=vertices.Count; Add(new Vector3(cell.x,.58f,-cell.y));
-                for(int i=0;i<outline.Count;i++) Add(new Vector3(outline[i].x,.58f,outline[i].y));
-                for(int i=0;i<outline.Count;i++)
+                void Crystal(Vector2 point,float radius,float height,float angle,float stretch,float x,float z)
                 {
-                    int a=middle+1+i,b=middle+1+(i+1)%outline.Count;
-                    triangles.AddRange(new[]{middle,b,a});
-                    Vector2 edgeCenter=(outline[i]+outline[(i+1)%outline.Count])*.5f;
-                    Vector2Int neighbor=cell;
-                    Vector2 relative=edgeCenter-new Vector2(cell.x,-cell.y);
-                    if(Mathf.Abs(relative.x)>Mathf.Abs(relative.y)) neighbor.x+=relative.x>0 ? 1 : -1;
-                    else neighbor.y+=relative.y>0 ? -1 : 1;
-                    if(occupied.Contains(neighbor)) continue;
-                    int lower=vertices.Count;
-                    Add(new Vector3(outline[i].x,.33f,outline[i].y)); Add(new Vector3(outline[(i+1)%outline.Count].x,.33f,outline[(i+1)%outline.Count].y));
-                    triangles.AddRange(new[]{a,b,lower,b,lower+1,lower});
+                    Vector2 axis=new Vector2(Mathf.Cos(angle),Mathf.Sin(angle));
+                    Vector2 cross=new Vector2(-axis.y,axis.x);
+                    Vector2[] foot={point-axis*radius,point+cross*radius*stretch,
+                        point+axis*radius,point-cross*radius*stretch};
+                    Vector2 tip=point+axis*radius*.3f+new Vector2(x,z)*radius*.1f;
+                    for(int face=0;face<4;face++)
+                    {
+                        int start=vertices.Count;
+                        Add(foot[face],.49f,3,face*.25f);Add(foot[(face+1)%4],.49f,3,face*.25f);
+                        Add(tip,height,3,face*.25f);triangles.AddRange(new[]{start,start+1,start+2});
+                    }
+                }
+                int Add(Vector2 point,float height,float layer,float depth)
+                {
+                    int index=vertices.Count;vertices.Add(new Vector3(point.x,height,point.y));
+                    uv.Add(new Vector2((point.x-min.x+.5f)/size.x,(-point.y-min.y+.5f)/size.y));
+                    local.Add(new Vector2(point.x-cell.x+.5f,-point.y-cell.y+.5f));
+                    borders.Add(flags);surfaces.Add(new Vector2(layer,depth));return index;
+                }
+                void Quad(Vector2 a,float ay,Vector2 b,float by,Vector2 c,float cy,Vector2 d,float dy,float layer)
+                {
+                    int start=vertices.Count;
+                    Add(a,ay,layer,0);Add(b,by,layer,0);Add(c,cy,layer,1);Add(d,dy,layer,1);
+                    triangles.AddRange(new[]{start,start+2,start+1,start+1,start+2,start+3});
+                }
+                Vector2 Chipped(Vector2 point)
+                {
+                    float noise=(Mathf.Sin(point.x*19.31f+point.y*27.17f)*437.2f)%1;
+                    noise=Mathf.Abs(noise)*.018f;
+                    if(left&&point.x<center.x-.49f)point.x-=noise;
+                    if(right&&point.x>center.x+.49f)point.x+=noise;
+                    if(top&&point.y>center.y+.49f)point.y+=noise;
+                    if(bottom&&point.y<center.y-.49f)point.y-=noise;
+                    return point;
                 }
             }
-            var mesh=new Mesh { name="BlockIceShell" };
-            mesh.SetVertices(vertices); mesh.SetUVs(0,uv); mesh.SetUVs(1,localUv); mesh.SetUVs(2,borders); mesh.SetTriangles(triangles,0); mesh.RecalculateNormals(); return mesh;
-            void Add(Vector3 point)
-            {
-                localUv.Add(new Vector2(point.x-activeCell.x+.5f,-point.z-activeCell.y+.5f));
-                borders.Add(activeBorders);
-                vertices.Add(point); uv.Add(new Vector2((point.x-min.x+.5f)/size.x,(-point.z-min.y+.5f)/size.y));
-            }
+            var mesh=new Mesh{name="BlockIceShell_Crystal_V2"};
+            mesh.SetVertices(vertices);mesh.SetTriangles(triangles,0);
+            mesh.SetUVs(0,uv);mesh.SetUVs(1,local);mesh.SetUVs(2,borders);mesh.SetUVs(3,surfaces);
+            mesh.RecalculateNormals();mesh.RecalculateBounds();return mesh;
+        }
+
+        static float Variation(float seed)
+        {
+            return Mathf.Repeat(Mathf.Sin(seed*12.9898f+78.233f)*43758.5453f,1);
+        }
+
+        static Vector2[] Outline(Vector2 center,float left,float right,float top,float bottom,float cut,
+            bool hasLeft,bool hasRight,bool hasTop,bool hasBottom)
+        {
+            float tr=hasTop&&hasRight?cut:0,tl=hasTop&&hasLeft?cut:0;
+            float bl=hasBottom&&hasLeft?cut:0,br=hasBottom&&hasRight?cut:0;
+            return new[]{center+new Vector2(right-tr,top),center+new Vector2(right,top-tr),
+                center+new Vector2(right,-bottom+br),center+new Vector2(right-br,-bottom),
+                center+new Vector2(-left+bl,-bottom),center+new Vector2(-left,-bottom+bl),
+                center+new Vector2(-left,top-tl),center+new Vector2(-left+tl,top)};
         }
     }
 }

@@ -21,6 +21,7 @@ namespace BlockedIn.Blocks
         public Vector2 ConstrainDrag(Block block, Vector2 current, Vector2 target, Vector2 pointerDelta,
             float deltaTime = 1f / 60f)
         {
+            PrepareCollisionQuery(block);
             Vector2 result = BestSlide(block, current, target);
             if (guidedBlock == block)
             {

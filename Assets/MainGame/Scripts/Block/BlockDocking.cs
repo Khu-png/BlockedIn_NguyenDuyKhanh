@@ -9,6 +9,7 @@ namespace BlockedIn.Blocks
         [SerializeField, Range(0f, .075f)] float dockPortTravel = .065f;
         static readonly Vector2Int[] sideOffsets = { Vector2Int.down, Vector2Int.right, Vector2Int.up, Vector2Int.left };
         readonly List<DockPort> dockPorts = new List<DockPort>();
+        readonly HashSet<Block> dockPartners = new HashSet<Block>();
         Block dockPartner;
         bool docking;
         float dockElapsed;
@@ -90,12 +91,12 @@ namespace BlockedIn.Blocks
                 visual.localPosition = visualRest;
                 return;
             }
-            var partners = new HashSet<Block>();
+            dockPartners.Clear();
             foreach (Vector2Int cell in cells)
                 for (int side = 0; side < 4; side++)
-                    if (TryDockNeighbor(cell, side, out Block other)) partners.Add(other);
+                    if (TryDockNeighbor(cell, side, out Block other)) dockPartners.Add(other);
             StartDock();
-            foreach (Block partner in partners) partner.StartDock();
+            foreach (Block partner in dockPartners) partner.StartDock();
             SoundManager.Play(SoundManager.MatchSound);
             dockPartner = null;
         }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum GameState { Gameplay, Win, Lose }
@@ -5,6 +6,7 @@ public enum GameState { Gameplay, Win, Lose }
 public class GameManager : Singleton<GameManager>
 {
     static GameState gameState;
+    Coroutine resultRoutine;
     void Awake()
     {
         RegisterSingleton(this);
@@ -18,6 +20,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnPlay()
     {
+        CancelResult();
         ChangeState(GameState.Gameplay);
         UIManager.Ins.CloseAll();
         UIManager.Ins.OpenUI<Gameplay>();
@@ -37,19 +40,40 @@ public class GameManager : Singleton<GameManager>
         if (!IsState(GameState.Gameplay)) return;
         ChangeState(GameState.Win);
         LevelManager.Ins.SetInputEnabled(false);
-        UIManager.Ins.OpenUI<Win>();
-        if (SoundManager.Ins != null) SoundManager.Ins.SetMusicSuspended(true);
-        SoundManager.Play(SoundManager.WinSound);
+        BeginResult(true);
     }
     public void OnLose()
     {
         if (!IsState(GameState.Gameplay)) return;
         ChangeState(GameState.Lose);
         LevelManager.Ins.SetInputEnabled(false);
-        UIManager.Ins.OpenUI<Lose>();
-        if (SoundManager.Ins != null) SoundManager.Ins.SetMusicSuspended(true);
-        SoundManager.Play(SoundManager.LoseSound);
+        BeginResult(false);
     }
+    void BeginResult(bool win)
+    {
+        if(SoundManager.Ins!=null)SoundManager.Ins.SetMusicSuspended(true);
+        if(!win)SoundManager.Play(SoundManager.LoseSound);
+        resultRoutine=StartCoroutine(ShowResult(win));
+    }
+    IEnumerator ShowResult(bool win)
+    {
+        Gameplay view=UIManager.Ins.GetUI<Gameplay>();
+        if(view!=null&&view.ResultFeedback!=null)yield return view.ResultFeedback.Play(win);
+        else yield return new WaitForSecondsRealtime(win?.1f:.32f);
+        if(!IsState(win?GameState.Win:GameState.Lose)){resultRoutine=null;yield break;}
+        if(LoadingManager.Ins!=null&&LoadingManager.Ins.IsLoading){resultRoutine=null;yield break;}
+        if(win){UIManager.Ins.OpenUI<Win>();SoundManager.Play(SoundManager.WinSound);}
+        else UIManager.Ins.OpenUI<Lose>();
+        resultRoutine=null;
+    }
+    void CancelResult()
+    {
+        if(resultRoutine!=null)StopCoroutine(resultRoutine);resultRoutine=null;
+        if(UIManager.Ins==null||!UIManager.Ins.IsLoaded<Gameplay>())return;
+        Gameplay view=UIManager.Ins.GetUI<Gameplay>();
+        if(view!=null&&view.ResultFeedback!=null)view.ResultFeedback.Restore();
+    }
+    void OnDisable()=>CancelResult();
     public void OnReplay() => LevelManager.Ins.OnReplay();
     public void OnNextLevel()
     {

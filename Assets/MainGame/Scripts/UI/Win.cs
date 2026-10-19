@@ -2,6 +2,8 @@ using UnityEngine;
 
 public sealed class Win : UICanvas
 {
+    [SerializeField] ResultPopupSequence reveal;
+    public bool IsReady => reveal==null || reveal.IsReady;
     [SerializeField] UnityEngine.UI.Button nextButton;
     [SerializeField] UnityEngine.UI.Text levelText;
     [SerializeField] UnityEngine.UI.Text messageText;
@@ -9,6 +11,7 @@ public sealed class Win : UICanvas
     {
         base.Open();
         transform.SetAsLastSibling();
+        if(reveal!=null)reveal.Play(true);
         bool hasNext = LevelManager.Ins != null && LevelManager.Ins.HasNextLevel;
         if (nextButton != null) nextButton.interactable = hasNext;
         if (levelText != null && LevelManager.Ins != null)
@@ -16,6 +19,6 @@ public sealed class Win : UICanvas
         if (messageText != null) messageText.text = hasNext
             ? "Ready for the next puzzle?" : "You've completed every level!";
     }
-    public void OnReplay() { SoundManager.Play(SoundManager.ButtonSound); LevelManager.Ins.OnReplay(); }
-    public void OnNextLevel() { SoundManager.Play(SoundManager.ButtonSound); GameManager.Ins.OnNextLevel(); }
+    public void OnReplay() { if(!IsReady)return; SoundManager.Play(SoundManager.ButtonSound); LevelManager.Ins.OnReplay(); }
+    public void OnNextLevel() { if(!IsReady)return; SoundManager.Play(SoundManager.ButtonSound); GameManager.Ins.OnNextLevel(); }
 }

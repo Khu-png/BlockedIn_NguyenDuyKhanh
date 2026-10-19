@@ -10,6 +10,12 @@ namespace BlockedIn.Blocks
         MeshRenderer placementRenderer;
         MaterialPropertyBlock placementProperties;
         Block previewBlock;
+        readonly PlacementPreviewMeshCache placementMeshes = new PlacementPreviewMeshCache();
+        static readonly int PreviewBaseMap = Shader.PropertyToID("_BaseMap");
+        static readonly int PreviewBaseColor = Shader.PropertyToID("_BaseColor");
+        Texture previewTexture;
+        Color previewColor;
+        bool previewPropertiesApplied;
 
         public void SetPlacementPreviewMaterial(Material material)
         {
@@ -28,23 +34,29 @@ namespace BlockedIn.Blocks
             if (placementPreview == null) CreatePlacementPreview();
             if (previewBlock != block)
             {
-                if (placementMesh.sharedMesh != null) Destroy(placementMesh.sharedMesh);
-                placementMesh.sharedMesh = BlockPlacementMesh.Build(block.Cells);
+                placementMesh.sharedMesh = placementMeshes.Get(block.Cells);
                 previewBlock = block;
             }
             Material source = block.ColorData.Material;
-            placementProperties.Clear();
-            Texture texture = source != null && source.HasProperty("_BaseMap")
-                ? source.GetTexture("_BaseMap") : null;
-            Color color = source != null && source.HasProperty("_BaseColor")
-                ? source.GetColor("_BaseColor") : Color.white;
-            placementProperties.SetTexture("_BaseMap", texture != null ? texture : Texture2D.whiteTexture);
-            placementProperties.SetColor("_BaseColor", color);
-            placementRenderer.SetPropertyBlock(placementProperties);
-            Vector3 local = layout.transform.InverseTransformPoint(GridToWorld(destination));
-            local.y = -.19f;
-            placementPreview.transform.localPosition = local;
-            placementPreview.SetActive(true);
+            Texture texture = source != null && source.HasProperty(PreviewBaseMap)
+                ? source.GetTexture(PreviewBaseMap) : null;
+            Color color = source != null && source.HasProperty(PreviewBaseColor)
+                ? source.GetColor(PreviewBaseColor) : Color.white;
+            texture = texture != null ? texture : Texture2D.whiteTexture;
+            if (!previewPropertiesApplied || previewTexture != texture || previewColor != color)
+            {
+                placementProperties.Clear();
+                placementProperties.SetTexture(PreviewBaseMap, texture);
+                placementProperties.SetColor(PreviewBaseColor, color);
+                placementRenderer.SetPropertyBlock(placementProperties);
+                previewTexture = texture;
+                previewColor = color;
+                previewPropertiesApplied = true;
+            }
+            Vector3 local = new Vector3(destination.x - (layout.columns - 1) * .5f,
+                -.19f, (layout.rows - 1) * .5f - destination.y);
+            if (placementPreview.transform.localPosition != local) placementPreview.transform.localPosition = local;
+            if (!placementPreview.activeSelf) placementPreview.SetActive(true);
         }
 
         void CreatePlacementPreview()
@@ -66,7 +78,7 @@ namespace BlockedIn.Blocks
 
         void OnDestroy()
         {
-            if (placementMesh != null && placementMesh.sharedMesh != null) Destroy(placementMesh.sharedMesh);
+            placementMeshes.Dispose();
             if (placementPreview != null) Destroy(placementPreview);
         }
     }

@@ -118,7 +118,7 @@ namespace BlockedIn.Blocks
         {
             if (board == null || board.PowerupBusy || !CanDrag) return false;
             dragging = true;
-            foreach (Block item in board.Blocks) if (item != null) item.RefreshDockPorts();
+            board.RefreshDockNeighborhood(this);
             board.ResetDragGuidance(this);
             dragCamera = camera;
             lastDragTarget = board.WorldToGrid(transform.position);

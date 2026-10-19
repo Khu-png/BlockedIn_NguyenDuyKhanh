@@ -13,6 +13,9 @@ namespace BlockedIn.Blocks
         [SerializeField] CameraManager cameraManager;
         [SerializeField] Camera viewCamera;
         [SerializeField] List<Block> blocks = new List<Block>();
+        readonly BlockDockNeighborhood dockNeighborhood = new BlockDockNeighborhood();
+        readonly BlockCollisionGrid collisionGrid = new BlockCollisionGrid();
+        public void RefreshDockNeighborhood(Block changed) => dockNeighborhood.Refresh(changed, blocks);
         public IReadOnlyList<Block> Blocks => blocks;
         public GeneratedBoard Layout => layout;
         public bool HasPlayerInteracted { get; private set; }
@@ -63,31 +66,35 @@ namespace BlockedIn.Blocks
             return new Vector2(local.x + (layout.columns - 1) * .5f, (layout.rows - 1) * .5f - local.z);
         }
 
+        void PrepareCollisionQuery(Block moving) => collisionGrid.Prepare(layout, blocks, moving);
+
         public bool IsBlocked(Vector2Int cell, Block moving)
         {
-            if (layout == null || cell.x < 0 || cell.y < 0 || cell.x >= layout.columns || cell.y >= layout.rows)
-                return true;
-            if (layout.cells == null || layout.cells.Length != layout.columns * layout.rows)
-                throw new InvalidOperationException("Board cell data does not match its dimensions.");
-            if (layout.cells[cell.y * layout.columns + cell.x] != BoardCell.Floor) return true;
-            foreach (Block other in blocks)
-            {
-                if (other == null || other == moving) continue;
-                foreach (Vector2Int offset in other.Cells)
-                    if (other.GridPosition + offset == cell) return true;
-            }
-            return false;
+            PrepareCollisionQuery(moving);
+            return collisionGrid.IsBlocked(cell);
         }
 
         public bool CanPlace(Block block, Vector2Int origin)
         {
+            PrepareCollisionQuery(block);
+            return CanPlacePrepared(block, origin);
+        }
+
+        bool CanPlacePrepared(Block block, Vector2Int origin)
+        {
             if (block.Cells == null || block.Cells.Length == 0) return false;
             foreach (Vector2Int offset in block.Cells)
-                if (IsBlocked(origin + offset, block)) return false;
+                if (collisionGrid.IsBlocked(origin + offset)) return false;
             return true;
         }
 
         public Vector2 Constrain(Block block, Vector2 current, Vector2 target)
+        {
+            PrepareCollisionQuery(block);
+            return ConstrainPrepared(block, current, target);
+        }
+
+        Vector2 ConstrainPrepared(Block block, Vector2 current, Vector2 target)
         {
             Vector2 delta = target - current;
             return Slide(block, current, target, Mathf.Abs(delta.x) >= Mathf.Abs(delta.y));
@@ -110,7 +117,7 @@ namespace BlockedIn.Blocks
                     for (int index = 0; index < length; index++)
                     {
                         Vector2Int cell = horizontal ? new Vector2Int(index, row) : new Vector2Int(row, index);
-                        if (!IsBlocked(cell, block)) continue;
+                        if (!collisionGrid.IsBlocked(cell)) continue;
                         float boundary = index - axisOffset + (positive ? -1 : 1);
                         if (positive && boundary >= start - PositionEpsilon) result = Mathf.Min(result, boundary);
                         if (!positive && boundary <= start + PositionEpsilon) result = Mathf.Max(result, boundary);
@@ -121,6 +128,7 @@ namespace BlockedIn.Blocks
 
         public bool TrySnap(Block block, Vector2 current, float tolerance, out Vector2Int destination)
         {
+            PrepareCollisionQuery(block);
             destination = Vector2Int.RoundToInt(current);
             if (Vector2.Distance(current, destination) <= tolerance && CanReach(block, current, destination)) return true;
             float best = float.PositiveInfinity;
@@ -138,8 +146,8 @@ namespace BlockedIn.Blocks
 
         bool CanReach(Block block, Vector2 current, Vector2Int destination)
         {
-            if (!CanPlace(block, destination)) return false;
-            return Vector2.Distance(Constrain(block, current, destination), destination) < PositionEpsilon;
+            if (!CanPlacePrepared(block, destination)) return false;
+            return Vector2.Distance(ConstrainPrepared(block, current, destination), destination) < PositionEpsilon;
         }
 
         public Block Resolve(Collider collider)

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using BlockedIn.Blocks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,21 +9,21 @@ public sealed class HammerPowerup : MonoBehaviour
     [SerializeField] HammerFeedback feedbackPrefab;
     [SerializeField] TimeFreezeView timeFreeze;
     [SerializeField] Graphic[] dimmedHud = System.Array.Empty<Graphic>();
-    static readonly int SelectionMode = Shader.PropertyToID("_HammerMode");
-    readonly HashSet<Block> eligible = new HashSet<Block>();
-    Color[] hudColors = System.Array.Empty<Color>();
+    HammerTargetSelection selection;
+    HammerFeedbackPool feedbackPool;
     BlockBoard board;
     Coroutine routine;
     HammerFeedback feedback;
     Block[] splitParts;
     HammerBlockImpact blockImpact;
-    public bool IsSelecting { get; private set; }
+    Coroutine retreatRoutine;
+    public bool IsSelecting => selection != null && selection.IsActive;
     public bool IsStriking => routine != null;
     public bool IsActive => IsSelecting || IsStriking;
     void Awake()
     {
-        hudColors = new Color[dimmedHud.Length];
-        for(int i=0;i<dimmedHud.Length;i++)if(dimmedHud[i]!=null)hudColors[i]=dimmedHud[i].color;
+        selection = new HammerTargetSelection(dimmedHud);
+        if (feedbackPrefab != null) feedbackPool = new HammerFeedbackPool(feedbackPrefab);
     }
     bool ContextReady()
     {
@@ -47,22 +46,19 @@ public sealed class HammerPowerup : MonoBehaviour
     public bool TryBegin(BlockBoard owner)
     {
         if(IsActive || owner==null || owner.PowerupBusy || feedbackPrefab==null)return false;
-        foreach(Block block in owner.Blocks)if(block!=null&&(block.IsDragging||block.IsSettling))return false;
-        eligible.Clear();
-        foreach(Block block in owner.Blocks)
-            if(block!=null&&block.CanSplit)eligible.Add(block);
-        if(eligible.Count==0)return false;
-        board=owner;board.PowerupBusy=true;board.PowerupPress=Select;
-        IsSelecting=true;Shader.SetGlobalFloat(SelectionMode,1);
-        foreach(Block block in board.Blocks)if(block!=null)block.ShowHammerSelection(true,eligible.Contains(block));
-        SetHudDimmed(true);
+        if (selection == null) selection = new HammerTargetSelection(dimmedHud);
+        if (!selection.Begin(owner)) return false;
+        if (feedbackPool == null) feedbackPool = new HammerFeedbackPool(feedbackPrefab);
+        board = owner;
+        board.PowerupBusy = true;
+        board.PowerupPress = Select;
         return true;
     }
     public bool Select(Block target)
     {
         if(!IsSelecting || IsStriking)return true;
-        if(target==null || !eligible.Contains(target) || !target.CanSplit)return true;
-        IsSelecting=false;ClearSelection();
+        if(!selection.CanSelect(target))return true;
+        ClearSelection();
         routine=StartCoroutine(Strike(target));
         return true;
     }
@@ -82,7 +78,7 @@ public sealed class HammerPowerup : MonoBehaviour
             Ray ray=camera.ScreenPointToRay(screen);
             if(plane.Raycast(ray,out float distance))start=ray.GetPoint(distance);
         }
-        feedback=Instantiate(feedbackPrefab);
+        feedback=feedbackPool.Rent();
         yield return feedback.Fly(start,center,rotation,.7f*board.Layout.transform.lossyScale.x);
         yield return feedback.Swing(center,rotation);
         if(target==null||board==null||!target.CanSplit){Finish();yield break;}
@@ -91,40 +87,32 @@ public sealed class HammerPowerup : MonoBehaviour
         catch(System.Exception error) { Debug.LogException(error); }
         if(splitParts==null){Finish();yield break;}
         blockImpact = new HammerBlockImpact(splitParts, board);
+        retreatRoutine=StartCoroutine(feedback.Retreat(rotation));
         yield return blockImpact.Play();
-        yield return feedback.Retreat(rotation);
+        if(retreatRoutine!=null)yield return retreatRoutine;
+        retreatRoutine=null;
         Finish();
     }
-    void ClearSelection()
-    {
-        Shader.SetGlobalFloat(SelectionMode,0);
-        if(board!=null)foreach(Block block in board.Blocks)if(block!=null)block.ShowHammerSelection(false,false);
-        SetHudDimmed(false);
-    }
-    void SetHudDimmed(bool dimmed)
-    {
-        for(int i=0;i<dimmedHud.Length;i++)if(dimmedHud[i]!=null)
-        {
-            Color color=hudColors[i];if(dimmed){color.r*=.3f;color.g*=.3f;color.b*=.3f;}dimmedHud[i].color=color;
-        }
-    }
+    void ClearSelection() => selection?.Clear();
     public void Cancel()
     {
         if(routine!=null)StopCoroutine(routine);
+        if(retreatRoutine!=null)StopCoroutine(retreatRoutine);retreatRoutine=null;
         ClearSelection();Finish();
     }
     void Finish()
     {
         blockImpact?.Restore();
-        if(feedback!=null)Destroy(feedback.gameObject);
+        if(feedback!=null)feedbackPool.Return(feedback);
         if(board!=null)
         {
             if(board.PowerupPress==Select)board.PowerupPress=null;
             board.PowerupBusy=false;board.RequestCompletionCheck();
             if(splitParts!=null)foreach(Block block in splitParts)if(block!=null)block.RefreshDockPorts();
         }
-        IsSelecting=false;routine=null;feedback=null;board=null;
-        splitParts=null;blockImpact=null;eligible.Clear();
+        routine=null;feedback=null;board=null;
+        splitParts=null;blockImpact=null;
     }
     void OnDisable()=>Cancel();
+    void OnDestroy() => feedbackPool?.Dispose();
 }
