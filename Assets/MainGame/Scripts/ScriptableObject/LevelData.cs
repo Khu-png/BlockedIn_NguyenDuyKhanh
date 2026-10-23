@@ -20,6 +20,7 @@ namespace BlockedIn.MapTools
         public BlockColorData[] blockColors;
         public BlockEdgeData[] blockEdges;
         public int[] blockGroups;
+        public Vector2Int[] blockGoalPositions;
         public BlockIceData[] frozenColors = System.Array.Empty<BlockIceData>();
         public BlockColorData[] ropeColors = System.Array.Empty<BlockColorData>();
         [SerializeField, HideInInspector] GeneratedBoard runtimeBoard;
@@ -30,6 +31,7 @@ namespace BlockedIn.MapTools
             && (blockColors == null || blockColors.Length == 0 || blockColors.Length == cells.Length)
             && (blockEdges == null || blockEdges.Length == 0 || blockEdges.Length == cells.Length)
             && (blockGroups == null || blockGroups.Length == 0 || blockGroups.Length == cells.Length)
+            && (blockGoalPositions == null || blockGoalPositions.Length == 0 || blockGoalPositions.Length == cells.Length)
             && (ropeColors == null || ropeColors.Length == 0 || ropeColors.Length == cells.Length);
     }
 }

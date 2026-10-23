@@ -21,6 +21,12 @@ namespace BlockedIn.Blocks
             RequestCompletionCheck();
         }
 
+        public void OnBlocksMatched(Block first, Block second)
+        {
+            if (layout == null) return;
+            StartCoroutine(ColorMatchBurst.Play(first, second, layout.transform, layout.columns, layout.rows, ViewCamera));
+        }
+
         bool CanCheckCompletion()
         {
             return !PowerupBusy && Time.time >= completionNotBefore;
@@ -58,8 +64,6 @@ namespace BlockedIn.Blocks
 
     }
 }
-
-
 
 namespace BlockedIn.Blocks
 {

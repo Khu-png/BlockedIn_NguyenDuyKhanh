@@ -19,6 +19,7 @@ namespace BlockedIn.Blocks
             root.transform.localScale = transform.localScale;
             Block part = root.AddComponent<Block>();
             part.CopyDragSettings(this);
+            part.iconMaterial = iconMaterial;
             Transform model = new GameObject("Visual").transform;
             model.SetParent(root.transform, false);
             var footprint = new Vector2Int[indices.Count];
@@ -45,6 +46,7 @@ namespace BlockedIn.Blocks
                 if (iconRenderers != null && index < iconRenderers.Length) icons[i] = iconRenderers[index];
             }
             part.Configure(colorData, gridPosition + origin, model, body.ToArray(), colliders[0], movable);
+            part.SetGoalPosition(HasGoalPosition ? GoalPosition + origin : new Vector2Int(-1, -1));
             part.ConfigureShape(footprint, appearances, colliders, models);
             part.iconRenderers = icons;
             part.RefreshSplitCorners();

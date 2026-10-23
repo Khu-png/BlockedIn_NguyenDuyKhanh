@@ -11,14 +11,15 @@ namespace BlockedIn.EditorTools
         void SaveAsLevel()
         {
             mapAsset = BoardLevelStorage.Save(levelNumber, columns, rows, outerWalls, cells,
-                blockColors, blockEdges, blockGroups, tilePrefab, backdropPrefab, wallPrefab, timeLimit, frozenColors, ropeColors);
+                blockColors, blockEdges, blockGroups, tilePrefab, backdropPrefab, wallPrefab, timeLimit, frozenColors, ropeColors,
+                blockGoalPositions);
             EditorGUIUtility.PingObject(mapAsset);
         }
 
         void SaveTo(BoardMap asset)
         {
             BoardRopeBuilder.Validate(blockColors, ropeColors, blockGroups);
-            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
+            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups, blockGoalPositions);
             Undo.RecordObject(asset, "Save board map");
             asset.columns = columns;
             asset.rows = rows;
@@ -30,6 +31,7 @@ namespace BlockedIn.EditorTools
             asset.frozenColors = (BlockIceData[])frozenColors.Clone();
             asset.ropeColors = (BlockColorData[])ropeColors.Clone();
             asset.blockGroups = (int[])blockGroups.Clone();
+            asset.blockGoalPositions = (Vector2Int[])blockGoalPositions.Clone();
             BoardLevelStorage.BakeRuntimeBoard(asset, tilePrefab, backdropPrefab, wallPrefab);
             EditorUtility.SetDirty(asset);
             AssetDatabase.SaveAssets();
@@ -48,6 +50,7 @@ namespace BlockedIn.EditorTools
             blockColors = mapAsset.blockColors == null ? null : (BlockColorData[])mapAsset.blockColors.Clone();
             blockEdges = mapAsset.blockEdges == null ? null : (BlockEdgeData[])mapAsset.blockEdges.Clone();
             blockGroups = mapAsset.blockGroups == null ? null : (int[])mapAsset.blockGroups.Clone();
+            blockGoalPositions = mapAsset.blockGoalPositions == null ? null : (Vector2Int[])mapAsset.blockGoalPositions.Clone();
             frozenColors = mapAsset.frozenColors == null ? Array.Empty<BlockIceData>() : (BlockIceData[])mapAsset.frozenColors.Clone();
             ropeColors = mapAsset.ropeColors == null ? Array.Empty<BlockColorData>() : (BlockColorData[])mapAsset.ropeColors.Clone();
             selectedCells.Clear();
@@ -59,7 +62,9 @@ namespace BlockedIn.EditorTools
             {
                 assemblyStage = 2;
                 editShape = true;
-                assemblyStatus = "Loaded layout. Arrange pieces directly, or start a new complete shape in Build Shape.";
+                assemblyStatus = HasGoalPositions()
+                    ? "Loaded layout with solution positions."
+                    : "Loaded legacy layout without solution positions. Restore the solution, capture it, then shuffle.";
             }
         }
 

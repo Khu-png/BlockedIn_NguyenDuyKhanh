@@ -13,6 +13,8 @@ namespace BlockedIn.Blocks
         Block dockPartner;
         bool docking;
         float dockElapsed;
+        float matchPulseElapsed;
+        bool matchPulseActive;
         Vector3 settleVisualTarget, visualScale = Vector3.one;
 
         struct DockPort
@@ -70,7 +72,7 @@ namespace BlockedIn.Blocks
 
         bool CanDock(Block other)
         {
-            return other != null && other != this && other.isActiveAndEnabled && HasSameColor(other)
+            return other != null && other.isActiveAndEnabled && BlockConnectionRules.CanMatch(this, other)
                 && !other.IsFrozen && !other.IsRoped && !other.IsRopeCutting && !other.IsDragging
                 && !other.settling && Vector2.Distance(board.WorldToGrid(other.transform.position),
                     other.GridPosition) <= BlockBoard.PositionEpsilon;
@@ -94,9 +96,18 @@ namespace BlockedIn.Blocks
             dockPartners.Clear();
             foreach (Vector2Int cell in cells)
                 for (int side = 0; side < 4; side++)
-                    if (TryDockNeighbor(cell, side, out Block other)) dockPartners.Add(other);
+                    if (TryDockNeighbor(cell, side, out Block other))
+                    {
+                        if (dockPartners.Add(other))
+                            board.OnBlocksMatched(this, other);
+                    }
+            StartMatchPulse();
+            foreach (Block partner in dockPartners)
+            {
+                partner.StartMatchPulse();
+                partner.StartDock();
+            }
             StartDock();
-            foreach (Block partner in dockPartners) partner.StartDock();
             SoundManager.Play(SoundManager.MatchSound);
             dockPartner = null;
         }
@@ -127,18 +138,60 @@ namespace BlockedIn.Blocks
             docking = true;
         }
 
+        void StartMatchPulse()
+        {
+            matchPulseElapsed = 0;
+            matchPulseActive = true;
+        }
+
         void TickDock(float deltaTime)
         {
-            if (!docking) return;
-            dockElapsed += Mathf.Max(0f, deltaTime);
-            float progress = Mathf.Clamp01(dockElapsed / Mathf.Max(.01f, dockDuration));
-            float ease = progress * progress * (3f - 2f * progress);
-            foreach (DockPort port in dockPorts)
-                if (port.appearance != null)
-                    port.appearance.SetTabRetraction(port.side, port.direction, dockPortTravel * (1f - ease));
-            if (progress < 1f) return;
-            docking = false;
-            board.OnDockFinished();
+            if (docking)
+            {
+                dockElapsed += Mathf.Max(0f, deltaTime);
+                float progress = Mathf.Clamp01(dockElapsed / Mathf.Max(.01f, dockDuration));
+                float ease = progress * progress * (3f - 2f * progress);
+                foreach (DockPort port in dockPorts)
+                    if (port.appearance != null)
+                        port.appearance.SetTabRetraction(port.side, port.direction, dockPortTravel * (1f - ease));
+                if (progress >= 1f)
+                {
+                    docking = false;
+                    board.OnDockFinished();
+                }
+            }
+            TickMatchPulse(deltaTime);
+        }
+
+        void TickMatchPulse(float deltaTime)
+        {
+            if (!matchPulseActive || visual == null) return;
+            const float duration = .24f;
+            matchPulseElapsed += Mathf.Max(0, deltaTime);
+            float progress = Mathf.Clamp01(matchPulseElapsed / duration);
+            float horizontal, vertical;
+            if (progress < .25f)
+            {
+                float t = progress / .25f;
+                horizontal = Mathf.Lerp(1, .98f, t);
+                vertical = Mathf.Lerp(1, 1.02f, t);
+            }
+            else if (progress < .62f)
+            {
+                float t = (progress - .25f) / .37f;
+                horizontal = Mathf.Lerp(.98f, 1.02f, t);
+                vertical = Mathf.Lerp(1.02f, .99f, t);
+            }
+            else
+            {
+                float t = (progress - .62f) / .38f;
+                horizontal = Mathf.Lerp(1.02f, 1, t);
+                vertical = Mathf.Lerp(.99f, 1, t);
+            }
+            visual.localScale = Vector3.Scale(visualScale, new Vector3(horizontal, vertical, horizontal));
+            if (progress < 1) return;
+            visual.localScale = visualScale;
+            matchPulseActive = false;
         }
 
         public void RefreshDockPorts()
@@ -156,4 +209,5 @@ namespace BlockedIn.Blocks
             TickDock(dockDuration);
         }
     }
+
 }

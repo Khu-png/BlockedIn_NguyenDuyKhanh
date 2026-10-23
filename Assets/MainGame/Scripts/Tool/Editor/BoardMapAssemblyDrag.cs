@@ -79,8 +79,8 @@ namespace BlockedIn.EditorTools
                 throw new InvalidOperationException("The destination must fit both groups without overlapping walls, other groups, or the board edge.");
             Undo.RecordObject(this, other == null ? "Place puzzle piece" : "Swap puzzle groups");
             selectedCells = other == null
-                ? PuzzlePieceMover.Move(columns, blockColors, blockEdges, blockGroups, ropeColors, piece, delta)
-                : PuzzlePieceSwap.Apply(columns, blockColors, blockEdges, blockGroups, ropeColors, piece, other, delta);
+                ? PuzzlePieceMover.Move(columns, blockColors, blockEdges, blockGroups, ropeColors, blockGoalPositions, piece, delta)
+                : PuzzlePieceSwap.Apply(columns, blockColors, blockEdges, blockGroups, ropeColors, blockGoalPositions, piece, other, delta);
             assemblyStatus = other == null ? null : "Groups swapped.";
         }
 

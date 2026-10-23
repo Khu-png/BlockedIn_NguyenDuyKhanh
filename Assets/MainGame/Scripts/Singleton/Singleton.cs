@@ -8,6 +8,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     public static T Ins => ins;
 
+    protected virtual void OnEnable()
+    {
+        if (Application.isPlaying) RegisterSingleton(this as T);
+    }
+
     protected void RegisterSingleton(T instance)
     {
         if (ins == null) ins = instance;

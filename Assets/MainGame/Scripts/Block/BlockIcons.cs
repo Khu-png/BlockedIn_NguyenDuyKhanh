@@ -6,6 +6,7 @@ namespace BlockedIn.Blocks
     {
         [SerializeField, HideInInspector] SpriteRenderer[] iconRenderers = System.Array.Empty<SpriteRenderer>();
         public SpriteRenderer[] IconRenderers => iconRenderers;
+        [SerializeField] Material iconMaterial;
         const float IconWidth = .48f;
         const float IconHeight = .398f;
 
@@ -47,6 +48,11 @@ namespace BlockedIn.Blocks
             {
                 if (renderer == null) continue;
                 renderer.sprite = sprite;
+                if (iconMaterial != null)
+                {
+                    renderer.sharedMaterial = iconMaterial;
+                    renderer.sortingOrder = 0;
+                }
                 renderer.color = colorData != null ? colorData.IconTint : Color.white;
                 renderer.enabled = sprite != null;
                 if (sprite == null) continue;

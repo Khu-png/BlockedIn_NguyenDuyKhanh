@@ -7,6 +7,7 @@ namespace BlockedIn.Blocks
     {
         [SerializeField] BlockColorData colorData;
         [SerializeField, HideInInspector] Vector2Int gridPosition;
+        [SerializeField, HideInInspector] Vector2Int goalPosition = new Vector2Int(-1, -1);
         [SerializeField, HideInInspector] Vector2Int[] cells = { Vector2Int.zero };
         [SerializeField] Transform visual;
         [SerializeField] GameObject iceVisual;
@@ -38,6 +39,8 @@ namespace BlockedIn.Blocks
 
         public BlockColorData ColorData => colorData;
         public Vector2Int GridPosition => gridPosition;
+        public Vector2Int GoalPosition => goalPosition;
+        public bool HasGoalPosition => goalPosition.x >= 0 && goalPosition.y >= 0;
         public Vector2Int[] Cells => cells;
         public Collider HitCollider => hitCollider;
         public BlockAppearance Appearance => appearance;
@@ -50,6 +53,7 @@ namespace BlockedIn.Blocks
         {
             colorData = color;
             gridPosition = position;
+            goalPosition = position;
             visual = model;
             renderers = modelRenderers;
             hitCollider = collider;
@@ -58,6 +62,7 @@ namespace BlockedIn.Blocks
             if (appearance != null) appearance.Apply();
         }
 
+        public void SetGoalPosition(Vector2Int position) => goalPosition = position;
         public void Initialize(BlockBoard owner)
         {
             if (visual == null || hitCollider == null || cells == null || cells.Length == 0)
@@ -101,6 +106,7 @@ namespace BlockedIn.Blocks
         public void ApplyColor()
         {
             RefreshIcons();
+            RefreshTabLayer();
             if (colorData == null || colorData.Material == null || renderers == null) return;
             foreach (Renderer item in renderers)
             {
@@ -118,6 +124,7 @@ namespace BlockedIn.Blocks
         {
             if (board == null || board.PowerupBusy || !CanDrag) return false;
             dragging = true;
+            board.BeginFloorShadowTrail(this);
             board.RefreshDockNeighborhood(this);
             board.ResetDragGuidance(this);
             dragCamera = camera;
@@ -135,6 +142,7 @@ namespace BlockedIn.Blocks
             Vector2 destination = board.ConstrainDrag(this, current, target, target - lastDragTarget, Time.deltaTime);
             lastDragTarget = target;
             transform.position = board.GridToWorld(destination);
+            board.CaptureFloorShadowTrail(this);
             board.ShowPlacementPreview(this, snapTolerance);
         }
 
@@ -224,13 +232,12 @@ namespace BlockedIn.Blocks
         }
 
         void Update() => Tick(Time.deltaTime);
-
         void OnDisable()
         {
             if (board == null) return;
             board.ResetDragGuidance(this);
             board.HidePlacementPreview(this);
-            dragging = settling = false;
+            dragging = settling = matchPulseActive = false;
             docking = false;
             dockPartner = null;
             RefreshDockPorts();

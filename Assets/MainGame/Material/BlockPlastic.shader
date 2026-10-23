@@ -4,9 +4,11 @@ Shader "BlockedIn/BlockPlastic"
     {
         [MainTexture] _BaseMap ("Block Texture", 2D) = "white" {}
         [MainColor] _BaseColor ("Block Color", Color) = (1,1,1,1)
+        _ColorSaturation ("Color Saturation", Range(1,1.5)) = 1.18
         _GlossStrength ("Soft Reflection", Range(0,1)) = .32
         _GlossPower ("Reflection Focus", Range(4,40)) = 16
         _ShadeStrength ("Side Shading", Range(0,.5)) = .16
+        [PerRendererData] _TabOverIce ("Tab Over Ice", Float) = 1
         [PerRendererData] _HammerSelected ("Hammer Target", Float) = 0
         [HideInInspector] _Cull ("Cull", Float) = 2
         [HideInInspector] _Cutoff ("Cutoff", Float) = .5
@@ -22,10 +24,12 @@ Shader "BlockedIn/BlockPlastic"
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
                 half4 _BaseColor;
+                half _ColorSaturation;
                 half _GlossStrength;
                 half _GlossPower;
                 half _ShadeStrength;
                 half _HammerSelected;
+                half _TabOverIce;
             CBUFFER_END
             half _HammerMode;
             struct Attributes
@@ -56,6 +60,15 @@ Shader "BlockedIn/BlockPlastic"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
                 output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
                 output.positionCS = TransformWorldToHClip(output.positionWS);
+                // Move tab fragments toward the camera in depth only, without shifting their screen position.
+                float3 towardCamera = GetWorldSpaceViewDir(output.positionWS);
+                float4 tabLayer = TransformWorldToHClip(output.positionWS + towardCamera * .25);
+                half isLegacyTab = step(abs(input.edgeMatch.y + 73), .01);
+                half isFittedTab = step(abs(input.edgeMatch.y - 1), .01)
+                    * max(step(abs(input.edgeMatch.x), .01), step(abs(input.edgeMatch.x + 17), .01));
+                float biasedDepth = tabLayer.z / tabLayer.w * output.positionCS.w;
+                output.positionCS.z = lerp(output.positionCS.z, biasedDepth,
+                    max(isLegacyTab, isFittedTab) * _TabOverIce);
                 // Round the coating highlight across the existing bevel without changing the mesh.
                 half bevel = saturate((input.positionOS.y - .255) / .137);
                 bevel *= smoothstep(.15, .65, input.normalOS.y);
@@ -90,6 +103,8 @@ Shader "BlockedIn/BlockPlastic"
                     textureColor *= clamp(targetEdge / max(sourceEdge, .03h), .35h, 2.8h);
                 }
                 half3 color = textureColor * _BaseColor.rgb;
+                half luminance = dot(color, half3(.2126h, .7152h, .0722h));
+                color = lerp(luminance.xxx, color, _ColorSaturation);
                 color *= shade;
                 half3 coated = lerp(color, half3(1.0h, 1.0h, 1.0h), gloss);
                 half selected = saturate(_HammerSelected);

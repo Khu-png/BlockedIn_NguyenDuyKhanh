@@ -32,6 +32,9 @@ namespace BlockedIn.Blocks
             if (camera != null) viewCamera = camera;
         }
 
+        public void ConfigureGoalPositions(Vector2Int[] goalPositions)
+            => BlockGoalMapping.Apply(layout, blocks, goalPositions);
+
         void Start()
         {
             foreach (Block block in blocks)

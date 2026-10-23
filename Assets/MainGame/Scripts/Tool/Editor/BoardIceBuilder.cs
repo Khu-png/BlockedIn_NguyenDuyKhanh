@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.IO;
 using BlockedIn.Blocks;
 using UnityEditor;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace BlockedIn.EditorTools
             var root=new GameObject("IceVisual"); root.transform.SetParent(block.Visual,false);
             root.transform.localRotation=Quaternion.Inverse(block.Visual.localRotation);
             var shell=new GameObject("IceShell"); shell.transform.SetParent(root.transform,false);
-            MeshFilter filter=shell.AddComponent<MeshFilter>(); filter.sharedMesh=LoadMesh(block.Cells);
+            MeshFilter filter=shell.AddComponent<MeshFilter>(); filter.sharedMesh=LoadMesh(block);
             MeshRenderer renderer=shell.AddComponent<MeshRenderer>();
             renderer.sharedMaterial=AssetDatabase.LoadAssetAtPath<Material>(Folder+"/IceShell.mat");
             if(renderer.sharedMaterial==null) throw new InvalidOperationException("Assign the ice shell material at its default path.");
@@ -45,15 +46,32 @@ namespace BlockedIn.EditorTools
             BlockIceShardAssets.Configure(presentation);
             block.ConfigureIce(presentation,count);
         }
-        static Mesh LoadMesh(Vector2Int[] cells)
+        public static Mesh LoadMesh(Block block)
+        {
+            return LoadMesh(block.Cells, TabMasks(block));
+        }
+
+        static int[] TabMasks(Block block)
+        {
+            var result=new int[block.Cells.Length];
+            for(int i=0;i<result.Length;i++)
+                for(int side=0;side<4;side++)
+                    if(block.EdgeAt(block.Cells[i],(BlockSide)side)==EdgeType.Tab) result[i]|=1<<side;
+            return result;
+        }
+
+        static Mesh LoadMesh(Vector2Int[] cells,int[] tabs)
         {
             var key=new StringBuilder(); foreach(Vector2Int cell in cells) key.Append(cell.x).Append(':').Append(cell.y).Append(';');
-            string path=Folder+"/IceShape_"+Hash128.Compute(key.ToString())+".asset";
+            foreach(int mask in tabs) key.Append("T").Append(mask);
+            string path=Folder+"/IceShape_V5_"+Hash128.Compute(key.ToString())+".asset";
             Mesh mesh=AssetDatabase.LoadAssetAtPath<Mesh>(path);
-            if(mesh==null) { mesh=BlockIceMeshBuilder.Build(cells); AssetDatabase.CreateAsset(mesh,path); }
-            if (!mesh.HasVertexAttribute(UnityEngine.Rendering.VertexAttribute.TexCoord3) || mesh.name != "BlockIceShell_Crystal_V2")
+            string name=Path.GetFileNameWithoutExtension(path);
+            if(mesh==null) { mesh=BlockIceMeshBuilder.Build(cells,tabs); mesh.name=name; AssetDatabase.CreateAsset(mesh,path); }
+            if (!mesh.HasVertexAttribute(UnityEngine.Rendering.VertexAttribute.TexCoord3) || mesh.name != name)
             {
-                Mesh updated=BlockIceMeshBuilder.Build(cells);
+                Mesh updated=BlockIceMeshBuilder.Build(cells,tabs);
+                updated.name=name;
                 EditorUtility.CopySerialized(updated,mesh);EditorUtility.SetDirty(mesh);
                 UnityEngine.Object.DestroyImmediate(updated);
             }

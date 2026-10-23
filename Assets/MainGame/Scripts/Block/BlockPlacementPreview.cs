@@ -10,6 +10,7 @@ namespace BlockedIn.Blocks
         MeshRenderer placementRenderer;
         MaterialPropertyBlock placementProperties;
         Block previewBlock;
+        FloorShadowTrail floorShadowTrail;
         readonly PlacementPreviewMeshCache placementMeshes = new PlacementPreviewMeshCache();
         static readonly int PreviewBaseMap = Shader.PropertyToID("_BaseMap");
         static readonly int PreviewBaseColor = Shader.PropertyToID("_BaseColor");
@@ -20,6 +21,24 @@ namespace BlockedIn.Blocks
         public void SetPlacementPreviewMaterial(Material material)
         {
             placementPreviewMaterial = material;
+        }
+
+        public void BeginFloorShadowTrail(Block block)
+        {
+            if (block == null || layout == null || !Application.isPlaying) return;
+            if (floorShadowTrail == null)
+            {
+                floorShadowTrail = gameObject.AddComponent<FloorShadowTrail>();
+                floorShadowTrail.Initialize(layout.transform, layout.columns, layout.rows,
+                    placementPreviewMaterial, placementMeshes);
+            }
+            floorShadowTrail.Begin(block, WorldToGrid(block.transform.position));
+        }
+
+        public void CaptureFloorShadowTrail(Block block)
+        {
+            if (floorShadowTrail != null && block != null)
+                floorShadowTrail.Capture(block, WorldToGrid(block.transform.position));
         }
 
         public void ShowPlacementPreview(Block block, float tolerance)

@@ -34407,6 +34407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b5f130a6b01e0df4abf3750bdce72a24, type: 2}
   gridPosition: {x: 0, y: 8}
+  goalPosition: {x: 0, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -34529,6 +34530,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 5006407695419816094}
@@ -38026,6 +38028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 4, y: 8}
+  goalPosition: {x: 4, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -38148,6 +38151,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 567061606580202775}
@@ -40041,6 +40045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b5f130a6b01e0df4abf3750bdce72a24, type: 2}
   gridPosition: {x: 2, y: 0}
+  goalPosition: {x: 2, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -40163,6 +40168,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 2469777533566831114}
@@ -57766,6 +57772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b623be114004a934a9f60a8ba84754cf, type: 2}
   gridPosition: {x: 0, y: 4}
+  goalPosition: {x: 4, y: 4}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -57888,6 +57895,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 591050388105128390}
@@ -59659,6 +59667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b5f130a6b01e0df4abf3750bdce72a24, type: 2}
   gridPosition: {x: 2, y: 2}
+  goalPosition: {x: 4, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -59781,6 +59790,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 7698193910667021211}
@@ -89774,6 +89784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 0, y: 0}
+  goalPosition: {x: 0, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -89896,6 +89907,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 7685576426779716840}
@@ -109573,6 +109585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 4, y: 0}
+  goalPosition: {x: 2, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -109695,6 +109708,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 8334254370732104765}
@@ -119367,6 +119381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b623be114004a934a9f60a8ba84754cf, type: 2}
   gridPosition: {x: 2, y: 6}
+  goalPosition: {x: 0, y: 4}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -119489,6 +119504,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 5857068678162511447}
@@ -120114,6 +120130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b623be114004a934a9f60a8ba84754cf, type: 2}
   gridPosition: {x: 4, y: 4}
+  goalPosition: {x: 2, y: 4}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -120236,6 +120253,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 4115826498522909467}

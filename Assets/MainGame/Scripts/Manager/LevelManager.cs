@@ -69,6 +69,7 @@ public class LevelManager : Singleton<LevelManager>
         if (currentLevel.blockGameplay != null)
         {
             currentLevel.blockGameplay.Configure(currentLevel, cameraManager);
+            currentLevel.blockGameplay.ConfigureGoalPositions(data.blockGoalPositions);
             hasGoals = currentLevel.blockGameplay.HasRemainingGoals;
             currentLevel.blockGameplay.ColorsRemoved += CheckWin;
         }
@@ -163,8 +164,9 @@ public class LevelManager : Singleton<LevelManager>
 
 #if UNITY_EDITOR
     static readonly HashSet<LevelManager> registered = new();
-    void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         if (Application.isPlaying || !gameObject.scene.IsValid()) return;
         registered.Add(this);
         RefreshLevels();

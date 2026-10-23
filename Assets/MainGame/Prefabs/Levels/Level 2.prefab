@@ -2517,6 +2517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
   gridPosition: {x: 1, y: 5}
+  goalPosition: {x: 3, y: 4}
   cells:
   - {x: 0, y: 0}
   visual: {fileID: 8658966015939358549}
@@ -2586,6 +2587,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
@@ -17215,6 +17217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 0, y: 3}
+  goalPosition: {x: 4, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -17337,6 +17340,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 4028559681266307105}
@@ -18243,6 +18247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
   gridPosition: {x: 4, y: 5}
+  goalPosition: {x: 0, y: 1}
   cells:
   - {x: 0, y: 0}
   visual: {fileID: 558622756471936472}
@@ -18312,6 +18317,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
@@ -22088,7 +22094,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3163678617280372384}
-  m_Mesh: {fileID: 4300000, guid: c80c520ea73fd3c448f46e016ce4e23f, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 59f22b4805f38504889c89f67a84b3f1, type: 2}
 --- !u!23 &346525399371509509
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23843,6 +23849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
   gridPosition: {x: 0, y: 5}
+  goalPosition: {x: 2, y: 0}
   cells:
   - {x: 0, y: 0}
   visual: {fileID: 1944316377076620975}
@@ -23912,6 +23919,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
@@ -26797,6 +26805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 4, y: 1}
+  goalPosition: {x: 4, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -26919,6 +26928,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 8026746587757667785}
@@ -29919,6 +29929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
   gridPosition: {x: 3, y: 2}
+  goalPosition: {x: 3, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -29989,6 +30000,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 3650199912022411670}
@@ -34157,6 +34169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
   gridPosition: {x: 5, y: 5}
+  goalPosition: {x: 3, y: 1}
   cells:
   - {x: 0, y: 0}
   visual: {fileID: 2113845331115850962}
@@ -34226,6 +34239,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
@@ -47970,7 +47984,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7427694083537185845}
-  m_Mesh: {fileID: 4300000, guid: c80c520ea73fd3c448f46e016ce4e23f, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 2a19c1431d963e14eb048c234a1aacb6, type: 2}
 --- !u!23 &8799914280853834474
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -59276,6 +59290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: 2283ff29f3c8ea94d8eaf6cfae2c5673, type: 2}
   gridPosition: {x: 1, y: 0}
+  goalPosition: {x: 1, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -59346,6 +59361,7 @@ MonoBehaviour:
   dockDuration: 0.12
   dockPortTravel: 0.065
   iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 5876912160122934055}

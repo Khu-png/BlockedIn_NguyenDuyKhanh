@@ -31,6 +31,7 @@ namespace BlockedIn.Blocks
         {
             int previous = freezeCount;
             freezeCount = Mathf.Max(0, count);
+            if ((previous > 0) != IsFrozen) RefreshTabLayer();
             if (Application.isPlaying && freezeCount < previous)
                 SoundManager.Play(freezeCount == 0 ? SoundManager.IceBreakSound : SoundManager.IceCrackSound);
             if (icePresentation != null) icePresentation.ShowCount(freezeCount);

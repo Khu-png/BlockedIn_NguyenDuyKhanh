@@ -37,16 +37,18 @@ namespace BlockedIn.EditorTools
         }
 
         public static List<int> Apply(int columns, BlockColorData[] colors, BlockEdgeData[] edges, int[] groups,
-            BlockColorData[] ropes, List<int> piece, List<int> other, Vector2Int delta)
+            BlockColorData[] ropes, Vector2Int[] goalPositions, List<int> piece, List<int> other, Vector2Int delta)
         {
             var oldColors = (BlockColorData[])colors.Clone();
             var oldEdges = (BlockEdgeData[])edges.Clone();
             var oldGroups = (int[])groups.Clone();
             var oldRopes = (BlockColorData[])ropes.Clone();
+            var oldGoals = (Vector2Int[])goalPositions.Clone();
             var sources = new List<int>(piece);sources.AddRange(other);
             foreach (int cell in sources)
             {
                 colors[cell] = null;edges[cell] = default;groups[cell] = 0;ropes[cell] = null;
+                goalPositions[cell] = PuzzlePieceMover.InvalidGoal;
             }
             var moved = new List<int>();
             foreach (int cell in sources)
@@ -56,6 +58,7 @@ namespace BlockedIn.EditorTools
                 int next = cell + (first ? offset : -offset);
                 colors[next] = oldColors[cell];edges[next] = oldEdges[cell];
                 groups[next] = oldGroups[cell];ropes[next] = oldRopes[cell];
+                goalPositions[next] = oldGoals[cell];
                 if (first) moved.Add(next);
             }
             return moved;

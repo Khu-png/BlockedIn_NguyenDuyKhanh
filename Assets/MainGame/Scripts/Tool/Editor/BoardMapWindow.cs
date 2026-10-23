@@ -16,6 +16,7 @@ namespace BlockedIn.EditorTools
         [SerializeField] int brushIndex;
         [SerializeField] BlockColorData[] blockColors;
         [SerializeField] BlockEdgeData[] blockEdges;
+        [SerializeField] Vector2Int[] blockGoalPositions;
         [SerializeField] BoardMap mapAsset;
         [SerializeField] GeneratedBoard target;
         [SerializeField] GameObject tilePrefab, backdropPrefab, wallPrefab;
@@ -72,6 +73,8 @@ namespace BlockedIn.EditorTools
             var nextBlocks = new BlockColorData[width * height];
             var nextGroups = new int[width * height];
             var nextEdges = new BlockEdgeData[width * height];
+            var nextGoals = new Vector2Int[width * height];
+            for (int i = 0; i < nextGoals.Length; i++) nextGoals[i] = PuzzlePieceMover.InvalidGoal;
             var nextRopes = new BlockColorData[width * height];
             for (int y = 0; y < height; y++)
                 for (int x = 0; x < width; x++)
@@ -80,6 +83,8 @@ namespace BlockedIn.EditorTools
                         nextBlocks[y * width + x] = blockColors[y * columns + x];
                     if (blockEdges != null && x < columns && y < rows && y * columns + x < blockEdges.Length)
                         nextEdges[y * width + x] = blockEdges[y * columns + x];
+                    if (blockGoalPositions != null && x < columns && y < rows && y * columns + x < blockGoalPositions.Length)
+                        nextGoals[y * width + x] = blockGoalPositions[y * columns + x];
                     if (blockGroups != null && x < columns && y < rows && y * columns + x < blockGroups.Length)
                         nextGroups[y * width + x] = blockGroups[y * columns + x];
                     if (ropeColors != null && x < columns && y < rows && y * columns + x < ropeColors.Length)
@@ -92,6 +97,7 @@ namespace BlockedIn.EditorTools
             selectedCells.Clear();
             blockColors = nextBlocks;
             blockEdges = nextEdges;
+            blockGoalPositions = nextGoals;
             columns = width;
             rows = height;
             cells = next;
@@ -102,7 +108,7 @@ namespace BlockedIn.EditorTools
         {
             Undo.RecordObject(this, "Fill map");
             for (int i = 0; i < cells.Length; i++)
-            { cells[i] = value; blockColors[i] = null; blockEdges[i] = default; blockGroups[i] = 0; ropeColors[i] = null; }
+            { cells[i] = value; blockColors[i] = null; blockEdges[i] = default; blockGoalPositions[i] = PuzzlePieceMover.InvalidGoal; blockGroups[i] = 0; ropeColors[i] = null; }
             frozenColors = Array.Empty<BlockIceData>();
             selectedCells.Clear();
         }
@@ -114,6 +120,7 @@ namespace BlockedIn.EditorTools
             for (int i = 0; i < cells.Length; i++) cells[i] = BoardCell.Floor;
             Array.Clear(blockColors, 0, blockColors.Length);
             Array.Clear(blockEdges, 0, blockEdges.Length);
+            ClearGoalPositions();
             Array.Clear(blockGroups, 0, blockGroups.Length);
             Array.Clear(ropeColors, 0, ropeColors.Length);
             selectedCells.Clear();
@@ -175,7 +182,7 @@ namespace BlockedIn.EditorTools
             BoardRopeBuilder.Validate(blockColors, ropeColors, blockGroups);
             RestoreBoardBinding();
             RequireBoardBinding();
-            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
+            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups, blockGoalPositions);
             previewCamera = Camera.main;
             if (tilePrefab == null) tilePrefab = BoardDefaultPrefabs.Load("BoardTile");
             if (backdropPrefab == null) backdropPrefab = BoardDefaultPrefabs.Load("BoardBackdropCell");
@@ -184,7 +191,7 @@ namespace BlockedIn.EditorTools
                 tilePrefab, backdropPrefab, wallPrefab);
             Undo.RegisterCompleteObjectUndo(this, "Bind generated board");
             SetBoardBinding(board);
-            BoardBlockBuilder.Generate(target, blockColors, previewCamera, blockEdges, blockGroups);
+            BoardBlockBuilder.Generate(target, blockColors, previewCamera, blockEdges, blockGroups, blockGoalPositions);
             BoardIceBuilder.Apply(target.blockGameplay, frozenColors);
             BoardRopeBuilder.Apply(target.blockGameplay, ropeColors);
         }

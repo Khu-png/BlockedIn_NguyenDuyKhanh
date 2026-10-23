@@ -76,14 +76,14 @@ public sealed class Gameplay : UICanvas
         if (hammerPowerup != null && hammerPowerup.IsStriking) return;
         if (hammerPowerup != null && hammerPowerup.IsActive) hammerPowerup.Cancel();
         if (settingsOpen) { OnCloseSettings(); return; }
-        if (settingsPanel == null || !GameManager.IsState(GameState.Gameplay)) return;
+        if (settingsPanel == null || LevelManager.Ins == null || !GameManager.IsState(GameState.Gameplay)) return;
         if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
         if (!settingsSessionPaused)
         {
             CacheSettingsAnimation();
             previousTimeScale = Time.timeScale;
-            settingsSessionPaused = true;
             LevelManager.Ins.SetInputEnabled(false);
+            settingsSessionPaused = true;
             Time.timeScale = 0f;
         }
         SoundManager.Play(SoundManager.ButtonSound);
@@ -102,6 +102,7 @@ public sealed class Gameplay : UICanvas
     void FinishCloseSettings()
     {
         if (!settingsSessionPaused) return;
+        CacheSettingsAnimation();
         settingsOpen = settingsSessionPaused = false;
         settingsProgress = 0f;
         for (int i = 0; i < settingsRestPositions.Length; i++)
@@ -159,9 +160,10 @@ public sealed class Gameplay : UICanvas
     }
     void CacheSettingsAnimation()
     {
-        if (settingsRestPositions != null) return;
-        Canvas.ForceUpdateCanvases();
         int count = settingsButtons != null ? settingsButtons.Length : 0;
+        if (settingsRestPositions != null && settingsRestPositions.Length == count
+            && settingsRestScales != null && settingsRestScales.Length == count) return;
+        Canvas.ForceUpdateCanvases();
         settingsRestPositions = new Vector2[count];
         settingsRestScales = new Vector3[count];
         for (int i = 0; i < count; i++)
@@ -175,6 +177,7 @@ public sealed class Gameplay : UICanvas
     void TickSettings(float deltaTime)
     {
         if (!settingsSessionPaused) return;
+        CacheSettingsAnimation();
         float duration = Mathf.Max(.01f, settingsSlideDuration)
             + Mathf.Max(0, settingsStagger) * Mathf.Max(0, settingsRestPositions.Length - 1);
         settingsProgress = Mathf.MoveTowards(settingsProgress, settingsOpen ? 1f : 0f,
@@ -185,6 +188,7 @@ public sealed class Gameplay : UICanvas
     void ApplySettingsAnimation()
     {
         if (settingsButtons == null) return;
+        CacheSettingsAnimation();
         float duration = Mathf.Max(.01f, settingsSlideDuration);
         float stagger = Mathf.Max(0, settingsStagger);
         float elapsed = settingsProgress * (duration + stagger * Mathf.Max(0, settingsButtons.Length - 1));

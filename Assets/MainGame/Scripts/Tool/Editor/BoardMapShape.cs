@@ -123,7 +123,10 @@ namespace BlockedIn.EditorTools
         {
             Undo.RecordObject(this, "Remove shape cells");
             foreach (int index in selectedCells)
-            { blockColors[index] = null; blockEdges[index] = default; blockGroups[index] = 0; ropeColors[index] = null; }
+            {
+                blockGoalPositions[index] = PuzzlePieceMover.InvalidGoal;
+                blockColors[index] = null; blockEdges[index] = default; blockGroups[index] = 0; ropeColors[index] = null;
+            }
             selectedCells.Clear();
             RepairGroups();
             Repaint();

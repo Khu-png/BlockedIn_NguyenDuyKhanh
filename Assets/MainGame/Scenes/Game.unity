@@ -910,9 +910,10 @@ MonoBehaviour:
   mainCamera: {fileID: 330585545}
   gamePlayRect: {fileID: 28360612}
   uiCamera: {fileID: 0}
-  padding: 1.04
-  backgroundPrefab: {fileID: 9066015772493468440, guid: 554689aedf22be449a20b78d549e7cb6, type: 3}
+  padding: 0.85
+  backgroundPrefab: {fileID: 9066015772493468440, guid:  554689aedf22be449a20b78d549e7cb6, type: 3}
   boardFramePrefab: {fileID: 140220026976544434, guid: 5e674b34edf835247b6fb97de819b476, type: 3}
+  iceCameraData: {fileID: 330585547}
 --- !u!1 &1842512555
 GameObject:
   m_ObjectHideFlags: 0

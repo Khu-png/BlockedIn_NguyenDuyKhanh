@@ -9,7 +9,7 @@ namespace BlockedIn.EditorTools
     public static class BoardShapeBuilder
     {
         public static Block Add(BlockBoard board, Block prefab, List<int> members,
-            BlockColorData[] colors, BlockEdgeData[] edges)
+            BlockColorData[] colors, BlockEdgeData[] edges, Vector2Int[] goalPositions = null)
         {
             int columns = board.Layout.columns;
             int first = members[0];
@@ -49,6 +49,10 @@ namespace BlockedIn.EditorTools
             }
             block.Configure(colors[first], origin, visual, renderers.ToArray(), colliders[0]);
             block.ConfigureShape(footprint, appearances, colliders, models);
+            Vector2Int firstGoal = goalPositions != null && goalPositions.Length > first
+                ? goalPositions[first] : PuzzlePieceMover.InvalidGoal;
+            block.SetGoalPosition(firstGoal == PuzzlePieceMover.InvalidGoal
+                ? origin : firstGoal - footprint[0]);
             board.Register(block);
             return block;
         }

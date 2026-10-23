@@ -514,7 +514,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -535,7 +535,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1029,6 +1029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: c1ea069552015a74aa1eaf7ae9497109, type: 2}
   gridPosition: {x: 4, y: 5}
+  goalPosition: {x: 2, y: 4}
   cells:
   - {x: 0, y: 0}
   visual: {fileID: 9179314980418861782}
@@ -1099,6 +1100,7 @@ MonoBehaviour:
   dockPortTravel: 0.065
   iconRenderers:
   - {fileID: 4655813241702232959}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
@@ -9917,6 +9919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: a685ebb53c14e334594c093df631eec5, type: 2}
   gridPosition: {x: 4, y: 2}
+  goalPosition: {x: 5, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -9989,6 +9992,7 @@ MonoBehaviour:
   iconRenderers:
   - {fileID: 2586870166089943949}
   - {fileID: 6788245652609835354}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 5500458663622114866}
@@ -12034,6 +12038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 1, y: 0}
+  goalPosition: {x: 4, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -12106,6 +12111,7 @@ MonoBehaviour:
   iconRenderers:
   - {fileID: 322871865720841165}
   - {fileID: 3300035533457008896}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 222201597065579462}
@@ -13960,7 +13966,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13981,7 +13987,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a1c49c8287848d14d9b3db03a387bda3, type: 3}
   m_Color: {r: 1, g: 0.8, b: 0.5, a: 1}
@@ -16892,7 +16898,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16913,7 +16919,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a1c49c8287848d14d9b3db03a387bda3, type: 3}
   m_Color: {r: 1, g: 0.8, b: 0.5, a: 1}
@@ -20864,7 +20870,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20885,7 +20891,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -24610,7 +24616,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24631,7 +24637,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -26055,6 +26061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
   gridPosition: {x: 3, y: 2}
+  goalPosition: {x: 5, y: 0}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -26127,6 +26134,7 @@ MonoBehaviour:
   iconRenderers:
   - {fileID: 3648628153116247793}
   - {fileID: 423712740602900350}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 980349923472736448}
@@ -28215,7 +28223,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28236,7 +28244,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -30460,7 +30468,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30481,7 +30489,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -33727,7 +33735,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -33748,7 +33756,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -37110,7 +37118,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37131,7 +37139,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a1c49c8287848d14d9b3db03a387bda3, type: 3}
   m_Color: {r: 1, g: 0.8, b: 0.5, a: 1}
@@ -39355,7 +39363,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39376,7 +39384,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -42405,7 +42413,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -42426,7 +42434,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 42f344833b6259f4386f602a9b89a52e, type: 3}
   m_Color: {r: 0.5, g: 0.84, b: 1, a: 1}
@@ -43328,7 +43336,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -43349,7 +43357,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -55226,7 +55234,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -55247,7 +55255,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 42f344833b6259f4386f602a9b89a52e, type: 3}
   m_Color: {r: 0.5, g: 0.84, b: 1, a: 1}
@@ -55630,7 +55638,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -55651,7 +55659,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e3dbf7eb2afec3b4d991e7a109e14946, type: 3}
   m_Color: {r: 0.72, g: 1, b: 0.55, a: 1}
@@ -57064,7 +57072,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -57085,7 +57093,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -57926,6 +57934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b63e0dee99f52594792e8b03a5828e04, type: 2}
   gridPosition: {x: 2, y: 1}
+  goalPosition: {x: 0, y: 1}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -58106,6 +58115,7 @@ MonoBehaviour:
   - {fileID: 2172047595931096856}
   - {fileID: 6816318835065711507}
   - {fileID: 3785327504618731998}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 899516177563593897}
@@ -59033,7 +59043,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -59054,7 +59064,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e3dbf7eb2afec3b4d991e7a109e14946, type: 3}
   m_Color: {r: 0.72, g: 1, b: 0.55, a: 1}
@@ -65570,6 +65580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: c1ea069552015a74aa1eaf7ae9497109, type: 2}
   gridPosition: {x: 1, y: 4}
+  goalPosition: {x: 1, y: 4}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -65669,6 +65680,7 @@ MonoBehaviour:
   - {fileID: 9081783237060765953}
   - {fileID: 332234655791064877}
   - {fileID: 1186684619954144546}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 7093034266946176911}
@@ -70204,7 +70216,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -70225,7 +70237,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e3dbf7eb2afec3b4d991e7a109e14946, type: 3}
   m_Color: {r: 0.72, g: 1, b: 0.55, a: 1}
@@ -73142,6 +73154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: a685ebb53c14e334594c093df631eec5, type: 2}
   gridPosition: {x: 5, y: 4}
+  goalPosition: {x: 4, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -73214,6 +73227,7 @@ MonoBehaviour:
   iconRenderers:
   - {fileID: 5971771792001632379}
   - {fileID: 8689850169793030858}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 5419951431371721683}
@@ -75179,7 +75193,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75200,7 +75214,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -76224,7 +76238,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76245,7 +76259,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 42f344833b6259f4386f602a9b89a52e, type: 3}
   m_Color: {r: 0.5, g: 0.84, b: 1, a: 1}
@@ -77835,7 +77849,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77856,7 +77870,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -82296,7 +82310,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82317,7 +82331,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3a5ac5f54b5c54ba8995e50720c530, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85332,7 +85346,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85353,7 +85367,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e3dbf7eb2afec3b4d991e7a109e14946, type: 3}
   m_Color: {r: 0.72, g: 1, b: 0.55, a: 1}
@@ -85972,7 +85986,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85993,7 +86007,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a1c49c8287848d14d9b3db03a387bda3, type: 3}
   m_Color: {r: 1, g: 0.8, b: 0.5, a: 1}
@@ -87220,6 +87234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlockedIn.Blocks.Block
   colorData: {fileID: 11400000, guid: b63e0dee99f52594792e8b03a5828e04, type: 2}
   gridPosition: {x: 0, y: 2}
+  goalPosition: {x: 0, y: 2}
   cells:
   - {x: 0, y: 0}
   - {x: 1, y: 0}
@@ -87400,6 +87415,7 @@ MonoBehaviour:
   - {fileID: 1356937984544169233}
   - {fileID: 3065489599358248040}
   - {fileID: 4279345128149860175}
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   ropeVisual: {fileID: 0}
   cellAppearances:
   - {fileID: 6422125985118102530}
@@ -87944,7 +87960,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87965,7 +87981,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 42f344833b6259f4386f602a9b89a52e, type: 3}
   m_Color: {r: 0.5, g: 0.84, b: 1, a: 1}

@@ -1617,6 +1617,7 @@ MonoBehaviour:
   cellVisuals: []
   icePresentation: {fileID: 0}
   freezeCount: 0
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
 --- !u!114 &9000000000001005
 MonoBehaviour:
   m_ObjectHideFlags: 0

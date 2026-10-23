@@ -1,3 +1,4 @@
+using System;
 using BlockedIn.Blocks;
 using BlockedIn.Blocks.Editor;
 using BlockedIn.MapTools;
@@ -14,9 +15,20 @@ namespace BlockedIn.EditorTools
                 blockColors = new BlockColorData[columns * rows];
             if (blockEdges == null || blockEdges.Length != columns * rows)
                 blockEdges = new BlockEdgeData[columns * rows];
+            EnsureGoalPositions();
             EnsureGroups();
             EnsureRopes();
             for (int i = 0; i < blockEdges.Length; i++) blockEdges[i].Normalize();
+        }
+
+        void EnsureGoalPositions()
+        {
+            if (blockGoalPositions != null && blockGoalPositions.Length == columns * rows) return;
+            var goals = new Vector2Int[columns * rows];
+            for (int i = 0; i < goals.Length; i++) goals[i] = PuzzlePieceMover.InvalidGoal;
+            if (blockGoalPositions != null)
+                Array.Copy(blockGoalPositions, goals, Math.Min(blockGoalPositions.Length, goals.Length));
+            blockGoalPositions = goals;
         }
 
         void DrawGrid(Rect grid)
@@ -109,6 +121,7 @@ namespace BlockedIn.EditorTools
                 color = BlockAssetBuilder.LoadColor("Blue");
             }
             Undo.RecordObject(this, "Paint map");
+            blockGoalPositions[index] = PuzzlePieceMover.InvalidGoal;
             if (blockColors[index] == null || color == null) blockEdges[index] = default;
             cells[index] = brushIndex == 1 ? MapTools.BoardCell.Wall : MapTools.BoardCell.Floor;
             blockColors[index] = color;
@@ -133,7 +146,11 @@ namespace BlockedIn.EditorTools
             {
                 blockColors[cell] = color;
                 ropeColors[cell] = inheritedRope;
-                if (color == null) { blockEdges[cell] = default; blockGroups[cell] = 0; ropeColors[cell] = null; }
+                if (color == null)
+                {
+                    blockGoalPositions[cell] = PuzzlePieceMover.InvalidGoal;
+                    blockEdges[cell] = default; blockGroups[cell] = 0; ropeColors[cell] = null;
+                }
             }
 
             Repaint();

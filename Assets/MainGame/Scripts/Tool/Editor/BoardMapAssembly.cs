@@ -59,8 +59,10 @@ namespace BlockedIn.EditorTools
             {
                 Undo.RecordObject(this, "Prepare complete puzzle shapes");
                 PuzzleShapeCutter.Prepare(columns, blockColors, blockEdges, blockGroups);
+                ClearGoalPositions();
             }
             Undo.RecordObject(this, "Change puzzle authoring step");
+            if (next == 2 && !HasGoalPositions()) CaptureGoalPositions();
             selectAssemblyGroups = false;
             assemblyStage = next;editShape = next != 0;painting = false;
             selectedCells.Clear();assemblyStatus = null;
@@ -73,8 +75,14 @@ namespace BlockedIn.EditorTools
         }
         void DrawArrangement()
         {
+            if (!HasGoalPositions())
+            {
+                EditorGUILayout.HelpBox("Arrange the blocks into the intended solution, then capture these positions before shuffling.", MessageType.Warning);
+                if (GUILayout.Button("Capture Current Layout as Solution")) Run(CaptureGoalPositions);
+            }
             shuffleSteps = EditorGUILayout.IntSlider("Shuffle moves", shuffleSteps, 1, 300);
-            if (GUILayout.Button("Shuffle with legal moves")) Run(ShuffleAssembly);
+            using (new EditorGUI.DisabledScope(!HasGoalPositions()))
+                if (GUILayout.Button("Shuffle with legal moves")) Run(ShuffleAssembly);
         }
         void MoveAssemblyPiece(Vector2Int delta)
         {
@@ -87,10 +95,34 @@ namespace BlockedIn.EditorTools
             Undo.RecordObject(this, "Shuffle puzzle pieces");
             var lockedColors = new HashSet<int>();
             foreach (BlockIceData ice in frozenColors) if (ice.count > 0) lockedColors.Add(ice.colorId);
-            int moved = PuzzlePieceMover.Shuffle(columns, cells, blockColors, blockEdges, blockGroups, ropeColors, shuffleSteps, lockedColors);
+            int moved = PuzzlePieceMover.Shuffle(columns, cells, blockColors, blockEdges, blockGroups, ropeColors, blockGoalPositions, shuffleSteps, lockedColors);
             selectedCells.Clear();
             assemblyStatus = moved == 0 ? "No legal shuffle move is available. Leave more free floor space."
                 : "Applied " + moved + " legal moves. Play-test the result before using it as a level.";
+        }
+
+        bool HasGoalPositions()
+        {
+            if (blockGoalPositions == null || blockGoalPositions.Length != blockColors.Length) return false;
+            for (int i = 0; i < blockColors.Length; i++)
+                if (blockColors[i] != null && blockGoalPositions[i] == PuzzlePieceMover.InvalidGoal) return false;
+            return true;
+        }
+
+        void CaptureGoalPositions()
+        {
+            Undo.RecordObject(this, "Capture solution positions");
+            EnsureGoalPositions();
+            for (int i = 0; i < blockColors.Length; i++)
+                blockGoalPositions[i] = blockColors[i] != null
+                    ? new Vector2Int(i % columns, i / columns) : PuzzlePieceMover.InvalidGoal;
+            assemblyStatus = "Saved solution positions. Shuffle and save the level to keep them.";
+        }
+
+        void ClearGoalPositions()
+        {
+            EnsureGoalPositions();
+            for (int i = 0; i < blockGoalPositions.Length; i++) blockGoalPositions[i] = PuzzlePieceMover.InvalidGoal;
         }
     }
 }

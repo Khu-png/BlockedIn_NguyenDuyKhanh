@@ -15,7 +15,7 @@ namespace BlockedIn.CameraTools
         [SerializeField] RectTransform gamePlayRect;
         [Tooltip("Leave empty for an Overlay Canvas. Otherwise assign the Canvas camera.")]
         [SerializeField] Camera uiCamera;
-        [SerializeField, Min(1f)] float padding = 1.04f;
+        [SerializeField, Range(.85f, 1.25f)] float padding = .85f;
         [SerializeField] SpriteRenderer backgroundPrefab;
         [SerializeField] SpriteRenderer boardFramePrefab;
         SpriteRenderer background, boardFrame;
@@ -40,6 +40,7 @@ namespace BlockedIn.CameraTools
         void LateUpdate()
         {
             FitBackground();
+            UpdateIceRefraction();
             if (board == null || mainCamera == null) return;
             if (mainCamera.pixelRect != lastPixelRect || mainCamera.aspect != lastAspect
                 || GetViewport(mainCamera, gamePlayRect, uiCamera) != lastViewport
@@ -142,7 +143,7 @@ namespace BlockedIn.CameraTools
             float height = Mathf.Abs(Vector3.Dot(horizontal, up)) + Mathf.Abs(Vector3.Dot(vertical, up));
             float aspect = Mathf.Max(camera.aspect, .01f);
             float size = Mathf.Max(height / (2 * viewport.height), width / (2 * aspect * viewport.width));
-            size = Mathf.Max(.01f, size * Mathf.Max(1, padding));
+            size = Mathf.Max(.01f, size * Mathf.Clamp(padding, .85f, 1.25f));
             float distance = Mathf.Max(horizontal.magnitude, vertical.magnitude) + 10;
             Vector2 offset = viewport.center - new Vector2(.5f, .5f);
             Vector3 position = root.position + root.up * distance;

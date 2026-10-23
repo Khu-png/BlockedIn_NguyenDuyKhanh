@@ -66,5 +66,25 @@ MonoBehaviour:
     bottom: 0
     left: 0
   blockGroups: 000000000000000000000000000000000000000000000000000000000000000000000000
+  blockGoalPositions:
+  - {x: -1, y: -1}
+  - {x: 1, y: 0}
+  - {x: -1, y: -1}
+  - {x: 1, y: 2}
+  - {x: -1, y: -1}
+  - {x: 0, y: 2}
+  - {x: -1, y: -1}
+  - {x: 1, y: 1}
+  - {x: -1, y: -1}
   frozenColors: []
+  ropeColors:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   runtimeBoard: {fileID: 1952688856834549461, guid: 7ce32f06224b9174db6d0cef843fc96f, type: 3}

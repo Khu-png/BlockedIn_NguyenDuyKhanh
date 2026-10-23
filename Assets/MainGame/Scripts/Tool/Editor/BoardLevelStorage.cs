@@ -36,7 +36,7 @@ namespace BlockedIn.EditorTools
                 try
                 {
                     BoardBlockBuilder.Validate(level.columns, level.rows, level.cells,
-                        level.blockColors, level.blockEdges, level.blockGroups);
+                        level.blockColors, level.blockEdges, level.blockGroups, level.blockGoalPositions);
                     BakeRuntimeBoard(level);
                     changed = true;
                 }
@@ -50,11 +50,11 @@ namespace BlockedIn.EditorTools
         public static BoardMap Save(int number, int columns, int rows, bool border, BoardCell[] cells,
             BlockColorData[] blockColors = null, BlockEdgeData[] blockEdges = null, int[] blockGroups = null,
             GameObject tile = null, GameObject backdrop = null, GameObject wall = null, float? timeLimit = null, BlockIceData[] frozenColors = null,
-            BlockColorData[] ropeColors = null)
+            BlockColorData[] ropeColors = null, Vector2Int[] blockGoalPositions = null)
         {
             Validate(number, columns, rows, cells);
             BoardRopeBuilder.Validate(blockColors, ropeColors, blockGroups);
-            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups);
+            BoardBlockBuilder.Validate(columns, rows, cells, blockColors, blockEdges, blockGroups, blockGoalPositions);
             if (!AssetDatabase.IsValidFolder(ParentFolder)) AssetDatabase.CreateFolder("Assets/MainGame", "ScriptableObject");
             if (!AssetDatabase.IsValidFolder(Folder)) AssetDatabase.CreateFolder(ParentFolder, "Levels");
             string name = "Level " + number;
@@ -72,6 +72,7 @@ namespace BlockedIn.EditorTools
             level.blockColors = blockColors == null ? null : (BlockColorData[])blockColors.Clone();
             level.blockEdges = blockEdges == null ? null : (BlockEdgeData[])blockEdges.Clone();
             level.blockGroups = blockGroups == null ? null : (int[])blockGroups.Clone();
+            level.blockGoalPositions = blockGoalPositions == null ? null : (Vector2Int[])blockGoalPositions.Clone();
             if (frozenColors != null) level.frozenColors = (BlockIceData[])frozenColors.Clone();
             if (ropeColors != null) level.ropeColors = (BlockColorData[])ropeColors.Clone();
             BakeRuntimeBoard(level, tile, backdrop, wall);
@@ -95,7 +96,8 @@ namespace BlockedIn.EditorTools
                     tile != null ? tile : BoardDefaultPrefabs.Load("BoardTile"),
                     backdrop != null ? backdrop : BoardDefaultPrefabs.Load("BoardBackdropCell"),
                     wall != null ? wall : BoardDefaultPrefabs.Load("BoardWallCell"));
-                BoardBlockBuilder.Generate(board, level.blockColors, null, level.blockEdges, level.blockGroups);
+                BoardBlockBuilder.Generate(board, level.blockColors, null, level.blockEdges,
+                    level.blockGroups, level.blockGoalPositions);
                 BoardIceBuilder.Apply(board.blockGameplay, level.frozenColors);
                 BoardRopeBuilder.Apply(board.blockGameplay, level.ropeColors);
                 string path = prefabFolder + "/Level " + level.levelNumber + ".prefab";

@@ -40,6 +40,7 @@ namespace BlockedIn.Blocks
         bool StableCell(Block block)
         {
             return block != null && block.isActiveAndEnabled && !block.IsFrozen && !block.IsRoped && !block.IsDragging && !block.IsSettling && block.Appearance != null
+                && block.HasGoalPosition
                 && block.Cells != null && block.Cells.Length > 0
                 && Vector2.Distance(worldToGrid(block.transform.position), block.GridPosition) <= BlockBoard.PositionEpsilon;
         }
@@ -65,7 +66,7 @@ namespace BlockedIn.Blocks
             other = null;
             if (!positions.TryGetValue(block.GridPosition + cell + connectionOffsets[side], out other)) return false;
             EdgeType first = block.EdgeAt(cell, (BlockSide)side);
-            if (other == block) return false;
+            if (!BlockConnectionRules.CanMatch(block, other)) return false;
             Vector2Int offset = block.GridPosition + cell + connectionOffsets[side] - other.GridPosition;
             EdgeType second = other.EdgeAt(offset, (BlockSide)((side + 2) % 4));
             return first == EdgeType.Tab && second == EdgeType.Socket
