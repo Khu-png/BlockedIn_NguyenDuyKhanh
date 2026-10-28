@@ -24,6 +24,7 @@ namespace BlockedIn.Blocks
             if (block != null && blocks.Contains(block)) HasPlayerInteracted = true;
         }
         public Camera ViewCamera => cameraManager != null ? cameraManager.MainCamera : viewCamera;
+        public CameraManager CameraController => cameraManager;
 
         public void Configure(GeneratedBoard board, CameraManager cameraController, Camera camera = null)
         {
@@ -37,6 +38,7 @@ namespace BlockedIn.Blocks
 
         void Start()
         {
+            PrepareMatchSweeps();
             foreach (Block block in blocks)
             {
                 if (block == null || !CanPlace(block, block.GridPosition))

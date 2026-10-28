@@ -95,6 +95,8 @@ namespace BlockedIn.Blocks
             tiltAngle = source.tiltAngle;
             verticalTiltAngle = source.verticalTiltAngle;
             screenRollAngle = source.screenRollAngle;
+            dragFollowTime = source.dragFollowTime;
+            dragFollowSpeed = source.dragFollowSpeed;
         }
 
         public bool HasSameColor(Block other)
@@ -124,6 +126,7 @@ namespace BlockedIn.Blocks
         {
             if (board == null || board.PowerupBusy || !CanDrag) return false;
             dragging = true;
+            dragFollowVelocity = Vector2.zero;
             board.BeginFloorShadowTrail(this);
             board.RefreshDockNeighborhood(this);
             board.ResetDragGuidance(this);
@@ -133,17 +136,6 @@ namespace BlockedIn.Blocks
             visual.localPosition = visualRest + Vector3.up * liftHeight;
             board.ShowPlacementPreview(this, snapTolerance);
             return true;
-        }
-
-        public void DragTo(Vector2 target)
-        {
-            if (!dragging) return;
-            Vector2 current = board.WorldToGrid(transform.position);
-            Vector2 destination = board.ConstrainDrag(this, current, target, target - lastDragTarget, Time.deltaTime);
-            lastDragTarget = target;
-            transform.position = board.GridToWorld(destination);
-            board.CaptureFloorShadowTrail(this);
-            board.ShowPlacementPreview(this, snapTolerance);
         }
 
         public void EndDrag()

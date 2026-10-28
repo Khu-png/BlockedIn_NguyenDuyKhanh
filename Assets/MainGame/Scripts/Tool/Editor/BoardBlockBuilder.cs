@@ -50,6 +50,8 @@ namespace BlockedIn.EditorTools
             gameplay.Configure(board, null, camera);
             gameplay.SetPlacementPreviewMaterial(AssetDatabase.LoadAssetAtPath<Material>(
                 "Assets/MainGame/Material/BlockPlacementPreview.mat"));
+            gameplay.SetMatchSweepMaterial(AssetDatabase.LoadAssetAtPath<Material>(
+                "Assets/MainGame/Material/BlockMatchSweep.mat"));
             board.blockGameplay = gameplay;
             BlockInput input = Undo.AddComponent<BlockInput>(root);
             input.Configure(camera, gameplay);

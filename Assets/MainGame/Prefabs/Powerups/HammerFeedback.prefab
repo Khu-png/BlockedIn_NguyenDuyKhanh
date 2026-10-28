@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HammerFeedback
   head: {fileID: 5316346670762178235}
   impact: {fileID: 6169935879374497883}
+  impactBurstMaterial: {fileID: 2100000, guid: 8a8a7a5fcd044b3c994d3af5771658ce, type: 2}
   audioSource: {fileID: 822724159023963591}
   hitSound: {fileID: 8300000, guid: 29be2bdcc4744a64934977956a8b618f, type: 3}
   breakSound: {fileID: 8300000, guid: de902eeef2fe0ef4e91316ff00d743ff, type: 3}

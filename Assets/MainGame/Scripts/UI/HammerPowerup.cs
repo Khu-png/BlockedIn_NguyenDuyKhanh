@@ -17,6 +17,7 @@ public sealed class HammerPowerup : MonoBehaviour
     Block[] splitParts;
     HammerBlockImpact blockImpact;
     Coroutine retreatRoutine;
+    readonly HammerCameraImpulse cameraImpulse = new HammerCameraImpulse();
     public bool IsSelecting => selection != null && selection.IsActive;
     public bool IsStriking => routine != null;
     public bool IsActive => IsSelecting || IsStriking;
@@ -33,9 +34,11 @@ public sealed class HammerPowerup : MonoBehaviour
     }
     void Update()
     {
+        cameraImpulse.ClearOffset();
         if(IsActive && (!ContextReady() || LevelManager.Ins.CurrentLevel.blockGameplay != board))Cancel();
         if(button!=null)button.interactable = ContextReady() && !IsStriking && (timeFreeze==null || !timeFreeze.IsIntroducing);
     }
+    void LateUpdate() => cameraImpulse.Tick(Time.deltaTime);
     public void Toggle()
     {
         if(IsStriking)return;
@@ -82,7 +85,9 @@ public sealed class HammerPowerup : MonoBehaviour
         yield return feedback.Fly(start,center,rotation,.7f*board.Layout.transform.lossyScale.x);
         yield return feedback.Swing(center,rotation);
         if(target==null||board==null||!target.CanSplit){Finish();yield break;}
-        feedback.Hit(center);
+        feedback.Hit(center, rotation, Mathf.Clamp(Mathf.Sqrt(target.Cells.Length) * .8f, 1.35f, 2.4f)
+            * board.Layout.transform.lossyScale.x);
+        cameraImpulse.Play(camera);
         try { splitParts=board.SplitBlock(target); }
         catch(System.Exception error) { Debug.LogException(error); }
         if(splitParts==null){Finish();yield break;}
@@ -102,6 +107,7 @@ public sealed class HammerPowerup : MonoBehaviour
     }
     void Finish()
     {
+        cameraImpulse.Restore();
         blockImpact?.Restore();
         if(feedback!=null)feedbackPool.Return(feedback);
         if(board!=null)

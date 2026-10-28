@@ -52,6 +52,7 @@ namespace BlockedIn.CameraTools
         {
             if (board != level) { introActive = false; introProgress = 1; }
             board = level;
+            SetResultFrameVisible(true);
             Fit();
         }
 

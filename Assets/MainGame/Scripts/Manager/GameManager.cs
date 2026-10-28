@@ -60,6 +60,8 @@ public class GameManager : Singleton<GameManager>
         Gameplay view=UIManager.Ins.GetUI<Gameplay>();
         if(view!=null&&view.ResultFeedback!=null)yield return view.ResultFeedback.Play(win);
         else yield return new WaitForSecondsRealtime(win?.1f:.32f);
+        if(win&&LevelManager.Ins!=null&&LevelManager.Ins.CurrentLevel!=null)
+            yield return LevelManager.Ins.CurrentLevel.PlayWinResult();
         if(!IsState(win?GameState.Win:GameState.Lose)){resultRoutine=null;yield break;}
         if(LoadingManager.Ins!=null&&LoadingManager.Ins.IsLoading){resultRoutine=null;yield break;}
         if(win){UIManager.Ins.OpenUI<Win>();SoundManager.Play(SoundManager.WinSound);}
@@ -69,6 +71,8 @@ public class GameManager : Singleton<GameManager>
     void CancelResult()
     {
         if(resultRoutine!=null)StopCoroutine(resultRoutine);resultRoutine=null;
+        if(LevelManager.Ins!=null&&LevelManager.Ins.CurrentLevel!=null)
+            LevelManager.Ins.CurrentLevel.RestoreWinResult();
         if(UIManager.Ins==null||!UIManager.Ins.IsLoaded<Gameplay>())return;
         Gameplay view=UIManager.Ins.GetUI<Gameplay>();
         if(view!=null&&view.ResultFeedback!=null)view.ResultFeedback.Restore();

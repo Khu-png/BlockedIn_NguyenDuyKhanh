@@ -6,7 +6,7 @@ namespace BlockedIn.Blocks
 {
     public sealed partial class BlockBoard
     {
-        [SerializeField, Min(.1f)] float colorExitDuration = 1.2f;
+        [SerializeField, Min(.1f)] float colorExitDuration = .95f;
         [SerializeField, Min(0)] float colorExitHeight = 1.5f;
         [SerializeField, Min(0)] float colorExitSpin = 60f;
         const float PickupDuration = .14f;
@@ -128,6 +128,7 @@ namespace BlockedIn.Blocks
         IEnumerator PlayColorExit(List<Block> group, Camera camera)
         {
             yield return PickupColor(group, camera);
+            if (!HasRemainingGoals) FinalGoalExitStarted?.Invoke();
             List<ExitVisual> visuals = CaptureExitVisuals(group, camera);
             float elapsed = 0;
             float duration = Mathf.Max(.1f, colorExitDuration);

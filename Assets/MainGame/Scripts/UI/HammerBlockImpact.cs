@@ -60,9 +60,9 @@ public sealed class HammerBlockImpact
             Pose pose = poses[i];
             if (pose.visual == null) continue;
             float sign = pose.outward.x + pose.outward.z * .5f >= 0 ? 1 : -1;
-            pose.visual.localPosition = pose.position + pose.outward * (.27f * recoil + .035f * tremble)
-                + pose.up * (.15f * Mathf.Sin(t * Mathf.PI));
-            pose.visual.localRotation = Quaternion.AngleAxis(sign * (24 * recoil + 4 * tremble), pose.up) * pose.rotation;
+            pose.visual.localPosition = pose.position + pose.outward * (.36f * recoil + .045f * tremble)
+                + pose.up * (.22f * Mathf.Sin(t * Mathf.PI));
+            pose.visual.localRotation = Quaternion.AngleAxis(sign * (30 * recoil + 5 * tremble), pose.up) * pose.rotation;
             Vector3 scale = new Vector3(1 - .09f * squash + .04f * recoil, 1 - .13f * squash, 1 + .09f * squash + .04f * recoil);
             pose.visual.localScale = Vector3.Scale(pose.scale, scale);
         }

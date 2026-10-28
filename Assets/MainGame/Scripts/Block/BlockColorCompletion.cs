@@ -17,14 +17,14 @@ namespace BlockedIn.Blocks
 
         public void OnDockFinished()
         {
-            completionNotBefore = Time.time + .05f;
+            completionNotBefore = Mathf.Max(completionNotBefore, Time.time + .05f);
             RequestCompletionCheck();
         }
 
         public void OnBlocksMatched(Block first, Block second)
         {
             if (layout == null) return;
-            StartCoroutine(ColorMatchBurst.Play(first, second, layout.transform, layout.columns, layout.rows, ViewCamera));
+            PlayMatchSweep(first, second);
         }
 
         bool CanCheckCompletion()
@@ -34,6 +34,8 @@ namespace BlockedIn.Blocks
 
         void LateUpdate()
         {
+            TickPlacementPreview(Time.deltaTime);
+            matchSweeps?.Tick(Time.deltaTime);
             if (completionPending) CheckCompletedColors();
         }
 
@@ -70,6 +72,7 @@ namespace BlockedIn.Blocks
     public sealed partial class BlockBoard
     {
         public event Action ColorsRemoved;
+        public event Action FinalGoalExitStarted;
         public bool HasRemainingGoals
         {
             get

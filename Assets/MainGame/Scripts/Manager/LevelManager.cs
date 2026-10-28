@@ -72,6 +72,7 @@ public class LevelManager : Singleton<LevelManager>
             currentLevel.blockGameplay.ConfigureGoalPositions(data.blockGoalPositions);
             hasGoals = currentLevel.blockGameplay.HasRemainingGoals;
             currentLevel.blockGameplay.ColorsRemoved += CheckWin;
+            currentLevel.blockGameplay.FinalGoalExitStarted += CheckWinDuringExit;
         }
         else hasGoals = false;
         if (currentLevel.Input != null)
@@ -102,6 +103,11 @@ public class LevelManager : Singleton<LevelManager>
         if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
         if (hasGoals && currentLevel != null && !currentLevel.blockGameplay.IsRemovingColors
             && !currentLevel.blockGameplay.HasRemainingGoals) OnWin();
+    }
+    void CheckWinDuringExit()
+    {
+        if (LoadingManager.Ins != null && LoadingManager.Ins.IsLoading) return;
+        if (hasGoals && currentLevel != null && !currentLevel.blockGameplay.HasRemainingGoals) OnWin();
     }
     public void OnWin()
     {
@@ -155,7 +161,11 @@ public class LevelManager : Singleton<LevelManager>
     {
         remainingTimeFreeze = 0f;
         if (currentLevel == null) return;
-        if (currentLevel.blockGameplay != null) currentLevel.blockGameplay.ColorsRemoved -= CheckWin;
+        if (currentLevel.blockGameplay != null)
+        {
+            currentLevel.blockGameplay.ColorsRemoved -= CheckWin;
+            currentLevel.blockGameplay.FinalGoalExitStarted -= CheckWinDuringExit;
+        }
         currentLevel.gameObject.SetActive(false);
         Destroy(currentLevel.gameObject);
         currentLevel = null;

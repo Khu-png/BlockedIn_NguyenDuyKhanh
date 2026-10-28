@@ -17,6 +17,9 @@ namespace BlockedIn.Blocks
         Texture previewTexture;
         Color previewColor;
         bool previewPropertiesApplied;
+        bool previewVisible;
+        Vector3 previewTarget, previewVelocity;
+        float previewAlpha;
 
         public void SetPlacementPreviewMaterial(Material material)
         {
@@ -51,10 +54,15 @@ namespace BlockedIn.Blocks
                 return;
             }
             if (placementPreview == null) CreatePlacementPreview();
+            previewTarget = new Vector3(destination.x - (layout.columns - 1) * .5f,
+                -.185f, (layout.rows - 1) * .5f - destination.y);
             if (previewBlock != block)
             {
                 placementMesh.sharedMesh = placementMeshes.Get(block.Cells);
                 previewBlock = block;
+                previewAlpha = 0;
+                previewVelocity = Vector3.zero;
+                placementPreview.transform.localPosition = previewTarget;
             }
             Material source = block.ColorData.Material;
             Texture texture = source != null && source.HasProperty(PreviewBaseMap)
@@ -72,10 +80,8 @@ namespace BlockedIn.Blocks
                 previewColor = color;
                 previewPropertiesApplied = true;
             }
-            Vector3 local = new Vector3(destination.x - (layout.columns - 1) * .5f,
-                -.19f, (layout.rows - 1) * .5f - destination.y);
-            if (placementPreview.transform.localPosition != local) placementPreview.transform.localPosition = local;
-            if (!placementPreview.activeSelf) placementPreview.SetActive(true);
+            if (!placementPreview.activeSelf) placementPreview.transform.localPosition = previewTarget;
+            previewVisible = true;
         }
 
         void CreatePlacementPreview()
@@ -88,15 +94,37 @@ namespace BlockedIn.Blocks
             placementRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             placementRenderer.receiveShadows = false;
             placementProperties = new MaterialPropertyBlock();
+            placementPreview.SetActive(false);
         }
 
         public void HidePlacementPreview(Block block)
         {
-            if (previewBlock == block && placementPreview != null) placementPreview.SetActive(false);
+            if (previewBlock == block) previewVisible = false;
+        }
+
+        void TickPlacementPreview(float deltaTime)
+        {
+            if (placementPreview == null) return;
+            if (previewBlock == null || !previewBlock.IsDragging) previewVisible = false;
+            float targetAlpha = previewVisible ? 1 : 0;
+            previewAlpha = Mathf.MoveTowards(previewAlpha, targetAlpha, deltaTime / .075f);
+            if (previewAlpha <= 0 && !previewVisible)
+            {
+                if (placementPreview.activeSelf) placementPreview.SetActive(false);
+                return;
+            }
+            if (!placementPreview.activeSelf) placementPreview.SetActive(true);
+            placementPreview.transform.localPosition = Vector3.SmoothDamp(placementPreview.transform.localPosition,
+                previewTarget, ref previewVelocity, .06f, Mathf.Infinity, deltaTime);
+            Color tint = previewColor;
+            tint.a *= Mathf.SmoothStep(0, 1, previewAlpha);
+            placementProperties.SetColor(PreviewBaseColor, tint);
+            placementRenderer.SetPropertyBlock(placementProperties);
         }
 
         void OnDestroy()
         {
+            matchSweeps?.Dispose();
             placementMeshes.Dispose();
             if (placementPreview != null) Destroy(placementPreview);
         }

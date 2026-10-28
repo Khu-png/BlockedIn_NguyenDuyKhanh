@@ -4,6 +4,8 @@ public sealed class HammerFeedback : MonoBehaviour
 {
     [SerializeField] Transform head;
     [SerializeField] ParticleSystem impact;
+    [SerializeField] Material impactBurstMaterial;
+    HammerImpactBurst impactBurst;
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip hitSound;
     [SerializeField] AudioClip breakSound;
@@ -17,6 +19,12 @@ public sealed class HammerFeedback : MonoBehaviour
     static readonly Vector3 Grip = new Vector3(0, -1.15f, 0);
     static Quaternion Raised(Quaternion basis) => basis * Quaternion.Euler(-30, -15, -100);
     static Quaternion Contact(Quaternion basis) => basis * Quaternion.Euler(30, 20, -10);
+    void Awake()
+    {
+        if (impactBurstMaterial != null) impactBurst = new HammerImpactBurst(impactBurstMaterial);
+    }
+    void Update() => impactBurst?.Tick(Time.deltaTime);
+    void OnDestroy() => impactBurst?.Dispose();
     public IEnumerator Fly(Vector3 start, Vector3 target, Quaternion rotation, float size)
     {
         launchPoint = start;
@@ -65,9 +73,20 @@ public sealed class HammerFeedback : MonoBehaviour
         }
         PoseHead(target, Contact(rotation));
     }
-    public void Hit(Vector3 point)
+    public void Hit(Vector3 point, Quaternion facing, float radius)
     {
-        if (impact != null) { impact.transform.position = point; impact.Play(); }
+        impactBurst?.Play(point, facing, radius);
+        if (impact != null)
+        {
+            impact.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            impact.transform.position = point;
+            var main = impact.main;
+            main.startSize = new ParticleSystem.MinMaxCurve(.13f, .28f);
+            main.startSpeed = new ParticleSystem.MinMaxCurve(2.4f, 4.8f);
+            main.startLifetime = new ParticleSystem.MinMaxCurve(.18f, .38f);
+            impact.Play();
+            impact.Emit(24);
+        }
         if (SoundManager.Ins != null)
         {
             SoundManager.Ins.PlayEffect(hitSound);
@@ -99,6 +118,7 @@ public sealed class HammerFeedback : MonoBehaviour
     }
     public void ResetForReuse()
     {
+        impactBurst?.Clear();
         if (impact != null) impact.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         if (audioSource != null) audioSource.Stop();
         transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);

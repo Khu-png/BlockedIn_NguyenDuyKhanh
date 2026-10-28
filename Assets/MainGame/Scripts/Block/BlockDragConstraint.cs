@@ -40,9 +40,22 @@ namespace BlockedIn.Blocks
             Vector2 intent = target - current;
             if (intent.sqrMagnitude < PositionEpsilon * PositionEpsilon) intent = pointerDelta;
             if (Mathf.Abs(intent.x) > Mathf.Abs(intent.y) * DirectionPriority)
-                return GuideLane(block, current, target, result, true, deltaTime);
+                return GuideLane(block, current, target, target, result, true, deltaTime);
             if (Mathf.Abs(intent.y) > Mathf.Abs(intent.x) * DirectionPriority)
-                return GuideLane(block, current, target, result, false, deltaTime);
+                return GuideLane(block, current, target, target, result, false, deltaTime);
+            return result;
+        }
+
+        public Vector2 ConstrainDragStep(Block block, Vector2 current, Vector2 next, Vector2 destination,
+            float deltaTime)
+        {
+            PrepareCollisionQuery(block);
+            Vector2 result = BestSlide(block, current, next);
+            // Preserve the original corner entry path when smoothing leaves a tiny cross-axis offset.
+            if (Mathf.Abs(result.y - next.y) > PositionEpsilon)
+                result = GuideLane(block, current, next, destination, result, false, deltaTime);
+            if (Mathf.Abs(result.x - next.x) > PositionEpsilon)
+                result = GuideLane(block, current, next, destination, result, true, deltaTime);
             return result;
         }
 
@@ -85,11 +98,11 @@ namespace BlockedIn.Blocks
             return current;
         }
 
-        Vector2 GuideLane(Block block, Vector2 current, Vector2 target, Vector2 normal, bool horizontal,
+        Vector2 GuideLane(Block block, Vector2 current, Vector2 target, Vector2 pointer, Vector2 normal, bool horizontal,
             float deltaTime)
         {
             float cross = horizontal ? current.y : current.x;
-            float pointerCross = horizontal ? target.y : target.x;
+            float pointerCross = horizontal ? pointer.y : pointer.x;
             float lane = Mathf.Round(cross);
             if (Mathf.Abs(cross - lane) > LaneEntryTolerance
                 || Mathf.Abs(pointerCross - lane) > PointerLaneTolerance) return normal;

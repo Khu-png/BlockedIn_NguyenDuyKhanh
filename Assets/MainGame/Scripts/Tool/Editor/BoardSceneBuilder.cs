@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BlockedIn.MapTools;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -22,8 +23,11 @@ namespace BlockedIn.EditorTools
             Undo.SetCurrentGroupName("Generate board");
             target = Prepare(target);
             SetData(target, columns, rows, border, cells);
-            FillCells(target, tile, backdrop, wall);
-            if (border) AddBorder(target, wall);
+            var backdrops = new List<Transform>();
+            var walls = new List<Transform>();
+            target.SetResultCells(FillCells(target, tile, backdrop, wall, backdrops, walls));
+            if (border) AddBorder(target, wall, walls);
+            target.SetResultSurfaces(backdrops.ToArray(), walls.ToArray());
             Undo.CollapseUndoOperations(undoGroup);
             EditorSceneManager.MarkSceneDirty(target.gameObject.scene);
             Selection.activeGameObject = target.gameObject;
@@ -90,8 +94,10 @@ namespace BlockedIn.EditorTools
             board.cells = (BoardCell[])cells.Clone();
         }
 
-        static void FillCells(GeneratedBoard board, GameObject tile, GameObject backdrop, GameObject wall)
+        static Transform[] FillCells(GeneratedBoard board, GameObject tile, GameObject backdrop, GameObject wall,
+            List<Transform> backdrops, List<Transform> walls)
         {
+            var resultCells = new List<Transform>();
             GameObject alternate = tile;
             if (AssetDatabase.GetAssetPath(tile) == "Assets/MainGame/Prefabs/Board/BoardTile.prefab")
                 alternate = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/MainGame/Prefabs/Board/BoardTileAlternate.prefab") ?? tile;
@@ -100,33 +106,37 @@ namespace BlockedIn.EditorTools
                 {
                     BoardCell cell = board.cells[y * board.columns + x];
                     if (cell == BoardCell.Empty) continue;
-                    Place(board, backdrop, board.Backdrop, x, y, -.225f);
-                    if (cell == BoardCell.Floor) Place(board, (x + y) % 2 == 0 ? tile : alternate, board.Tiles, x, y, -.22f);
-                    else Place(board, wall, board.Walls, x, y, .03f);
+                    backdrops.Add(Place(board, backdrop, board.Backdrop, x, y, -.225f));
+                    if (cell == BoardCell.Floor)
+                        resultCells.Add(Place(board, (x + y) % 2 == 0 ? tile : alternate,
+                            board.Tiles, x, y, -.22f));
+                    else walls.Add(Place(board, wall, board.Walls, x, y, .03f));
                 }
+            return resultCells.ToArray();
         }
 
-        static void AddBorder(GeneratedBoard board, GameObject wall)
+        static void AddBorder(GeneratedBoard board, GameObject wall, List<Transform> walls)
         {
             for (int x = -1; x <= board.columns; x++)
             {
-                Place(board, wall, board.Walls, x, -1, .03f);
-                Place(board, wall, board.Walls, x, board.rows, .03f);
+                walls.Add(Place(board, wall, board.Walls, x, -1, .03f));
+                walls.Add(Place(board, wall, board.Walls, x, board.rows, .03f));
             }
             for (int y = 0; y < board.rows; y++)
             {
-                Place(board, wall, board.Walls, -1, y, .03f);
-                Place(board, wall, board.Walls, board.columns, y, .03f);
+                walls.Add(Place(board, wall, board.Walls, -1, y, .03f));
+                walls.Add(Place(board, wall, board.Walls, board.columns, y, .03f));
             }
         }
 
-        static void Place(GeneratedBoard board, GameObject prefab, Transform group, int x, int y, float elevation)
+        static Transform Place(GeneratedBoard board, GameObject prefab, Transform group, int x, int y, float elevation)
         {
             var cell = (GameObject)PrefabUtility.InstantiatePrefab(prefab, board.gameObject.scene);
             cell.name = prefab.name + "_" + x + "_" + y;
             cell.transform.SetParent(group, false);
             cell.transform.localPosition = new Vector3(x - (board.columns - 1) * .5f, elevation, (board.rows - 1) * .5f - y);
             Undo.RegisterCreatedObjectUndo(cell, "Place board cell");
+            return cell.transform;
         }
 
         public static void Clear(GeneratedBoard board)

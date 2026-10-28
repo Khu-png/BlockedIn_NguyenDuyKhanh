@@ -10,10 +10,25 @@ namespace BlockedIn.CameraTools
         static readonly int BoardGrid = Shader.PropertyToID("_GameplayBoardGrid");
         static readonly int BoardCells = Shader.PropertyToID("_GameplayBoardCells");
         static readonly int BoardShape = Shader.PropertyToID("_BoardShape");
+        static readonly int ResultFade = Shader.PropertyToID("_ResultFade");
         MaterialPropertyBlock frameProperties;
         GeneratedBoard surfaceBoard;
         BoardCell[] surfaceCells;
         Texture2D floorMask, outlineMask;
+        public void SetResultFrameVisible(bool visible)
+            => SetResultFrameProgress(visible ? 1 : 0);
+        public void SetResultFrameProgress(float visible)
+        {
+            if (boardFrame == null) return;
+            visible = Mathf.Clamp01(visible);
+            boardFrame.enabled = visible > 0;
+            boardFrame.transform.localScale = (boardFramePrefab != null
+                ? boardFramePrefab.transform.localScale : Vector3.one) * Mathf.Lerp(.94f, 1, visible);
+            if (frameProperties == null) frameProperties = new MaterialPropertyBlock();
+            boardFrame.GetPropertyBlock(frameProperties);
+            frameProperties.SetFloat(ResultFade, visible);
+            boardFrame.SetPropertyBlock(frameProperties);
+        }
         Sprite fittedBackgroundSprite;
         Vector3 fittedBackgroundSize;
         void FitBackground()

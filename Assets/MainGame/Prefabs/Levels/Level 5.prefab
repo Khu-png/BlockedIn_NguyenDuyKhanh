@@ -5757,6 +5757,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 6910753372999713683}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -6071,6 +6073,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 1891049655833344558}
   - {fileID: 7651385930055474637}
@@ -12571,6 +12575,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 2631589253159150584}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -13560,6 +13566,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 1764766719377012835}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -16985,9 +16993,10 @@ MonoBehaviour:
   - {fileID: 6188982600802335428}
   - {fileID: 2422251499662736231}
   - {fileID: 751468144466365466}
-  colorExitDuration: 1.2
+  colorExitDuration: 0.95
   colorExitHeight: 1.5
   colorExitSpin: 60
+  matchSweepMaterial: {fileID: 2100000, guid: c378cdfbe52249e584e6b06bbdb45204, type: 2}
   placementPreviewMaterial: {fileID: 2100000, guid: 13b742b925624d3e8d41167ddaf6afef, type: 2}
 --- !u!114 &346263150239727583
 MonoBehaviour:
@@ -21944,6 +21953,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 7024164239044054655}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -22257,6 +22268,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 7573954754108068354}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -28056,6 +28069,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 4244953108343053575}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -34039,6 +34054,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 8029614447491393754}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -34754,6 +34771,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 7229312880576164405}
   - {fileID: 5253308600970295614}
@@ -41986,6 +42005,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 808322540385989037}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -52066,6 +52087,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 9135702648511581735}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -58801,6 +58824,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 4669602490889615141}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -72269,6 +72294,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 1174612399509087524}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -81790,6 +81817,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 7259211883042207265}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -86323,6 +86352,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 8152223148565250199}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -86816,6 +86847,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 8726155242955888846}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -88637,6 +88670,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 8383236773060628378}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -100789,6 +100824,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 5580427863280907097}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -101470,6 +101507,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 831287651273292068}
   - {fileID: 7242742476899679860}
@@ -103638,6 +103677,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 4010700141498507335}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
@@ -104322,6 +104363,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 7006895093384865279}
   - {fileID: 6478772235491310142}
@@ -108892,6 +108935,139 @@ MonoBehaviour:
   tiles: {fileID: 1591537683679680361}
   backdrop: {fileID: 4335166427852650935}
   walls: {fileID: 8093542011070046113}
+  resultCells:
+  - {fileID: 3796569806221854756}
+  - {fileID: 2549025036918869863}
+  - {fileID: 9148921826751334198}
+  - {fileID: 6549160472776541907}
+  - {fileID: 3332563089748840608}
+  - {fileID: 6622996695538508808}
+  - {fileID: 8571881249435508325}
+  - {fileID: 1864579612247639496}
+  - {fileID: 3551890049863667275}
+  - {fileID: 5457790189425478183}
+  - {fileID: 8297814171288178016}
+  - {fileID: 6945911216351395957}
+  - {fileID: 2805382812612748450}
+  - {fileID: 2116636610819508257}
+  - {fileID: 437564667833082996}
+  - {fileID: 915327984305337819}
+  - {fileID: 16293069215603997}
+  - {fileID: 8572830604909205749}
+  - {fileID: 5603067962924339759}
+  - {fileID: 2386926389908663577}
+  - {fileID: 4992892872687395630}
+  - {fileID: 3461191060906130572}
+  - {fileID: 4418847924425805006}
+  - {fileID: 2902260420237341182}
+  - {fileID: 8953034712096918915}
+  - {fileID: 1741542466245093824}
+  - {fileID: 5178083432108598810}
+  - {fileID: 742586982547993810}
+  - {fileID: 1443696632716365378}
+  - {fileID: 7551621464427811206}
+  - {fileID: 4790478278798266705}
+  - {fileID: 3265210727940208585}
+  - {fileID: 5137825659016669065}
+  - {fileID: 3143752710462398066}
+  - {fileID: 1292792653846152662}
+  - {fileID: 3958795191129403261}
+  - {fileID: 5250811224203716058}
+  resultBackdrops:
+  - {fileID: 1610040879606629206}
+  - {fileID: 6542727035304092989}
+  - {fileID: 1543540112315326942}
+  - {fileID: 1139169756822337723}
+  - {fileID: 1790737066719842504}
+  - {fileID: 6152198190314803062}
+  - {fileID: 2795092291211563401}
+  - {fileID: 1648270341123366047}
+  - {fileID: 9187647982699862624}
+  - {fileID: 7656039983351434968}
+  - {fileID: 2742445532071863996}
+  - {fileID: 333148686296906139}
+  - {fileID: 3942909585566727844}
+  - {fileID: 3271336142448129820}
+  - {fileID: 2988145716661590926}
+  - {fileID: 8015699275294819840}
+  - {fileID: 855947076209929636}
+  - {fileID: 5500746500488506857}
+  - {fileID: 4397783632449416520}
+  - {fileID: 5446380458740115132}
+  - {fileID: 5705578517137127239}
+  - {fileID: 577540896183729457}
+  - {fileID: 6708977333400796948}
+  - {fileID: 2715655152496897825}
+  - {fileID: 7207078598123722990}
+  - {fileID: 9191842135876693862}
+  - {fileID: 7302482136707720085}
+  - {fileID: 5891533001416194532}
+  - {fileID: 8315812399051996938}
+  - {fileID: 6824552916817254650}
+  - {fileID: 8324260826309343778}
+  - {fileID: 3054691750291261537}
+  - {fileID: 4902132238622195373}
+  - {fileID: 1475835981190220230}
+  - {fileID: 8042276367063352607}
+  - {fileID: 5270330439510744686}
+  - {fileID: 4028470966698121974}
+  - {fileID: 3473417200696376997}
+  - {fileID: 838564645974723163}
+  - {fileID: 3197482232171362935}
+  - {fileID: 6555746464089305427}
+  - {fileID: 8430228823608660272}
+  - {fileID: 5840425154689445577}
+  - {fileID: 573089082453226829}
+  - {fileID: 3685590756452288230}
+  - {fileID: 5673593527998759598}
+  - {fileID: 1236708278979799420}
+  - {fileID: 5207562835570035251}
+  - {fileID: 8866655229168668233}
+  resultWalls:
+  - {fileID: 518648169966971553}
+  - {fileID: 7369746875489754798}
+  - {fileID: 6888450874481499569}
+  - {fileID: 1500972413036220235}
+  - {fileID: 3899781557632994921}
+  - {fileID: 4088696714078907984}
+  - {fileID: 4678882382431428330}
+  - {fileID: 6719990256425829114}
+  - {fileID: 5902194156100225453}
+  - {fileID: 4400187976894045384}
+  - {fileID: 7495299194134820431}
+  - {fileID: 2514894188499936796}
+  - {fileID: 5258702455286361791}
+  - {fileID: 4722189551901020143}
+  - {fileID: 7644728754591919043}
+  - {fileID: 6677568069214190638}
+  - {fileID: 7763264496906727886}
+  - {fileID: 644956456854927458}
+  - {fileID: 5790606893385253354}
+  - {fileID: 1456078964265571250}
+  - {fileID: 7193594473437298218}
+  - {fileID: 8612970742822633636}
+  - {fileID: 3686208409925611393}
+  - {fileID: 5873384207027783169}
+  - {fileID: 1079495300886911388}
+  - {fileID: 6660855405440164374}
+  - {fileID: 2740747738160606091}
+  - {fileID: 68135615540272837}
+  - {fileID: 8228312210927366022}
+  - {fileID: 8435153969458833902}
+  - {fileID: 6276021347109673015}
+  - {fileID: 8753635795686747612}
+  - {fileID: 3133153987111298927}
+  - {fileID: 8678864099121477969}
+  - {fileID: 3794078242792515151}
+  - {fileID: 5301442961569673800}
+  - {fileID: 1508619146101271798}
+  - {fileID: 7455969657761534702}
+  - {fileID: 4018915835562727390}
+  - {fileID: 5541952840243527627}
+  - {fileID: 5126763234050645574}
+  - {fileID: 758462999922471052}
+  - {fileID: 4110135624858217022}
+  - {fileID: 1156846884405682149}
   blockGameplay: {fileID: 3310369545545055200}
   input: {fileID: 346263150239727583}
   editorId: 86c18c06c8404b17ae3eebf86fdc8b26
@@ -109899,6 +110075,8 @@ MonoBehaviour:
   screenRollAngle: 8
   dockDuration: 0.12
   dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
   iconRenderers:
   - {fileID: 6841387090588583645}
   iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}

@@ -5,7 +5,7 @@ namespace BlockedIn.MapTools
 {
     // Marks the exact scene object owned by the editor tool.
     [ExecuteAlways]
-    public sealed class GeneratedBoard : MonoBehaviour
+    public sealed partial class GeneratedBoard : MonoBehaviour
     {
         public int columns;
         public int rows;
@@ -14,6 +14,9 @@ namespace BlockedIn.MapTools
         [SerializeField] Transform tiles;
         [SerializeField] Transform backdrop;
         [SerializeField] Transform walls;
+        [SerializeField] Transform[] resultCells = System.Array.Empty<Transform>();
+        [SerializeField] Transform[] resultBackdrops = System.Array.Empty<Transform>();
+        [SerializeField] Transform[] resultWalls = System.Array.Empty<Transform>();
 
         public BlockBoard blockGameplay;
         [SerializeField] BlockInput input;
@@ -23,12 +26,22 @@ namespace BlockedIn.MapTools
         public Transform Tiles => tiles;
         public Transform Backdrop => backdrop;
         public Transform Walls => walls;
+        public Transform[] ResultCells => resultCells;
 
         public void SetGroups(Transform tileGroup, Transform backdropGroup, Transform wallGroup)
         {
             tiles = tileGroup;
             backdrop = backdropGroup;
             walls = wallGroup;
+        }
+
+        public void SetResultCells(Transform[] cellsForResult)
+            => resultCells = cellsForResult ?? System.Array.Empty<Transform>();
+
+        public void SetResultSurfaces(Transform[] backdropsForResult, Transform[] wallsForResult)
+        {
+            resultBackdrops = backdropsForResult ?? System.Array.Empty<Transform>();
+            resultWalls = wallsForResult ?? System.Array.Empty<Transform>();
         }
 
 #if UNITY_EDITOR

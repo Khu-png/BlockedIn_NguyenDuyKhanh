@@ -37,6 +37,7 @@ namespace BlockedIn.Blocks
             if (delay > 0f) yield return new WaitForSeconds(delay);
             SoundManager.Play(SoundManager.RopeShowSound);
             scissors.gameObject.SetActive(true);
+            if (effects != null) effects.PrepareRopeTrails(halves);
             Quaternion cutRotation = Quaternion.Euler(0f, 45f, 0f);
             // The blades extend along local -Z; the handles extend along +Z.
             Vector3 target = cutPoint + Vector3.up * .12f + cutRotation * Vector3.forward * .28f;
@@ -51,13 +52,21 @@ namespace BlockedIn.Blocks
                 float progress = Mathf.Clamp01(elapsed / .5f);
                 float travel = 1f - Mathf.Pow(1f - progress, 2f);
                 Vector3 position = Arc(start, bend, target, travel);
+                float spiral = Mathf.Sin(progress * Mathf.PI);
+                position += new Vector3(Mathf.Cos(progress * Mathf.PI * 4f) * .09f,
+                    Mathf.Sin(progress * Mathf.PI * 4f) * .07f,
+                    Mathf.Sin(progress * Mathf.PI * 2f) * .06f) * spiral;
                 Vector3 heading = position - scissors.localPosition; heading.y = 0f;
                 Quaternion direction = heading.sqrMagnitude > .0001f ? Quaternion.LookRotation(-heading) : cutRotation;
                 scissors.localRotation = Quaternion.Slerp(direction, cutRotation,
                     Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(.6f, 1f, progress)));
                 scissors.localPosition = position;
                 scissors.localScale = Vector3.one * Mathf.Lerp(.25f, .85f, Mathf.Sin(progress * Mathf.PI * .5f));
-                if (effects != null) effects.Glow(.18f + Mathf.Sin(progress * Mathf.PI) * .12f, Facing);
+                if (effects != null)
+                {
+                    effects.Flight(progress, Facing);
+                    effects.Glow(.2f + Mathf.Sin(progress * Mathf.PI) * .18f, Facing);
+                }
                 yield return null;
             }
             elapsed = 0f;

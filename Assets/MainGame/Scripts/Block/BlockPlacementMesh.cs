@@ -12,14 +12,15 @@ namespace BlockedIn.Blocks
             Vector2Int.one, new Vector2Int(-1, 1), -Vector2Int.one, new Vector2Int(1, -1)
         };
 
-        public static Mesh Build(Vector2Int[] cells)
+        public static Mesh Build(Vector2Int[] cells, Mesh reusable = null)
         {
             var occupied = new HashSet<Vector2Int>(cells);
             var vertices = new List<Vector3>();
             var colors = new List<Color>();
             var triangles = new List<int>();
             foreach (Vector2Int cell in cells) AddCell(cell);
-            var mesh = new Mesh { name = "BlockPlacementFootprint" };
+            var mesh = reusable != null ? reusable : new Mesh { name = "BlockPlacementFootprint" };
+            if (reusable != null) mesh.Clear();
             mesh.SetVertices(vertices);
             mesh.SetColors(colors);
             mesh.SetTriangles(triangles, 0);
