@@ -33,9 +33,7 @@ namespace BlockedIn.Blocks
         Vector3 settleStart, settleTarget, visualRest;
         float releaseHeight;
         Vector2 lastDragTarget;
-        Quaternion visualRestRotation;
-        Vector3 lastTiltPosition, tilt, tiltVelocity;
-        Camera dragCamera;
+        BlockTiltMotion tiltMotion;
 
         public BlockColorData ColorData => colorData;
         public Vector2Int GridPosition => gridPosition;
@@ -70,9 +68,9 @@ namespace BlockedIn.Blocks
             board = owner;
             visualRest = visual.localPosition;
             visualScale = visual.localScale;
-            visualRestRotation = visual.localRotation;
-            ResetTilt();
             transform.position = owner.GridToWorld(gridPosition);
+            tiltMotion = new BlockTiltMotion(transform, visual, owner.Layout.transform,
+                tiltAngle, verticalTiltAngle, screenRollAngle);
             SetFreezeCount(freezeCount);
             ApplyColor();
             if (appearance != null) appearance.Apply();
@@ -95,6 +93,7 @@ namespace BlockedIn.Blocks
             tiltAngle = source.tiltAngle;
             verticalTiltAngle = source.verticalTiltAngle;
             screenRollAngle = source.screenRollAngle;
+            tiltMotion?.Configure(tiltAngle, verticalTiltAngle, screenRollAngle);
             dragFollowTime = source.dragFollowTime;
             dragFollowSpeed = source.dragFollowSpeed;
         }
@@ -130,9 +129,8 @@ namespace BlockedIn.Blocks
             board.BeginFloorShadowTrail(this);
             board.RefreshDockNeighborhood(this);
             board.ResetDragGuidance(this);
-            dragCamera = camera;
             lastDragTarget = board.WorldToGrid(transform.position);
-            lastTiltPosition = transform.position;
+            tiltMotion?.Begin(camera);
             visual.localPosition = visualRest + Vector3.up * liftHeight;
             board.ShowPlacementPreview(this, snapTolerance);
             return true;
@@ -161,7 +159,7 @@ namespace BlockedIn.Blocks
         public void Tick(float deltaTime)
         {
             if (exiting) return;
-            TickTilt(deltaTime);
+            tiltMotion?.Tick(dragging, deltaTime);
             if (!settling) { TickDock(deltaTime); return; }
             elapsed += deltaTime;
             float progress = Mathf.Clamp01(elapsed / Mathf.Max(.01f, settleDuration));
@@ -171,59 +169,13 @@ namespace BlockedIn.Blocks
             if (progress >= 1) { settling = false; ResetTilt(); FinishSettle(); }
         }
 
-        void TickTilt(float deltaTime)
-        {
-            if (board == null || visual == null || deltaTime <= 0) return;
-            if (!dragging && tilt.sqrMagnitude < .000001f && tiltVelocity.sqrMagnitude < .000001f)
-            {
-                if (tilt.sqrMagnitude > 0f || tiltVelocity.sqrMagnitude > 0f) ResetTilt();
-                else lastTiltPosition = transform.position;
-                return;
-            }
-            Vector3 movement = transform.position - lastTiltPosition;
-            lastTiltPosition = transform.position;
-            Vector3 speed = movement / deltaTime;
-            Vector3 target = dragging ? GetTiltTarget(speed) : Vector3.zero;
-            float remaining = Mathf.Min(deltaTime, .1f);
-            float leanLimit = Mathf.Max(tiltAngle, verticalTiltAngle);
-            float maxAngle = Mathf.Sqrt(leanLimit * leanLimit + screenRollAngle * screenRollAngle);
-            while (remaining > 0)
-            {
-                float step = Mathf.Min(remaining, .008f);
-                tiltVelocity += ((target - tilt) * 180f - tiltVelocity * 14f) * step;
-                tilt += tiltVelocity * step;
-                tilt = Vector3.ClampMagnitude(tilt, maxAngle);
-                remaining -= step;
-            }
-            Quaternion rotation = tilt.sqrMagnitude > .000001f
-                ? Quaternion.AngleAxis(tilt.magnitude, tilt.normalized) : Quaternion.identity;
-            Quaternion parentRotation = visual.parent != null ? visual.parent.rotation : Quaternion.identity;
-            visual.localRotation = Quaternion.Inverse(parentRotation) * rotation * parentRotation * visualRestRotation;
-        }
+        void ResetTilt() => tiltMotion?.Reset();
 
-        Vector3 GetTiltTarget(Vector3 speed)
+        void Update()
         {
-            Transform layout = board.Layout.transform;
-            Vector3 direction = Vector3.ClampMagnitude(speed / 4f, 1);
-            Vector3 forward = dragCamera != null ? dragCamera.transform.forward : -layout.up;
-            Vector3 cameraRight = dragCamera != null ? dragCamera.transform.right : layout.right;
-            Vector3 right = Vector3.ProjectOnPlane(cameraRight, layout.up).normalized;
-            Vector3 up = Vector3.Cross(right, layout.up).normalized;
-            float horizontal = Vector3.Dot(direction, right);
-            float vertical = Mathf.Clamp(Vector3.Dot(speed, up) / .8f, -1, 1);
-            Vector3 lean = Vector3.Cross(layout.up, right) * horizontal * tiltAngle
-                + Vector3.Cross(layout.up, up) * vertical * verticalTiltAngle;
-            return lean - forward * horizontal * screenRollAngle;
+            if (!dragging && !settling && !docking && !matchPulseActive) return;
+            Tick(Time.deltaTime);
         }
-
-        void ResetTilt()
-        {
-            tilt = tiltVelocity = Vector3.zero;
-            lastTiltPosition = transform.position;
-            if (visual != null) visual.localRotation = visualRestRotation;
-        }
-
-        void Update() => Tick(Time.deltaTime);
         void OnDisable()
         {
             if (board == null) return;

@@ -15,7 +15,20 @@ public sealed class Gameplay : UICanvas
     [SerializeField] UnityEvent timeFreezeClicked = new UnityEvent();
     [SerializeField] UnityEvent settingsClicked = new UnityEvent();
     public const string CoinsKey = "Coins";
-    public static int Coins => Mathf.Max(0, PlayerPrefs.GetInt(CoinsKey, 0));
+    static int cachedCoins;
+    static bool coinsLoaded;
+    public static int Coins
+    {
+        get
+        {
+            if (!coinsLoaded)
+            {
+                cachedCoins = Mathf.Max(0, PlayerPrefs.GetInt(CoinsKey, 0));
+                coinsLoaded = true;
+            }
+            return cachedCoins;
+        }
+    }
     [SerializeField] RectTransform boardArea;
     [SerializeField] GameObject settingsPanel;
     [SerializeField] Image musicIcon;
@@ -125,6 +138,8 @@ public sealed class Gameplay : UICanvas
         FinishCloseSettings();
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
+        cachedCoins = 0;
+        coinsLoaded = true;
         if (SoundManager.Ins != null) SoundManager.Ins.ReloadSettings();
         lastCoins = -1;
         LevelManager.Ins.OnPlay();
@@ -216,7 +231,9 @@ public sealed class Gameplay : UICanvas
     void OnDisable() => FinishCloseSettings();
     public static void SetCoins(int amount)
     {
-        PlayerPrefs.SetInt(CoinsKey, Mathf.Max(0, amount));
+        cachedCoins = Mathf.Max(0, amount);
+        coinsLoaded = true;
+        PlayerPrefs.SetInt(CoinsKey, cachedCoins);
         PlayerPrefs.Save();
     }
 }

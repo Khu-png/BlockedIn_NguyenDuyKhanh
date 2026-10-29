@@ -25,7 +25,7 @@ namespace BlockedIn.Blocks
         {
             Prepare();
             if (!prepared) return;
-            SetTrail(trail, true, new Color(.22f, .9f, 1f, .92f), .26f, .15f);
+            SetTrail(trail, true, new Color(.25f, 2.4f, 3.2f, 1f), .32f, .24f);
             for (int i = 0; i < flightTrails.Length; i++) flightTrails[i].emitting = true;
             flightOrbit.enabled = true;
             cutRing.enabled = cutRune.enabled = slash.enabled = false;
@@ -41,7 +41,7 @@ namespace BlockedIn.Blocks
             {
                 if (halves[i] == null) continue;
                 Color color = i == 0 ? new Color(.2f, .9f, 1f, .8f) : new Color(.72f, .3f, 1f, .8f);
-                ropeTrails[i] = CreateTrail("Rope Magic Trail", halves[i], color, .4f, .075f,
+                ropeTrails[i] = CreateTrail("Rope Magic Trail", halves[i], color * 2.4f, .48f, .13f,
                     new Vector3(0, .025f, 0));
             }
         }
@@ -50,11 +50,10 @@ namespace BlockedIn.Blocks
         {
             if (!prepared || flightOrbit == null || glow == null) return;
             float pulse = .5f + .5f * Mathf.Sin(progress * Mathf.PI * 6f);
-            float radius = Mathf.Lerp(.2f, .46f, Mathf.Sin(progress * Mathf.PI)) + pulse * .035f;
+            float radius = Mathf.Lerp(.25f, .58f, Mathf.Sin(progress * Mathf.PI)) + pulse * .05f;
             DrawRing(flightOrbit, glow.transform.position, facing, radius, progress * 260f);
-            Color color = Color.Lerp(new Color(.15f, .85f, 1f, .62f),
-                new Color(.68f, .28f, 1f, .7f), pulse);
-            SetLineColor(flightOrbit, color, new Color(1f, .72f, .22f, .3f));
+            Color color = Color.Lerp(new Color(.2f, 2.2f, 3f, .9f), new Color(2.1f, .35f, 3f, .9f), pulse);
+            SetLineColor(flightOrbit, color, new Color(3f, 1.5f, .25f, .65f));
         }
 
         public void Glow(float strength, Quaternion facing)
@@ -63,7 +62,7 @@ namespace BlockedIn.Blocks
             glow.transform.rotation = facing;
             properties ??= new MaterialPropertyBlock();
             float pulse = .5f + .5f * Mathf.Sin(Time.time * 9f);
-            Color color = Color.Lerp(new Color(.2f, .8f, 1f), new Color(.72f, .32f, 1f), pulse);
+            Color color = Color.Lerp(new Color(.2f, 2.6f, 3.6f), new Color(2.3f, .35f, 3.5f), pulse);
             color.a = Mathf.Clamp01(strength * 1.8f);
             properties.SetColor("_BaseColor", color);
             glow.SetPropertyBlock(properties);
@@ -74,14 +73,14 @@ namespace BlockedIn.Blocks
             Prepare();
             if (!prepared) return;
             float ease = 1f - Mathf.Pow(1f - progress, 2f);
-            DrawRing(cutRing, position, facing, Mathf.Lerp(.12f, .72f, ease), progress * 55f);
-            DrawRing(cutRune, position, facing, Mathf.Lerp(.2f, .5f, ease), -progress * 95f);
+            DrawRing(cutRing, position, facing, Mathf.Lerp(.12f, 1.12f, ease), progress * 55f);
+            DrawRing(cutRune, position, facing, Mathf.Lerp(.22f, .78f, ease), -progress * 95f);
             DrawSlash(position, facing, progress);
             float alpha = 1f - Mathf.SmoothStep(.35f, 1f, progress);
-            SetLineColor(cutRing, new Color(.15f, .9f, 1f, alpha), new Color(.7f, .3f, 1f, alpha));
-            SetLineColor(cutRune, new Color(1f, .78f, .18f, alpha * .9f),
-                new Color(.3f, .85f, 1f, alpha * .45f));
-            SetLineColor(slash, new Color(1f, .94f, .7f, alpha), new Color(.45f, .75f, 1f, alpha));
+            SetLineColor(cutRing, new Color(.2f, 3.2f, 4f, alpha), new Color(2.8f, .5f, 3.8f, alpha));
+            SetLineColor(cutRune, new Color(4f, 2f, .25f, alpha),
+                new Color(.35f, 2.8f, 3.8f, alpha * .8f));
+            SetLineColor(slash, new Color(5f, 4.5f, 2f, alpha), new Color(.5f, 2.8f, 4f, alpha));
             cutRing.enabled = cutRune.enabled = slash.enabled = progress < 1f;
             SetRopeTrails(progress < .82f);
             AnimateSparks(progress, position, facing);
@@ -101,20 +100,34 @@ namespace BlockedIn.Blocks
         {
             if (prepared || trail == null) return;
             prepared = true;
+            ExpandSparks();
             effectMaterial = trail.sharedMaterial;
             Transform tool = trail.transform.parent;
             flightTrails = new[]
             {
-                CreateTrail("Violet Echo", tool, new Color(.66f,.25f,1f,.75f), .32f, .1f,
+                CreateTrail("Violet Echo", tool, new Color(2.4f,.35f,3.8f,.9f), .34f, .14f,
                     new Vector3(-.07f,.02f,.03f)),
-                CreateTrail("Golden Echo", tool, new Color(1f,.72f,.18f,.58f), .2f, .055f,
+                CreateTrail("Golden Echo", tool, new Color(4f,1.8f,.2f,.8f), .22f, .075f,
                     new Vector3(.075f,.015f,-.025f))
             };
-            flightOrbit = CreateLine("Mystic Orbit", true, .035f, RingPoints);
-            cutRing = CreateLine("Cut Shock Ring", true, .055f, RingPoints);
-            cutRune = CreateLine("Cut Magic Seal", true, .025f, RingPoints);
-            slash = CreateLine("Cut Crescent", false, .085f, 18);
+            flightOrbit = CreateLine("Mystic Orbit", true, .055f, RingPoints);
+            cutRing = CreateLine("Cut Shock Ring", true, .115f, RingPoints);
+            cutRune = CreateLine("Cut Magic Seal", true, .065f, RingPoints);
+            slash = CreateLine("Cut Crescent", false, .18f, 18);
             StopFlight();
+        }
+
+        void ExpandSparks()
+        {
+            if (sparks == null || sparks.Length == 0 || sparks.Length >= 12) return;
+            Transform[] expanded = new Transform[12];
+            for (int i = 0; i < expanded.Length; i++)
+            {
+                if (i < sparks.Length) { expanded[i] = sparks[i]; continue; }
+                GameObject copy = Instantiate(sparks[i % sparks.Length].gameObject, transform);
+                copy.name = "CutSpark_" + i; copy.SetActive(false); expanded[i] = copy.transform;
+            }
+            sparks = expanded;
         }
 
         TrailRenderer CreateTrail(string name, Transform parent, Color color, float time,
@@ -165,7 +178,7 @@ namespace BlockedIn.Blocks
         void DrawSlash(Vector3 center, Quaternion facing, float progress)
         {
             Vector3 right = facing * Vector3.right, up = facing * Vector3.up;
-            float radius = Mathf.Lerp(.18f, .68f, 1f - Mathf.Pow(1f - progress, 2f));
+            float radius = Mathf.Lerp(.18f, 1.05f, 1f - Mathf.Pow(1f - progress, 2f));
             for (int i = 0; i < slash.positionCount; i++)
             {
                 float angle = Mathf.Lerp(-72f, 72f, i / (float)(slash.positionCount - 1)) * Mathf.Deg2Rad;
@@ -184,7 +197,7 @@ namespace BlockedIn.Blocks
                 float distance = (.25f + i * .06f) * (1f - Mathf.Pow(1f - progress, 2f));
                 spark.position = position + (right * Mathf.Cos(angle) + up * Mathf.Sin(angle)) * distance;
                 spark.rotation = facing * Quaternion.AngleAxis(progress * 190f + i * 20f, Vector3.forward);
-                spark.localScale = Vector3.one * ((.14f + i * .016f) * Mathf.Sin(progress * Mathf.PI));
+                spark.localScale = Vector3.one * ((.22f + i * .018f) * Mathf.Sin(progress * Mathf.PI));
             }
         }
 

@@ -52,16 +52,16 @@ public sealed class WinIntroEffect : MonoBehaviour
         IsPanelShown = false;
         bool panelShown = false;
         float elapsed = 0;
-        while (elapsed < 1.55f)
+        while (elapsed < .86f)
         {
             elapsed += Time.unscaledDeltaTime;
-            float enter = Ease(Mathf.Clamp01(elapsed / .36f));
-            float lift = Smooth(Mathf.Clamp01((elapsed - .82f) / .42f));
-            group.alpha = Mathf.Min(enter, 1 - Smooth(Mathf.Clamp01((elapsed - 1.25f) / .3f)));
+            float enter = Ease(Mathf.Clamp01(elapsed / .24f));
+            float lift = Smooth(Mathf.Clamp01((elapsed - .38f) / .28f));
+            group.alpha = Mathf.Min(enter, 1 - Smooth(Mathf.Clamp01((elapsed - .56f) / .22f)));
             root.anchoredPosition = Vector2.up * Mathf.Lerp(40, 650, lift);
             root.localScale = Vector3.one * Mathf.Lerp(.5f + enter * .5f
                 + Mathf.Sin(enter * Mathf.PI) * .1f, .52f, lift);
-            if (!panelShown && elapsed >= 1.08f)
+            if (!panelShown && elapsed >= .5f)
             {
                 panelShown = IsPanelShown = true;
                 showPanel?.Invoke();

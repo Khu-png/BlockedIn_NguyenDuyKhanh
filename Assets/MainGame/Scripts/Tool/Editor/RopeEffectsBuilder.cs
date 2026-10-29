@@ -50,7 +50,7 @@ namespace BlockedIn.EditorTools
             trail.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             MeshRenderer glow = Billboard("ScissorsGlow", scissors, EffectMaterial("ScissorsGlow", "Glow_01"));
             glow.transform.localPosition = Vector3.up * .025f; glow.transform.localScale = Vector3.one * .9f;
-            var stars = new Transform[6]; Material sparkle = EffectMaterial("ScissorsSparkle", "Sparkle_01");
+            var stars = new Transform[12]; Material sparkle = EffectMaterial("ScissorsSparkle", "Sparkle_01");
             for (int i = 0; i < stars.Length; i++) stars[i] = Billboard("CutSpark_" + i, root, sparkle).transform;
             BlockRopeEffects effects = root.gameObject.AddComponent<BlockRopeEffects>();
             effects.Configure(trail, glow, stars); return effects;

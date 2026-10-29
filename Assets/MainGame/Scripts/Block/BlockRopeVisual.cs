@@ -38,34 +38,31 @@ namespace BlockedIn.Blocks
             SoundManager.Play(SoundManager.RopeShowSound);
             scissors.gameObject.SetActive(true);
             if (effects != null) effects.PrepareRopeTrails(halves);
-            Quaternion cutRotation = Quaternion.Euler(0f, 45f, 0f);
-            // The blades extend along local -Z; the handles extend along +Z.
-            Vector3 target = cutPoint + Vector3.up * .12f + cutRotation * Vector3.forward * .28f;
-            Vector3 start = transform.InverseTransformPoint(origin) + new Vector3(.15f, 1f, -.2f);
+            Vector3 contact = cutPoint + Vector3.up * .12f;
+            Quaternion cutRotation = FlightRotation(contact, .998f);
+            // The blades extend along local -Z, so offset the pivot behind the cutting edge.
+            Vector3 target = contact + cutRotation * Vector3.forward * .44f;
+            Vector3 start = FlightPath(target, 0f);
             scissors.localPosition = start;
             if (effects != null) effects.StartFlight();
-            Vector3 bend = (start + target) * .5f + new Vector3(.65f, .7f, .35f);
             float elapsed = 0f;
-            while (elapsed < .5f)
+            const float flightDuration = 1.15f;
+            while (elapsed < flightDuration)
             {
                 elapsed += Time.deltaTime;
-                float progress = Mathf.Clamp01(elapsed / .5f);
-                float travel = 1f - Mathf.Pow(1f - progress, 2f);
-                Vector3 position = Arc(start, bend, target, travel);
-                float spiral = Mathf.Sin(progress * Mathf.PI);
-                position += new Vector3(Mathf.Cos(progress * Mathf.PI * 4f) * .09f,
-                    Mathf.Sin(progress * Mathf.PI * 4f) * .07f,
-                    Mathf.Sin(progress * Mathf.PI * 2f) * .06f) * spiral;
-                Vector3 heading = position - scissors.localPosition; heading.y = 0f;
+                float progress = Mathf.Clamp01(elapsed / flightDuration);
+                float travel = Mathf.SmoothStep(0f, 1f, progress);
+                Vector3 position = FlightPath(target, travel);
+                Vector3 heading = FlightPath(target, Mathf.Min(1f, travel + .006f)) - position;
+                heading.y = 0f;
                 Quaternion direction = heading.sqrMagnitude > .0001f ? Quaternion.LookRotation(-heading) : cutRotation;
-                scissors.localRotation = Quaternion.Slerp(direction, cutRotation,
-                    Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(.6f, 1f, progress)));
+                scissors.localRotation = direction;
                 scissors.localPosition = position;
-                scissors.localScale = Vector3.one * Mathf.Lerp(.25f, .85f, Mathf.Sin(progress * Mathf.PI * .5f));
+                scissors.localScale = Vector3.one * Mathf.Lerp(.32f, 1.08f, Mathf.Sin(progress * Mathf.PI * .5f));
                 if (effects != null)
                 {
                     effects.Flight(progress, Facing);
-                    effects.Glow(.2f + Mathf.Sin(progress * Mathf.PI) * .18f, Facing);
+                    effects.Glow(.38f + Mathf.Sin(progress * Mathf.PI) * .3f, Facing);
                 }
                 yield return null;
             }
@@ -77,13 +74,13 @@ namespace BlockedIn.Blocks
                 elapsed += Time.deltaTime;
                 float progress = Mathf.Clamp01(elapsed / duration);
                 if (cutAnimation != null) cutAnimation.SampleAnimation(scissors.gameObject, Mathf.Min(elapsed, duration));
-                if (!split && elapsed >= .32f) { split = true; SoundManager.Play(SoundManager.RopeCutSound); }
+                if (!split && elapsed >= .22f) { split = true; SoundManager.Play(SoundManager.RopeCutSound); }
                 if (split)
                 {
-                    SplitHalves(Mathf.Clamp01((elapsed - .32f) / .3f));
-                    if (effects != null) effects.Burst(Mathf.Clamp01((elapsed - .32f) / .34f), transform.TransformPoint(cutPoint + Vector3.up * .14f), Facing);
+                    SplitHalves(Mathf.Clamp01((elapsed - .22f) / .38f));
+                    if (effects != null) effects.Burst(Mathf.Clamp01((elapsed - .22f) / .42f), transform.TransformPoint(cutPoint + Vector3.up * .14f), Facing);
                 }
-                if (effects != null) effects.Glow(.15f + Mathf.Exp(-Mathf.Abs(elapsed - .32f) * 22f) * .4f, Facing);
+                if (effects != null) effects.Glow(.3f + Mathf.Exp(-Mathf.Abs(elapsed - .25f) * 18f) * .75f, Facing);
                 yield return null;
             }
             foreach (Transform half in halves) if (half != null) half.gameObject.SetActive(false);
@@ -93,7 +90,7 @@ namespace BlockedIn.Blocks
                 elapsed += Time.deltaTime; float progress = Mathf.Clamp01(elapsed / .28f);
                 scissors.localPosition = Arc(target, target + new Vector3(.25f, .6f, -.1f), exit, progress);
                 scissors.localRotation = cutRotation * Quaternion.Euler(progress * 15f, progress * 80f, 0f);
-                scissors.localScale = Vector3.one * (.85f * (1f - progress));
+                scissors.localScale = Vector3.one * (1.08f * (1f - progress));
                 if (effects != null)
                 {
                     effects.Glow(.15f * (1f - progress), Facing);
@@ -119,5 +116,27 @@ namespace BlockedIn.Blocks
         }
         static Vector3 Arc(Vector3 start, Vector3 bend, Vector3 end, float t)
             => (1f - t) * (1f - t) * start + 2f * (1f - t) * t * bend + t * t * end;
+        static Vector3 FlightPath(Vector3 center, float value)
+        {
+            Vector3 start = center + new Vector3(-3.7f, .12f, -.9f);
+            Vector3 lowLeft = center + new Vector3(-2.7f, .16f, -3.4f);
+            Vector3 lowRight = center + new Vector3(3.05f, .16f, -3.25f);
+            Vector3 outerRight = center + new Vector3(3.25f, .12f, 1.3f);
+            if (value < .72f) return Cubic(start, lowLeft, lowRight, outerRight, value / .72f);
+            Vector3 highRight = center + new Vector3(3.35f, .08f, 2.35f);
+            Vector3 inward = center + new Vector3(1.65f, .04f, 1.05f);
+            return Cubic(outerRight, highRight, inward, center, (value - .72f) / .28f);
+        }
+        static Quaternion FlightRotation(Vector3 target, float value)
+        {
+            Vector3 heading = FlightPath(target, Mathf.Min(1f, value + .002f)) - FlightPath(target, value);
+            heading.y = 0f; return Quaternion.LookRotation(-heading.normalized, Vector3.up);
+        }
+        static Vector3 Cubic(Vector3 a, Vector3 b, Vector3 c, Vector3 d, float value)
+        {
+            float inverse = 1f - value;
+            return inverse * inverse * inverse * a + 3f * inverse * inverse * value * b +
+                3f * inverse * value * value * c + value * value * value * d;
+        }
     }
 }

@@ -23,7 +23,12 @@ Shader "Blocked In/Rope Effect"
             Output Vert(Input i)
             { Output o; o.positionCS=TransformObjectToHClip(i.positionOS.xyz); o.uv=TRANSFORM_TEX(i.uv,_BaseMap); o.color=i.color; return o; }
             half4 Frag(Output i):SV_Target
-            { return SAMPLE_TEXTURE2D(_BaseMap,sampler_BaseMap,i.uv)*_BaseColor*i.color; }
+            {
+                half4 sample = SAMPLE_TEXTURE2D(_BaseMap,sampler_BaseMap,i.uv);
+                half brightness = max(sample.r,max(sample.g,sample.b));
+                return half4(_BaseColor.rgb*i.color.rgb*brightness,
+                    sample.a*_BaseColor.a*i.color.a);
+            }
             ENDHLSL
         }
     }
