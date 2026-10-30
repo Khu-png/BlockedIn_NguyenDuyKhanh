@@ -7,12 +7,20 @@ public class LoadingManager : Singleton<LoadingManager>
     [SerializeField] LoadingScreen loadingPrefab;
     [SerializeField] Transform canvasParent;
     [SerializeField, Min(.1f)] float progressSpeed = .9f;
+    [SerializeField] WinTransitionEffect winTransitionEffect;
     LoadingScreen screen;
     Coroutine loadingRoutine;
     public bool IsLoading { get; private set; }
     public float Progress { get; private set; }
 
     void Awake() => RegisterSingleton(this);
+
+    public void PlayWinTransition(Action onCovered)
+    {
+        if (onCovered == null) throw new ArgumentNullException(nameof(onCovered));
+        if (winTransitionEffect == null) onCovered();
+        else winTransitionEffect.Play(onCovered);
+    }
 
     public void LoadGameplay(int levelIndex)
     {

@@ -30,5 +30,15 @@ public sealed class Win : UICanvas
         if(reveal!=null)reveal.Play(true);
     }
     public void OnReplay() { if(!IsReady)return; SoundManager.Play(SoundManager.ButtonSound); LevelManager.Ins.OnReplay(); }
-    public void OnNextLevel() { if(!IsReady)return; SoundManager.Play(SoundManager.ButtonSound); GameManager.Ins.OnNextLevel(); }
+    public void OnNextLevel()
+    {
+        if (!IsReady) return;
+        SoundManager.Play(SoundManager.ButtonSound);
+        if (LoadingManager.Ins != null)
+        {
+            LoadingManager.Ins.PlayWinTransition(GameManager.Ins.OnNextLevel);
+            return;
+        }
+        GameManager.Ins.OnNextLevel();
+    }
 }

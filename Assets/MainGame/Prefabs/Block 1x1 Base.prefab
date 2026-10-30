@@ -1542,6 +1542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: c1ea069552015a74aa1eaf7ae9497109, type: 2}
   gridPosition: {x: 0, y: 0}
+  goalPosition: {x: -1, y: -1}
   cells:
   - {x: 0, y: 0}
   visual: {fileID: 9000000000001002}
@@ -1609,15 +1610,17 @@ MonoBehaviour:
   verticalTiltAngle: 12
   screenRollAngle: 8
   dockDuration: 0.12
-  dockBounceDuration: 0.16
-  dockGap: 0.06
-  dockSquash: 0.025
+  dockPortTravel: 0.065
+  dragFollowTime: 0.045
+  dragFollowSpeed: 35
+  iconRenderers: []
+  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
+  ropeVisual: {fileID: 0}
   cellAppearances: []
   cellColliders: []
   cellVisuals: []
   icePresentation: {fileID: 0}
   freezeCount: 0
-  iconMaterial: {fileID: 2100000, guid: 3a2747658b1c482cbdc48cdfdc62aac2, type: 2}
 --- !u!114 &9000000000001005
 MonoBehaviour:
   m_ObjectHideFlags: 0

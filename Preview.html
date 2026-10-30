@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blocked In — UI Preview</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      --ink: #15375e;
+      --blue: #20bdf2;
+      --gold: #ffd550;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 30%, #235c91 0, #122e52 47%, #09172d 100%);
+      color: white;
+    }
+
+    .glow {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: #39cbff;
+      filter: blur(130px);
+      opacity: .14;
+      top: 10%;
+      left: calc(50% - 210px);
+      pointer-events: none;
+    }
+
+    .phone {
+      position: relative;
+      width: min(390px, 100vw);
+      height: min(844px, 100dvh);
+      min-height: 680px;
+      padding: 28px 23px 24px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(84, 175, 227, .28), transparent 58%),
+        linear-gradient(160deg, #173e69, #102d51 58%, #0c2343);
+      box-shadow: 0 24px 80px #020b19a8, inset 0 0 0 1px #ffffff20;
+    }
+
+    .phone::before, .phone::after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+      border: 1px solid #d5f7ff14;
+      border-radius: 50%;
+      width: 360px;
+      height: 360px;
+      left: 15px;
+      top: 245px;
+    }
+
+    .phone::after {
+      width: 440px;
+      height: 440px;
+      left: -25px;
+      top: 205px;
+    }
+
+    .topbar, .level-row, .powerups, .coin-chip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 1000;
+      letter-spacing: 2.8px;
+      text-shadow: 0 2px 0 #092346;
+    }
+
+    .brand span { color: #70e5ff; }
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+      border: 2px solid #8ce8ff;
+      border-radius: 15px;
+      background: linear-gradient(#58d7ff, #1388db 70%);
+      box-shadow: 0 4px 0 #075495, inset 0 2px 2px #ffffff80;
+      color: white;
+      font-size: 21px;
+      text-shadow: 0 2px 1px #12619a;
+    }
+
+    .coin-chip {
+      gap: 7px;
+      min-width: 87px;
+      height: 37px;
+      padding: 0 10px;
+      border: 1px solid #ffec8a;
+      border-radius: 20px;
+      background: linear-gradient(#fff18a, #f8a824);
+      box-shadow: 0 3px 0 #a85a14, inset 0 2px 2px #fff9c6;
+      color: #743d11;
+      font-weight: 900;
+    }
+
+    .coin { font-size: 21px; filter: drop-shadow(0 1px 0 #b96015); }
+
+    .level-card {
+      width: max-content;
+      margin: 24px auto 16px;
+      padding: 8px 26px 10px;
+      border: 2px solid #9deaff;
+      border-radius: 18px;
+      background: linear-gradient(#7fe5ff, #39aef0 62%, #1982d2);
+      box-shadow: 0 5px 0 #07549b, inset 0 2px 2px #ffffffa6;
+      text-align: center;
+      text-shadow: 0 2px 0 #1766a4;
+    }
+
+    .level-label {
+      display: block;
+      color: #e8fbff;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .level-number { font-size: 24px; font-weight: 1000; line-height: 1.15; }
+
+    .timer {
+      position: relative;
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 12px;
+      display: grid;
+      place-content: center;
+      border: 5px solid #8ceaff;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 25%, #f8ffff, #bcefff 55%, #5ab9e8);
+      box-shadow: 0 5px 0 #12649f, 0 0 25px #56dfff55, inset 0 -4px 5px #2684b5;
+      color: #16517b;
+      text-align: center;
+    }
+
+    .timer span { font-size: 24px; font-weight: 1000; line-height: 1; }
+    .timer small { margin-top: 4px; font-size: 9px; font-weight: 900; letter-spacing: 1.5px; }
+
+    .hint {
+      margin: 0 0 15px;
+      color: #c8edff;
+      font-size: 12px;
+      text-align: center;
+      text-shadow: 0 1px 3px #09213d;
+    }
+
+    .board-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      padding: 12px;
+      border: 3px solid #c5f5ff;
+      border-radius: 27px;
+      background: linear-gradient(145deg, #f4fdff, #9bd8f0);
+      box-shadow: 0 9px 0 #2677a2, 0 16px 27px #05182e66, inset 0 2px 3px white;
+    }
+
+    .board {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+      gap: 5px;
+      padding: 7px;
+      border-radius: 17px;
+      background:
+        linear-gradient(#609abc30 1px, transparent 1px),
+        linear-gradient(90deg, #609abc30 1px, transparent 1px),
+        #d8f3fb;
+      background-size: 20% 20%;
+      box-shadow: inset 0 2px 5px #4f8eab55;
+    }
+
+    .block {
+      z-index: 1;
+      position: relative;
+      border: 2px solid #ffffffc9;
+      border-radius: 13px;
+      box-shadow: inset 0 3px 4px #ffffffb5, inset 0 -5px 5px #00000022, 0 3px 3px #18527054;
+      animation: bob 3.2s ease-in-out infinite;
+    }
+
+    .block::after {
+      position: absolute;
+      content: "";
+      top: 7px;
+      left: 12%;
+      width: 76%;
+      height: 19%;
+      border-radius: 50%;
+      background: #ffffff70;
+      filter: blur(2px);
+    }
+
+    .blue { grid-area: 1 / 2 / span 1 / span 2; background: linear-gradient(145deg, #64e9ff, #16a8f3 60%, #0879ce); }
+    .red { grid-area: 2 / 1 / span 2 / span 1; background: linear-gradient(145deg, #ff93a3, #f42f5a 65%, #ca1643); animation-delay: -.6s; }
+    .green { grid-area: 2 / 3 / span 2 / span 1; background: linear-gradient(145deg, #b8ff6d, #57d82e 60%, #2ca81c); animation-delay: -1.2s; }
+    .orange { grid-area: 4 / 2 / span 1 / span 2; background: linear-gradient(145deg, #ffe789, #ffaf2b 62%, #ed771a); animation-delay: -.3s; }
+    .violet { grid-area: 4 / 5 / span 2 / span 1; background: linear-gradient(145deg, #d6a5ff, #9b5bfb 60%, #7040d5); animation-delay: -1.6s; }
+    .cyan { grid-area: 5 / 2 / span 1 / span 2; background: linear-gradient(145deg, #94ffff, #22d5e8 60%, #0ba5c4); animation-delay: -.9s; }
+
+    .goal {
+      grid-area: 1 / 5;
+      display: grid;
+      place-items: center;
+      border: 2px dashed #36a9d8;
+      border-radius: 11px;
+      color: #268fb7;
+      font-size: 22px;
+      animation: target 1.7s ease-in-out infinite;
+    }
+
+    .exit-arrow {
+      position: absolute;
+      top: 25px;
+      right: -9px;
+      color: #41e7ff;
+      font-size: 29px;
+      filter: drop-shadow(0 2px 3px #165373);
+    }
+
+    .objective {
+      width: max-content;
+      margin: 17px auto 0;
+      padding: 7px 15px;
+      border: 1px solid #e8faff60;
+      border-radius: 20px;
+      background: #10345c9c;
+      color: #e7faff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
+    .objective b { color: var(--gold); }
+
+    .bottom {
+      position: absolute;
+      right: 23px;
+      bottom: 25px;
+      left: 23px;
+    }
+
+    .powerups { gap: 13px; justify-content: center; }
+
+    .powerup {
+      position: relative;
+      width: 76px;
+      height: 73px;
+      display: grid;
+      place-items: center;
+      border: 2px solid #c4f6ff;
+      border-radius: 19px;
+      background: linear-gradient(145deg, #ffffff, #b7ecff 68%, #73c6ed);
+      box-shadow: 0 5px 0 #26739e, inset 0 2px 3px white;
+      color: #17517a;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .powerup small {
+      position: absolute;
+      right: -6px;
+      bottom: -7px;
+      min-width: 25px;
+      padding: 3px 6px;
+      border: 1px solid #ffeaa0;
+      border-radius: 10px;
+      background: linear-gradient(#fff076, #ffb526);
+      color: #7d4612;
+      font-size: 11px;
+      font-weight: 1000;
+      text-align: center;
+    }
+
+    .power-label {
+      margin-top: 10px;
+      color: #d7f4ff;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-align: center;
+    }
+
+    .preview-tag {
+      position: fixed;
+      right: 18px;
+      bottom: 16px;
+      color: #c9e6f5a8;
+      font-size: 11px;
+      letter-spacing: .5px;
+    }
+
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+    @keyframes target { 0%, 100% { box-shadow: 0 0 0 0 #28a9d833; } 50% { box-shadow: 0 0 0 5px #28a9d822; } }
+
+    @media (max-height: 760px) {
+      .phone { padding-top: 18px; }
+      .level-card { margin-top: 13px; margin-bottom: 10px; }
+      .timer { width: 76px; height: 76px; }
+      .hint { margin-bottom: 9px; }
+      .bottom { bottom: 18px; }
+    }
+
+    @media (min-width: 520px) {
+      .phone { border: 1px solid #ffffff25; border-radius: 32px; height: min(844px, calc(100dvh - 40px)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="phone" aria-label="Blocked In gameplay interface preview">
+    <header class="topbar">
+      <button class="icon-button" aria-label="Settings">⚙</button>
+      <div class="brand">BLOCKED <span>IN</span></div>
+      <div class="coin-chip"><span class="coin">🪙</span><span>1,250</span></div>
+    </header>
+
+    <div class="level-card">
+      <span class="level-label">PUZZLE</span>
+      <span class="level-number">LEVEL 12</span>
+    </div>
+
+    <div class="timer"><span>02:15</span><small>TIME LEFT</small></div>
+    <p class="hint">Clear a path and guide the blocks to the exit!</p>
+
+    <section class="board-frame" aria-label="Colorful block puzzle board">
+      <div class="board">
+        <div class="block blue"></div>
+        <div class="goal">✦</div>
+        <div class="block red"></div>
+        <div class="block green"></div>
+        <div class="block orange"></div>
+        <div class="block violet"></div>
+        <div class="block cyan"></div>
+      </div>
+      <span class="exit-arrow">➜</span>
+    </section>
+    <div class="objective">✨ &nbsp; Match blocks to the <b>exit</b></div>
+
+    <footer class="bottom">
+      <div class="powerups">
+        <button class="powerup" aria-label="Hammer power-up">🔨<small>3</small></button>
+        <button class="powerup" aria-label="Freeze timer power-up">❄️<small>2</small></button>
+        <button class="powerup" aria-label="Hint power-up">💡<small>5</small></button>
+      </div>
+      <div class="power-label">BOOSTERS</div>
+    </footer>
+  </main>
+  <div class="preview-tag">UI CONCEPT · MOCKUP PREVIEW</div>
+</body>
+</html>

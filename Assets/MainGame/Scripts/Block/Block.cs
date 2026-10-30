@@ -85,6 +85,13 @@ namespace BlockedIn.Blocks
             if (board != null) board.RequestCompletionCheck();
         }
 
+        public void SetTransitionLayer(int layer)
+        {
+            gameObject.layer = layer;
+            foreach (Renderer item in renderers)
+                if (item != null) item.gameObject.layer = layer;
+        }
+
         public void CopyDragSettings(Block source)
         {
             liftHeight = source.liftHeight;

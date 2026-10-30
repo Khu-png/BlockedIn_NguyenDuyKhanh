@@ -1234,6 +1234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115963107}
   - component: {fileID: 2115963108}
+  - component: {fileID: 2115963109}
   m_Layer: 0
   m_Name: LoadingManager
   m_TagString: Untagged
@@ -1272,6 +1273,34 @@ MonoBehaviour:
   loadingPrefab: {fileID: 100011, guid: e40c0b2482624ce488707023c90d7142, type: 3}
   canvasParent: {fileID: 754450673}
   progressSpeed: 0.9
+  winTransitionEffect: {fileID: 2115963109}
+--- !u!114 &2115963109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115963106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f17599dd70a4cb6a68938af3d43c31b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::WinTransitionEffect
+  blockPrefab: {fileID: 9000000000001003, guid: 7be09d859c0c3c743bd29f0fbd2fc43c, type: 3}
+  transitionCamera: {fileID: 330585545}
+  overlayParent: {fileID: 754450673}
+  colors:
+  - {fileID: 11400000, guid: c1ea069552015a74aa1eaf7ae9497109, type: 2}
+  - {fileID: 11400000, guid: b63e0dee99f52594792e8b03a5828e04, type: 2}
+  - {fileID: 11400000, guid: a685ebb53c14e334594c093df631eec5, type: 2}
+  - {fileID: 11400000, guid: fceff368017b5c54ba7028a89bdd069b, type: 2}
+  - {fileID: 11400000, guid: 1318d80f37e5a614095076d362033c0f, type: 2}
+  - {fileID: 11400000, guid: bf6a5ead7f4aebb4a8b84911d22264cc, type: 2}
+  - {fileID: 11400000, guid: b5f130a6b01e0df4abf3750bdce72a24, type: 2}
+  - {fileID: 11400000, guid: b623be114004a934a9f60a8ba84754cf, type: 2}
+  - {fileID: 11400000, guid: c70c18aeb2be4ee4d9476fc49319a1e3, type: 2}
+  cellSpacing: 1
+  blockScale: 1.12
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

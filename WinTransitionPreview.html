@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blocked In — Unity Win Transition Preview</title>
+  <style>
+    @font-face {
+      font-family: "Unity Roboto";
+      src: url("Assets/MainGame/Resrouces/BlockedIn/BlockedIn/fonts/Roboto-Bold.ttf") format("truetype");
+      font-weight: 700;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 45%, #19306d, #070b21 76%);
+      font-family: "Unity Roboto", Arial, sans-serif;
+    }
+
+    .device {
+      position: relative;
+      width: min(486px, 100vw, calc(100dvh * 9 / 16));
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      isolation: isolate;
+      container-type: inline-size;
+      background: #080e36;
+      box-shadow: 0 24px 80px #020613aa;
+    }
+
+    .win-screen, .loading-screen, #blockCurtain {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .win-screen {
+      display: block;
+      object-fit: fill;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: opacity .16s linear;
+    }
+
+    #nextLevel {
+      position: absolute;
+      z-index: 1;
+      top: 58.9%;
+      left: 22%;
+      width: 56%;
+      height: 6.6%;
+      padding: 0;
+      border: 0;
+      border-radius: 22%;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    #nextLevel:hover { background: #ffffff10; }
+    #nextLevel:focus-visible { outline: 3px solid #fff4a8; outline-offset: 3px; }
+
+    #blockCurtain {
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .loading-screen {
+      z-index: 3;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .2s linear;
+    }
+
+    .loading-screen img {
+      position: absolute;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .loading-background {
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .loading-logo {
+      top: 31.5%;
+      left: 4.5%;
+      width: 91%;
+      height: 27.5%;
+      object-fit: contain;
+    }
+
+    .progress-track {
+      position: absolute;
+      top: 81.9%;
+      left: 25%;
+      width: 50%;
+      height: 4.1%;
+    }
+
+    .progress-socket, .progress-fill {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+
+    .progress-fill-window {
+      position: absolute;
+      inset: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0;
+      transition: width .14s linear;
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 86.8%;
+      left: 10%;
+      width: 80%;
+      height: 5.2%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 4.8cqw;
+      line-height: 1;
+      text-shadow: 2px -3px 1px #000000e6;
+      white-space: nowrap;
+    }
+
+    .device.transitioning #nextLevel { pointer-events: none; }
+    .device.loaded .win-screen,
+    .device.loaded #nextLevel { opacity: 0; }
+
+    .device.loaded .loading-screen {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .replay {
+      position: absolute;
+      z-index: 4;
+      right: 3%;
+      bottom: 2%;
+      padding: 7px 11px;
+      border: 1px solid #d5f3ff88;
+      border-radius: 12px;
+      background: #111f5bdb;
+      color: white;
+      font: 700 12px "Unity Roboto", Arial, sans-serif;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      cursor: pointer;
+      transition: opacity .2s ease;
+    }
+
+    .device.loaded .replay {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 1.7s;
+    }
+
+    .caption {
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      color: #d7e5ffad;
+      font: 11px Arial, sans-serif;
+      letter-spacing: .5px;
+      text-align: right;
+    }
+
+    @media (max-width: 520px) {
+      .caption { right: 8px; bottom: 7px; font-size: 9px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="device" id="device" aria-label="Unity win-to-loading transition preview">
+    <img
+      class="win-screen"
+      src="Previews/BlockedIn-WinScreen-Frame.png"
+      alt="Unity win screen: Level Complete, Level 7, Next Level and Play Again">
+    <button id="nextLevel" type="button" aria-label="Next Level"></button>
+
+    <img id="blockPrefab" src="Previews/BlockedIn-Block-Prefab.png" alt="" hidden>
+    <canvas id="blockCurtain" aria-hidden="true"></canvas>
+
+    <section class="loading-screen" aria-label="Unity loading screen" aria-live="polite">
+      <img
+        class="loading-background"
+        src="Assets/MainGame/Resrouces/BlockedIn/BlockedIn/images/game/branding/Splash_Background.png"
+        alt="">
+      <img
+        class="loading-logo"
+        src="Assets/MainGame/Resrouces/BlockedIn/BlockedIn/images/game/branding/Blocked-In_Logo.png"
+        alt="Blocked In">
+      <div class="progress-track">
+        <img
+          class="progress-socket"
+          src="Assets/MainGame/Resrouces/BlockedIn/BlockedIn/images/game/branding/Splash_Socket_ProgressBar.png"
+          alt="">
+        <div class="progress-fill-window">
+          <img
+            class="progress-fill"
+            src="Assets/MainGame/Resrouces/BlockedIn/BlockedIn/images/game/branding/Splash_Fill_ProgressBar.png"
+            alt="">
+        </div>
+      </div>
+      <div class="progress-text" id="progressText">Loading 0%</div>
+    </section>
+
+    <button class="replay" id="replay" type="button" aria-label="Replay transition">↻ Replay</button>
+  </main>
+  <div class="caption">UNITY UI + IN-GAME BLOCK PREFAB PREVIEW</div>
+
+  <script>
+    const device = document.getElementById("device");
+    const canvas = document.getElementById("blockCurtain");
+    const context = canvas.getContext("2d");
+    const blockPrefab = document.getElementById("blockPrefab");
+    const progressFill = document.querySelector(".progress-fill");
+    const progressText = document.getElementById("progressText");
+    const pieces = [];
+
+    let columns = 0;
+    let rows = 0;
+    let blockSize = 0;
+    let startedAt = 0;
+    let loadingAt = 0;
+    let animationFrame = 0;
+    const hueVariants = [0, 62, 126, 188, 246, 310];
+
+    function randomBetween(min, max) {
+      return min + Math.random() * (max - min);
+    }
+
+    function resizeCanvas() {
+      const bounds = device.getBoundingClientRect();
+      const pixelRatio = window.devicePixelRatio || 1;
+      canvas.width = Math.round(bounds.width * pixelRatio);
+      canvas.height = Math.round(bounds.height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      columns = 8;
+      blockSize = bounds.width / columns;
+      rows = Math.ceil(bounds.height / blockSize);
+    }
+
+    function buildPieces() {
+      pieces.length = 0;
+      for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++) {
+          const targetX = column * blockSize;
+          const targetY = row * blockSize;
+          const startY = targetY - device.clientHeight - blockSize;
+          const previousHues = new Set();
+          if (column > 0) previousHues.add(pieces[pieces.length - 1].hue);
+          if (row > 0) previousHues.add(pieces[(row - 1) * columns + column].hue);
+          const availableHues = hueVariants.filter(hue => !previousHues.has(hue));
+          const hue = availableHues[Math.floor(Math.random() * availableHues.length)];
+
+          pieces.push({
+            x: targetX + randomBetween(-blockSize * .12, blockSize * .12),
+            y: startY - randomBetween(0, blockSize * .12),
+            targetX,
+            targetY,
+            velocityX: randomBetween(-20, 20),
+            velocityY: 0,
+            angle: randomBetween(-.14, .14),
+            angularVelocity: randomBetween(-.75, .75),
+            hue,
+            delay: row * .014 + randomBetween(0, .07),
+            bounceCount: 0,
+            settled: false
+          });
+        }
+      }
+    }
+
+    function drawPiece(piece) {
+      context.save();
+      context.translate(piece.x + blockSize * .5, piece.y + blockSize * .5);
+      context.rotate(piece.angle);
+      context.filter = `hue-rotate(${piece.hue}deg)`;
+      context.drawImage(
+        blockPrefab,
+        -blockSize * .5,
+        -blockSize * .5,
+        blockSize + 2,
+        blockSize + 2);
+      context.restore();
+    }
+
+    function updatePiece(piece, elapsed, deltaTime) {
+      if (piece.settled || elapsed < piece.delay) return;
+
+      const step = Math.min(deltaTime, .034);
+      piece.velocityY += 2100 * step;
+      piece.x += piece.velocityX * step;
+      piece.y += piece.velocityY * step;
+      piece.angle += piece.angularVelocity * step;
+      piece.angularVelocity += -piece.angle * 10 * step;
+      piece.angularVelocity *= Math.exp(-4.2 * step);
+      piece.velocityX += (piece.targetX - piece.x) * 1.6 * step;
+      piece.velocityX *= Math.exp(-1.6 * step);
+
+      if (piece.y >= piece.targetY) {
+        piece.y = piece.targetY;
+        if (piece.bounceCount < 1 && piece.velocityY > 95) {
+          piece.velocityY *= -.11;
+          piece.bounceCount++;
+        } else {
+          piece.velocityY = 0;
+          piece.settled = true;
+          piece.x = piece.targetX;
+          piece.angle = 0;
+          piece.angularVelocity = 0;
+        }
+      }
+    }
+
+    function updateLoading(now) {
+      if (!loadingAt) return;
+      const progress = Math.min(1, (now - loadingAt) / 2300);
+      const percentage = Math.round(progress * 100);
+      progressFill.style.width = `${percentage}%`;
+      progressText.textContent = `Loading ${percentage}%`;
+    }
+
+    function animate(now) {
+      const elapsed = (now - startedAt) / 1000;
+      const deltaTime = Math.min((now - (animate.previousTime || now)) / 1000, .034);
+      animate.previousTime = now;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      let allSettled = true;
+      for (const piece of pieces) {
+        updatePiece(piece, elapsed, deltaTime);
+        if (!piece.settled) allSettled = false;
+      }
+
+      if (allSettled && !loadingAt) {
+        context.fillStyle = "#101b58";
+        context.fillRect(0, 0, device.clientWidth, device.clientHeight);
+        loadingAt = now;
+        device.classList.add("loaded");
+      }
+      for (const piece of pieces) drawPiece(piece);
+      updateLoading(now);
+      animationFrame = window.requestAnimationFrame(animate);
+    }
+
+    function startTransition() {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      device.classList.remove("transitioning", "loaded");
+      loadingAt = 0;
+      progressFill.style.width = "0";
+      progressText.textContent = "Loading 0%";
+      resizeCanvas();
+      buildPieces();
+      animate.previousTime = 0;
+      startedAt = performance.now();
+      device.classList.add("transitioning");
+      animationFrame = window.requestAnimationFrame(animate);
+    }
+
+    function resetPreview() {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      loadingAt = 0;
+      pieces.length = 0;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      progressFill.style.width = "0";
+      progressText.textContent = "Loading 0%";
+      device.classList.remove("transitioning", "loaded");
+    }
+
+    document.getElementById("nextLevel").addEventListener("click", startTransition);
+    document.getElementById("replay").addEventListener("click", resetPreview);
+    window.addEventListener("resize", () => {
+      if (!device.classList.contains("transitioning") && !device.classList.contains("loaded")) {
+        resizeCanvas();
+      }
+    });
+
+    resizeCanvas();
+  </script>
+</body>
+</html>
